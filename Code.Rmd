@@ -92,9 +92,9 @@ physeq <- merge_phyloseq(mothurdata, sample_data(meta))
 
 # Subset out paired samples
 physeq.pair <- subset_samples(physeq, Sample_ID != "HF8C")
-physeq.pair <- subset_samples(physeq, Sample_ID != "SC4A")
-physeq.pair <- subset_samples(physeq, Sample_ID != "TV2A")
-physeq.pair <- subset_samples(physeq, Sample_ID != "TV8A")
+physeq.pair <- subset_samples(physeq.pair, Sample_ID != "SC4A")
+physeq.pair <- subset_samples(physeq.pair, Sample_ID != "TV2A")
+physeq.pair <- subset_samples(physeq.pair, Sample_ID != "TV8A")
 #save(physeq.pair, file="Physeq.pair.RData")
 ```
 
@@ -107,10 +107,11 @@ load("Physeq.pair.RData")
 ### Alpha Div
 ```{r}
 adiv <- data.frame(sample_data(physeq))
+adiv.pair <- data.frame(sample_data(physeq.pair))
 
 ### Coverage
 # Plot
-ggplot(adiv, aes(x=Treatment, y= coverage, fill = Treatment)) +
+ggplot(adiv.pair, aes(x=Treatment, y= coverage, fill = Treatment)) +
   geom_boxplot(position=position_dodge(1)) +
   geom_point() + 
   facet_grid(.~Time) +
@@ -118,38 +119,27 @@ ggplot(adiv, aes(x=Treatment, y= coverage, fill = Treatment)) +
   scale_fill_manual(values=c("indianred1", "orange", "springgreen3", "deepskyblue2")) +
   ylab("Coverage")
 # Test normality
-hist(adiv$coverage, breaks=10)
-qqnorm(adiv$coverage)
-qqline(adiv$coverage)
-shapiro.test(adiv$coverage)
+hist(adiv.pair$coverage, breaks=10)
+qqnorm(adiv.pair$coverage)
+qqline(adiv.pair$coverage)
+shapiro.test(adiv.pair$coverage)
   # p-value = 0.003709
   # Not normal
 
 
 ### Total OTUs
-# Make the original, unnormalized phyloseq object
-shared = "mothur_outputs/final.shared"
-taxonomy = "mothur_outputs/final.taxonomy"
-mothurdata = import_mothur(
-  mothur_shared_file = shared,
-  mothur_constaxonomy_file = taxonomy)
-tax_table(mothurdata) <- cbind(tax_table(mothurdata), 
-                               row.names(tax_table(mothurdata)))
-colnames(tax_table(mothurdata)) <- 
-  c("Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species")
-# Read in metadata
-meta <- read.csv("metadata.csv")
-colnames(meta)[1] <- "Sample_ID"
-otu.tot <- data.frame(sample_names(mothurdata))
+otu.tot <- data.frame(sample_names(physeq.pair))
 # Pull out # of OTUs from all samples
-otu.tot$Total_OTUs <- rep("NA", 76)
-for(i in 1:76){
+otu.tot$Total_OTUs <- rep("NA", 72)
+for(i in 1:72){
   otu.tot[i,2] <- length(which(otu_table(mothurdata)[,i] != 0))
 }
-adiv$Total_OTUs <- otu.tot$Total_OTUs
-adiv$Total_OTUs <- as.numeric(adiv$Total_OTUs)
+adiv.pair$Total_OTUs <- otu.tot$Total_OTUs
+adiv.pair$Total_OTUs <- as.numeric(adiv.pair$Total_OTUs)
+adiv.pair.pre <- adiv.pair[which(adiv.pair$Time == "Pre-treatment"),]
+adiv.pair.post <- adiv.pair[which(adiv.pair$Time == "Post-treatment"),]
 # Plot
-ggplot(adiv, aes(x=Treatment, y=Total_OTUs, fill = Treatment)) +
+ggplot(adiv.pair, aes(x=Treatment, y=Total_OTUs, fill = Treatment)) +
   geom_boxplot(position=position_dodge(1)) +
   geom_point() + 
   facet_grid(.~Time) +
@@ -157,31 +147,40 @@ ggplot(adiv, aes(x=Treatment, y=Total_OTUs, fill = Treatment)) +
   scale_fill_manual(values=c("indianred1", "orange", "springgreen3", "deepskyblue2")) +
   ylab("Total OTUs")
 # Test normality
-hist(adiv$Total_OTUs, breaks=10)
-qqnorm(adiv$Total_OTUs)
-qqline(adiv$Total_OTUs)
-shapiro.test(adiv$Total_OTUs)
+hist(adiv.pair$Total_OTUs, breaks=10)
+qqnorm(adiv.pair$Total_OTUs)
+qqline(adiv.pair$Total_OTUs)
+shapiro.test(adiv.pair$Total_OTUs)
   # p-value = 0.002107
   # Not normal
-# Kruskal-Wallis
-kruskal.test(formula = Total_OTUs ~ Group, data = adiv)
-  # p-value = 8.581e-09
-kruskal.test(formula = Total_OTUs ~ Treatment, data = adiv)
-  # p-value = 0.001097
-kruskalmc(resp = Total_OTUs ~ Treatment, data = adiv)
-  # Significant:
+# Stats
+kruskal.test(formula = Total_OTUs ~ Treatment, data=adiv.pair[which(adiv.pair$Time == "Pre-treatment"),])
+  # All Pre-treatment
+  # p-value = 0.003924
+kruskalmc(resp = Total_OTUs ~ Treatment, data = adiv.pair[which(adiv.pair$Time == "Pre-treatment"),])
+  # Pre-treatment Significant:  
+      # Low fat - saccharin
+kruskal.test(formula = Total_OTUs ~ Treatment, data=adiv.pair[which(adiv.pair$Time == "Post-treatment"),])
+  # All Post-treatment
+  # p-value = 0.009035
+kruskalmc(resp = Total_OTUs ~ Treatment, data = adiv.pair[which(adiv.pair$Time == "Post-treatment"),])
+  # Post-treatment Significant:
     # High Fat - Low Fat
-    # Low Fat - Saccharin
-    # Low Fat - Stevia
-wilcox.test(Total_OTUs ~ Time, data=adiv)
-  # p-value = 4.114e-06
-
+#friedman.test(formula = Total_OTUs ~ Treatment | Time, data = adiv.pair)
+wilcox.test(Total_OTUs ~ Time, data=adiv.pair, paired=T)
+  # p-value = 0.5245
+wilcox.test(Total_OTUs ~ Sex, data = adiv.pair[which(adiv.pair$Time == "Pre-treatment"),])
+  # Pre-treatment Sex
+  # p-value = 0.6015
+wilcox.test(Total_OTUs ~ Sex, data = adiv.pair[which(adiv.pair$Time == "Post-treatment"),])
+  # Post-treatment Sex
+  # p-value = 0.1589
 
 
 ### Chao
 # Plot
 tiff("Chao.tiff", width=6.5, height=3, units="in", res=600)
-ggplot(adiv, aes(x=Treatment, y=chao, fill = Treatment)) +
+ggplot(adiv.pair, aes(x=Treatment, y=chao, fill = Treatment)) +
   geom_boxplot(position=position_dodge(1)) +
   geom_point() + 
   facet_grid(.~Time) +
@@ -190,16 +189,48 @@ ggplot(adiv, aes(x=Treatment, y=chao, fill = Treatment)) +
   ylab("Chao Richness")
 dev.off()
 # Test normality
-hist(adiv$chao, breaks=10)
-qqnorm(adiv$chao)
-qqline(adiv$chao)
-shapiro.test(adiv$chao)
+hist(adiv.pair$chao, breaks=10)
+qqnorm(adiv.pair$chao)
+qqline(adiv.pair$chao)
+shapiro.test(adiv.pair$chao)
   # p-value = 5.717e-05
   # Not normal
+# Stats
+kruskal.test(formula = chao ~ Treatment, data=adiv.pair[which(adiv.pair$Time == "Pre-treatment"),])
+  # All Pre-treatment
+  # p-value = 0.4731
+kruskal.test(formula = chao ~ Treatment, data=adiv.pair[which(adiv.pair$Time == "Post-treatment"),])
+  # All Post-treatment
+  # p-value = 0.0003939
+kruskalmc(resp = chao ~ Treatment, data = adiv.pair[which(adiv.pair$Time == "Post-treatment"),])
+  # Post-treatment Significant:
+    # High Fat - Low Fat
+    # Low Fat - Saccharin
+#friedman.test(formula = chao ~ Treatment | Time, data = adiv.pair)
+wilcox.test(chao ~ Time, data=adiv.pair, paired=T)
+  # p-value = 0.02096
+wilcox.test(chao ~ Time, data=adiv.pair[which(adiv.pair$Treatment == "High Fat"),], paired=T)
+  # High Fat
+  # p-value = 0.003906
+wilcox.test(chao ~ Time, data=adiv.pair[which(adiv.pair$Treatment == "Low Fat"),], paired=T)
+  # Low Fat
+  # p-value = 0.4316
+wilcox.test(chao ~ Time, data=adiv.pair[which(adiv.pair$Treatment == "Saccharin"),], paired=T)
+  # Saccharin
+  # p-value = 0.07422
+wilcox.test(chao ~ Time, data=adiv.pair[which(adiv.pair$Treatment == "Stevia"),], paired=T)
+  # p-value = 0.3125
+wilcox.test(chao ~ Sex, data = adiv.pair[which(adiv.pair$Time == "Pre-treatment"),])
+  # Pre-treatment Sex
+  # p-value = 1
+wilcox.test(chao ~ Sex, data = adiv.pair[which(adiv.pair$Time == "Post-treatment"),])
+  # Post-treatment Sex
+  # p-value = 0.8147
+
 
 ### Berger-Parker
 # Plot
-ggplot(adiv, aes(x=Treatment, y=bergerparker, fill = Treatment)) +
+ggplot(adiv.pair, aes(x=Treatment, y=bergerparker, fill = Treatment)) +
   geom_boxplot(position=position_dodge(1)) +
   geom_point() + 
   facet_grid(.~Time) +
@@ -207,16 +238,68 @@ ggplot(adiv, aes(x=Treatment, y=bergerparker, fill = Treatment)) +
   xlab("Treatment") +
   ylab("Berger-Parker")
 # Test normality
-hist(adiv$bergerparker, breaks=10)
-qqnorm(adiv$bergerparker)
-qqline(adiv$bergerparker)
-shapiro.test(adiv$bergerparker)
+hist(adiv.pair$bergerparker, breaks=10)
+qqnorm(adiv.pair$bergerparker)
+qqline(adiv.pair$bergerparker)
+shapiro.test(adiv.pair$bergerparker)
   # p-value = 0.00269
   # Not normal
+# Stats
+kruskal.test(formula = bergerparker ~ Treatment, data=adiv.pair[which(adiv.pair$Time == "Pre-treatment"),])
+  # All Pre-treatment
+  # p-value = 0.1931
+kruskal.test(formula = bergerparker ~ Treatment, data=adiv.pair[which(adiv.pair$Time == "Post-treatment"),])
+  # All Post-treatment
+  # p-value = 0.2489
+#friedman.test(formula = bergerparker ~ Treatment | Time, data = adiv.pair)
+wilcox.test(bergerparker ~ Time, data=adiv.pair, paired=T)
+  # p-value = 0.01098
+wilcox.test(bergerparker ~ Time, data=adiv.pair[which(adiv.pair$Treatment == "High Fat"),], paired=T)
+  # High Fat
+  # p-value = 0.07422
+wilcox.test(bergerparker ~ Time, data=adiv.pair[which(adiv.pair$Treatment == "Low Fat"),], paired=T)
+  # Low Fat
+  # p-value = 0.1934
+wilcox.test(bergerparker ~ Time, data=adiv.pair[which(adiv.pair$Treatment == "Saccharin"),], paired=T)
+  # Saccharin
+  # p-value = 0.8203
+wilcox.test(bergerparker ~ Time, data=adiv.pair[which(adiv.pair$Treatment == "Stevia"),], paired=T)
+  # p-value = 0.1484
+wilcox.test(bergerparker ~ Sex, data = adiv.pair[which(adiv.pair$Time == "Pre-treatment"),])
+  # Pre-treatment Sex
+  # p-value = 0.6279
+wilcox.test(bergerparker ~ Sex, data = adiv.pair[which(adiv.pair$Time == "Post-treatment"),])
+  # Post-treatment Sex
+  # p-value = 0.006402
+wilcox.test(bergerparker ~ Time, data = adiv.pair[which(adiv.pair[which(adiv.pair$Treatment == "High Fat"),]$Sex == "Female"),], paired=T)
+  # Female High Fat Time
+  # p-value = 0.375
+wilcox.test(bergerparker ~ Time, data = adiv.pair[which(adiv.pair[which(adiv.pair$Treatment == "High Fat"),]$Sex == "Male"),], paired=T)
+  # Male High Fat Time
+  # p-value = 0.3125
+wilcox.test(bergerparker ~ Time, data = adiv.pair[which(adiv.pair[which(adiv.pair$Treatment == "Low Fat"),]$Sex == "Female"),], paired=T)
+  # Female Low Fat Time
+  # p-value = 0.1875
+wilcox.test(bergerparker ~ Time, data = adiv.pair[which(adiv.pair[which(adiv.pair$Treatment == "Low Fat"),]$Sex == "Male"),], paired=T)
+  # Male Low Fat Time
+  # p-value = 0.8125
+wilcox.test(bergerparker ~ Time, data = adiv.pair[which(adiv.pair[which(adiv.pair$Treatment == "Saccharin"),]$Sex == "Female"),], paired=T)
+  # Female Saccharin Time
+  # p-value = 0.125
+wilcox.test(bergerparker ~ Time, data = adiv.pair[which(adiv.pair[which(adiv.pair$Treatment == "Saccharin"),]$Sex == "Male"),], paired=T)
+  # Male Saccharin Time
+  # p-value = 1
+wilcox.test(bergerparker ~ Time, data = adiv.pair[which(adiv.pair[which(adiv.pair$Treatment == "Stevia"),]$Sex == "Female"),], paired=T)
+  # Female Stevia Time
+  # p-value = 0.625
+wilcox.test(bergerparker ~ Time, data = adiv.pair[which(adiv.pair[which(adiv.pair$Treatment == "Stevia"),]$Sex == "Male"),], paired=T)
+  # Male Stevia Time
+  # p-value = 0.375
+
 
 ### Shannon
 # Plot
-ggplot(adiv, aes(x=Treatment, y=shannon, fill = Treatment)) +
+ggplot(adiv.pair, aes(x=Treatment, y=shannon, fill = Treatment)) +
   geom_boxplot(position=position_dodge(1)) +
   geom_point() + 
   facet_grid(.~Time) +
@@ -224,19 +307,71 @@ ggplot(adiv, aes(x=Treatment, y=shannon, fill = Treatment)) +
   xlab("Treatment") +
   ylab("Shannon Diversity")
 # Test normality
-hist(adiv$shannon, breaks=10)
-qqnorm(adiv$shannon)
-qqline(adiv$shannon)
-shapiro.test(adiv$shannon)
+hist(adiv.pair$shannon, breaks=10)
+qqnorm(adiv.pair$shannon)
+qqline(adiv.pair$shannon)
+shapiro.test(adiv.pair$shannon)
   # p-value = 0.5704
   # Normal
-
-
+# Stats
+summary(aov(shannon ~ Treatment, data = adiv.pair[which(adiv.pair$Time == "Pre-treatment"),]))
+  # Pre-treatment
+  # P-value = 0.589
+summary(aov(shannon ~ Treatment, data = adiv.pair[which(adiv.pair$Time == "Post-treatment"),]))
+  # Post-treatment
+  # P-value = 0.043
+TukeyHSD(aov(shannon ~ Treatment, data = adiv.pair[which(adiv.pair$Time == "Post-treatment"),]))
+  # Post-treamtent Significance:
+    # Saccharin - Low Fat
+t.test(shannon ~ Time, data = adiv.pair, paired=T)
+  # p-value = 0.9899
+t.test(shannon ~ Time, data = adiv.pair[which(adiv.pair$Treatment == "High Fat"),], paired=T)
+  # High Fat
+  # p-value = 0.9751
+t.test(shannon ~ Time, data = adiv.pair[which(adiv.pair$Treatment == "Low Fat"),], paired=T)
+  # Low Fat
+  # p-value = 0.03614
+t.test(shannon ~ Time, data = adiv.pair[which(adiv.pair$Treatment == "Saccharin"),], paired=T)
+  # Saccharin
+  # p-value = 0.192
+t.test(shannon ~ Time, data = adiv.pair[which(adiv.pair$Treatment == "Stevia"),], paired=T)
+  # Stevia
+  # p-value = 0.1537
+t.test(shannon ~ Sex, data = adiv.pair[which(adiv.pair$Time == "Pre-treatment"),])
+  # Pre-treatment Sex
+  # p-value = 0.6813
+t.test(shannon ~ Sex, data = adiv.pair[which(adiv.pair$Time == "Post-treatment"),])
+  # Post-treatment Sex
+  # p-value = 0.01769
+t.test(shannon ~ Time, data = adiv.pair[which(adiv.pair[which(adiv.pair$Treatment == "High Fat"),]$Sex == "Female"),], paired=T)
+  # Female High Fat Time
+  # p-value = 0.4814
+t.test(shannon ~ Time, data = adiv.pair[which(adiv.pair[which(adiv.pair$Treatment == "High Fat"),]$Sex == "Male"),], paired=T)
+  # Male High Fat Time
+  # p-value = 0.05131
+t.test(shannon ~ Time, data = adiv.pair[which(adiv.pair[which(adiv.pair$Treatment == "Low Fat"),]$Sex == "Female"),], paired=T)
+  # Female Low Fat Time
+  # p-value = 0.11
+t.test(shannon ~ Time, data = adiv.pair[which(adiv.pair[which(adiv.pair$Treatment == "Low Fat"),]$Sex == "Male"),], paired=T)
+  # Male Low Fat Time
+  # p-value = 0.2679
+t.test(shannon ~ Time, data = adiv.pair[which(adiv.pair[which(adiv.pair$Treatment == "Saccharin"),]$Sex == "Female"),], paired=T)
+  # Female Saccharin Time
+  # p-value = 0.1392
+t.test(shannon ~ Time, data = adiv.pair[which(adiv.pair[which(adiv.pair$Treatment == "Saccharin"),]$Sex == "Male"),], paired=T)
+  # Male Saccharin Time
+  # p-value = 0.2168
+t.test(shannon ~ Time, data = adiv.pair[which(adiv.pair[which(adiv.pair$Treatment == "Stevia"),]$Sex == "Female"),], paired=T)
+  # Female Stevia Time
+  # p-value = 0.5392
+t.test(shannon ~ Time, data = adiv.pair[which(adiv.pair[which(adiv.pair$Treatment == "Stevia"),]$Sex == "Male"),], paired=T)
+  # Male Stevia Time
+  # p-value = 0.05621
 
 ### Inverse Simpson
 # Plot
 tiff("InvSimp.tiff", width=6.5, height=3, units="in", res=600)
-ggplot(adiv, aes(x=Treatment, y= invsimpson, fill = Treatment)) +
+ggplot(adiv.pair, aes(x=Treatment, y= invsimpson, fill = Treatment)) +
   geom_boxplot(position=position_dodge(1)) +
   geom_point() + 
   facet_grid(.~Time) +
@@ -245,12 +380,64 @@ ggplot(adiv, aes(x=Treatment, y= invsimpson, fill = Treatment)) +
   ylab("Inverse Simpson Weighted Diversity")
 dev.off()
 # Test normality
-hist(adiv$invsimpson, breaks=10)
-qqnorm(adiv$invsimpson)
-qqline(adiv$invsimpson)
-shapiro.test(adiv$invsimpson)
+hist(adiv.pair$invsimpson, breaks=10)
+qqnorm(adiv.pair$invsimpson)
+qqline(adiv.pair$invsimpson)
+shapiro.test(adiv.pair$invsimpson)
   # p-value = 0.2751
   # Normal
+# Stats
+summary(aov(invsimpson ~ Treatment, data = adiv.pair[which(adiv.pair$Time == "Pre-treatment"),]))
+  # Pre-treatment
+  # P-value = 0.323
+summary(aov(invsimpson ~ Treatment, data = adiv.pair[which(adiv.pair$Time == "Post-treatment"),]))
+  # Post-treatment
+t.test(invsimpson ~ Time, data = adiv.pair, paired=T)
+  # p-value = 0.09364
+t.test(invsimpson ~ Time, data = adiv.pair[which(adiv.pair$Treatment == "High Fat"),], paired=T)
+  # High Fat
+  # p-value = 0.2415
+t.test(invsimpson ~ Time, data = adiv.pair[which(adiv.pair$Treatment == "Low Fat"),], paired=T)
+  # Low Fat
+  # p-value = 0.0852
+t.test(invsimpson ~ Time, data = adiv.pair[which(adiv.pair$Treatment == "Saccharin"),], paired=T)
+  # Saccharin
+  # p-value = 0.9167
+t.test(invsimpson ~ Time, data = adiv.pair[which(adiv.pair$Treatment == "Stevia"),], paired=T)
+  # Stevia
+  # p-value = 0.7599
+t.test(invsimpson ~ Sex, data = adiv.pair[which(adiv.pair$Time == "Pre-treatment"),])
+  # Pre-treatment Sex
+  # p-value = 0.9731
+t.test(invsimpson ~ Sex, data = adiv.pair[which(adiv.pair$Time == "Post-treatment"),])
+  # Post-treatment Sex
+  # p-value = 0.001503
+t.test(invsimpson ~ Time, data = adiv.pair[which(adiv.pair[which(adiv.pair$Treatment == "High Fat"),]$Sex == "Female"),], paired=T)
+  # Female High Fat Time
+  # p-value = 0.5901
+t.test(invsimpson ~ Time, data = adiv.pair[which(adiv.pair[which(adiv.pair$Treatment == "High Fat"),]$Sex == "Male"),], paired=T)
+  # Male High Fat Time
+  # p-value = 0.1063
+t.test(invsimpson ~ Time, data = adiv.pair[which(adiv.pair[which(adiv.pair$Treatment == "Low Fat"),]$Sex == "Female"),], paired=T)
+  # Female Low Fat Time
+  # p-value = 0.1735
+t.test(invsimpson ~ Time, data = adiv.pair[which(adiv.pair[which(adiv.pair$Treatment == "Low Fat"),]$Sex == "Male"),], paired=T)
+  # Male Low Fat Time
+  # p-value = 0.3996
+t.test(invsimpson ~ Time, data = adiv.pair[which(adiv.pair[which(adiv.pair$Treatment == "Saccharin"),]$Sex == "Female"),], paired=T)
+  # Female Saccharin Time
+  # p-value = 0.1378
+t.test(invsimpson ~ Time, data = adiv.pair[which(adiv.pair[which(adiv.pair$Treatment == "Saccharin"),]$Sex == "Male"),], paired=T)
+  # Male Saccharin Time
+  # p-value = 0.4341
+t.test(invsimpson ~ Time, data = adiv.pair[which(adiv.pair[which(adiv.pair$Treatment == "Stevia"),]$Sex == "Female"),], paired=T)
+  # Female Stevia Time
+  # p-value = 0.6195
+t.test(invsimpson ~ Time, data = adiv.pair[which(adiv.pair[which(adiv.pair$Treatment == "Stevia"),]$Sex == "Male"),], paired=T)
+  # Male Stevia Time
+  # p-value = 0.0892
+
+
 ```
 
 
