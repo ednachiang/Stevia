@@ -1,0 +1,89 @@
+---
+title: "Code"
+author: "Edna Chiang"
+date: "July 17, 2018"
+output: html_document
+---
+### Load Libraries
+```{r}
+library(ape)
+library(dplyr)
+library(ggplot2)
+library(gplots)
+library(phangorn)
+library(tidyr)
+library(vegan)
+library(phyloseq)
+library(grid)
+theme_set(theme_bw())
+set.seed(1)
+```
+
+
+
+### Import Data
+```{r}
+# Link files
+shared = "mothur_outputs/final.shared"
+taxonomy = "mothur_outputs/final.taxonomy"
+
+
+# Import mothur data
+mothurdata = import_mothur(
+  mothur_shared_file = shared,
+  mothur_constaxonomy_file = taxonomy)
+
+# Add OTU column in taxonomy table
+tax_table(mothurdata) <- cbind(tax_table(mothurdata), 
+                               row.names(tax_table(mothurdata)))
+
+# Rename taxonomy table columns
+colnames(tax_table(mothurdata)) <- 
+  c("Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species")
+```
+
+### Explore mothurdata object
+```{r}
+samp.sum <- data.frame(colSums(otu_table(mothurdata)))
+colnames(samp.sum) <- "Sample_TotalSeqs"
+samp.sum$sample <- row.names(samp.sum)
+samp.sum <- arrange(samp.sum, Sample_TotalSeqs)
+
+ggplot(samp.sum, aes(x=reorder(sample, Sample_TotalSeqs), y=Sample_TotalSeqs)) +
+  ylab("Number of Sequences per Sample") +
+  geom_bar(stat="identity", colour="black", fill="cornflowerblue") +
+  xlab("Sample Name") +
+  ggtitle("Total Number of Sequences per Sample") + 
+  theme(axis.text.x = element_text(colour = "black", size=6, angle=45,hjust = 1,
+                                   vjust = 1))
+
+ggplot(data.frame(sum = sample_sums(mothurdata)), aes(sum)) + 
+  geom_histogram(colour = "white", fill = "blue", bins=60) + 
+  ggtitle("Sample read counts") + 
+  xlab("total sequences")
+
+
+# Min, Mean, Max of sample read counts
+min(sample_sums(mothurdata))
+mean(sample_sums(mothurdata))
+median(sample_sums(mothurdata))
+max(sample_sums(mothurdata))
+```
+
+
+### Create Phyloseq Object
+```{r}
+meta <- read.csv("metadata.csv")
+colnames(meta)[1] <- "Sample_ID"
+rownames(meta) <- meta$Sample
+divsum <- read.table("mothur_outputs/final.summary", header=T)
+
+
+# Add in diversity summaries
+meta[,6:16] <- divsum[,3:12]
+
+# Create intermin phyloseq object
+physeq <- merge_phyloseq(mothurdata, sample_data(meta))
+
+#save(physeq, file="Physeq.RData")
+```
