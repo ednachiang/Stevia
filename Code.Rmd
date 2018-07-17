@@ -437,20 +437,19 @@ t.test(invsimpson ~ Time, data = adiv.pair[which(adiv.pair[which(adiv.pair$Treat
   # Male Stevia Time
   # p-value = 0.0892
 
-
 ```
 
 
 ### Examine Phyla
 ```{r}
 # Merge samples with the same taxonomic rank
-goodphy <- tax_glom(physeq, taxrank="Phylum")
+goodphy <- tax_glom(physeq.pair, taxrank="Phylum")
 
 # Transform each merged phylum count to rel abund
 phy99 <- transform_sample_counts(goodphy, function(x){(x/sum(x))*100})
 
-# Remove any phyla with <1% rel abund
-phy99 <- prune_taxa(taxa_sums(phy99) > 1, phy99)
+# Remove any phyla with <0.1% rel abund
+phy99 <- prune_taxa(taxa_sums(phy99) > 0.01, phy99)
 
 # Create rank abundance of phyla
 barplot(sort(taxa_sums(phy99),TRUE)[1:20]/nsamples(phy99),las=2,cex.axis=.7)
@@ -458,10 +457,10 @@ barplot(sort(taxa_sums(phy99),TRUE)[1:20]/nsamples(phy99),las=2,cex.axis=.7)
 
 # Summarize data
 phy.df <- psmelt(phy99)
-phy.df$Phylum <- ordered(phy.df$Phylum, levels=c("Firmicutes", "Bacteroidetes", "Verrucomicrobia", "Proteobacteria", "Actinobacteria", "Tenericutes", "Cyanobacteria", "Unclassified", "Fibrobacteres", "Elusimicrobia"))
+phy.df$Phylum <- ordered(phy.df$Phylum, levels=c("Firmicutes", "Bacteroidetes", "Verrucomicrobia", "Tenericutes", "Proteobacteria", "Actinobacteria", "Unclassified", "Cyanobacteria"))
 phy.df$Phylum[which(is.na(phy.df$Phylum))] <- rep("Unclassified",length(which(is.na(phy.df$Phylum))))
 phy.sum <- phy.df %>%
-  group_by(Substrate, Antibiotics, Phylum) %>%
+  group_by(Treatment, Time, Phylum) %>%
   summarize(Mean = mean(Abundance),
             Median = median(Abundance),
             SD = sd(Abundance),
@@ -479,11 +478,11 @@ phy.sum$iqr.max <- phy.sum$Median + 0.5*phy.sum$iqr
 tiff("phyla.facet.tiff", width = 13, height = 8, units = "in", res = 300)
 ggplot(phy.sum, aes(x=Phylum, y=Median, fill=Phylum)) +
   geom_bar(stat="identity", color="black") +
-  facet_grid(Antibiotics ~ Substrate) +
+  facet_grid(Time ~ Treatment) +
   geom_errorbar(aes(ymax=iqr.max, ymin=iqr.min), width=0.25) +
-  scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00", "gray35", "#999999")) +
+  scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00")) +
   xlab("Phyla") +
-  ylab("Median Relative Abundance for Phyla > 1%") +
+  ylab("Median Relative Abundance for Phyla > 0.01%") +
   scale_y_continuous(limits=c(0,80), expand=c(0,0))+
   theme(axis.text.x = element_blank(),
         panel.spacing=unit(1, "lines"),
@@ -494,4 +493,61 @@ ggplot(phy.sum, aes(x=Phylum, y=Median, fill=Phylum)) +
         legend.title = element_text(size = 14),
         legend.text = element_text(size=12))
 dev.off()
+
+
+### Testing barplot for sex + treatment + time
+test <- phy.df %>%
+  group_by(Treatment, Time, Sex, Phylum) %>%
+  summarize(Mean = mean(Abundance),
+            Median = median(Abundance),
+            SD = sd(Abundance),
+            SE = (sd(Abundance)/(sqrt(length(Abundance)))),
+            iqr = IQR(Abundance))
+test$iqr.min <- test$Median - 0.5*test$iqr
+test[which(test$iqr.min < 0),10] <- 0
+  # Any IQR min < 0, change to 0 (otherwise error bar won't plot)
+test$iqr.max <- test$Median + 0.5*test$iqr
+ggplot(test, aes(x=Phylum, y=Median, fill=Phylum)) +
+  geom_bar(stat="identity", color="black") +
+  facet_grid(Time + Sex ~ Treatment) +
+  geom_errorbar(aes(ymax=iqr.max, ymin=iqr.min), width=0.25) +
+  scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00")) +
+  xlab("Phyla") +
+  ylab("Median Relative Abundance for Phyla > 0.01%") +
+  scale_y_continuous(limits=c(0,80), expand=c(0,0))+
+  theme(axis.text.x = element_blank(),
+        panel.spacing=unit(1, "lines"),
+        axis.title = element_text(size=20),
+        strip.text.x = element_text(size=14),
+        strip.text.y = element_text(size=14),
+        axis.text.y = element_text(size=12),
+        legend.title = element_text(size = 14),
+        legend.text = element_text(size=12))
+test <- phy.df %>%
+  group_by(Time, Sex, Phylum) %>%
+  summarize(Mean = mean(Abundance),
+            Median = median(Abundance),
+            SD = sd(Abundance),
+            SE = (sd(Abundance)/(sqrt(length(Abundance)))),
+            iqr = IQR(Abundance))
+test$iqr.min <- test$Median - 0.5*test$iqr
+test[which(test$iqr.min < 0),10] <- 0
+  # Any IQR min < 0, change to 0 (otherwise error bar won't plot)
+test$iqr.max <- test$Median + 0.5*test$iqr
+ggplot(test, aes(x=Phylum, y=Median, fill=Phylum)) +
+  geom_bar(stat="identity", color="black") +
+  facet_grid(Time~ Sex) +
+  geom_errorbar(aes(ymax=iqr.max, ymin=iqr.min), width=0.25) +
+  scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00")) +
+  xlab("Phyla") +
+  ylab("Median Relative Abundance for Phyla > 0.01%") +
+  scale_y_continuous(limits=c(0,80), expand=c(0,0))+
+  theme(axis.text.x = element_blank(),
+        panel.spacing=unit(1, "lines"),
+        axis.title = element_text(size=20),
+        strip.text.x = element_text(size=14),
+        strip.text.y = element_text(size=14),
+        axis.text.y = element_text(size=12),
+        legend.title = element_text(size = 14),
+        legend.text = element_text(size=12))
 ```
