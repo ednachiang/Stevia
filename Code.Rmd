@@ -89,11 +89,19 @@ meta[,7:17] <- divsum[,3:12]
 physeq <- merge_phyloseq(mothurdata, sample_data(meta))
 
 #save(physeq, file="Physeq.RData")
+
+# Subset out paired samples
+physeq.pair <- subset_samples(physeq, Sample_ID != "HF8C")
+physeq.pair <- subset_samples(physeq, Sample_ID != "SC4A")
+physeq.pair <- subset_samples(physeq, Sample_ID != "TV2A")
+physeq.pair <- subset_samples(physeq, Sample_ID != "TV8A")
+#save(physeq.pair, file="Physeq.pair.RData")
 ```
 
 ### Load Phyloseq Object
 ```{r}
 load("Physeq.RData")
+load("Physeq.pair.RData")
 ```
 
 ### Alpha Div
