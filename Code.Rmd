@@ -15,6 +15,7 @@ library(tidyr)
 library(vegan)
 library(phyloseq)
 library(grid)
+library(pgirmess)
 theme_set(theme_bw())
 set.seed(1)
 ```
@@ -40,6 +41,7 @@ tax_table(mothurdata) <- cbind(tax_table(mothurdata),
 # Rename taxonomy table columns
 colnames(tax_table(mothurdata)) <- 
   c("Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species")
+
 ```
 
 ### Explore mothurdata object
@@ -76,14 +78,225 @@ max(sample_sums(mothurdata))
 meta <- read.csv("metadata.csv")
 colnames(meta)[1] <- "Sample_ID"
 rownames(meta) <- meta$Sample
+meta$Time <- ordered(meta$Time, levels=c("Pre-treatment", "Post-treatment"))
 divsum <- read.table("mothur_outputs/final.summary", header=T)
 
 
 # Add in diversity summaries
-meta[,6:16] <- divsum[,3:12]
+meta[,7:17] <- divsum[,3:12]
 
 # Create intermin phyloseq object
 physeq <- merge_phyloseq(mothurdata, sample_data(meta))
 
 #save(physeq, file="Physeq.RData")
+```
+
+### Load Phyloseq Object
+```{r}
+load("Physeq.RData")
+```
+
+### Alpha Div
+```{r}
+adiv <- data.frame(sample_data(physeq))
+
+### Coverage
+# Plot
+ggplot(adiv, aes(x=Treatment, y= coverage, fill = Treatment)) +
+  geom_boxplot(position=position_dodge(1)) +
+  geom_point() + 
+  facet_grid(.~Time) +
+  xlab("Treatment") +
+  scale_fill_manual(values=c("indianred1", "orange", "springgreen3", "deepskyblue2")) +
+  ylab("Coverage")
+# Test normality
+hist(adiv$coverage, breaks=10)
+qqnorm(adiv$coverage)
+qqline(adiv$coverage)
+shapiro.test(adiv$coverage)
+  # p-value = 0.003709
+  # Not normal
+
+
+### Total OTUs
+# Make the original, unnormalized phyloseq object
+shared = "mothur_outputs/final.shared"
+taxonomy = "mothur_outputs/final.taxonomy"
+mothurdata = import_mothur(
+  mothur_shared_file = shared,
+  mothur_constaxonomy_file = taxonomy)
+tax_table(mothurdata) <- cbind(tax_table(mothurdata), 
+                               row.names(tax_table(mothurdata)))
+colnames(tax_table(mothurdata)) <- 
+  c("Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species")
+# Read in metadata
+meta <- read.csv("metadata.csv")
+colnames(meta)[1] <- "Sample_ID"
+otu.tot <- data.frame(sample_names(mothurdata))
+# Pull out # of OTUs from all samples
+otu.tot$Total_OTUs <- rep("NA", 76)
+for(i in 1:76){
+  otu.tot[i,2] <- length(which(otu_table(mothurdata)[,i] != 0))
+}
+adiv$Total_OTUs <- otu.tot$Total_OTUs
+adiv$Total_OTUs <- as.numeric(adiv$Total_OTUs)
+# Plot
+ggplot(adiv, aes(x=Treatment, y=Total_OTUs, fill = Treatment)) +
+  geom_boxplot(position=position_dodge(1)) +
+  geom_point() + 
+  facet_grid(.~Time) +
+  xlab("Treatment") +
+  scale_fill_manual(values=c("indianred1", "orange", "springgreen3", "deepskyblue2")) +
+  ylab("Total OTUs")
+# Test normality
+hist(adiv$Total_OTUs, breaks=10)
+qqnorm(adiv$Total_OTUs)
+qqline(adiv$Total_OTUs)
+shapiro.test(adiv$Total_OTUs)
+  # p-value = 0.002107
+  # Not normal
+# Kruskal-Wallis
+kruskal.test(formula = Total_OTUs ~ Group, data = adiv)
+  # p-value = 8.581e-09
+kruskal.test(formula = Total_OTUs ~ Treatment, data = adiv)
+  # p-value = 0.001097
+kruskalmc(resp = Total_OTUs ~ Treatment, data = adiv)
+  # Significant:
+    # High Fat - Low Fat
+    # Low Fat - Saccharin
+    # Low Fat - Stevia
+wilcox.test(Total_OTUs ~ Time, data=adiv)
+  # p-value = 4.114e-06
+
+
+
+### Chao
+# Plot
+tiff("Chao.tiff", width=6.5, height=3, units="in", res=600)
+ggplot(adiv, aes(x=Treatment, y=chao, fill = Treatment)) +
+  geom_boxplot(position=position_dodge(1)) +
+  geom_point() + 
+  facet_grid(.~Time) +
+  xlab("Treatment") +
+  scale_fill_manual(values=c("indianred1", "orange", "springgreen3", "deepskyblue2")) +
+  ylab("Chao Richness")
+dev.off()
+# Test normality
+hist(adiv$chao, breaks=10)
+qqnorm(adiv$chao)
+qqline(adiv$chao)
+shapiro.test(adiv$chao)
+  # p-value = 5.717e-05
+  # Not normal
+
+### Berger-Parker
+# Plot
+ggplot(adiv, aes(x=Treatment, y=bergerparker, fill = Treatment)) +
+  geom_boxplot(position=position_dodge(1)) +
+  geom_point() + 
+  facet_grid(.~Time) +
+  scale_fill_manual(values=c("indianred1", "orange", "springgreen3", "deepskyblue2")) +
+  xlab("Treatment") +
+  ylab("Berger-Parker")
+# Test normality
+hist(adiv$bergerparker, breaks=10)
+qqnorm(adiv$bergerparker)
+qqline(adiv$bergerparker)
+shapiro.test(adiv$bergerparker)
+  # p-value = 0.00269
+  # Not normal
+
+### Shannon
+# Plot
+ggplot(adiv, aes(x=Treatment, y=shannon, fill = Treatment)) +
+  geom_boxplot(position=position_dodge(1)) +
+  geom_point() + 
+  facet_grid(.~Time) +
+  scale_fill_manual(values=c("indianred1", "orange", "springgreen3", "deepskyblue2")) +
+  xlab("Treatment") +
+  ylab("Shannon Diversity")
+# Test normality
+hist(adiv$shannon, breaks=10)
+qqnorm(adiv$shannon)
+qqline(adiv$shannon)
+shapiro.test(adiv$shannon)
+  # p-value = 0.5704
+  # Normal
+
+
+
+### Inverse Simpson
+# Plot
+tiff("InvSimp.tiff", width=6.5, height=3, units="in", res=600)
+ggplot(adiv, aes(x=Treatment, y= invsimpson, fill = Treatment)) +
+  geom_boxplot(position=position_dodge(1)) +
+  geom_point() + 
+  facet_grid(.~Time) +
+  scale_fill_manual(values=c("indianred1", "orange", "springgreen3", "deepskyblue2")) +
+  xlab("Treatment") +
+  ylab("Inverse Simpson Weighted Diversity")
+dev.off()
+# Test normality
+hist(adiv$invsimpson, breaks=10)
+qqnorm(adiv$invsimpson)
+qqline(adiv$invsimpson)
+shapiro.test(adiv$invsimpson)
+  # p-value = 0.2751
+  # Normal
+```
+
+
+### Examine Phyla
+```{r}
+# Merge samples with the same taxonomic rank
+goodphy <- tax_glom(physeq, taxrank="Phylum")
+
+# Transform each merged phylum count to rel abund
+phy99 <- transform_sample_counts(goodphy, function(x){(x/sum(x))*100})
+
+# Remove any phyla with <1% rel abund
+phy99 <- prune_taxa(taxa_sums(phy99) > 1, phy99)
+
+# Create rank abundance of phyla
+barplot(sort(taxa_sums(phy99),TRUE)[1:20]/nsamples(phy99),las=2,cex.axis=.7)
+
+
+# Summarize data
+phy.df <- psmelt(phy99)
+phy.df$Phylum <- ordered(phy.df$Phylum, levels=c("Firmicutes", "Bacteroidetes", "Verrucomicrobia", "Proteobacteria", "Actinobacteria", "Tenericutes", "Cyanobacteria", "Unclassified", "Fibrobacteres", "Elusimicrobia"))
+phy.df$Phylum[which(is.na(phy.df$Phylum))] <- rep("Unclassified",length(which(is.na(phy.df$Phylum))))
+phy.sum <- phy.df %>%
+  group_by(Substrate, Antibiotics, Phylum) %>%
+  summarize(Mean = mean(Abundance),
+            Median = median(Abundance),
+            SD = sd(Abundance),
+            SE = (sd(Abundance)/(sqrt(length(Abundance)))),
+            iqr = IQR(Abundance))
+
+# Calculate IQR limits
+phy.sum$iqr.min <- phy.sum$Median - 0.5*phy.sum$iqr
+phy.sum[which(phy.sum$iqr.min < 0),10] <- 0
+  # Any IQR min < 0, change to 0 (otherwise error bar won't plot)
+phy.sum$iqr.max <- phy.sum$Median + 0.5*phy.sum$iqr
+
+
+### Barplot ###
+tiff("phyla.facet.tiff", width = 13, height = 8, units = "in", res = 300)
+ggplot(phy.sum, aes(x=Phylum, y=Median, fill=Phylum)) +
+  geom_bar(stat="identity", color="black") +
+  facet_grid(Antibiotics ~ Substrate) +
+  geom_errorbar(aes(ymax=iqr.max, ymin=iqr.min), width=0.25) +
+  scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00", "gray35", "#999999")) +
+  xlab("Phyla") +
+  ylab("Median Relative Abundance for Phyla > 1%") +
+  scale_y_continuous(limits=c(0,80), expand=c(0,0))+
+  theme(axis.text.x = element_blank(),
+        panel.spacing=unit(1, "lines"),
+        axis.title = element_text(size=20),
+        strip.text.x = element_text(size=14),
+        strip.text.y = element_text(size=14),
+        axis.text.y = element_text(size=12),
+        legend.title = element_text(size = 14),
+        legend.text = element_text(size=12))
+dev.off()
 ```
