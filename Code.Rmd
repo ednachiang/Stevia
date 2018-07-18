@@ -20,7 +20,14 @@ theme_set(theme_bw())
 set.seed(1)
 ```
 
-
+### Load Functions
+```{r}
+veganCovEllipse <- function(cov, center = c(0, 0), scale = 1, npoints = 100) {
+    theta <- (0:npoints) * 2 * pi/npoints
+    Circle <- cbind(cos(theta), sin(theta))
+    t(center + scale * t(Circle %*% chol(cov)))
+}
+```
 
 ### Import Data
 ```{r}
@@ -96,12 +103,56 @@ physeq.pair <- subset_samples(physeq.pair, Sample_ID != "SC4A")
 physeq.pair <- subset_samples(physeq.pair, Sample_ID != "TV2A")
 physeq.pair <- subset_samples(physeq.pair, Sample_ID != "TV8A")
 #save(physeq.pair, file="Physeq.pair.RData")
+
+# Subset out Pre vs. Post
+physeq.pre <- subset_samples(physeq.pair, Time == "Pre-treatment")
+#save(physeq.pre, file="Physeq.pre.RData")
+physeq.post <- subset_samples(physeq.pair, Time == "Post-treatment")
+#save(physeq.post, file="Physeq.post.RData")
+
+# Subset Post w/o Low Fat (due to skewing)
+physeq.post.rem <- subset_samples(physeq.post, Treatment != "Low Fat")
+#save(physeq.post.rem, file="Physeq.post.rem.RData")
+
+# Subset out Female vs. Male
+physeq.fem <- subset_samples(physeq.pair, Sex == "Female")
+#save(physeq.fem, file="Physeq.fem.RData")
+physeq.mal <- subset_samples(physeq.pair, Sex == "Male")
+#save(physeq.mal, file="Physeq.mal.RData")
+
+# Subset out Sex + Time
+physeq.pre.fem <- subset_samples(physeq.pre, Sex == "Female")
+#save(physeq.pre.fem, file="Physeq.pre.fem.RData")
+physeq.pre.mal <- subset_samples(physeq.pre, Sex == "Male")
+#save(physeq.pre.mal, file="Physeq.pre.mal.RData")
+physeq.post.fem <- subset_samples(physeq.post, Sex == "Female")
+#save(physeq.post.fem, file="Physeq.post.fem.RData")
+physeq.post.mal <- subset_samples(physeq.post, Sex == "Male")
+#save(physeq.post.mal, file="Physeq.post.mal.RData")
+
+# Remove Low Fat from Sex + Post subsets
+physeq.post.fem.rem <- subset_samples(physeq.post.fem, Treatment != "Low Fat")
+#save(physeq.post.fem.rem, file="Physeq.post.fem.rem.RData")
+physeq.post.mal.rem <- subset_samples(physeq.post.mal, Treatment != "Low Fat")
+#save(physeq.post.mal.rem, file="Physeq.post.mal.rem.RData")
 ```
 
 ### Load Phyloseq Object
 ```{r}
 load("Physeq.RData")
 load("Physeq.pair.RData")
+load("Physeq.pre.RData")
+load("Physeq.post.RData")
+load("Physeq.post.rem.RData")
+load("Physeq.fem.RData")
+load("Physeq.mal.RData")
+load("Physeq.pre.fem.RData")
+load("Physeq.pre.mal.RData")
+load("Physeq.post.fem.RData")
+load("Physeq.post.mal.RData")
+load("Physeq.post.fem.rem.RData")
+load("Physeq.post.mal.rem.RData")
+
 ```
 
 ### Alpha Div
@@ -550,4 +601,319 @@ ggplot(test, aes(x=Phylum, y=Median, fill=Phylum)) +
         axis.text.y = element_text(size=12),
         legend.title = element_text(size = 14),
         legend.text = element_text(size=12))
+```
+
+### Bray-Curtis
+```{r}
+### Paired
+bray.nmds <- ordinate(physeq=physeq.pair, method="NMDS", distance="bray")
+  # stress = 8.822573e-05
+
+plot_ordination(physeq=physeq.pair, ordination=bray.nmds, color="Treatment", shape="Time") +
+  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00")) +
+  scale_shape_manual(values=c(19,2))
+
+### Pre-treatment
+bray.nmds.pre <- ordinate(physeq=physeq.pre, method="NMDS", distance="bray")
+  # stress = 0.1847002 
+plot_ordination(physeq=physeq.pre, ordination=bray.nmds.pre, color="Treatment", shape="Sex") +
+  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00")) +
+  scale_shape_manual(values=c(19,2))
+
+
+
+# Treatment Ellipses
+sample_data(physeq.pre)$Elip.treat <- paste(sample_data(physeq.pre)$Treatment)
+elip.nmds.pre.treat <- data.frame(MDS1 = bray.nmds.pre$points[,1], MDS2 = bray.nmds.pre$points[,2],
+                        Group = sample_data(physeq.pre)$Elip.treat)
+plot.new()
+elip.ord.pre.treat <- ordiellipse(bray.nmds.pre, sample_data(physeq.pre)$Elip.treat, display="sites", kind="se", conf=0.95, label=T)
+elip.pre.treat.df <- data.frame()
+for(i in levels(elip.nmds.pre.treat$Group)){
+  elip.pre.treat.df <- rbind(elip.pre.treat.df, cbind(as.data.frame(with(elip.nmds.pre.treat[elip.nmds.pre.treat$Group==i,],
+                                                     veganCovEllipse(elip.ord.pre.treat[[i]]$cov,
+                                                                     elip.ord.pre.treat[[i]]$center,
+                                                                     elip.ord.pre.treat[[i]]$scale))),
+                                  group=i))
+  
+}
+
+# Plot w/ treatment ellip
+plot_ordination(physeq=physeq.pre, ordination=bray.nmds.pre, color="Treatment") +
+  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00")) +
+  geom_path(data=elip.pre.treat.df, aes(x=NMDS1, y=NMDS2, colour=group), size=1, linetype=1)
+
+# Sex Ellipses
+sample_data(physeq.pre)$Elip.sex <- paste(sample_data(physeq.pre)$Sex)
+elip.nmds.pre.sex <- data.frame(MDS1 = bray.nmds.pre$points[,1], MDS2 = bray.nmds.pre$points[,2],
+                        Group = sample_data(physeq.pre)$Elip.sex)
+plot.new()
+elip.ord.pre.sex <- ordiellipse(bray.nmds.pre, sample_data(physeq.pre)$Elip.sex, display="sites", kind="se", conf=0.95, label=T)
+elip.pre.sex.df <- data.frame()
+for(i in levels(elip.nmds.pre.sex$Group)){
+  elip.pre.sex.df <- rbind(elip.pre.sex.df, cbind(as.data.frame(with(elip.nmds.pre.sex[elip.nmds.pre.sex$Group==i,],
+                                                     veganCovEllipse(elip.ord.pre.sex[[i]]$cov,
+                                                                     elip.ord.pre.sex[[i]]$center,
+                                                                     elip.ord.pre.sex[[i]]$scale))),
+                                  group=i))
+}
+
+# Plot w/ sex ellip
+plot_ordination(physeq=physeq.pre, ordination=bray.nmds.pre, color="Sex") +
+  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00")) +
+  geom_path(data=elip.pre.sex.df, aes(x=NMDS1, y=NMDS2, colour=group), size=1, linetype=1)
+
+
+
+### Post-treatment
+bray.nmds.post <- ordinate(physeq=physeq.post, method="NMDS", distance="bray")
+  # stress = 8.927466e-05
+
+plot_ordination(physeq=physeq.post, ordination=bray.nmds.post, color="Treatment", shape="Sex") +
+  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00")) +
+  scale_shape_manual(values=c(19,2))
+
+
+
+### Post-treatment w/o Low Fat
+bray.nmds.post.rem <- ordinate(physeq=physeq.post.rem, method="NMDS", distance="bray")
+  # stress = 0.2067552
+
+plot_ordination(physeq=physeq.post.rem, ordination=bray.nmds.post.rem, color="Treatment", shape="Sex") +
+  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00")) +
+  scale_shape_manual(values=c(19,2))
+
+# Treatment Ellipses
+sample_data(physeq.post.rem)$Elip.treat <- paste(sample_data(physeq.post.rem)$Treatment)
+elip.nmds.post.rem.treat <- data.frame(MDS1 = bray.nmds.post.rem$points[,1], MDS2 = bray.nmds.post.rem$points[,2],
+                        Group = sample_data(physeq.post.rem)$Elip.treat)
+plot.new()
+elip.ord.post.rem.treat <- ordiellipse(bray.nmds.post.rem, sample_data(physeq.post.rem)$Elip.treat, display="sites", kind="se", conf=0.95, label=T)
+elip.post.rem.treat.df <- data.frame()
+for(i in levels(elip.nmds.post.rem.treat$Group)){
+  elip.post.rem.treat.df <- rbind(elip.post.rem.treat.df, cbind(as.data.frame(with(elip.nmds.post.rem.treat[elip.nmds.post.rem.treat$Group==i,],
+                                                     veganCovEllipse(elip.ord.post.rem.treat[[i]]$cov,
+                                                                     elip.ord.post.rem.treat[[i]]$center,
+                                                                     elip.ord.post.rem.treat[[i]]$scale))),
+                                  group=i))
+  
+}
+
+# Plot w/ treatment ellip
+plot_ordination(physeq=physeq.post.rem, ordination=bray.nmds.post.rem, color="Treatment") +
+  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00")) +
+  geom_path(data=elip.post.rem.treat.df, aes(x=NMDS1, y=NMDS2, colour=group), size=1, linetype=1)
+
+# Sex Ellipses
+sample_data(physeq.post.rem)$Elip.sex <- paste(sample_data(physeq.post.rem)$Sex)
+elip.nmds.post.rem.sex <- data.frame(MDS1 = bray.nmds.post.rem$points[,1], MDS2 = bray.nmds.post.rem$points[,2],
+                        Group = sample_data(physeq.post.rem)$Elip.sex)
+plot.new()
+elip.ord.post.rem.sex <- ordiellipse(bray.nmds.post.rem, sample_data(physeq.post.rem)$Elip.sex, display="sites", kind="se", conf=0.95, label=T)
+elip.post.rem.sex.df <- data.frame()
+for(i in levels(elip.nmds.post.rem.sex$Group)){
+  elip.post.rem.sex.df <- rbind(elip.post.rem.sex.df, cbind(as.data.frame(with(elip.nmds.post.rem.sex[elip.nmds.post.rem.sex$Group==i,],
+                                                     veganCovEllipse(elip.ord.post.rem.sex[[i]]$cov,
+                                                                     elip.ord.post.rem.sex[[i]]$center,
+                                                                     elip.ord.post.rem.sex[[i]]$scale))),
+                                  group=i))
+}
+
+# Plot w/ sex ellip
+plot_ordination(physeq=physeq.post.rem, ordination=bray.nmds.post.rem, color="Sex") +
+  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00")) +
+  geom_path(data=elip.post.rem.sex.df, aes(x=NMDS1, y=NMDS2, colour=group), size=1, linetype=1)
+
+
+
+### All Female
+bray.nmds.fem <- ordinate(physeq=physeq.fem, method="NMDS", distance="bray")
+  # stress = 8.77398e-05
+
+plot_ordination(physeq=physeq.fem, ordination=bray.nmds.fem, color="Treatment", shape="Time") +
+  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00")) +
+  scale_shape_manual(values=c(19,2))
+
+
+
+### All Male
+bray.nmds.mal <- ordinate(physeq=physeq.mal, method="NMDS", distance="bray")
+  # stress = 8.193224e-05 
+
+plot_ordination(physeq=physeq.mal, ordination=bray.nmds.mal, color="Treatment", shape="Time") +
+  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00")) +
+  scale_shape_manual(values=c(19,2))
+
+
+
+### Pre Female
+bray.nmds.pre.fem <- ordinate(physeq=physeq.pre.fem, method="NMDS", distance="bray")
+  # stress = 0.1965918 
+
+plot_ordination(physeq=physeq.pre.fem, ordination=bray.nmds.pre.fem, color="Treatment") +
+  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00"))
+
+# Treatment Ellipses
+sample_data(physeq.pre.fem)$Elip.treat <- paste(sample_data(physeq.pre.fem)$Treatment)
+elip.nmds.pre.fem.treat <- data.frame(MDS1 = bray.nmds.pre.fem$points[,1], MDS2 = bray.nmds.pre.fem$points[,2],
+                        Group = sample_data(physeq.pre.fem)$Elip.treat)
+plot.new()
+elip.ord.pre.fem.treat <- ordiellipse(bray.nmds.pre.fem, sample_data(physeq.pre.fem)$Elip.treat, display="sites", kind="se", conf=0.95, label=T)
+elip.pre.fem.treat.df <- data.frame()
+for(i in levels(elip.nmds.pre.fem.treat$Group)){
+  elip.pre.fem.treat.df <- rbind(elip.pre.fem.treat.df, cbind(as.data.frame(with(elip.nmds.pre.fem.treat[elip.nmds.pre.fem.treat$Group==i,],
+                                                     veganCovEllipse(elip.ord.pre.fem.treat[[i]]$cov,
+                                                                     elip.ord.pre.fem.treat[[i]]$center,
+                                                                     elip.ord.pre.fem.treat[[i]]$scale))),
+                                  group=i))
+}
+
+# Plot w/ treatment ellip
+plot_ordination(physeq=physeq.pre.fem, ordination=bray.nmds.pre.fem, color="Treatment") +
+  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00")) +
+  geom_path(data=elip.pre.fem.treat.df, aes(x=NMDS1, y=NMDS2, colour=group), size=1, linetype=1)
+
+
+
+### Pre Male
+bray.nmds.pre.mal <- ordinate(physeq=physeq.pre.mal, method="NMDS", distance="bray")
+  # stress = 0.1949269 
+  # NO CONVERGENCE!!!
+
+plot_ordination(physeq=physeq.pre.mal, ordination=bray.nmds.pre.mal, color="Treatment") #+
+  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00"))
+
+# Treatment Ellipses
+sample_data(physeq.pre.mal)$Elip.treat <- paste(sample_data(physeq.pre.mal)$Treatment)
+elip.nmds.pre.mal.treat <- data.frame(MDS1 = bray.nmds.pre.mal$points[,1], MDS2 = bray.nmds.pre.mal$points[,2],
+                        Group = sample_data(physeq.pre.mal)$Elip.treat)
+plot.new()
+elip.ord.pre.mal.treat <- ordiellipse(bray.nmds.pre.mal, sample_data(physeq.pre.mal)$Elip.treat, display="sites", kind="se", conf=0.95, label=T)
+elip.pre.mal.treat.df <- data.frame()
+for(i in levels(elip.nmds.pre.mal.treat$Group)){
+  elip.pre.mal.treat.df <- rbind(elip.pre.mal.treat.df, cbind(as.data.frame(with(elip.nmds.pre.mal.treat[elip.nmds.pre.mal.treat$Group==i,],
+                                                     veganCovEllipse(elip.ord.pre.mal.treat[[i]]$cov,
+                                                                     elip.ord.pre.mal.treat[[i]]$center,
+                                                                     elip.ord.pre.mal.treat[[i]]$scale))),
+                                  group=i))
+}
+
+# Plot w/ treatment ellip
+plot_ordination(physeq=physeq.pre.mal, ordination=bray.nmds.pre.mal, color="Treatment") +
+  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00")) +
+  geom_path(data=elip.pre.mal.treat.df, aes(x=NMDS1, y=NMDS2, colour=group), size=1, linetype=1)
+
+
+### Post Female
+bray.nmds.post.fem <- ordinate(physeq=physeq.post.fem, method="NMDS", distance="bray")
+  # stress = 8.335943e-05
+
+plot_ordination(physeq=physeq.post.fem, ordination=bray.nmds.post.fem, color="Treatment") #+
+  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00"))
+
+# Treatment Ellipses
+sample_data(physeq.post.fem)$Elip.treat <- paste(sample_data(physeq.post.fem)$Treatment)
+elip.nmds.post.fem.treat <- data.frame(MDS1 = bray.nmds.post.fem$points[,1], MDS2 = bray.nmds.post.fem$points[,2],
+                        Group = sample_data(physeq.post.fem)$Elip.treat)
+plot.new()
+elip.ord.post.fem.treat <- ordiellipse(bray.nmds.post.fem, sample_data(physeq.post.fem)$Elip.treat, display="sites", kind="se", conf=0.95, label=T)
+elip.post.fem.treat.df <- data.frame()
+for(i in levels(elip.nmds.post.fem.treat$Group)){
+  elip.post.fem.treat.df <- rbind(elip.post.fem.treat.df, cbind(as.data.frame(with(elip.nmds.post.fem.treat[elip.nmds.post.fem.treat$Group==i,],
+                                                     veganCovEllipse(elip.ord.post.fem.treat[[i]]$cov,
+                                                                     elip.ord.post.fem.treat[[i]]$center,
+                                                                     elip.ord.post.fem.treat[[i]]$scale))),
+                                  group=i))
+}
+
+# Plot w/ treatment ellip
+plot_ordination(physeq=physeq.post.fem, ordination=bray.nmds.post.fem, color="Treatment") +
+  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00")) +
+  geom_path(data=elip.post.fem.treat.df, aes(x=NMDS1, y=NMDS2, colour=group), size=1, linetype=1)
+
+
+### Post Male
+bray.nmds.post.mal <- ordinate(physeq=physeq.post.mal, method="NMDS", distance="bray")
+  # stress = 8.658975e-05 
+
+plot_ordination(physeq=physeq.post.mal, ordination=bray.nmds.post.mal, color="Treatment") #+
+  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00"))
+
+# Treatment Ellipses
+sample_data(physeq.post.mal)$Elip.treat <- paste(sample_data(physeq.post.mal)$Treatment)
+elip.nmds.post.mal.treat <- data.frame(MDS1 = bray.nmds.post.mal$points[,1], MDS2 = bray.nmds.post.mal$points[,2],
+                        Group = sample_data(physeq.post.mal)$Elip.treat)
+plot.new()
+elip.ord.post.mal.treat <- ordiellipse(bray.nmds.post.mal, sample_data(physeq.post.mal)$Elip.treat, display="sites", kind="se", conf=0.95, label=T)
+elip.post.mal.treat.df <- data.frame()
+for(i in levels(elip.nmds.post.mal.treat$Group)){
+  elip.post.mal.treat.df <- rbind(elip.post.mal.treat.df, cbind(as.data.frame(with(elip.nmds.post.mal.treat[elip.nmds.post.mal.treat$Group==i,],
+                                                     veganCovEllipse(elip.ord.post.mal.treat[[i]]$cov,
+                                                                     elip.ord.post.mal.treat[[i]]$center,
+                                                                     elip.ord.post.mal.treat[[i]]$scale))),
+                                  group=i))
+}
+
+# Plot w/ treatment ellip
+plot_ordination(physeq=physeq.post.mal, ordination=bray.nmds.post.mal, color="Treatment") +
+  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00")) +
+  geom_path(data=elip.post.mal.treat.df, aes(x=NMDS1, y=NMDS2, colour=group), size=1, linetype=1)
+
+
+
+### Post Female w/o Low Fat
+bray.nmds.post.fem.rem <- ordinate(physeq=physeq.post.fem.rem, method="NMDS", distance="bray")
+  # stress = 0.169206 
+
+plot_ordination(physeq=physeq.post.fem.rem, ordination=bray.nmds.post.fem.rem, color="Treatment") #+
+  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00"))
+
+# Treatment Ellipses
+sample_data(physeq.post.fem.rem)$Elip.treat <- paste(sample_data(physeq.post.fem.rem)$Treatment)
+elip.nmds.post.fem.rem.treat <- data.frame(MDS1 = bray.nmds.post.fem.rem$points[,1], MDS2 = bray.nmds.post.fem.rem$points[,2],
+                        Group = sample_data(physeq.post.fem.rem)$Elip.treat)
+plot.new()
+elip.ord.post.fem.rem.treat <- ordiellipse(bray.nmds.post.fem.rem, sample_data(physeq.post.fem.rem)$Elip.treat, display="sites", kind="se", conf=0.95, label=T)
+elip.post.fem.rem.treat.df <- data.frame()
+for(i in levels(elip.nmds.post.fem.rem.treat$Group)){
+  elip.post.fem.rem.treat.df <- rbind(elip.post.fem.rem.treat.df, cbind(as.data.frame(with(elip.nmds.post.fem.rem.treat[elip.nmds.post.fem.rem.treat$Group==i,],
+                                                     veganCovEllipse(elip.ord.post.fem.rem.treat[[i]]$cov,
+                                                                     elip.ord.post.fem.rem.treat[[i]]$center,
+                                                                     elip.ord.post.fem.rem.treat[[i]]$scale))),
+                                  group=i))
+}
+
+# Plot w/ treatment ellip
+plot_ordination(physeq=physeq.post.fem.rem, ordination=bray.nmds.post.fem.rem, color="Treatment") +
+  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00")) +
+  geom_path(data=elip.post.fem.rem.treat.df, aes(x=NMDS1, y=NMDS2, colour=group), size=1, linetype=1)
+
+
+
+### Post Male w/o Low Fat
+bray.nmds.post.mal.rem <- ordinate(physeq=physeq.post.mal.rem, method="NMDS", distance="bray")
+  # stress = 0.160679
+
+plot_ordination(physeq=physeq.post.mal.rem, ordination=bray.nmds.post.mal.rem, color="Treatment") #+
+  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00"))
+
+# Treatment Ellipses
+sample_data(physeq.post.mal.rem)$Elip.treat <- paste(sample_data(physeq.post.mal.rem)$Treatment)
+elip.nmds.post.mal.rem.treat <- data.frame(MDS1 = bray.nmds.post.mal.rem$points[,1], MDS2 = bray.nmds.post.mal.rem$points[,2],
+                        Group = sample_data(physeq.post.mal.rem)$Elip.treat)
+plot.new()
+elip.ord.post.mal.rem.treat <- ordiellipse(bray.nmds.post.mal.rem, sample_data(physeq.post.mal.rem)$Elip.treat, display="sites", kind="se", conf=0.95, label=T)
+elip.post.mal.rem.treat.df <- data.frame()
+for(i in levels(elip.nmds.post.mal.rem.treat$Group)){
+  elip.post.mal.rem.treat.df <- rbind(elip.post.mal.rem.treat.df, cbind(as.data.frame(with(elip.nmds.post.mal.rem.treat[elip.nmds.post.mal.rem.treat$Group==i,],
+                                                     veganCovEllipse(elip.ord.post.mal.rem.treat[[i]]$cov,
+                                                                     elip.ord.post.mal.rem.treat[[i]]$center,
+                                                                     elip.ord.post.mal.rem.treat[[i]]$scale))),
+                                  group=i))
+}
+
+# Plot w/ treatment ellip
+plot_ordination(physeq=physeq.post.mal.rem, ordination=bray.nmds.post.mal.rem, color="Treatment") +
+  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00")) +
+  geom_path(data=elip.post.mal.rem.treat.df, aes(x=NMDS1, y=NMDS2, colour=group), size=1, linetype=1)
 ```
