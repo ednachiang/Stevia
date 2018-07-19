@@ -136,6 +136,17 @@ physeq.post.fem.rem <- subset_samples(physeq.post.fem, Treatment != "Low Fat")
 #save(physeq.post.fem.rem, file="Physeq.post.fem.rem.RData")
 physeq.post.mal.rem <- subset_samples(physeq.post.mal, Treatment != "Low Fat")
 #save(physeq.post.mal.rem, file="Physeq.post.mal.rem.RData")
+
+# Subset out treatments
+physeq.hf <- subset_samples(physeq.pair, Treatment == "High Fat")
+#save(physeq.hf, file = "Physeq.hf.RData")
+physeq.lf <- subset_samples(physeq.pair, Treatment == "Low Fat")
+#save(physeq.hf, file = "Physeq.lf.RData")
+physeq.sc <- subset_samples(physeq.pair, Treatment == "Saccharin")
+#save(physeq.hf, file = "Physeq.sc.RData")
+physeq.tv <- subset_samples(physeq.pair, Treatment == "Stevia")
+#save(physeq.hf, file = "Physeq.tv.RData")
+
 ```
 
 ### Load Phyloseq Object
@@ -153,7 +164,10 @@ load("Physeq.post.fem.RData")
 load("Physeq.post.mal.RData")
 load("Physeq.post.fem.rem.RData")
 load("Physeq.post.mal.rem.RData")
-
+load("Physeq.hf.RData")
+load("Physeq.lf.RData")
+load("Physeq.sc.RData")
+load("Physeq.tv.RData")
 ```
 
 ### Alpha Div
@@ -964,11 +978,25 @@ p <- permutest(beta.tax)
 p$tab
   # p-value = 0.338
 
+# Subj_ID
+adonis(pair.bray ~ Subj_ID, data=pair.sampdf)
+  # p-value = 0.976
+  # R2 = 0.42718
+beta.tax = betadisper(d=pair.bray, group=pair.sampdf$Subj_ID)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.001
+
 # Combined Variables
-adonis(pair.bray ~ Time + Treatment + Sex, data=pair.sampdf)
+adonis(pair.bray ~ Time + Treatment + Sex + Subj_ID,
+       data=pair.sampdf)
+  ### Subj_ID must be last because it's not sig
+    # If first, adonis doesn't evaluate the remainder of the model because the first variable (Subj_ID) us bit sig
   # Time: p-value = 0.001; R2 = 0.25838
   # Treatment: p-value = 0.001; R2 = 0.12309
   # Sex: p-value = 0.001; R2 = 0.07370
+  # Subj_ID: p-value = 0.907, R2 = 0.23038
+  
 
 
 ### Pre-treatment
@@ -1080,10 +1108,20 @@ p <- permutest(beta.tax)
 p$tab
   # p-value = 0.102
 
+# Subj_ID
+adonis(fem.bray ~ Subj_ID, data=fem.sampdf)
+  # p-value = 0.977
+  # R2 = 0.37156
+beta.tax = betadisper(d=fem.bray, group=fem.sampdf$Subj_ID)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.001
+
 # Combined Variables
-adonis(fem.bray ~ Time + Treatment, data=fem.sampdf)
+adonis(fem.bray ~ Time + Treatment + Subj_ID, data=fem.sampdf)
   # Time: p-value = 0.001; R2 = 0.35979
   # Treatment: p-value = 0.001; R2 = 0.16207
+  # Subj_ID: p-value = 0.560; R2 = 0.20949
 
 
 
@@ -1109,10 +1147,20 @@ p <- permutest(beta.tax)
 p$tab
   # p-value = 0.761
 
+# Subj_ID
+adonis(mal.bray ~ Subj_ID, data=mal.sampdf)
+  # p-value = 0.976
+  # R2 = 0.39022
+beta.tax = betadisper(d=mal.bray, group=mal.sampdf$Subj_ID)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.001
+
 # Combined Variables
-adonis(mal.bray ~ Time + Treatment, data=mal.sampdf)
+adonis(mal.bray ~ Time + Treatment + Subj_ID, data=mal.sampdf)
   # Time: p-value = 0.001; R2 = 0.32399
   # Treatment: p-value = 0.001; R2 = 0.15030
+  # Subj_ID: p-value = 0.442; R2 = 0.23992
 
 
 
@@ -1204,23 +1252,259 @@ p <- permutest(beta.tax)
 p$tab
   # p-value = 0.696
 
+### High Fat
+hf.sampdf <- data.frame(sample_data(physeq.hf))
+hf.bray <- phyloseq::distance(physeq=physeq.hf, method="bray")
+
+# Time
+adonis(hf.bray ~ Time, data=hf.sampdf)
+  # p-value = 0.001
+  # R2 = 0.48394
+beta.tax = betadisper(d=hf.bray, group=hf.sampdf$Time)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.005
+
+# Sex
+adonis(hf.bray ~ Sex, data=hf.sampdf)
+  # p-value = 0.188
+  # R2 = 0.08379
+beta.tax = betadisper(d=hf.bray, group=hf.sampdf$Sex)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.595
+
+# Subj_ID
+adonis(hf.bray ~ Subj_ID, data=hf.sampdf)
+  # p-value = 0.986
+  # R2 = 0.28542
+beta.tax = betadisper(d=hf.bray, group=hf.sampdf$Subj_ID)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.001
+
+# Combined
+adonis(hf.bray ~ Time + Sex + Subj_ID, data=hf.sampdf)
+  # Time: p-value = 0.001; R2 = 0.48394
+  # Sex: p-value = 0.038; R2 = 0.08379
+  # Subj_ID: p-value = 0.471; R2 = 0.20163
 
 
 
+### Low Fat
+lf.sampdf <- data.frame(sample_data(physeq.lf))
+lf.bray <- phyloseq::distance(physeq=physeq.lf, method="bray")
 
-pair.combos <- combn(x=levels(pair.sampdf$Treatment), m=2)
-pair.bray.pvals <- data.frame(rep(999,10))
-for( i in 1:ncol(pair.combos)){
-  temp.physeq <- subset_samples(physeq.pair, Treatment %in% combos[,i])
+# Time
+adonis(lf.bray ~ Time, data=lf.sampdf)
+  # p-value = 0.001
+  # R2 = 0.20248
+beta.tax = betadisper(d=lf.bray, group=lf.sampdf$Time)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.528
+
+# Sex
+adonis(lf.bray ~ Sex, data=lf.sampdf)
+  # p-value = 0.001
+  # R2 = 0.14304
+beta.tax = betadisper(d=lf.bray, group=lf.sampdf$Sex)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.169
+
+# Subj_ID
+adonis(lf.bray ~ Subj_ID, data=lf.sampdf)
+  # p-value = 0.45
+  # R2 = 0.46743
+beta.tax = betadisper(d=lf.bray, group=lf.sampdf$Subj_ID)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.001
+
+# Combined
+adonis(lf.bray ~ Time + Sex + Subj_ID, data=lf.sampdf)
+  # Time: p-value = 0.001; R2 = 0.20248
+  # Sex: p-value = 0.001; R2 = 0.14304
+  # Subj_ID: p-value = 0.303; R2 = 0.32439
+
+
+
+### Saccharin
+sc.sampdf <- data.frame(sample_data(physeq.sc))
+sc.bray <- phyloseq::distance(physeq=physeq.sc, method="bray")
+
+# Time
+adonis(sc.bray ~ Time, data=sc.sampdf)
+  # p-value = 0.002
+  # R2 = 0.43652
+beta.tax = betadisper(d=sc.bray, group=sc.sampdf$Time)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.007
+
+# Sex
+adonis(sc.bray ~ Sex, data=sc.sampdf)
+  # p-value = 0.149
+  # R2 = 0.09876
+beta.tax = betadisper(d=sc.bray, group=sc.sampdf$Sex)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.815
+
+# Subj_ID
+adonis(sc.bray ~ Subj_ID, data=sc.sampdf)
+  # p-value = 0.966
+  # R2 = 0.33888
+beta.tax = betadisper(d=sc.bray, group=sc.sampdf$Subj_ID)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.001
+
+# Combined
+adonis(sc.bray ~ Time + Sex + Subj_ID, data=sc.sampdf)
+  # Time: p-value = 0.001; R2 = 0.43652
+  # Sex: p-value = 0.016; R2 = 0.09876
+  # Subj_ID: p-value = 0.303; R2 = 0.24012
+
+
+
+### Saccharin
+tv.sampdf <- data.frame(sample_data(physeq.tv))
+tv.bray <- phyloseq::distance(physeq=physeq.tv, method="bray")
+
+# Time
+adonis(tv.bray ~ Time, data=tv.sampdf)
+  # p-value = 0.001
+  # R2 = 0.48081
+beta.tax = betadisper(d=tv.bray, group=tv.sampdf$Time)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.001
+
+# Sex
+adonis(tv.bray ~ Sex, data=tv.sampdf)
+  # p-value = 0.165
+  # R2 = 0.11129
+beta.tax = betadisper(d=tv.bray, group=tv.sampdf$Sex)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.512
+
+# Subj_ID
+adonis(tv.bray ~ Subj_ID, data=tv.sampdf)
+  # p-value = 0.985
+  # R2 = 0.29089
+beta.tax = betadisper(d=tv.bray, group=tv.sampdf$Subj_ID)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.001
+
+# Combined
+adonis(tv.bray ~ Time + Sex + Subj_ID, data=tv.sampdf)
+  # Time: p-value = 0.001; R2 = 0.48081
+  # Sex: p-value = 0.017; R2 = 0.11129
+  # Subj_ID: p-value = 0.580; R2 = 0.17960
+
+combos <- combn(x=levels(pair.sampdf$Treatment), m=2)
+bray.pvals.pre <- data.frame(rep(999,6))
+for( i in 1:ncol(combos)){
+  temp.physeq <- subset_samples(physeq.pre, Treatment %in% combos[,i])
   temp.sampdf <- data.frame(sample_data(temp.physeq))
   temp.bray <- phyloseq::distance(physeq=temp.physeq, method="bray")
   test <- adonis(temp.bray ~ Group, data=temp.sampdf)
-  rownames(bray.pvals)[i] <- paste(combos[1,i], combos[2,i])
-  bray.pvals[i,1]<- test[[1]]$`Pr(>F)`[1]
+  rownames(bray.pvals.pre)[i] <- paste(combos[1,i], combos[2,i])
+  bray.pvals.pre[i,1]<- test[[1]]$`Pr(>F)`[1]
 }
-colnames(bray.pvals) <- "pval"
-bray.pvals$Adj.bonf <- p.adjust(bray.pvals$pval, method="bonferroni")
-bray.pvals$Adj.BH <- p.adjust(bray.pvals$pval, method="BH")
+colnames(bray.pvals.pre) <- "pval"
+bray.pvals.pre$Adj.bonf <- p.adjust(bray.pvals.pre$pval, method="bonferroni")
+bray.pvals.pre$Adj.BH <- p.adjust(bray.pvals.pre$pval, method="BH")
+
+bray.pvals.post <- data.frame(rep(999,6))
+for( i in 1:ncol(combos)){
+  temp.physeq <- subset_samples(physeq.post, Treatment %in% combos[,i])
+  temp.sampdf <- data.frame(sample_data(temp.physeq))
+  temp.bray <- phyloseq::distance(physeq=temp.physeq, method="bray")
+  test <- adonis(temp.bray ~ Group, data=temp.sampdf)
+  rownames(bray.pvals.post)[i] <- paste(combos[1,i], combos[2,i])
+  bray.pvals.post[i,1]<- test[[1]]$`Pr(>F)`[1]
+}
+colnames(bray.pvals.post) <- "pval"
+bray.pvals.post$Adj.bonf <- p.adjust(bray.pvals.post$pval, method="bonferroni")
+bray.pvals.post$Adj.BH <- p.adjust(bray.pvals.post$pval, method="BH")
+
+bray.pvals.pre.fem <- data.frame(rep(999,6))
+for( i in 1:ncol(combos)){
+  temp.physeq <- subset_samples(physeq.pre.fem, Treatment %in% combos[,i])
+  temp.sampdf <- data.frame(sample_data(temp.physeq))
+  temp.bray <- phyloseq::distance(physeq=temp.physeq, method="bray")
+  test <- adonis(temp.bray ~ Group, data=temp.sampdf)
+  rownames(bray.pvals.pre.fem)[i] <- paste(combos[1,i], combos[2,i])
+  bray.pvals.pre.fem[i,1]<- test[[1]]$`Pr(>F)`[1]
+}
+colnames(bray.pvals.pre.fem) <- "pval"
+bray.pvals.pre.fem$Adj.bonf <- p.adjust(bray.pvals.pre.fem$pval, method="bonferroni")
+bray.pvals.pre.fem$Adj.BH <- p.adjust(bray.pvals.pre.fem$pval, method="BH")
+
+bray.pvals.pre.mal <- data.frame(rep(999,6))
+for( i in 1:ncol(combos)){
+  temp.physeq <- subset_samples(physeq.pre.mal, Treatment %in% combos[,i])
+  temp.sampdf <- data.frame(sample_data(temp.physeq))
+  temp.bray <- phyloseq::distance(physeq=temp.physeq, method="bray")
+  test <- adonis(temp.bray ~ Group, data=temp.sampdf)
+  rownames(bray.pvals.pre.mal)[i] <- paste(combos[1,i], combos[2,i])
+  bray.pvals.pre.mal[i,1]<- test[[1]]$`Pr(>F)`[1]
+}
+colnames(bray.pvals.pre.mal) <- "pval"
+bray.pvals.pre.mal$Adj.bonf <- p.adjust(bray.pvals.pre.mal$pval, method="bonferroni")
+bray.pvals.pre.mal$Adj.BH <- p.adjust(bray.pvals.pre.mal$pval, method="BH")
+
+bray.pvals.post.fem <- data.frame(rep(999,6))
+for( i in 1:ncol(combos)){
+  temp.physeq <- subset_samples(physeq.post.fem, Treatment %in% combos[,i])
+  temp.sampdf <- data.frame(sample_data(temp.physeq))
+  temp.bray <- phyloseq::distance(physeq=temp.physeq, method="bray")
+  test <- adonis(temp.bray ~ Group, data=temp.sampdf)
+  rownames(bray.pvals.post.fem)[i] <- paste(combos[1,i], combos[2,i])
+  bray.pvals.post.fem[i,1]<- test[[1]]$`Pr(>F)`[1]
+}
+colnames(bray.pvals.post.fem) <- "pval"
+bray.pvals.post.fem$Adj.bonf <- p.adjust(bray.pvals.post.fem$pval, method="bonferroni")
+bray.pvals.post.fem$Adj.BH <- p.adjust(bray.pvals.post.fem$pval, method="BH")
+
+bray.pvals.post.mal <- data.frame(rep(999,6))
+for( i in 1:ncol(combos)){
+  temp.physeq <- subset_samples(physeq.post.mal, Treatment %in% combos[,i])
+  temp.sampdf <- data.frame(sample_data(temp.physeq))
+  temp.bray <- phyloseq::distance(physeq=temp.physeq, method="bray")
+  test <- adonis(temp.bray ~ Group, data=temp.sampdf)
+  rownames(bray.pvals.post.mal)[i] <- paste(combos[1,i], combos[2,i])
+  bray.pvals.post.mal[i,1]<- test[[1]]$`Pr(>F)`[1]
+}
+colnames(bray.pvals.post.mal) <- "pval"
+bray.pvals.post.mal$Adj.bonf <- p.adjust(bray.pvals.post.mal$pval, method="bonferroni")
+bray.pvals.post.mal$Adj.BH <- p.adjust(bray.pvals.post.mal$pval, method="BH")
+
+
+
+
+### Adjust P-vals
+bray.pvals.all <- data.frame(bray.pvals.pre[,1])
+bray.pvals.all[(nrow(bray.pvals.all)+1):(nrow(bray.pvals.all)+nrow(bray.pvals.post)),1] <- bray.pvals.post[,1]
+bray.pvals.all[(nrow(bray.pvals.all)+1):(nrow(bray.pvals.all)+nrow(bray.pvals.pre.fem)),1] <- bray.pvals.pre.fem[,1]
+bray.pvals.all[(nrow(bray.pvals.all)+1):(nrow(bray.pvals.all)+nrow(bray.pvals.pre.mal)),1] <- bray.pvals.pre.mal[,1]
+bray.pvals.all[(nrow(bray.pvals.all)+1):(nrow(bray.pvals.all)+nrow(bray.pvals.post.fem)),1] <- bray.pvals.post.fem[,1]
+bray.pvals.all[(nrow(bray.pvals.all)+1):(nrow(bray.pvals.all)+nrow(bray.pvals.post.mal)),1] <- bray.pvals.post.mal[,1]
+bray.pvals.all[(nrow(bray.pvals.all)+1),1] <- adonis(hf.bray ~ Time, data=hf.sampdf)$aov.tab[1,6]
+bray.pvals.all[(nrow(bray.pvals.all)+1),1] <- adonis(lf.bray ~ Time, data=lf.sampdf)$aov.tab[1,6]
+bray.pvals.all[(nrow(bray.pvals.all)+1),1] <- adonis(sc.bray ~ Time, data=sc.sampdf)$aov.tab[1,6]
+bray.pvals.all[(nrow(bray.pvals.all)+1),1] <- adonis(tv.bray ~ Time, data=tv.sampdf)$aov.tab[1,6]
+colnames(bray.pvals.all) <- "pvals"
+bray.pvals.all$BH <- p.adjust(bray.pvals.all$pval, method="BH")
+bray.pvals.all$Group <- c(rep("Pre", 6), rep("Post", 6), rep("Pre Fem", 6), rep("Pre Mal", 6), rep("Post Fem", 6), rep("Post Mal", 6), "High Fat", "Low Fat", "Saccharin", "Stevia")
+bray.pvals.all$Comp <- c(rownames(bray.pvals.pre), rownames(bray.pvals.post), rownames(bray.pvals.pre.fem), rownames(bray.pvals.pre.mal), rownames(bray.pvals.post.fem), rownames(bray.pvals.post.mal), rep("Time", 4))
+
+write.table(bray.pvals.all, "PERMANOVA.pvals.csv", sep=",")
 ```
 
 
