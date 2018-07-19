@@ -1,77 +1,77 @@
 Sample_ID,Subj_ID,Treatment,Time,Sex,Group
-FL1A,SUBJ1,Low Fat,Pre-treatment,Male,LowFat_Pre
-FL1C,SUBJ1,Low Fat,Post-treatment,Male,LowFat_Post
-FL2A,SUBJ2,Low Fat,Pre-treatment,Female,LowFat_Pre
-FL2C,SUBJ2,Low Fat,Post-treatment,Female,LowFat_Post
-FL3A,SUBJ3,Low Fat,Pre-treatment,Female,LowFat_Pre
-FL3C,SUBJ3,Low Fat,Post-treatment,Female,LowFat_Post
-FL4A,SUBJ4,Low Fat,Pre-treatment,Female,LowFat_Pre
-FL4C,SUBJ4,Low Fat,Post-treatment,Female,LowFat_Post
-FL5A,SUBJ5,Low Fat,Pre-treatment,Male,LowFar_Pre
-FL5C,SUBJ5,Low Fat,Post-treatment,Male,LowFat_Post
-FL6A,SUBJ6,Low Fat,Pre-treatment,Female,LowFat_Pre
-FL6C,SUBJ6,Low Fat,Post-treatment,Female,LowFat_Post
-FL7A,SUBJ7,Low Fat,Pre-treatment,Male,LowFat_Pre
-FL7C,SUBJ7,Low Fat,Post-treatment,Male,LowFat_Post
-FL8A,SUBJ8,Low Fat,Pre-treatment,Female,LowFat_Pre
-FL8C,SUBJ8,Low Fat,Post-treatment,Female,LowFat_Post
-FL9A,SUBJ9,Low Fat,Pre-treatment,Male,LowFat_Pre
-FL9C,SUBJ9,Low Fat,Post-treatment,Male,LowFat_Post
-FL10A,SUBJ10,Low Fat,Pre-treatment,Male,LowFat_Pre
-FL10C,SUBJ10,Low Fat,Post-treatment,Male,LowFat_Post
-HF1A,SUBJ1,High Fat,Pre-treatment,Male,HighFat_Pre
-HF1C,SUBJ1,High Fat,Post-treatment,Male,HighFat_Post
-HF2A,SUBJ2,High Fat,Pre-treatment,Female,HighFat_Pre
-HF2C,SUBJ2,High Fat,Post-treatment,Female,HighFat_Post
-HF3A,SUBJ3,High Fat,Pre-treatment,Male,HighFat_Pre
-HF3C,SUBJ3,High Fat,Post-treatment,Male,HighFat_Post
-HF4A,SUBJ4,High Fat,Pre-treatment,Male,HighFat_Pre
-HF4C,SUBJ4,High Fat,Post-treatment,Male,HighFat_Post
-HF5A,SUBJ5,High Fat,Pre-treatment,Female,HighFat_Pre
-HF5C,SUBJ5,High Fat,Post-treatment,Female,HighFat_Post
-HF6A,SUBJ6,High Fat,Pre-treatment,Female,HighFat_Pre
-HF6C,SUBJ6,High Fat,Post-treatment,Female,HighFat_Post
-HF7A,SUBJ7,High Fat,Pre-treatment,Female,HighFat_Pre
-HF7C,SUBJ7,High Fat,Post-treatment,Female,HighFat_Post
-HF8C,SUBJ8,High Fat,Post-treatment,Female,HighFat_Post
-HF9A,SUBJ9,High Fat,Pre-treatment,Male,HighFat_Pre
-HF9C,SUBJ9,High Fat,Post-treatment,Male,HighFat_Post
-HF10A,SUBJ10,High Fat,Pre-treatment,Male,HighFat_Pre
-HF10C,SUBJ10,High Fat,Post-treatment,Male,HighFat_Post
-SC1A,SUBJ1,Saccharin,Pre-treatment,Male,Saccharin_Pre
-SC1C,SUBJ1,Saccharin,Post-treatment,Male,Saccharin_Post
-SC2A,SUBJ2,Saccharin,Pre-treatment,Male,Saccharin_Pre
-SC2C,SUBJ2,Saccharin,Post-treatment,Male,Saccharin_Post
-SC3A,SUBJ3,Saccharin,Pre-treatment,Male,Saccharin_Pre
-SC3C,SUBJ3,Saccharin,Post-treatment,Male,Saccharin_Post
-SC4A,SUBJ4,Saccharin,Pre-treatment,Male,Saccharin_Pre
-SC5A,SUBJ5,Saccharin,Pre-treatment,Male,Saccharin_Pre
-SC5C,SUBJ5,Saccharin,Post-treatment,Male,Saccharin_Post
-SC6A,SUBJ6,Saccharin,Pre-treatment,Female,Saccharin_Pre
-SC6C,SUBJ6,Saccharin,Post-treatment,Female,Saccharin_Post
-SC7A,SUBJ7,Saccharin,Pre-treatment,Female,Saccharin_Pre
-SC7C,SUBJ7,Saccharin,Post-treatment,Female,Saccharin_Post
-SC8A,SUBJ8,Saccharin,Pre-treatment,Female,Saccharin_Pre
-SC8C,SUBJ8,Saccharin,Post-treatment,Female,Saccharin_Post
-SC9A,SUBJ9,Saccharin,Pre-treatment,Female,Saccharin_Pre
-SC9C,SUBJ9,Saccharin,Post-treatment,Female,Saccharin_Post
-SC10A,SUBJ10,Saccharin,Pre-treatment,Female,Saccharin_Pre
-SC10C,SUBJ10,Saccharin,Post-treatment,Female,Saccharin_Post
-TV1A,SUBJ1,Stevia,Pre-treatment,Male,Stevia_Pre
-TV1C,SUBJ1,Stevia,Post-treatment,Male,Stevia_Post
-TV2A,SUBJ2,Stevia,Pre-treatment,Male,Stevia_Pre
-TV3A,SUBJ3,Stevia,Pre-treatment,Male,Stevia_Pre
-TV3C,SUBJ3,Stevia,Post-treatment,Male,Stevia_Post
-TV4A,SUBJ4,Stevia,Pre-treatment,Male,Stevia_Pre
-TV4C,SUBJ4,Stevia,Post-treatment,Male,Stevia_Post
-TV5A,SUBJ5,Stevia,Pre-treatment,Female,Stevia_Pre
-TV5C,SUBJ5,Stevia,Post-treatment,Female,Stevia_Post
-TV6A,SUBJ6,Stevia,Pre-treatment,Female,Stevia_Pre
-TV6C,SUBJ6,Stevia,Post-treatment,Female,Stevia_Post
-TV7A,SUBJ7,Stevia,Pre-treatment,Male,Stevia_Pre
-TV7C,SUBJ7,Stevia,Post-treatment,Male,Stevia_Post
-TV8A,SUBJ8,Stevia,Pre-treatment,Female,Stevia_Pre
-TV9A,SUBJ9,Stevia,Pre-treatment,Female,Stevia_Pre
-TV9C,SUBJ9,Stevia,Post-treatment,Female,Stevia_Post
-TV10A,SUBJ10,Stevia,Pre-treatment,Female,Stevia_Pre
-TV10C,SUBJ10,Stevia,Post-treatment,Female,Stevia_Post
+FL1A,FL1,Low Fat,Pre-treatment,Male,LowFat_Pre
+FL1C,FL1,Low Fat,Post-treatment,Male,LowFat_Post
+FL2A,FL2,Low Fat,Pre-treatment,Female,LowFat_Pre
+FL2C,FL2,Low Fat,Post-treatment,Female,LowFat_Post
+FL3A,FL3,Low Fat,Pre-treatment,Female,LowFat_Pre
+FL3C,FL3,Low Fat,Post-treatment,Female,LowFat_Post
+FL4A,FL4,Low Fat,Pre-treatment,Female,LowFat_Pre
+FL4C,FL4,Low Fat,Post-treatment,Female,LowFat_Post
+FL5A,FL5,Low Fat,Pre-treatment,Male,LowFar_Pre
+FL5C,FL5,Low Fat,Post-treatment,Male,LowFat_Post
+FL6A,FL6,Low Fat,Pre-treatment,Female,LowFat_Pre
+FL6C,FL6,Low Fat,Post-treatment,Female,LowFat_Post
+FL7A,FL7,Low Fat,Pre-treatment,Male,LowFat_Pre
+FL7C,FL7,Low Fat,Post-treatment,Male,LowFat_Post
+FL8A,FL8,Low Fat,Pre-treatment,Female,LowFat_Pre
+FL8C,FL8,Low Fat,Post-treatment,Female,LowFat_Post
+FL9A,FL9,Low Fat,Pre-treatment,Male,LowFat_Pre
+FL9C,FL9,Low Fat,Post-treatment,Male,LowFat_Post
+FL10A,FL10,Low Fat,Pre-treatment,Male,LowFat_Pre
+FL10C,FL10,Low Fat,Post-treatment,Male,LowFat_Post
+HF1A,HF1,High Fat,Pre-treatment,Male,HighFat_Pre
+HF1C,HF1,High Fat,Post-treatment,Male,HighFat_Post
+HF2A,HF2,High Fat,Pre-treatment,Female,HighFat_Pre
+HF2C,HF2,High Fat,Post-treatment,Female,HighFat_Post
+HF3A,HF3,High Fat,Pre-treatment,Male,HighFat_Pre
+HF3C,HF3,High Fat,Post-treatment,Male,HighFat_Post
+HF4A,HF4,High Fat,Pre-treatment,Male,HighFat_Pre
+HF4C,HF4,High Fat,Post-treatment,Male,HighFat_Post
+HF5A,HF5,High Fat,Pre-treatment,Female,HighFat_Pre
+HF5C,HF5,High Fat,Post-treatment,Female,HighFat_Post
+HF6A,HF6,High Fat,Pre-treatment,Female,HighFat_Pre
+HF6C,HF6,High Fat,Post-treatment,Female,HighFat_Post
+HF7A,HF7,High Fat,Pre-treatment,Female,HighFat_Pre
+HF7C,HF7,High Fat,Post-treatment,Female,HighFat_Post
+HF8C,HF8,High Fat,Post-treatment,Female,HighFat_Post
+HF9A,HF9,High Fat,Pre-treatment,Male,HighFat_Pre
+HF9C,HF9,High Fat,Post-treatment,Male,HighFat_Post
+HF10A,HF10,High Fat,Pre-treatment,Male,HighFat_Pre
+HF10C,HF10,High Fat,Post-treatment,Male,HighFat_Post
+SC1A,SC1,Saccharin,Pre-treatment,Male,Saccharin_Pre
+SC1C,SC1,Saccharin,Post-treatment,Male,Saccharin_Post
+SC2A,SC2,Saccharin,Pre-treatment,Male,Saccharin_Pre
+SC2C,SC2,Saccharin,Post-treatment,Male,Saccharin_Post
+SC3A,SC3,Saccharin,Pre-treatment,Male,Saccharin_Pre
+SC3C,SC3,Saccharin,Post-treatment,Male,Saccharin_Post
+SC4A,SC4,Saccharin,Pre-treatment,Male,Saccharin_Pre
+SC5A,SC5,Saccharin,Pre-treatment,Male,Saccharin_Pre
+SC5C,SC5,Saccharin,Post-treatment,Male,Saccharin_Post
+SC6A,SC6,Saccharin,Pre-treatment,Female,Saccharin_Pre
+SC6C,SC6,Saccharin,Post-treatment,Female,Saccharin_Post
+SC7A,SC7,Saccharin,Pre-treatment,Female,Saccharin_Pre
+SC7C,SC7,Saccharin,Post-treatment,Female,Saccharin_Post
+SC8A,SC8,Saccharin,Pre-treatment,Female,Saccharin_Pre
+SC8C,SC8,Saccharin,Post-treatment,Female,Saccharin_Post
+SC9A,SC9,Saccharin,Pre-treatment,Female,Saccharin_Pre
+SC9C,SC9,Saccharin,Post-treatment,Female,Saccharin_Post
+SC10A,SC10,Saccharin,Pre-treatment,Female,Saccharin_Pre
+SC10C,SC10,Saccharin,Post-treatment,Female,Saccharin_Post
+TV1A,TV1,Stevia,Pre-treatment,Male,Stevia_Pre
+TV1C,TV1,Stevia,Post-treatment,Male,Stevia_Post
+TV2A,TV2,Stevia,Pre-treatment,Male,Stevia_Pre
+TV3A,TV3,Stevia,Pre-treatment,Male,Stevia_Pre
+TV3C,TV3,Stevia,Post-treatment,Male,Stevia_Post
+TV4A,TV4,Stevia,Pre-treatment,Male,Stevia_Pre
+TV4C,TV4,Stevia,Post-treatment,Male,Stevia_Post
+TV5A,TV5,Stevia,Pre-treatment,Female,Stevia_Pre
+TV5C,TV5,Stevia,Post-treatment,Female,Stevia_Post
+TV6A,TV6,Stevia,Pre-treatment,Female,Stevia_Pre
+TV6C,TV6,Stevia,Post-treatment,Female,Stevia_Post
+TV7A,TV7,Stevia,Pre-treatment,Male,Stevia_Pre
+TV7C,TV7,Stevia,Post-treatment,Male,Stevia_Post
+TV8A,TV8,Stevia,Pre-treatment,Female,Stevia_Pre
+TV9A,TV9,Stevia,Pre-treatment,Female,Stevia_Pre
+TV9C,TV9,Stevia,Post-treatment,Female,Stevia_Post
+TV10A,TV10,Stevia,Pre-treatment,Female,Stevia_Pre
+TV10C,TV10,Stevia,Post-treatment,Female,Stevia_Post
