@@ -16,6 +16,7 @@ library(vegan)
 library(phyloseq)
 library(grid)
 library(pgirmess)
+library(lme4)
 theme_set(theme_bw())
 set.seed(1)
 ```
@@ -183,7 +184,7 @@ otu.tot <- data.frame(sample_names(physeq.pair))
 # Pull out # of OTUs from all samples
 otu.tot$Total_OTUs <- rep("NA", 72)
 for(i in 1:72){
-  otu.tot[i,2] <- length(which(otu_table(mothurdata)[,i] != 0))
+  otu.tot[i,2] <- length(which(otu_table(physeq.pair)[,i] != 0))
 }
 adiv.pair$Total_OTUs <- otu.tot$Total_OTUs
 adiv.pair$Total_OTUs <- as.numeric(adiv.pair$Total_OTUs)
@@ -226,7 +227,9 @@ wilcox.test(Total_OTUs ~ Sex, data = adiv.pair[which(adiv.pair$Time == "Pre-trea
 wilcox.test(Total_OTUs ~ Sex, data = adiv.pair[which(adiv.pair$Time == "Post-treatment"),])
   # Post-treatment Sex
   # p-value = 0.1589
-
+# Repeated Measure
+summary(lmer(Total_OTUs ~ Time + Treatment + Sex + (1|Subj_ID), data=adiv.pair))
+  # Variance explained by Subj_ID = 0.0
 
 ### Chao
 # Plot
@@ -277,7 +280,9 @@ wilcox.test(chao ~ Sex, data = adiv.pair[which(adiv.pair$Time == "Pre-treatment"
 wilcox.test(chao ~ Sex, data = adiv.pair[which(adiv.pair$Time == "Post-treatment"),])
   # Post-treatment Sex
   # p-value = 0.8147
-
+# Repeated Measures
+summary(lmer(chao ~ Time + Treatment + Sex + (1|Subj_ID), data=adiv.pair))
+  # Variance explained by Subj_ID = 1.376e-13
 
 ### Berger-Parker
 # Plot
@@ -346,7 +351,9 @@ wilcox.test(bergerparker ~ Time, data = adiv.pair[which(adiv.pair[which(adiv.pai
 wilcox.test(bergerparker ~ Time, data = adiv.pair[which(adiv.pair[which(adiv.pair$Treatment == "Stevia"),]$Sex == "Male"),], paired=T)
   # Male Stevia Time
   # p-value = 0.375
-
+# Repeated Measures
+summary(lmer(bergerparker ~ Time + Treatment + Sex + (1|Subj_ID), data=adiv.pair))
+  # Variance explained by Subj_ID = 0
 
 ### Shannon
 # Plot
@@ -418,6 +425,9 @@ t.test(shannon ~ Time, data = adiv.pair[which(adiv.pair[which(adiv.pair$Treatmen
 t.test(shannon ~ Time, data = adiv.pair[which(adiv.pair[which(adiv.pair$Treatment == "Stevia"),]$Sex == "Male"),], paired=T)
   # Male Stevia Time
   # p-value = 0.05621
+# Repeated Measure
+summary(lmer(shannon ~ Time + Treatment + Sex + (1|Subj_ID), data=adiv.pair))
+  # Variance explained by Subj_ID = 0
 
 ### Inverse Simpson
 # Plot
@@ -487,7 +497,9 @@ t.test(invsimpson ~ Time, data = adiv.pair[which(adiv.pair[which(adiv.pair$Treat
 t.test(invsimpson ~ Time, data = adiv.pair[which(adiv.pair[which(adiv.pair$Treatment == "Stevia"),]$Sex == "Male"),], paired=T)
   # Male Stevia Time
   # p-value = 0.0892
-
+# Repeated Measure
+summary(lmer(invsimpson ~ Time + Treatment + Sex + (1|Subj_ID), data=adiv.pair))
+  # Variance explained by Subj_ID = 0
 ```
 
 
