@@ -952,8 +952,7 @@ plot_ordination(physeq=physeq.mal, ordination=bray.nmds.mal, color="Treatment", 
 bray.nmds.pre.fem <- ordinate(physeq=physeq.pre.fem, method="NMDS", distance="bray")
   # stress = 0.1965918 
 
-plot_ordination(physeq=physeq.pre.fem, ordination=bray.nmds.pre.fem, color="Treatment") +
-  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00"))
+plot_ordination(physeq=physeq.pre.fem, ordination=bray.nmds.pre.fem, color="Treatment")
 
 # Treatment Ellipses
 sample_data(physeq.pre.fem)$Elip.treat <- paste(sample_data(physeq.pre.fem)$Treatment)

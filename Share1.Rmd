@@ -1,0 +1,195 @@
+---
+title: "Stevia Microbiota"
+author: "Edna Chiang"
+date: "July 19, 2018"
+output: html_document
+---
+
+```{r, include=F}
+# Load Libraries
+library(ape)
+library(dplyr)
+library(ggplot2)
+library(gplots)
+library(phangorn)
+library(tidyr)
+library(vegan)
+library(phyloseq)
+library(grid)
+library(pgirmess)
+library(lme4)
+theme_set(theme_bw())
+set.seed(1)
+
+# Load Functions
+veganCovEllipse <- function(cov, center = c(0, 0), scale = 1, npoints = 100) {
+    theta <- (0:npoints) * 2 * pi/npoints
+    Circle <- cbind(cos(theta), sin(theta))
+    t(center + scale * t(Circle %*% chol(cov)))
+}
+```
+
+
+```{r, include=F}
+# Load Phyloseq Object
+load("Physeq.RData")
+load("Physeq.pair.RData")
+load("Physeq.pre.RData")
+load("Physeq.post.RData")
+load("Physeq.post.rem.RData")
+load("Physeq.fem.RData")
+load("Physeq.mal.RData")
+load("Physeq.pre.fem.RData")
+load("Physeq.pre.mal.RData")
+load("Physeq.post.fem.RData")
+load("Physeq.post.mal.RData")
+load("Physeq.post.fem.rem.RData")
+load("Physeq.post.mal.rem.RData")
+load("Physeq.hf.RData")
+load("Physeq.lf.RData")
+load("Physeq.sc.RData")
+load("Physeq.tv.RData")
+```
+
+# Description  
+This is a quick, exploratory analysis of fecal pellets from our winter squirrels, pre- and post- ABX treatment. Pellets were collected prior to ABX treatment, and 2 weeks after treatment.  
+  
+Overall, pellets from 22 squirrels were collected:  
+- 18 squirrels received ABX treatment (samples = 18 pre & 18 post)  
+- 4 were controls (received normal water) (samples = 4 pre & 4 post)  
+  
+Some of the sample sequences were poor quality and not included here. The samples that are included in this analysis include:  
+- 30 ABX (18 pre & 12 post)  
+- 6 controls (3 pre & 3 post) 
+  
+For reference, samples were normalized to 7614 reads to ensure comparability.  
+  
+Since this was a quick analysis, I didn't run much actual stats. That will definitely be done in the future though!  
+    
+
+# Within-Sample Diversity (Alpha) 
+  
+
+### Chao Richness  
+Chao is an estimate of richness (how many unique OTUs exist in a particular sample).
+```{r, echo=F}
+# Chao
+ggplot(adiv.pair, aes(x=Treatment, y=chao, fill = Treatment)) +
+  geom_boxplot(position=position_dodge(1)) +
+  geom_point() + 
+  facet_grid(Time ~ Sex) +
+  xlab("Treatment") +
+  scale_fill_manual(values=c("indianred1", "orange", "springgreen3", "deepskyblue2")) +
+  ylab("Chao Richness")
+```
+  
+
+  
+### Shannon Diversity  
+Shannon's Index is an estimate of diversity, taking into account both the presence/absence and abundance of OTUs.  
+
+```{r, echo=F}
+# Shannon
+ggplot(adiv.pair, aes(x=Treatment, y=shannon, fill = Treatment)) +
+  geom_boxplot(position=position_dodge(1)) +
+  geom_point() + 
+  facet_grid(Time ~ Sex) +
+  scale_fill_manual(values=c("indianred1", "orange", "springgreen3", "deepskyblue2")) +
+  xlab("Treatment") +
+  ylab("Shannon Diversity")
+```
+
+  
+
+# Examine Phyla  
+The phyla are listed in order of highest overall relative abundance to lowest overall relative abundance. Phyla with a total relative abundance of < 0.01% were removed. Error bars are interquartile range.  
+
+```{r, include=F}
+# Merge samples with the same taxonomic rank
+goodphy <- tax_glom(physeq.pair, taxrank="Phylum")
+
+# Transform each merged phylum count to rel abund
+phy99 <- transform_sample_counts(goodphy, function(x){(x/sum(x))*100})
+
+# Remove any phyla with <0.1% rel abund
+phy99 <- prune_taxa(taxa_sums(phy99) > 0.01, phy99)
+
+# Create rank abundance of phyla
+barplot(sort(taxa_sums(phy99),TRUE)[1:20]/nsamples(phy99),las=2,cex.axis=.7)
+
+### Testing barplot for sex + treatment + time
+test <- phy.df %>%
+  group_by(Treatment, Time, Sex, Phylum) %>%
+  summarize(Mean = mean(Abundance),
+            Median = median(Abundance),
+            SD = sd(Abundance),
+            SE = (sd(Abundance)/(sqrt(length(Abundance)))),
+            iqr = IQR(Abundance))
+test$iqr.min <- test$Median - 0.5*test$iqr
+test[which(test$iqr.min < 0),10] <- 0
+  # Any IQR min < 0, change to 0 (otherwise error bar won't plot)
+test$iqr.max <- test$Median + 0.5*test$iqr
+ggplot(test, aes(x=Phylum, y=Median, fill=Phylum)) +
+  geom_bar(stat="identity", color="black") +
+  facet_grid(Time + Sex ~ Treatment) +
+  geom_errorbar(aes(ymax=iqr.max, ymin=iqr.min), width=0.25) +
+  scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00")) +
+  xlab("Phyla") +
+  ylab("Median Relative Abundance for Phyla > 0.01%") +
+  scale_y_continuous(limits=c(0,80), expand=c(0,0))+
+  theme(axis.text.x = element_blank(),
+        panel.spacing=unit(1, "lines"),
+        axis.title = element_text(size=20),
+        strip.text.x = element_text(size=14),
+        strip.text.y = element_text(size=14),
+        axis.text.y = element_text(size=12),
+        legend.title = element_text(size = 14),
+        legend.text = element_text(size=12))
+
+    
+```
+  
+
+  
+
+# Between-Sample Diversity (Beta)  
+Bray-Curtis dissimilarity. Broadly, this metric is calculated by comparing every single sample with each other. It considers the OTUs that are shared between samples, and both presence/absence and weight (abundance).  
+  
+In the ordination, each point is 1 sample. The distance betwen points is inversely related to how similar the samples are.  
+Closer points = more similar.  
+Farther points = less similar.  
+
+```{r, include=F}
+### Paired
+bray.nmds <- ordinate(physeq=physeq.pair, method="NMDS", distance="bray")
+  # stress = 8.822573e-05
+
+plot_ordination(physeq=physeq.pair, ordination=bray.nmds, color="Treatment", shape="Time") +
+  scale_color_manual(values=c("indianred1", "orange", "springgreen3", "deepskyblue2")) +
+  scale_shape_manual(values=c(19,2))
+```
+
+
+
+```{r, include=F}
+### Paired
+bray.nmds <- ordinate(physeq=physeq.pair, method="NMDS", distance="bray")
+  # stress = 8.822573e-05
+
+plot_ordination(physeq=physeq.pair, ordination=bray.nmds, color="Treatment", shape="Time") +
+  scale_color_manual(values=c("indianred1", "orange", "springgreen3", "deepskyblue2")) +
+  scale_shape_manual(values=c(19,2))
+```
+  
+To evaluate significant difference in community compositions, I used PERMANOVA. To examine significant variance in communities, I used a multivariate analogue of Levene's test (*betadisper*) which analyzes multivariate homogeneity of group dispersions/variances.  
+  
+Control samples Pre & Post are not significantly different (p-value = 0.7) and do not significantly different variances (p-value = 0.6).  
+  
+ABX samples Pre & Post are significantly different (p-value = 0.001) and also have significantly different variances (p-value = 0.001).  
+  
+Within Pre samples, there was no significant difference in composition or variance (p-values = 0.675 and 0.415, respectively).  
+  
+In Post samples, there was no significant difference in community composition (p-value = 0.4); however, there was a difference in variance (p-value = 0.032). Although this suggests that Post-ABX and Control samples have similar community compositions, I think that this is largely due to the high variation in Post-ABX samples. It would be helpful for me to plot standard error elipses to see how much overlap there is between these 2 groups.  
+  
+Overall, this suggests that our ABX treatment does significantly change community composition, but not equally in all squirrels-- there's quite a bit of variation in how the community is altered.  
+  
