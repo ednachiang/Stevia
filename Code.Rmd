@@ -603,7 +603,7 @@ ggplot(test, aes(x=Phylum, y=Median, fill=Phylum)) +
         legend.text = element_text(size=12))
 ```
 
-### Bray-Curtis
+### Bray-Curtis NMDS
 ```{r}
 ### Paired
 bray.nmds <- ordinate(physeq=physeq.pair, method="NMDS", distance="bray")
@@ -917,3 +917,683 @@ plot_ordination(physeq=physeq.post.mal.rem, ordination=bray.nmds.post.mal.rem, c
   #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00")) +
   geom_path(data=elip.post.mal.rem.treat.df, aes(x=NMDS1, y=NMDS2, colour=group), size=1, linetype=1)
 ```
+
+
+### Jaccard NMDS
+```{r}
+jac.nmds <- ordinate(physeq=physeq.pair, method="NMDS", distance="jaccard")
+  # stress =  0.7.312101e-05
+
+plot_ordination(physeq=physeq.pair, ordination=jac.nmds, color="Treatment", shape="Time") +
+  scale_shape_manual(values=c(19,2))
+
+### Pre-treatment
+jac.nmds.pre <- ordinate(physeq=physeq.pre, method="NMDS", distance="jaccard")
+  # stress = 0.2112659  
+plot_ordination(physeq=physeq.pre, ordination=jac.nmds.pre, color="Treatment", shape="Sex") +
+  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00")) +
+  scale_shape_manual(values=c(19,2))
+
+
+
+### Post-treatment
+jac.nmds.post <- ordinate(physeq=physeq.post, method="NMDS", distance="jaccard")
+  # stress = 9.557318e-05
+
+plot_ordination(physeq=physeq.post, ordination=jac.nmds.post, color="Treatment", shape="Sex") +
+  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00")) +
+  scale_shape_manual(values=c(19,2))
+
+
+
+### Post-treatment w/o Low Fat
+jac.nmds.post.rem <- ordinate(physeq=physeq.post.rem, method="NMDS", distance="jaccard")
+  # stress = 0.2031122
+
+plot_ordination(physeq=physeq.post.rem, ordination=jac.nmds.post.rem, color="Treatment", shape="Sex") +
+  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00")) +
+  scale_shape_manual(values=c(19,2))
+
+
+
+### All Female
+jac.nmds.fem <- ordinate(physeq=physeq.fem, method="NMDS", distance="jaccard")
+  # stress = 9.966751e-05
+
+plot_ordination(physeq=physeq.fem, ordination=jac.nmds.fem, color="Treatment", shape="Time") +
+  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00")) +
+  scale_shape_manual(values=c(19,2))
+
+
+
+### All Male
+jac.nmds.mal <- ordinate(physeq=physeq.mal, method="NMDS", distance="jaccard")
+  # stress = 9.978072e-05  
+
+plot_ordination(physeq=physeq.mal, ordination=jac.nmds.mal, color="Treatment", shape="Time") +
+  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00")) +
+  scale_shape_manual(values=c(19,2))
+
+
+
+### Pre Female
+jac.nmds.pre.fem <- ordinate(physeq=physeq.pre.fem, method="NMDS", distance="jaccard")
+  # stress = 0.1698204  
+
+plot_ordination(physeq=physeq.pre.fem, ordination=jac.nmds.pre.fem, color="Treatment") #+
+  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00"))
+
+
+
+### Pre Male
+jac.nmds.pre.mal <- ordinate(physeq=physeq.pre.mal, method="NMDS", distance="jaccard")
+  # stress = 0.2057542 
+  # NO CONVERGENCE!!!
+
+plot_ordination(physeq=physeq.pre.mal, ordination=jac.nmds.pre.mal, color="Treatment") #+
+  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00"))
+
+
+
+### Post Female
+jac.nmds.post.fem <- ordinate(physeq=physeq.post.fem, method="NMDS", distance="jaccard")
+  # stress = 9.245148e-05
+
+plot_ordination(physeq=physeq.post.fem, ordination=jac.nmds.post.fem, color="Treatment") #+
+  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00"))
+
+
+
+### Post Male
+jac.nmds.post.mal <- ordinate(physeq=physeq.post.mal, method="NMDS", distance="jaccard")
+  # stress = 8.7399e-05 
+
+plot_ordination(physeq=physeq.post.mal, ordination=jac.nmds.post.mal, color="Treatment") #+
+  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00"))
+
+
+
+### Post Female w/o Low Fat
+jac.nmds.post.fem.rem <- ordinate(physeq=physeq.post.fem.rem, method="NMDS", distance="jaccard")
+  # stress = 0.1711962 
+
+plot_ordination(physeq=physeq.post.fem.rem, ordination=jac.nmds.post.fem.rem, color="Treatment") #+
+  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00"))
+
+
+
+### Post Male w/o Low Fat
+jac.nmds.post.mal.rem <- ordinate(physeq=physeq.post.mal.rem, method="NMDS", distance="jaccard")
+  # stress = 0.1730168
+
+plot_ordination(physeq=physeq.post.mal.rem, ordination=jac.nmds.post.mal.rem, color="Treatment") #+
+  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00"))
+
+
+```
+### PERMANOVA Bray-Curtis
+```{r}
+### Paired
+pair.sampdf <- data.frame(sample_data(physeq.pair))
+pair.bray <- phyloseq::distance(physeq=physeq.pair, method="bray")
+
+# Time
+adonis(pair.bray ~ Time, data=pair.sampdf)
+  # p-value = 0.001
+  # R2 = 0.25838
+beta.tax = betadisper(d=pair.bray, group=pair.sampdf$Time)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.522
+
+# Treatment
+adonis(pair.bray ~ Treatment, data=pair.sampdf)
+  # p-value = 0.001
+  # R2 = 0.12309
+beta.tax = betadisper(d=pair.bray, group=pair.sampdf$Treatment)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.663
+
+# Sex
+adonis(pair.bray ~ Sex, data=pair.sampdf)
+  # p-value = 0.001
+  # R2 = 0.07431
+beta.tax = betadisper(d=pair.bray, group=pair.sampdf$Sex)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.338
+
+# Combined Variables
+adonis(pair.bray ~ Time + Treatment + Sex, data=pair.sampdf)
+  # Time: p-value = 0.001; R2 = 0.25838
+  # Treatment: p-value = 0.001; R2 = 0.12309
+  # Sex: p-value = 0.001; R2 = 0.07370
+
+
+### Pre-treatment
+pre.sampdf <- data.frame(sample_data(physeq.pre))
+pre.bray <- phyloseq::distance(physeq=physeq.pre, method="bray")
+
+# Sex
+adonis(pre.bray ~ Sex, data=pre.sampdf)
+  # p-value = 0.001
+  # R2 = 0.34423
+beta.tax = betadisper(d=pre.bray, group=pre.sampdf$Sex)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.042
+
+# Treatment
+adonis(pre.bray ~ Treatment, data=pre.sampdf)
+  # p-value = 0.775
+  # R2 = 0.06522
+beta.tax = betadisper(d=pre.bray, group=pre.sampdf$Treatment)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.931
+
+# Combined Variables
+adonis(pre.bray ~ Sex + Treatment, data=pre.sampdf)
+  # Sex: p-value = 0.001; R2 = 0.34423
+  # Treatment: p-value = 0.340; R2 = 0.06231
+
+
+
+### Post-treatment
+post.sampdf <- data.frame(sample_data(physeq.post))
+post.bray <- phyloseq::distance(physeq=physeq.post, method="bray")
+
+# Sex
+adonis(post.bray ~ Sex, data=post.sampdf)
+  # p-value = 0.166
+  # R2 = 0.04113
+beta.tax = betadisper(d=post.bray, group=post.sampdf$Sex)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.859
+
+# Treatment
+adonis(post.bray ~ Treatment, data=post.sampdf)
+  # p-value = 0.001
+  # R2 = 0.47417
+beta.tax = betadisper(d=post.bray, group=post.sampdf$Treatment)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.001
+
+# Combined Variables
+adonis(post.bray ~ Treatment + Sex, data=post.sampdf)
+  # Treatment: p-value = 0.001; R2 = 0.47417
+  # R2: p-value = 0.036; R2 = 0.04196
+
+
+
+### Post-treatment w/o Low Fat
+post.rem.sampdf <- data.frame(sample_data(physeq.post.rem))
+post.rem.bray <- phyloseq::distance(physeq=physeq.post.rem, method="bray")
+
+# Sex
+adonis(post.rem.bray ~ Sex, data=post.rem.sampdf)
+  # p-value = 0.003
+  # R2 = 0.1325
+beta.tax = betadisper(d=post.rem.bray, group=post.rem.sampdf$Sex)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.345
+
+# Treatment
+adonis(post.rem.bray ~ Treatment, data=post.rem.sampdf)
+  # p-value = 0.033
+  # R2 = 0.12945
+beta.tax = betadisper(d=post.rem.bray, group=post.rem.sampdf$Treatment)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.486
+
+# Combined Variables
+adonis(post.rem.bray ~ Sex + Treatment, data=post.rem.sampdf)
+  # Sex: p-value = 0.002; R2 = 0.13250
+  # Treatment: p-value = 0.010; R2 = 0.13259
+
+
+
+### All Female
+fem.sampdf <- data.frame(sample_data(physeq.fem))
+fem.bray <- phyloseq::distance(physeq=physeq.fem, method="bray")
+
+# Time
+adonis(fem.bray ~ Time, data=fem.sampdf)
+  # p-value = 0.001
+  # R2 = 0.35979
+beta.tax = betadisper(d=fem.bray, group=fem.sampdf$Time)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.03
+
+# Treatment
+adonis(fem.bray ~ Treatment, data=fem.sampdf)
+  # p-value = 0.036
+  # R2 = 0.16207
+beta.tax = betadisper(d=fem.bray, group=fem.sampdf$Treatment)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.102
+
+# Combined Variables
+adonis(fem.bray ~ Time + Treatment, data=fem.sampdf)
+  # Time: p-value = 0.001; R2 = 0.35979
+  # Treatment: p-value = 0.001; R2 = 0.16207
+
+
+
+### All Male
+mal.sampdf <- data.frame(sample_data(physeq.mal))
+mal.bray <- phyloseq::distance(physeq=physeq.mal, method="bray")
+
+# Time
+adonis(mal.bray ~ Time, data=mal.sampdf)
+  # p-value = 0.001
+  # R2 = 0.32399
+beta.tax = betadisper(d=mal.bray, group=mal.sampdf$Time)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.149
+
+# Treatment
+adonis(mal.bray ~ Treatment, data=mal.sampdf)
+  # p-value = 0.021
+  # R2 = 0.1503
+beta.tax = betadisper(d=mal.bray, group=mal.sampdf$Treatment)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.761
+
+# Combined Variables
+adonis(mal.bray ~ Time + Treatment, data=mal.sampdf)
+  # Time: p-value = 0.001; R2 = 0.32399
+  # Treatment: p-value = 0.001; R2 = 0.15030
+
+
+
+### Female Pre-treatment
+pre.fem.sampdf <- data.frame(sample_data(physeq.pre.fem))
+pre.fem.bray <- phyloseq::distance(physeq=physeq.pre.fem, method="bray")
+
+# Treatment
+adonis(pre.fem.bray ~ Treatment, data=pre.fem.sampdf)
+  # p-value = 0.565
+  # R2 = 0.15532
+beta.tax = betadisper(d=pre.fem.bray, group=pre.fem.sampdf$Treatment)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.456
+
+
+
+### Male Pre-treatment
+pre.mal.sampdf <- data.frame(sample_data(physeq.pre.mal))
+pre.mal.bray <- phyloseq::distance(physeq=physeq.pre.mal, method="bray")
+
+# Treatment
+adonis(pre.mal.bray ~ Treatment, data=pre.mal.sampdf)
+  # p-value = 0.241
+  # R2 = 0.20338
+beta.tax = betadisper(d=pre.mal.bray, group=pre.mal.sampdf$Treatment)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.886
+
+
+
+### Female Post-treatment
+post.fem.sampdf <- data.frame(sample_data(physeq.post.fem))
+post.fem.bray <- phyloseq::distance(physeq=physeq.post.fem, method="bray")
+
+# Treatment
+adonis(post.fem.bray ~ Treatment, data=post.fem.sampdf)
+  # p-value = 0.001
+  # R2 = 0.60409
+beta.tax = betadisper(d=post.fem.bray, group=post.fem.sampdf$Treatment)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.112
+
+
+
+### Male Post-treatment
+post.mal.sampdf <- data.frame(sample_data(physeq.post.mal))
+post.mal.bray <- phyloseq::distance(physeq=physeq.post.mal, method="bray")
+
+# Treatment
+adonis(post.mal.bray ~ Treatment, data=post.mal.sampdf)
+  # p-value = 0.001
+  # R2 = 0.51171
+beta.tax = betadisper(d=post.mal.bray, group=post.mal.sampdf$Treatment)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.004
+
+
+
+### Female Post-treatment w/o Low Fat
+post.fem.rem.sampdf <- data.frame(sample_data(physeq.post.fem.rem))
+post.fem.rem.bray <- phyloseq::distance(physeq=physeq.post.fem.rem, method="bray")
+
+# Treatment
+adonis(post.fem.rem.bray ~ Treatment, data=post.fem.rem.sampdf)
+  # p-value = 0.038
+  # R2 = 0.27097
+beta.tax = betadisper(d=post.fem.rem.bray, group=post.fem.rem.sampdf$Treatment)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.992
+
+
+
+### Male Post-treatment w/o Low Fat
+post.mal.rem.sampdf <- data.frame(sample_data(physeq.post.mal.rem))
+post.mal.rem.bray <- phyloseq::distance(physeq=physeq.post.mal.rem, method="bray")
+
+# Treatment
+adonis(post.mal.rem.bray ~ Treatment, data=post.mal.rem.sampdf)
+  # p-value = 0.263
+  # R2 = 0.19267
+beta.tax = betadisper(d=post.mal.rem.bray, group=post.mal.rem.sampdf$Treatment)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.696
+
+
+
+
+
+pair.combos <- combn(x=levels(pair.sampdf$Treatment), m=2)
+pair.bray.pvals <- data.frame(rep(999,10))
+for( i in 1:ncol(pair.combos)){
+  temp.physeq <- subset_samples(physeq.pair, Treatment %in% combos[,i])
+  temp.sampdf <- data.frame(sample_data(temp.physeq))
+  temp.bray <- phyloseq::distance(physeq=temp.physeq, method="bray")
+  test <- adonis(temp.bray ~ Group, data=temp.sampdf)
+  rownames(bray.pvals)[i] <- paste(combos[1,i], combos[2,i])
+  bray.pvals[i,1]<- test[[1]]$`Pr(>F)`[1]
+}
+colnames(bray.pvals) <- "pval"
+bray.pvals$Adj.bonf <- p.adjust(bray.pvals$pval, method="bonferroni")
+bray.pvals$Adj.BH <- p.adjust(bray.pvals$pval, method="BH")
+```
+
+
+
+### PERMANOVA Jaccard
+```{r}
+### Paired
+pair.sampdf <- data.frame(sample_data(physeq.pair))
+pair.jac <- phyloseq::distance(physeq=physeq.pair, method="jaccard")
+
+# Time
+adonis(pair.jac ~ Time, data=pair.sampdf)
+  # p-value = 0.001
+  # R2 = 0.18735
+beta.tax = betadisper(d=pair.jac, group=pair.sampdf$Time)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.656
+
+# Treatment
+adonis(pair.jac ~ Treatment, data=pair.sampdf)
+  # p-value = 0.001
+  # R2 = 0.09585
+beta.tax = betadisper(d=pair.jac, group=pair.sampdf$Treatment)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.937
+
+# Sex
+adonis(pair.jac ~ Sex, data=pair.sampdf)
+  # p-value = 0.001
+  # R2 = 0.06316
+beta.tax = betadisper(d=pair.jac, group=pair.sampdf$Sex)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.213
+
+# Combined Variables
+adonis(pair.jac ~ Time + Treatment + Sex, data=pair.sampdf)
+  # Time: p-value = 0.001; R2 = 0.18735
+  # Treatment: p-value = 0.001; R2 = 0.09585
+  # Sex: p-value = 0.001; R2 = 0.06274
+  ### BRAY-CURTIS HAS LOWER RESIDUALS SO I'M GONNA GO WITH THAT SINCE THAT SUGGESTS BRAY-CURTIS EXPLAINS THE DATA VARIATION BETTER COMPARED TO JACCARD
+
+### Pre-treatment
+pre.sampdf <- data.frame(sample_data(physeq.pre))
+pre.jac <- phyloseq::distance(physeq=physeq.pre, method="jaccard")
+
+# Sex
+adonis(pre.jac ~ Sex, data=pre.sampdf)
+  # p-value = 0.001
+  # R2 = 0.34423
+beta.tax = betadisper(d=pre.jac, group=pre.sampdf$Sex)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.042
+
+# Treatment
+adonis(pre.jac ~ Treatment, data=pre.sampdf)
+  # p-value = 0.775
+  # R2 = 0.06522
+beta.tax = betadisper(d=pre.jac, group=pre.sampdf$Treatment)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.931
+
+# Combined Variables
+adonis(pre.jac ~ Sex + Treatment, data=pre.sampdf)
+  # Sex: p-value = 0.001; R2 = 0.34423
+  # Treatment: p-value = 0.340; R2 = 0.06231
+
+
+
+### Post-treatment
+post.sampdf <- data.frame(sample_data(physeq.post))
+post.jac <- phyloseq::distance(physeq=physeq.post, method="jaccard")
+
+# Sex
+adonis(post.jac ~ Sex, data=post.sampdf)
+  # p-value = 0.166
+  # R2 = 0.04113
+beta.tax = betadisper(d=post.jac, group=post.sampdf$Sex)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.859
+
+# Treatment
+adonis(post.jac ~ Treatment, data=post.sampdf)
+  # p-value = 0.001
+  # R2 = 0.47417
+beta.tax = betadisper(d=post.jac, group=post.sampdf$Treatment)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.001
+
+# Combined Variables
+adonis(post.jac ~ Treatment + Sex, data=post.sampdf)
+  # Treatment: p-value = 0.001; R2 = 0.47417
+  # R2: p-value = 0.036; R2 = 0.04196
+
+
+
+### Post-treatment w/o Low Fat
+post.rem.sampdf <- data.frame(sample_data(physeq.post.rem))
+post.rem.jac <- phyloseq::distance(physeq=physeq.post.rem, method="jaccard")
+
+# Sex
+adonis(post.rem.jac ~ Sex, data=post.rem.sampdf)
+  # p-value = 0.003
+  # R2 = 0.1325
+beta.tax = betadisper(d=post.rem.jac, group=post.rem.sampdf$Sex)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.345
+
+# Treatment
+adonis(post.rem.jac ~ Treatment, data=post.rem.sampdf)
+  # p-value = 0.033
+  # R2 = 0.12945
+beta.tax = betadisper(d=post.rem.jac, group=post.rem.sampdf$Treatment)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.486
+
+# Combined Variables
+adonis(post.rem.jac ~ Sex + Treatment, data=post.rem.sampdf)
+  # Sex: p-value = 0.002; R2 = 0.13250
+  # Treatment: p-value = 0.010; R2 = 0.13259
+
+
+
+### All Female
+fem.sampdf <- data.frame(sample_data(physeq.fem))
+fem.jac <- phyloseq::distance(physeq=physeq.fem, method="jaccard")
+
+# Time
+adonis(fem.jac ~ Time, data=fem.sampdf)
+  # p-value = 0.001
+  # R2 = 0.35979
+beta.tax = betadisper(d=fem.jac, group=fem.sampdf$Time)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.03
+
+# Treatment
+adonis(fem.jac ~ Treatment, data=fem.sampdf)
+  # p-value = 0.036
+  # R2 = 0.16207
+beta.tax = betadisper(d=fem.jac, group=fem.sampdf$Treatment)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.102
+
+# Combined Variables
+adonis(fem.jac ~ Time + Treatment, data=fem.sampdf)
+  # Time: p-value = 0.001; R2 = 0.35979
+  # Treatment: p-value = 0.001; R2 = 0.16207
+
+
+
+### All Male
+mal.sampdf <- data.frame(sample_data(physeq.mal))
+mal.jac <- phyloseq::distance(physeq=physeq.mal, method="jaccard")
+
+# Time
+adonis(mal.jac ~ Time, data=mal.sampdf)
+  # p-value = 0.001
+  # R2 = 0.32399
+beta.tax = betadisper(d=mal.jac, group=mal.sampdf$Time)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.149
+
+# Treatment
+adonis(mal.jac ~ Treatment, data=mal.sampdf)
+  # p-value = 0.021
+  # R2 = 0.1503
+beta.tax = betadisper(d=mal.jac, group=mal.sampdf$Treatment)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.761
+
+# Combined Variables
+adonis(mal.jac ~ Time + Treatment, data=mal.sampdf)
+  # Time: p-value = 0.001; R2 = 0.32399
+  # Treatment: p-value = 0.001; R2 = 0.15030
+
+
+
+### Female Pre-treatment
+pre.fem.sampdf <- data.frame(sample_data(physeq.pre.fem))
+pre.fem.jac <- phyloseq::distance(physeq=physeq.pre.fem, method="jaccard")
+
+# Treatment
+adonis(pre.fem.jac ~ Treatment, data=pre.fem.sampdf)
+  # p-value = 0.565
+  # R2 = 0.15532
+beta.tax = betadisper(d=pre.fem.jac, group=pre.fem.sampdf$Treatment)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.456
+
+
+
+### Male Pre-treatment
+pre.mal.sampdf <- data.frame(sample_data(physeq.pre.mal))
+pre.mal.jac <- phyloseq::distance(physeq=physeq.pre.mal, method="jaccard")
+
+# Treatment
+adonis(pre.mal.jac ~ Treatment, data=pre.mal.sampdf)
+  # p-value = 0.241
+  # R2 = 0.20338
+beta.tax = betadisper(d=pre.mal.jac, group=pre.mal.sampdf$Treatment)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.886
+
+
+
+### Female Post-treatment
+post.fem.sampdf <- data.frame(sample_data(physeq.post.fem))
+post.fem.jac <- phyloseq::distance(physeq=physeq.post.fem, method="jaccard")
+
+# Treatment
+adonis(post.fem.jac ~ Treatment, data=post.fem.sampdf)
+  # p-value = 0.001
+  # R2 = 0.60409
+beta.tax = betadisper(d=post.fem.jac, group=post.fem.sampdf$Treatment)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.112
+
+
+
+### Male Post-treatment
+post.mal.sampdf <- data.frame(sample_data(physeq.post.mal))
+post.mal.jac <- phyloseq::distance(physeq=physeq.post.mal, method="jaccard")
+
+# Treatment
+adonis(post.mal.jac ~ Treatment, data=post.mal.sampdf)
+  # p-value = 0.001
+  # R2 = 0.51171
+beta.tax = betadisper(d=post.mal.jac, group=post.mal.sampdf$Treatment)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.004
+
+
+
+### Female Post-treatment w/o Low Fat
+post.fem.rem.sampdf <- data.frame(sample_data(physeq.post.fem.rem))
+post.fem.rem.jac <- phyloseq::distance(physeq=physeq.post.fem.rem, method="jaccard")
+
+# Treatment
+adonis(post.fem.rem.jac ~ Treatment, data=post.fem.rem.sampdf)
+  # p-value = 0.038
+  # R2 = 0.27097
+beta.tax = betadisper(d=post.fem.rem.jac, group=post.fem.rem.sampdf$Treatment)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.992
+
+
+
+### Male Post-treatment w/o Low Fat
+post.mal.rem.sampdf <- data.frame(sample_data(physeq.post.mal.rem))
+post.mal.rem.jac <- phyloseq::distance(physeq=physeq.post.mal.rem, method="jaccard")
+
+# Treatment
+adonis(post.mal.rem.jac ~ Treatment, data=post.mal.rem.sampdf)
+  # p-value = 0.263
+  # R2 = 0.19267
+beta.tax = betadisper(d=post.mal.rem.jac, group=post.mal.rem.sampdf$Treatment)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.696
