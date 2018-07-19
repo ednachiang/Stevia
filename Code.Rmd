@@ -1695,6 +1695,7 @@ write.table(bray.pvals.all, "PERMANOVA.pvals.csv", sep=",")
 
 ### Simper
 ```{r}
+### OTU-Level
 simper.pretty(data.frame(otu_table(physeq.pair)),
               data.frame(sample_data(physeq.pair)),
               c("Treatment", "Time", "Sex"),
@@ -1706,7 +1707,93 @@ kruskal.pretty(data.frame(otu_table(physeq.pair)),
                csv = stevia.simper,
                c("Treatment", "Time", "Sex"),
                output_name = 'stevia',
-               data.frame(tax_table(physeq.pair)))
+               taxonomy = data.frame(tax_table(physeq.pair)))
+stevia.simper.kw <- read.csv("stevia_krusk_simper.csv")
+for(i in 1:nrow(stevia.simper.kw)){
+  save <- which(rownames(data.frame(tax_table(physeq.pair))) == stevia.simper.kw$OTU[i])
+  stevia.simper.kw$Taxonomy[i] <-
+    paste(data.frame(tax_table(physeq.pair))[i,2], "-",
+          data.frame(tax_table(physeq.pair))[i,3], "-",
+          data.frame(tax_table(physeq.pair))[i,4], "-",
+          data.frame(tax_table(physeq.pair))[i,5], "-",
+          data.frame(tax_table(physeq.pair))[i,6])
+}
+#write.table(stevia.simper.kw, "stevia_krusk_simper.csv", sep=",")
+
+
+
+
+### Phylum-Level
+# Merge samples with the same taxonomic rank
+goodphy <- tax_glom(physeq.pair, taxrank="Phylum")
+
+# Transform each merged phylum count to rel abund
+phy99 <- transform_sample_counts(goodphy, function(x){(x/sum(x))*100})
+
+# Remove any phyla with <0.1% rel abund
+phy99 <- prune_taxa(taxa_sums(phy99) > 0.01, phy99)
+
+# Run Simper
+simper.pretty(data.frame(otu_table(phy99)),
+              data.frame(sample_data(phy99)),
+              c("Treatment", "Time", "Sex"),
+              perc_cutoff=0.5, low_cutoff='y', low_val=0.01,
+              output_name='stevia.phylum')
+stevia.simper <- read.csv("stevia.phylum_clean_simper.csv")
+kruskal.pretty(data.frame(otu_table(phy99)),
+               data.frame(sample_data(phy99)),
+               csv = stevia.simper,
+               c("Treatment", "Time", "Sex"),
+               output_name = 'stevia.phylum',
+               taxonomy = data.frame(tax_table(phy99)))
+stevia.simper.kw <- read.csv("stevia.phylum_krusk_simper.csv")
+for(i in 1:nrow(stevia.simper.kw)){
+  save <- which(rownames(data.frame(tax_table(phy99))) == stevia.simper.kw$OTU[i])
+  stevia.simper.kw$Taxonomy[i] <-
+    paste(data.frame(tax_table(phy99))[i,2], "-",
+          data.frame(tax_table(phy99))[i,3], "-",
+          data.frame(tax_table(phy99))[i,4], "-",
+          data.frame(tax_table(phy99))[i,5], "-",
+          data.frame(tax_table(phy99))[i,6])
+}
+#write.table(stevia.simper.kw, "stevia.phylum_krusk_simper.csv", sep=",")
+
+
+
+### Phylum-Level
+# Merge samples with the same taxonomic rank
+goodfam <- tax_glom(physeq.pair, taxrank="Family")
+
+# Transform each merged family count to rel abund
+fam99 <- transform_sample_counts(goodfam, function(x){(x/sum(x))*100})
+
+# Remove any phyla with <0.1% rel abund
+fam99 <- prune_taxa(taxa_sums(fam99) > 0.01, fam99)
+
+# Run Simper
+simper.pretty(data.frame(otu_table(fam99)),
+              data.frame(sample_data(fam99)),
+              c("Treatment", "Time", "Sex"),
+              perc_cutoff=0.5, low_cutoff='y', low_val=0.01,
+              output_name='stevia.family')
+stevia.simper <- read.csv("stevia.family_clean_simper.csv")
+kruskal.pretty(data.frame(otu_table(fam99)),
+               data.frame(sample_data(fam99)),
+               csv = stevia.simper,
+               c("Treatment", "Time", "Sex"),
+               output_name = 'stevia.family',
+               taxonomy = data.frame(tax_table(fam99)))
+stevia.simper.kw <- read.csv("stevia.family_krusk_simper.csv")
+for(i in 1:nrow(stevia.simper.kw)){
+  save <- which(rownames(data.frame(tax_table(fam99))) == stevia.simper.kw$OTU[i])
+  stevia.simper.kw$Taxonomy[i] <-
+    paste(data.frame(tax_table(fam99))[i,2], "-",
+          data.frame(tax_table(fam99))[i,3], "-",
+          data.frame(tax_table(fam99))[i,4], "-",
+          data.frame(tax_table(fam99))[i,5], "-",
+          data.frame(tax_table(fam99))[i,6])
+}
+write.table(stevia.simper.kw, "stevia.family_krusk_simper.csv", sep=",")
 ```
 
 
