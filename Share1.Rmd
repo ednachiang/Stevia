@@ -18,6 +18,7 @@ library(phyloseq)
 library(grid)
 library(pgirmess)
 library(lme4)
+library(kableExtra)
 theme_set(theme_bw())
 set.seed(1)
 
@@ -52,59 +53,65 @@ load("Physeq.tv.RData")
 ```
 
 # Description  
-This is a quick, exploratory analysis of fecal pellets from our winter squirrels, pre- and post- ABX treatment. Pellets were collected prior to ABX treatment, and 2 weeks after treatment.  
-  
-Overall, pellets from 22 squirrels were collected:  
-- 18 squirrels received ABX treatment (samples = 18 pre & 18 post)  
-- 4 were controls (received normal water) (samples = 4 pre & 4 post)  
-  
-Some of the sample sequences were poor quality and not included here. The samples that are included in this analysis include:  
-- 30 ABX (18 pre & 12 post)  
-- 6 controls (3 pre & 3 post) 
-  
-For reference, samples were normalized to 7614 reads to ensure comparability.  
-  
-Since this was a quick analysis, I didn't run much actual stats. That will definitely be done in the future though!  
+This is a quick summary of the follow-up analyses to Sarah's thesis that I've performed.  
     
-
+I included only individuals with both pre-treatment and post-treatment samples as I run a few paired tests and want to keep the samples consistent throughout all analyses. I removed 4 individuals, resulting in the following final sample count:  
+```{r, echo=F}
+samps <- data.frame(rep("NA",4))
+colnames(samps) <- "Treatment"
+samps$Treatment <- c("High Fat", "Low Fat", "Saccharin", "Stevia")
+samps$N <- c(9, 10, 9, 8)
+samps$Female <- c(4, 5, 5, 4)
+samps$Male <- c(5, 5, 4, 4)
+kable(samps, "html") %>% kable_styling(full_width=F)
+```
+  
 # Within-Sample Diversity (Alpha) 
   
 
 ### Chao Richness  
 Chao is an estimate of richness (how many unique OTUs exist in a particular sample).
-```{r, echo=F}
+```{r, echo=F, fig.height=4, fig.width=6.5}
+adiv.pair <- data.frame(sample_data(physeq.pair))
+
 # Chao
 ggplot(adiv.pair, aes(x=Treatment, y=chao, fill = Treatment)) +
   geom_boxplot(position=position_dodge(1)) +
   geom_point() + 
-  facet_grid(Time ~ Sex) +
+  facet_grid(. ~ Time) +
   xlab("Treatment") +
   scale_fill_manual(values=c("indianred1", "orange", "springgreen3", "deepskyblue2")) +
   ylab("Chao Richness")
 ```
   
+* Post-treatment groups are significantly different (adj p-val = 0.004):
+    + High Fat vs. Low Fat
+    + Low Fat vs. Saccharin
+  
+* High Fat Pre-treatment and Post-treatment are significantly different (adj p-val = 0.018)
 
   
 ### Shannon Diversity  
 Shannon's Index is an estimate of diversity, taking into account both the presence/absence and abundance of OTUs.  
 
-```{r, echo=F}
+```{r, echo=F, fig.height=4, fig.width=6.5}
 # Shannon
 ggplot(adiv.pair, aes(x=Treatment, y=shannon, fill = Treatment)) +
   geom_boxplot(position=position_dodge(1)) +
   geom_point() + 
-  facet_grid(Time ~ Sex) +
+  facet_grid(. ~ Time) +
   scale_fill_manual(values=c("indianred1", "orange", "springgreen3", "deepskyblue2")) +
   xlab("Treatment") +
   ylab("Shannon Diversity")
 ```
-
+  
+No significant differences.
   
 
 # Examine Phyla  
 The phyla are listed in order of highest overall relative abundance to lowest overall relative abundance. Phyla with a total relative abundance of < 0.01% were removed. Error bars are interquartile range.  
 
-```{r, include=F}
+```{r, echo=F, fig.height=6, fig.width=10, warning=F}
 # Merge samples with the same taxonomic rank
 goodphy <- tax_glom(physeq.pair, taxrank="Phylum")
 
@@ -114,9 +121,47 @@ phy99 <- transform_sample_counts(goodphy, function(x){(x/sum(x))*100})
 # Remove any phyla with <0.1% rel abund
 phy99 <- prune_taxa(taxa_sums(phy99) > 0.01, phy99)
 
-# Create rank abundance of phyla
-barplot(sort(taxa_sums(phy99),TRUE)[1:20]/nsamples(phy99),las=2,cex.axis=.7)
+# Organize
+phy.df <- psmelt(phy99)
+phy.df$Phylum <- ordered(phy.df$Phylum, levels=c("Firmicutes", "Bacteroidetes", "Verrucomicrobia", "Tenericutes", "Proteobacteria", "Actinobacteria", "Unclassified", "Cyanobacteria"))
+phy.df$Phylum[which(is.na(phy.df$Phylum))] <- rep("Unclassified",length(which(is.na(phy.df$Phylum))))
 
+phy.sum <- phy.df %>%
+  group_by(Treatment, Time, Phylum) %>%
+  summarize(Mean = mean(Abundance),
+            Median = median(Abundance),
+            SD = sd(Abundance),
+            SE = (sd(Abundance)/(sqrt(length(Abundance)))),
+            iqr = IQR(Abundance))
+
+# Calculate IQR limits
+phy.sum$iqr.min <- phy.sum$Median - 0.5*phy.sum$iqr
+phy.sum[which(phy.sum$iqr.min < 0),10] <- 0
+  # Any IQR min < 0, change to 0 (otherwise error bar won't plot)
+phy.sum$iqr.max <- phy.sum$Median + 0.5*phy.sum$iqr
+
+
+### Barplot ###
+ggplot(phy.sum, aes(x=Phylum, y=Median, fill=Phylum)) +
+  geom_bar(stat="identity", color="black") +
+  facet_grid(Time ~ Treatment) +
+  geom_errorbar(aes(ymax=iqr.max, ymin=iqr.min), width=0.25) +
+  scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00")) +
+  xlab("Phyla") +
+  ylab("Median Relative Abundance for Phyla > 0.01%") +
+  scale_y_continuous(limits=c(0,80), expand=c(0,0))+
+  theme(axis.text.x = element_blank(),
+        panel.spacing=unit(1, "lines"),
+        axis.title = element_text(size=16),
+        strip.text.x = element_text(size=12),
+        strip.text.y = element_text(size=12),
+        axis.text.y = element_text(size=12),
+        legend.title = element_text(size = 14),
+        legend.text = element_text(size=12))
+```
+
+There are some interesting (& unexpected?) trends if we take into account sex:  
+```{r, echo=F, fig.height=10, fig.width=10}
 ### Testing barplot for sex + treatment + time
 test <- phy.df %>%
   group_by(Treatment, Time, Sex, Phylum) %>%
@@ -139,21 +184,24 @@ ggplot(test, aes(x=Phylum, y=Median, fill=Phylum)) +
   scale_y_continuous(limits=c(0,80), expand=c(0,0))+
   theme(axis.text.x = element_blank(),
         panel.spacing=unit(1, "lines"),
-        axis.title = element_text(size=20),
-        strip.text.x = element_text(size=14),
-        strip.text.y = element_text(size=14),
+        axis.title = element_text(size=16),
+        strip.text.x = element_text(size=12),
+        strip.text.y = element_text(size=12),
         axis.text.y = element_text(size=12),
         legend.title = element_text(size = 14),
         legend.text = element_text(size=12))
-
-    
 ```
-  
+Trends that caught my eye (not statistically tested yet):  
+
+* Pre-treatment females generally have a higher % Bacteroidetes compared to males
+    + Especially in High Fat Pre-treatment
+* Saccharin Post-treatment
+    + Females have higher % Verrucomicrobia compared to males
 
   
 
 # Between-Sample Diversity (Beta)  
-Bray-Curtis dissimilarity. Broadly, this metric is calculated by comparing every single sample with each other. It considers the OTUs that are shared between samples, and both presence/absence and weight (abundance).  
+I used bray-Curtis dissimilarity, which considers both presence/absence and weight (abundance).  
   
 In the ordination, each point is 1 sample. The distance betwen points is inversely related to how similar the samples are.  
 Closer points = more similar.  
@@ -163,33 +211,54 @@ Farther points = less similar.
 ### Paired
 bray.nmds <- ordinate(physeq=physeq.pair, method="NMDS", distance="bray")
   # stress = 8.822573e-05
+```
 
+```{r, echo=F, fig.height=4.5, fig.width=7}
 plot_ordination(physeq=physeq.pair, ordination=bray.nmds, color="Treatment", shape="Time") +
   scale_color_manual(values=c("indianred1", "orange", "springgreen3", "deepskyblue2")) +
   scale_shape_manual(values=c(19,2))
 ```
+  
+Pre-treatment vs. Post-treatment samples cluster distinctly for all samples except Low Fat.
+Within each treatment, pre- vs. post- are significantly different (all adj pvals = 0.006).  
+To determine what categorical factors are contributing to between-sample differences, I used PERMANOVA to evaluate:  
 
+* Time
+    + Pre-treatment vs. Post-treatment
+* Treatment
+    + High Fat, Low Fat, Saccharin, Stevia
+* Sex
+    + Female, Male
+* Individual
+    + My attempt to account for the paired nature of the data
 
+```{r, echo=F}
+samps <- data.frame(rep("NA",5))
+colnames(samps) <- "Factor"
+samps$Factor <- c("Time", "Treatment", "Sex", "Individual", "Residual")
+samps$pval <- c(0.001, 0.001, 0.001, 0.907, NA)
+samps$R2 <- c(0.258, 0.123, 0.074, 0.230, 0.349)
 
+kable(samps, "html") %>% kable_styling(full_width=F)
+```
+  
+
+* Time accounts for the most variation in the data, followed by Treatment and Sex
+* Individual accounted for quite a bit of the data variation, but was not significant (likely because we have a small n (2) for each individual)
+  
+Given that time explains the most data variation, let's take a look within Pre-treatment samples:  
 ```{r, include=F}
-### Paired
-bray.nmds <- ordinate(physeq=physeq.pair, method="NMDS", distance="bray")
-  # stress = 8.822573e-05
+### Pre-treatment
+bray.nmds.pre <- ordinate(physeq=physeq.pre, method="NMDS", distance="bray")
+  # stress = 0.1847002
+```
 
-plot_ordination(physeq=physeq.pair, ordination=bray.nmds, color="Treatment", shape="Time") +
-  scale_color_manual(values=c("indianred1", "orange", "springgreen3", "deepskyblue2")) +
+```{r, echo=F}
+### Pre-treatment
+plot_ordination(physeq=physeq.pre, ordination=bray.nmds.pre, color="Treatment", shape="Sex") +
+  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00")) +
   scale_shape_manual(values=c(19,2))
 ```
   
-To evaluate significant difference in community compositions, I used PERMANOVA. To examine significant variance in communities, I used a multivariate analogue of Levene's test (*betadisper*) which analyzes multivariate homogeneity of group dispersions/variances.  
-  
-Control samples Pre & Post are not significantly different (p-value = 0.7) and do not significantly different variances (p-value = 0.6).  
-  
-ABX samples Pre & Post are significantly different (p-value = 0.001) and also have significantly different variances (p-value = 0.001).  
-  
-Within Pre samples, there was no significant difference in composition or variance (p-values = 0.675 and 0.415, respectively).  
-  
-In Post samples, there was no significant difference in community composition (p-value = 0.4); however, there was a difference in variance (p-value = 0.032). Although this suggests that Post-ABX and Control samples have similar community compositions, I think that this is largely due to the high variation in Post-ABX samples. It would be helpful for me to plot standard error elipses to see how much overlap there is between these 2 groups.  
-  
-Overall, this suggests that our ABX treatment does significantly change community composition, but not equally in all squirrels-- there's quite a bit of variation in how the community is altered.  
-  
+There is no significance between treatments, but you can see that 
+
