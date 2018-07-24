@@ -317,11 +317,11 @@ physeq.post.mal.rem <- subset_samples(physeq.post.mal, Treatment != "Low Fat")
 physeq.hf <- subset_samples(physeq.pair, Treatment == "High Fat")
 #save(physeq.hf, file = "Physeq.hf.RData")
 physeq.lf <- subset_samples(physeq.pair, Treatment == "Low Fat")
-#save(physeq.hf, file = "Physeq.lf.RData")
+#save(physeq.lf, file = "Physeq.lf.RData")
 physeq.sc <- subset_samples(physeq.pair, Treatment == "Saccharin")
-#save(physeq.hf, file = "Physeq.sc.RData")
+#save(physeq.sc, file = "Physeq.sc.RData")
 physeq.tv <- subset_samples(physeq.pair, Treatment == "Stevia")
-#save(physeq.hf, file = "Physeq.tv.RData")
+#save(physeq.tv, file = "Physeq.tv.RData")
 
 ```
 
@@ -463,6 +463,7 @@ wilcox.test(chao ~ Time, data=adiv.pair[which(adiv.pair$Treatment == "Saccharin"
   # Saccharin
   # p-value = 0.07422
 wilcox.test(chao ~ Time, data=adiv.pair[which(adiv.pair$Treatment == "Stevia"),], paired=T)
+  # Stevia
   # p-value = 0.3125
 wilcox.test(chao ~ Sex, data = adiv.pair[which(adiv.pair$Time == "Pre-treatment"),])
   # Pre-treatment Sex
@@ -1662,7 +1663,6 @@ bray.pvals.post.mal$Adj.BH <- p.adjust(bray.pvals.post.mal$pval, method="BH")
 
 
 
-
 ### Adjust P-vals
 bray.pvals.all <- data.frame(bray.pvals.pre[,1])
 bray.pvals.all[(nrow(bray.pvals.all)+1):(nrow(bray.pvals.all)+nrow(bray.pvals.post)),1] <- bray.pvals.post[,1]
@@ -1674,12 +1674,14 @@ bray.pvals.all[(nrow(bray.pvals.all)+1),1] <- adonis(hf.bray ~ Time, data=hf.sam
 bray.pvals.all[(nrow(bray.pvals.all)+1),1] <- adonis(lf.bray ~ Time, data=lf.sampdf)$aov.tab[1,6]
 bray.pvals.all[(nrow(bray.pvals.all)+1),1] <- adonis(sc.bray ~ Time, data=sc.sampdf)$aov.tab[1,6]
 bray.pvals.all[(nrow(bray.pvals.all)+1),1] <- adonis(tv.bray ~ Time, data=tv.sampdf)$aov.tab[1,6]
+bray.pvals.all[nrow(bray.pvals.all)+1,1] <- adonis(pre.bray ~ Sex, data=pre.sampdf)[[1]]$`Pr(>F)`[1]
+bray.pvals.all[nrow(bray.pvals.all)+1,1] <- adonis(post.bray ~ Sex, data=post.sampdf)[[1]]$`Pr(>F)`[1]
 colnames(bray.pvals.all) <- "pvals"
 bray.pvals.all$BH <- p.adjust(bray.pvals.all$pval, method="BH")
-bray.pvals.all$Group <- c(rep("Pre", 6), rep("Post", 6), rep("Pre Fem", 6), rep("Pre Mal", 6), rep("Post Fem", 6), rep("Post Mal", 6), "High Fat", "Low Fat", "Saccharin", "Stevia")
-bray.pvals.all$Comp <- c(rownames(bray.pvals.pre), rownames(bray.pvals.post), rownames(bray.pvals.pre.fem), rownames(bray.pvals.pre.mal), rownames(bray.pvals.post.fem), rownames(bray.pvals.post.mal), rep("Time", 4))
+bray.pvals.all$Group <- c(rep("Pre", 6), rep("Post", 6), rep("Pre Fem", 6), rep("Pre Mal", 6), rep("Post Fem", 6), rep("Post Mal", 6), "High Fat", "Low Fat", "Saccharin", "Stevia", "Pre", "Post")
+bray.pvals.all$Comp <- c(rownames(bray.pvals.pre), rownames(bray.pvals.post), rownames(bray.pvals.pre.fem), rownames(bray.pvals.pre.mal), rownames(bray.pvals.post.fem), rownames(bray.pvals.post.mal), rep("Time", 4), rep("Sex",2))
 
-write.table(bray.pvals.all, "PERMANOVA.pvals.csv", sep=",")
+write.table(bray.pvals.all, "PERMANOVA.pvals2.csv", sep=",")
 ```
 
 
