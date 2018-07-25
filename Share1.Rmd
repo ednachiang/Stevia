@@ -211,16 +211,20 @@ Farther points = less similar.
 ### Paired
 bray.nmds <- ordinate(physeq=physeq.pair, method="NMDS", distance="bray")
   # stress = 8.822573e-05
+
+test <- plot_ordination(physeq=physeq.pair, ordination=bray.nmds, color="Treatment", shape="Time") +
+  scale_color_manual(values=c("indianred1", "orange", "springgreen3", "deepskyblue2")) +
+  scale_shape_manual(values=c(19,24)) +
+   geom_point(size=2, stroke=1.5)
+test$layers <- test$layers[-1]
 ```
 
 ```{r, echo=F, fig.height=4.5, fig.width=7}
-plot_ordination(physeq=physeq.pair, ordination=bray.nmds, color="Treatment", shape="Time") +
-  scale_color_manual(values=c("indianred1", "orange", "springgreen3", "deepskyblue2")) +
-  scale_shape_manual(values=c(19,2))
+test
 ```
   
 Pre-treatment vs. Post-treatment samples cluster distinctly for all samples except Low Fat.
-Within each treatment, pre- vs. post- are significantly different (all adj pvals = 0.006).  
+Within each treatment, pre- vs. post- are significantly different (all adj pvals = 0.005).  
 To determine what categorical factors are contributing to between-sample differences, I used PERMANOVA to evaluate:  
 
 * Time
@@ -246,19 +250,50 @@ kable(samps, "html") %>% kable_styling(full_width=F)
 * Time accounts for the most variation in the data, followed by Treatment and Sex
 * Individual accounted for quite a bit of the data variation, but was not significant (likely because we have a small n (2) for each individual)
   
+### Pre-treatment  
 Given that time explains the most data variation, let's take a look within Pre-treatment samples:  
 ```{r, include=F}
 ### Pre-treatment
 bray.nmds.pre <- ordinate(physeq=physeq.pre, method="NMDS", distance="bray")
   # stress = 0.1847002
+
+test <- plot_ordination(physeq=physeq.pre, ordination=bray.nmds.pre, color="Treatment", shape="Sex") +
+  scale_color_manual(values=c("indianred1", "orange", "springgreen3", "deepskyblue2")) +
+  scale_shape_manual(values=c(19,24)) +
+  geom_point(size=2, stroke=1.5)
+test$layers <- test$layers[-1]
 ```
 
-```{r, echo=F}
+```{r, echo=F, fig.height=4.5, fig.width=7}
 ### Pre-treatment
-plot_ordination(physeq=physeq.pre, ordination=bray.nmds.pre, color="Treatment", shape="Sex") +
-  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00")) +
-  scale_shape_manual(values=c(19,2))
+test
 ```
   
-There is no significance between treatments, but you can see that 
+* There is no significance between treatments.  
+* There *is* a significant difference between sex (adj pval = 0.005).
+  
+### Post-treatment  
+```{r, include=F}
+### Post-treatment
+bray.nmds.post <- ordinate(physeq=physeq.post, method="NMDS", distance="bray")
+  # stress = 8.927466e-05
 
+test <- plot_ordination(physeq=physeq.post, ordination=bray.nmds.post, color="Treatment", shape="Sex") +
+  scale_color_manual(values=c("indianred1", "orange", "springgreen3", "deepskyblue2")) +
+  scale_shape_manual(values=c(19,24)) +
+  geom_point(size=2, stroke=1.5)
+test$layers <- test$layers[-1]
+```
+
+```{r, echo=F, fig.height=4.5, fig.width=7}
+### Post-treatment
+test
+```
+  
+* Unlike in Pre-treatment samples, sex is not significant in Post-treatment samples (adj p-val = 0.326)
+* Low Fat is significantly different from all other treatments (all adj pvals = 0.005)
+    + This is true overall, and within Females and within and Males
+* Saccharin vs. Stevia trend towards a difference (adj pval = 0.063)
+    + This trend is seen within Females (adj pval = 0.063), but not within Males (adj pval = 0.571)
+  
+# Identifying Specific Genera
