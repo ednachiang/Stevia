@@ -1846,7 +1846,7 @@ for(i in 1:nrow(stevia.sc.simper.kw)){
           data.frame(tax_table(physeq.sc))[i,5], "-",
           data.frame(tax_table(physeq.sc))[i,6])
 }
-write.table(stevia.sc.simper.kw, "stevia.sc_krusk_simper.csv", sep=",")
+#write.table(stevia.sc.simper.kw, "stevia.sc_krusk_simper.csv", sep=",")
 
 # Stevia
 simper.pretty(data.frame(otu_table(physeq.tv)),
@@ -1873,7 +1873,37 @@ for(i in 1:nrow(stevia.tv.simper.kw)){
 }
 #write.table(stevia.tv.simper.kw, "stevia.tv_krusk_simper.csv", sep=",")
 
-
+### BH CORRECTION FOR ALL OTU-LEVEL SIMPER COMPARISONS
+stevia.simper.kw$Group <- rep("All", nrow(stevia.simper.kw))
+stevia.simper.kw$OTU <- as.character(stevia.simper.kw$OTU)
+stevia.simper.kw$Comparison <- as.character(stevia.simper.kw$Comparison)
+stevia.pre.simper.kw$Group <- rep("Pre", nrow(stevia.pre.simper.kw))
+stevia.pre.simper.kw$OTU <- as.character(stevia.pre.simper.kw$OTU)
+stevia.pre.simper.kw$Comparison <- as.character(stevia.pre.simper.kw$Comparison)
+stevia.post.simper.kw$Group <- rep("Post", nrow(stevia.post.simper.kw))
+stevia.post.simper.kw$OTU <- as.character(stevia.post.simper.kw$OTU)
+stevia.post.simper.kw$Comparison <- as.character(stevia.post.simper.kw$Comparison)
+stevia.hf.simper.kw$Group <- rep("High Fat", nrow(stevia.hf.simper.kw))
+stevia.hf.simper.kw$OTU <- as.character(stevia.hf.simper.kw$OTU)
+stevia.hf.simper.kw$Comparison <- as.character(stevia.hf.simper.kw$Comparison)
+stevia.lf.simper.kw$Group <- rep("Low Fat", nrow(stevia.lf.simper.kw))
+stevia.lf.simper.kw$OTU <- as.character(stevia.lf.simper.kw$OTU)
+stevia.lf.simper.kw$Comparison <- as.character(stevia.lf.simper.kw$Comparison)
+stevia.sc.simper.kw$Group <- rep("Saccharin", nrow(stevia.sc.simper.kw))
+stevia.sc.simper.kw$OTU <- as.character(stevia.sc.simper.kw$OTU)
+stevia.sc.simper.kw$Comparison <- as.character(stevia.sc.simper.kw$Comparison)
+stevia.tv.simper.kw$Group <- rep("Stevia", nrow(stevia.tv.simper.kw))
+stevia.tv.simper.kw$OTU <- as.character(stevia.tv.simper.kw$OTU)
+stevia.tv.simper.kw$Comparison <- as.character(stevia.tv.simper.kw$Comparison)
+stevia.simper.all <- stevia.simper.kw
+stevia.simper.all[(nrow(stevia.simper.all)+1):(nrow(stevia.simper.all)+nrow(stevia.pre.simper.kw)),] <- stevia.pre.simper.kw
+stevia.simper.all[(nrow(stevia.simper.all)+1):(nrow(stevia.simper.all)+nrow(stevia.post.simper.kw)),] <- stevia.post.simper.kw
+stevia.simper.all[(nrow(stevia.simper.all)+1):(nrow(stevia.simper.all)+nrow(stevia.hf.simper.kw)),] <- stevia.hf.simper.kw
+stevia.simper.all[(nrow(stevia.simper.all)+1):(nrow(stevia.simper.all)+nrow(stevia.lf.simper.kw)),] <- stevia.lf.simper.kw
+stevia.simper.all[(nrow(stevia.simper.all)+1):(nrow(stevia.simper.all)+nrow(stevia.sc.simper.kw)),] <- stevia.sc.simper.kw
+stevia.simper.all[(nrow(stevia.simper.all)+1):(nrow(stevia.simper.all)+nrow(stevia.tv.simper.kw)),] <- stevia.tv.simper.kw
+stevia.simper.all$fdr_krusk_p.val <- p.adjust(stevia.simper.all$krusk_p.val, "BH")
+#write.table(stevia.simper.all, "stevia.simper.all.csv", sep=",")
 
 
 
@@ -2060,7 +2090,11 @@ for(i in 1:nrow(stevia.phylum.tv.simper.kw)){
           data.frame(tax_table(subset_samples(phy99, Treatment == "Stevia")))[i,5], "-",
           data.frame(tax_table(subset_samples(phy99, Treatment == "Stevia")))[i,6])
 }
-#(stevia.phylum.tv.simper.kw, "stevia.phylum.tv_krusk_simper.csv", sep=",")
+#write.table(stevia.phylum.tv.simper.kw, "stevia.phylum.tv_krusk_simper.csv", sep=",")
+
+
+
+
 
 
 ### Family-Level
@@ -2247,6 +2281,229 @@ for(i in 1:nrow(stevia.family.tv.simper.kw)){
           data.frame(tax_table(subset_samples(fam99, Treatment == "Stevia")))[i,6])
 }
 #write.table(stevia.family.tv.simper.kw, "stevia.family.tv_krusk_simper.csv", sep=",")
+
+### BH CORRECTION FOR ALL OTU-LEVEL SIMPER COMPARISONS
+stevia.simper.kw$Group <- rep("All", nrow(stevia.simper.kw))
+stevia.simper.kw$OTU <- as.character(stevia.simper.kw$OTU)
+stevia.simper.kw$Comparison <- as.character(stevia.simper.kw$Comparison)
+stevia.family.pre.simper.kw$Group <- rep("Pre", nrow(stevia.family.pre.simper.kw))
+stevia.family.pre.simper.kw$OTU <- as.character(stevia.family.pre.simper.kw$OTU)
+stevia.family.pre.simper.kw$Comparison <- as.character(stevia.family.pre.simper.kw$Comparison)
+stevia.family.post.simper.kw$Group <- rep("Post", nrow(stevia.family.post.simper.kw))
+stevia.family.post.simper.kw$OTU <- as.character(stevia.family.post.simper.kw$OTU)
+stevia.family.post.simper.kw$Comparison <- as.character(stevia.family.post.simper.kw$Comparison)
+stevia.family.hf.simper.kw$Group <- rep("High Fat", nrow(stevia.family.hf.simper.kw))
+stevia.family.hf.simper.kw$OTU <- as.character(stevia.family.hf.simper.kw$OTU)
+stevia.family.hf.simper.kw$Comparison <- as.character(stevia.family.hf.simper.kw$Comparison)
+stevia.family.lf.simper.kw$Group <- rep("Low Fat", nrow(stevia.family.lf.simper.kw))
+stevia.family.lf.simper.kw$OTU <- as.character(stevia.family.lf.simper.kw$OTU)
+stevia.family.lf.simper.kw$Comparison <- as.character(stevia.family.lf.simper.kw$Comparison)
+stevia.family.sc.simper.kw$Group <- rep("Saccharin", nrow(stevia.family.sc.simper.kw))
+stevia.family.sc.simper.kw$OTU <- as.character(stevia.family.sc.simper.kw$OTU)
+stevia.family.sc.simper.kw$Comparison <- as.character(stevia.family.sc.simper.kw$Comparison)
+stevia.family.tv.simper.kw$Group <- rep("Stevia", nrow(stevia.family.tv.simper.kw))
+stevia.family.tv.simper.kw$OTU <- as.character(stevia.family.tv.simper.kw$OTU)
+stevia.family.tv.simper.kw$Comparison <- as.character(stevia.family.tv.simper.kw$Comparison)
+stevia.family.simper.all <- stevia.simper.kw
+stevia.family.simper.all[(nrow(stevia.family.simper.all)+1):(nrow(stevia.family.simper.all)+nrow(stevia.family.pre.simper.kw)),] <- stevia.family.pre.simper.kw
+stevia.family.simper.all[(nrow(stevia.family.simper.all)+1):(nrow(stevia.family.simper.all)+nrow(stevia.family.post.simper.kw)),] <- stevia.family.post.simper.kw
+stevia.family.simper.all[(nrow(stevia.family.simper.all)+1):(nrow(stevia.family.simper.all)+nrow(stevia.family.hf.simper.kw)),] <- stevia.family.hf.simper.kw
+stevia.family.simper.all[(nrow(stevia.family.simper.all)+1):(nrow(stevia.family.simper.all)+nrow(stevia.family.lf.simper.kw)),] <- stevia.family.lf.simper.kw
+stevia.family.simper.all[(nrow(stevia.family.simper.all)+1):(nrow(stevia.family.simper.all)+nrow(stevia.family.sc.simper.kw)),] <- stevia.family.sc.simper.kw
+stevia.family.simper.all[(nrow(stevia.family.simper.all)+1):(nrow(stevia.family.simper.all)+nrow(stevia.family.tv.simper.kw)),] <- stevia.family.tv.simper.kw
+stevia.family.simper.all$fdr_krusk_p.val <- p.adjust(stevia.family.simper.all$krusk_p.val, "BH")
+#write.table(stevia.family.simper.all, "stevia.family.simper.all.csv", sep=",")
+
+
+
+
+
+
+
+### Genus-Level
+# Merge samples with the same taxonomic rank
+goodgen <- tax_glom(physeq.pair, taxrank="Genus")
+
+# Transform each merged genus count to rel abund
+gen99 <- transform_sample_counts(goodgen, function(x){(x/sum(x))*100})
+
+# Remove any genla with <0.1% rel abund
+gen99 <- prune_taxa(taxa_sums(gen99) > 0.01, gen99)
+
+# All
+simper.pretty(data.frame(otu_table(gen99)),
+              data.frame(sample_data(gen99)),
+              c("Treatment", "Time", "Sex"),
+              perc_cutoff=0.5, low_cutoff='y', low_val=0.01,
+              output_name='stevia.genus')
+stevia.simper <- read.csv("stevia.genus_clean_simper.csv")
+kruskal.pretty(data.frame(otu_table(gen99)),
+               data.frame(sample_data(gen99)),
+               csv = stevia.simper,
+               c("Treatment", "Time", "Sex"),
+               output_name = 'stevia.genus',
+               taxonomy = data.frame(tax_table(gen99)))
+stevia.simper.kw <- read.csv("stevia.genus_krusk_simper.csv")
+for(i in 1:nrow(stevia.simper.kw)){
+  save <- which(rownames(data.frame(tax_table(gen99))) == stevia.simper.kw$OTU[i])
+  stevia.simper.kw$Taxonomy[i] <-
+    paste(data.frame(tax_table(gen99))[i,2], "-",
+          data.frame(tax_table(gen99))[i,3], "-",
+          data.frame(tax_table(gen99))[i,4], "-",
+          data.frame(tax_table(gen99))[i,5], "-",
+          data.frame(tax_table(gen99))[i,6])
+}
+#write.table(stevia.simper.kw, "stevia.genus_krusk_simper.csv", sep=",")
+
+# Pre-treatment
+simper.pretty(data.frame(otu_table(subset_samples(gen99, Time == "Pre-treatment"))),
+              data.frame(sample_data(subset_samples(gen99, Time == "Pre-treatment"))),
+              c("Treatment", "Sex"),
+              perc_cutoff=0.5, low_cutoff='y', low_val=0.01,
+              output_name='stevia.genus.pre')
+stevia.genus.pre.simper <- read.csv("stevia.genus.pre_clean_simper.csv")
+kruskal.pretty(data.frame(otu_table(subset_samples(gen99, Time == "Pre-treatment"))),
+               data.frame(sample_data(subset_samples(gen99, Time == "Pre-treatment"))),
+               csv = stevia.genus.pre.simper,
+               c("Treatment", "Sex"),
+               output_name = 'stevia.genus.pre',
+               taxonomy = data.frame(tax_table(physeq.pre)))
+stevia.genus.pre.simper.kw <- read.csv("stevia.genus.pre_krusk_simper.csv")
+for(i in 1:nrow(stevia.genus.pre.simper.kw)){
+  save <- which(rownames(data.frame(tax_table(subset_samples(gen99, Time == "Pre-treatment")))) == stevia.genus.pre.simper.kw$OTU[i])
+  stevia.genus.pre.simper.kw$Taxonomy[i] <-
+    paste(data.frame(tax_table(physeq.pre))[i,2], "-",
+          data.frame(tax_table(physeq.pre))[i,3], "-",
+          data.frame(tax_table(physeq.pre))[i,4], "-",
+          data.frame(tax_table(physeq.pre))[i,5], "-",
+          data.frame(tax_table(physeq.pre))[i,6])
+}
+#write.table(stevia.genus.pre.simper.kw, "stevia.genus.pre_krusk_simper.csv", sep=",")
+
+# Post-treatment
+simper.pretty(data.frame(otu_table(subset_samples(gen99, Time == "Post-treatment"))),
+              data.frame(sample_data(subset_samples(gen99, Time == "Post-treatment"))),
+              c("Treatment", "Sex"),
+              perc_cutoff=0.5, low_cutoff='y', low_val=0.01,
+              output_name='stevia.genus.post')
+stevia.genus.post.simper <- read.csv("stevia.genus.post_clean_simper.csv")
+kruskal.pretty(data.frame(otu_table(subset_samples(gen99, Time == "Post-treatment"))),
+               data.frame(sample_data(subset_samples(gen99, Time == "Post-treatment"))),
+               csv = stevia.genus.post.simper,
+               c("Treatment", "Sex"),
+               output_name = 'stevia.genus.post',
+               taxonomy = data.frame(tax_table(subset_samples(gen99, Time == "Post-treatment"))))
+stevia.genus.post.simper.kw <- read.csv("stevia.genus.post_krusk_simper.csv")
+for(i in 1:nrow(stevia.genus.post.simper.kw)){
+  save <- which(rownames(data.frame(tax_table(subset_samples(gen99, Time == "Post-treatment")))) == stevia.genus.post.simper.kw$OTU[i])
+  stevia.genus.post.simper.kw$Taxonomy[i] <-
+    paste(data.frame(tax_table(physeq.post))[i,2], "-",
+          data.frame(tax_table(physeq.post))[i,3], "-",
+          data.frame(tax_table(physeq.post))[i,4], "-",
+          data.frame(tax_table(physeq.post))[i,5], "-",
+          data.frame(tax_table(physeq.post))[i,6])
+}
+#write.table(stevia.genus.post.simper.kw, "stevia.genus.post_krusk_simper.csv", sep=",")
+
+# High Fat
+simper.pretty(data.frame(otu_table(subset_samples(gen99, Treatment == "High Fat"))),
+              data.frame(sample_data(subset_samples(gen99, Treatment == "High Fat"))),
+              c("Time", "Sex"),
+              perc_cutoff=0.5, low_cutoff='y', low_val=0.01,
+              output_name='stevia.genus.hf')
+stevia.genus.hf.simper <- read.csv("stevia.genus.hf_clean_simper.csv")
+kruskal.pretty(data.frame(otu_table(subset_samples(gen99, Treatment == "High Fat"))),
+               data.frame(sample_data(subset_samples(gen99, Treatment == "High Fat"))),
+               csv = stevia.genus.hf.simper,
+               c("Time", "Sex"),
+               output_name = 'stevia.genus.hf',
+               taxonomy = data.frame(tax_table(subset_samples(gen99, Treatment == "High Fat"))))
+stevia.genus.hf.simper.kw <- read.csv("stevia.genus.hf_krusk_simper.csv")
+for(i in 1:nrow(stevia.genus.hf.simper.kw)){
+  save <- which(rownames(data.frame(tax_table(subset_samples(gen99, Treatment == "High Fat")))) == stevia.genus.hf.simper.kw$OTU[i])
+  stevia.genus.hf.simper.kw$Taxonomy[i] <-
+    paste(data.frame(tax_table(subset_samples(gen99, Treatment == "High Fat")))[i,2], "-",
+          data.frame(tax_table(subset_samples(gen99, Treatment == "High Fat")))[i,3], "-",
+          data.frame(tax_table(subset_samples(gen99, Treatment == "High Fat")))[i,4], "-",
+          data.frame(tax_table(subset_samples(gen99, Treatment == "High Fat")))[i,5], "-",
+          data.frame(tax_table(subset_samples(gen99, Treatment == "High Fat")))[i,6])
+}
+#write.table(stevia.genus.hf.simper.kw, "stevia.genus.hf_krusk_simper.csv", sep=",")
+
+# Low Fat
+simper.pretty(data.frame(otu_table(subset_samples(gen99, Treatment == "Low Fat"))),
+              data.frame(sample_data(subset_samples(gen99, Treatment == "Low Fat"))),
+              c("Time", "Sex"),
+              perc_cutoff=0.5, low_cutoff='y', low_val=0.01,
+              output_name='stevia.genus.lf')
+stevia.genus.lf.simper <- read.csv("stevia.genus.lf_clean_simper.csv")
+kruskal.pretty(data.frame(otu_table(subset_samples(gen99, Treatment == "Low Fat"))),
+               data.frame(sample_data(subset_samples(gen99, Treatment == "Low Fat"))),
+               csv = stevia.genus.lf.simper,
+               c("Time", "Sex"),
+               output_name = 'stevia.genus.lf',
+               taxonomy = data.frame(tax_table(subset_samples(gen99, Treatment == "Low Fat"))))
+stevia.genus.lf.simper.kw <- read.csv("stevia.genus.lf_krusk_simper.csv")
+for(i in 1:nrow(stevia.genus.lf.simper.kw)){
+  save <- which(rownames(data.frame(tax_table(subset_samples(gen99, Treatment == "Low Fat")))) == stevia.genus.lf.simper.kw$OTU[i])
+  stevia.genus.lf.simper.kw$Taxonomy[i] <-
+    paste(data.frame(tax_table(subset_samples(gen99, Treatment == "Low Fat")))[i,2], "-",
+          data.frame(tax_table(subset_samples(gen99, Treatment == "Low Fat")))[i,3], "-",
+          data.frame(tax_table(subset_samples(gen99, Treatment == "Low Fat")))[i,4], "-",
+          data.frame(tax_table(subset_samples(gen99, Treatment == "Low Fat")))[i,5], "-",
+          data.frame(tax_table(subset_samples(gen99, Treatment == "Low Fat")))[i,6])
+}
+#write.table(stevia.genus.lf.simper.kw, "stevia.genus.lf_krusk_simper.csv", sep=",")
+
+# Saccharin
+simper.pretty(data.frame(otu_table(subset_samples(gen99, Treatment == "Saccharin"))),
+              data.frame(sample_data(subset_samples(gen99, Treatment == "Saccharin"))),
+              c("Time", "Sex"),
+              perc_cutoff=0.5, low_cutoff='y', low_val=0.01,
+              output_name='stevia.genus.sc')
+stevia.genus.sc.simper <- read.csv("stevia.genus.sc_clean_simper.csv")
+kruskal.pretty(data.frame(otu_table(subset_samples(gen99, Treatment == "Saccharin"))),
+               data.frame(sample_data(subset_samples(gen99, Treatment == "Saccharin"))),
+               csv = stevia.genus.sc.simper,
+               c("Time", "Sex"),
+               output_name = 'stevia.genus.sc',
+               taxonomy = data.frame(tax_table(subset_samples(gen99, Treatment == "Saccharin"))))
+stevia.genus.sc.simper.kw <- read.csv("stevia.genus.sc_krusk_simper.csv")
+for(i in 1:nrow(stevia.genus.sc.simper.kw)){
+  save <- which(rownames(data.frame(tax_table(subset_samples(gen99, Treatment == "Saccharin")))) == stevia.genus.sc.simper.kw$OTU[i])
+  stevia.genus.sc.simper.kw$Taxonomy[i] <-
+    paste(data.frame(tax_table(subset_samples(gen99, Treatment == "Saccharin")))[i,2], "-",
+          data.frame(tax_table(subset_samples(gen99, Treatment == "Saccharin")))[i,3], "-",
+          data.frame(tax_table(subset_samples(gen99, Treatment == "Saccharin")))[i,4], "-",
+          data.frame(tax_table(subset_samples(gen99, Treatment == "Saccharin")))[i,5], "-",
+          data.frame(tax_table(subset_samples(gen99, Treatment == "Saccharin")))[i,6])
+}
+#write.table(stevia.genus.sc.simper.kw, "stevia.genus.sc_krusk_simper.csv", sep=",")
+
+# Stevia
+simper.pretty(data.frame(otu_table(subset_samples(gen99, Treatment == "Stevia"))),
+              data.frame(sample_data(subset_samples(gen99, Treatment == "Stevia"))),
+              c("Time", "Sex"),
+              perc_cutoff=0.5, low_cutoff='y', low_val=0.01,
+              output_name='stevia.genus.tv')
+stevia.genus.tv.simper <- read.csv("stevia.genus.tv_clean_simper.csv")
+kruskal.pretty(data.frame(otu_table(subset_samples(gen99, Treatment == "Stevia"))),
+               data.frame(sample_data(subset_samples(gen99, Treatment == "Stevia"))),
+               csv = stevia.genus.tv.simper,
+               c("Time", "Sex"),
+               output_name = 'stevia.genus.tv',
+               taxonomy = data.frame(tax_table(subset_samples(gen99, Treatment == "Stevia"))))
+stevia.genus.tv.simper.kw <- read.csv("stevia.genus.tv_krusk_simper.csv")
+for(i in 1:nrow(stevia.genus.tv.simper.kw)){
+  save <- which(rownames(data.frame(tax_table(subset_samples(gen99, Treatment == "Stevia")))) == stevia.genus.tv.simper.kw$OTU[i])
+  stevia.genus.tv.simper.kw$Taxonomy[i] <-
+    paste(data.frame(tax_table(subset_samples(gen99, Treatment == "Stevia")))[i,2], "-",
+          data.frame(tax_table(subset_samples(gen99, Treatment == "Stevia")))[i,3], "-",
+          data.frame(tax_table(subset_samples(gen99, Treatment == "Stevia")))[i,4], "-",
+          data.frame(tax_table(subset_samples(gen99, Treatment == "Stevia")))[i,5], "-",
+          data.frame(tax_table(subset_samples(gen99, Treatment == "Stevia")))[i,6])
+}
+#write.table(stevia.genus.tv.simper.kw, "stevia.genus.tv_krusk_simper.csv", sep=",")
 ```
 
 

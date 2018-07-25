@@ -1,96 +1,52 @@
 Comparison,SIMPER,OTU,krusk_p.val,fdr_krusk_p.val,Taxonomy,Left.mean.abund,Left.stdev,Right.mean.abund,Right.stdev
-Low Fat_High Fat,0.111895688,Otu00001,0.251071195,0.869087301,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.106934657,0.134523338,0.057251324,0.114182811
+Low Fat_High Fat,0.111895688,Otu00001,0.251071195,0.831064731,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.106934657,0.134523338,0.057251324,0.114182811
 Low Fat_High Fat,0.07561499,Otu00006,1,1,Verrucomicrobia - Verrucomicrobiae - Verrucomicrobiales - Verrucomicrobiaceae - Akkermansia,0.048681388,0.064397564,0.07165183,0.097066583
-Low Fat_High Fat,0.061189515,Otu00013,0.894641928,0.966624614,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidaceae - Bacteroides,0.049083854,0.054261152,0.059605048,0.07459827
-Low Fat_High Fat,0.057676637,Otu00005,0.094022045,0.869087301,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.037260338,0.028763812,0.0838579,0.063598775
-Low Fat_High Fat,0.057665078,Otu00011,0.402411972,0.869087301,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.045103043,0.043442503,0.065375134,0.069248093
-Low Fat_High Fat,0.057566558,Otu00007,0.322351566,0.869087301,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.058235949,0.102558928,0.011179856,0.022560401
-Low Fat_High Fat,0.055511169,Otu00009,0.24659678,0.869087301,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.037591262,0.068701063,0.03122807,0.093684211
-Low Fat_Saccharin,0.108230582,Otu00001,0.675464147,0.903790055,Tenericutes - Mollicutes - Anaeroplasmatales - Anaeroplasmataceae - Anaeroplasma,0.106934657,0.134523338,0.071688555,0.098947094
-Low Fat_Saccharin,0.084708822,Otu00005,0.072448014,0.869087301,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.037260338,0.028763812,0.115047414,0.114382312
-Low Fat_Saccharin,0.064268119,Otu00006,0.560848072,0.877897899,Firmicutes - Clostridia - Clostridiales - Ruminococcaceae - Ruminiclostridium,0.048681388,0.064397564,0.063421943,0.074860586
-Low Fat_Saccharin,0.056487518,Otu00007,0.170899356,0.869087301,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.058235949,0.102558928,0.01055645,0.031669351
-Low Fat_Saccharin,0.050126187,Otu00008,0.414216178,0.869087301,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_unclassified,0.079279403,0.053141211,0.053212368,0.042087144
-Low Fat_Saccharin,0.046306988,Otu00013,0.507865941,0.869087301,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_unclassified,0.049083854,0.054261152,0.031214506,0.042133095
-Low Fat_Saccharin,0.040505868,Otu00011,0.834114953,0.95564428,Firmicutes - Bacilli - Lactobacillales - Streptococcaceae - Lactococcus,0.045103043,0.043442503,0.045476616,0.040859423
-Low Fat_Saccharin,0.036844819,Otu00021,0.924798272,0.966624614,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_NK4A136_group,0.012543307,0.02659529,0.035115925,0.066184108
-Low Fat_Stevia,0.109869425,Otu00001,0.521452381,0.869087301,Firmicutes - Clostridia - Clostridiales - Ruminococcaceae - Oscillibacter,0.106934657,0.134523338,0.054607467,0.085151057
-Low Fat_Stevia,0.066834201,Otu00006,0.925924631,0.966624614,Firmicutes - Clostridia - Clostridiales - Clostridiales_vadinBB60_group - Clostridiales_vadinBB60_group_ge,0.048681388,0.064397564,0.06500118,0.070604239
-Low Fat_Stevia,0.065968315,Otu00013,0.342497626,0.869087301,Firmicutes - Bacilli - Lactobacillales - Lactobacillaceae - Lactobacillus,0.049083854,0.054261152,0.070090647,0.075501788
-Low Fat_Stevia,0.060740612,Otu00009,0.919500888,0.966624614,Firmicutes - Clostridia - Clostridiales - Ruminococcaceae - Ruminiclostridium_9,0.037591262,0.068701063,0.046869437,0.081290616
-Low Fat_Stevia,0.059493824,Otu00007,0.961076611,0.981744925,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_unclassified,0.058235949,0.102558928,0.011513648,0.016411462
-Low Fat_Stevia,0.056895123,Otu00008,0.328383214,0.869087301,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.079279403,0.053141211,0.057467765,0.052253643
-Low Fat_Stevia,0.054191001,Otu00005,0.374259319,0.869087301,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_NK4A136_group,0.037260338,0.028763812,0.073416468,0.077454305
-High Fat_Saccharin,0.09041296,Otu00005,0.75727775,0.953491549,Bacteroidetes - Bacteroidia - Bacteroidales - Rikenellaceae - Alistipes,0.0838579,0.063598775,0.115047414,0.114382312
-High Fat_Saccharin,0.089295002,Otu00001,0.299124727,0.869087301,Firmicutes - Clostridia - Clostridiales - Ruminococcaceae - Ruminococcaceae_unclassified,0.057251324,0.114182811,0.071688555,0.098947094
-High Fat_Saccharin,0.080624663,Otu00006,0.616646474,0.901252539,Firmicutes - Clostridia - Clostridiales - Clostridiales_vadinBB60_group - Clostridiales_vadinBB60_group_ge,0.07165183,0.097066583,0.063421943,0.074860586
-High Fat_Saccharin,0.058346775,Otu00013,0.497401878,0.869087301,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_unclassified,0.059605048,0.07459827,0.031214506,0.042133095
-High Fat_Saccharin,0.05706074,Otu00011,0.471813563,0.869087301,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_unclassified,0.065375134,0.069248093,0.045476616,0.040859423
-High Fat_Saccharin,0.05436624,Otu00021,0.695699529,0.9053624,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_NK4A136_group,0.036595394,0.082836971,0.035115925,0.066184108
-High Fat_Saccharin,0.038603529,Otu00008,0.309379737,0.869087301,Firmicutes - Clostridia - Clostridiales - Ruminococcaceae - Ruminococcaceae_ge,0.037031549,0.033539435,0.053212368,0.042087144
-High Fat_Stevia,0.082391074,Otu00001,0.464510967,0.869087301,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_NK4A136_group,0.057251324,0.114182811,0.054607467,0.085151057
-High Fat_Stevia,0.08154157,Otu00006,0.834931318,0.95564428,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.07165183,0.097066583,0.06500118,0.070604239
-High Fat_Stevia,0.071566667,Otu00013,0.834931318,0.95564428,Firmicutes - Clostridia - Clostridiales - Ruminococcaceae - Anaerotruncus,0.059605048,0.07459827,0.070090647,0.075501788
-High Fat_Stevia,0.06983378,Otu00005,0.500581352,0.869087301,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_NK4A136_group,0.0838579,0.063598775,0.073416468,0.077454305
-High Fat_Stevia,0.063774137,Otu00009,0.300987649,0.869087301,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_NK4A136_group,0.03122807,0.093684211,0.046869437,0.081290616
-High Fat_Stevia,0.05861755,Otu00011,0.231506926,0.869087301,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_unclassified,0.065375134,0.069248093,0.034597513,0.03784323
-High Fat_Stevia,0.049733477,Otu00021,0.612613562,0.901252539,Proteobacteria - Betaproteobacteria - Burkholderiales - Alcaligenaceae - Parasutterella,0.036595394,0.082836971,0.023784073,0.067271516
-Saccharin_Stevia,0.093487058,Otu00005,0.563702862,0.877897899,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_NK4A136_group,0.115047414,0.114382312,0.073416468,0.077454305
-Saccharin_Stevia,0.082616354,Otu00001,0.657225676,0.903790055,Firmicutes - Clostridia - Clostridiales - Ruminococcaceae - Oscillibacter,0.071688555,0.098947094,0.054607467,0.085151057
-Saccharin_Stevia,0.06982466,Otu00006,0.490858491,0.869087301,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_NK4A136_group,0.063421943,0.074860586,0.06500118,0.070604239
-Saccharin_Stevia,0.065643972,Otu00013,0.297455214,0.869087301,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.031214506,0.042133095,0.070090647,0.075501788
-Saccharin_Stevia,0.048355057,Otu00008,0.772829993,0.953491549,Firmicutes - Clostridia - Clostridiales - Ruminococcaceae - Ruminiclostridium,0.053212368,0.042087144,0.057467765,0.052253643
-Saccharin_Stevia,0.047024052,Otu00021,0.365450544,0.869087301,Firmicutes - Clostridia - Clostridiales - Peptococcaceae - uncultured,0.035115925,0.066184108,0.023784073,0.067271516
-Saccharin_Stevia,0.045579172,Otu00009,0.652443217,0.903790055,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_NK4A136_group,0.005700374,0.010543668,0.046869437,0.081290616
-Saccharin_Stevia,0.039378185,Otu00011,0.425069338,0.869087301,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - uncultured,0.045476616,0.040859423,0.034597513,0.03784323
-Low Fat_High Fat,0.111895688,Otu00001,0.251071195,0.869087301,Firmicutes - Clostridia - Clostridiales - Ruminococcaceae - Ruminiclostridium_9,0.106934657,0.134523338,0.057251324,0.114182811
-Low Fat_High Fat,0.07561499,Otu00006,1,1,Bacteroidetes - Bacteroidia - Bacteroidales - Rikenellaceae - Alistipes,0.048681388,0.064397564,0.07165183,0.097066583
-Low Fat_High Fat,0.061189515,Otu00013,0.894641928,0.966624614,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.049083854,0.054261152,0.059605048,0.07459827
-Low Fat_High Fat,0.057676637,Otu00005,0.094022045,0.869087301,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_unclassified,0.037260338,0.028763812,0.0838579,0.063598775
-Low Fat_High Fat,0.057665078,Otu00011,0.402411972,0.869087301,Firmicutes - Erysipelotrichia - Erysipelotrichales - Erysipelotrichaceae - Erysipelotrichaceae_unclassified,0.045103043,0.043442503,0.065375134,0.069248093
-Low Fat_High Fat,0.057566558,Otu00007,0.322351566,0.869087301,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Tyzzerella,0.058235949,0.102558928,0.011179856,0.022560401
-Low Fat_High Fat,0.055511169,Otu00009,0.24659678,0.869087301,Firmicutes - Clostridia - Clostridiales - Ruminococcaceae - Ruminiclostridium,0.037591262,0.068701063,0.03122807,0.093684211
-Low Fat_Saccharin,0.108230582,Otu00001,0.675464147,0.903790055,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_NK4A136_group,0.106934657,0.134523338,0.071688555,0.098947094
-Low Fat_Saccharin,0.084708822,Otu00005,0.072448014,0.869087301,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_NK4A136_group,0.037260338,0.028763812,0.115047414,0.114382312
-Low Fat_Saccharin,0.064268119,Otu00006,0.560848072,0.877897899,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Acetatifactor,0.048681388,0.064397564,0.063421943,0.074860586
-Low Fat_Saccharin,0.056487518,Otu00007,0.170899356,0.869087301,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.058235949,0.102558928,0.01055645,0.031669351
-Low Fat_Saccharin,0.050126187,Otu00008,0.414216178,0.869087301,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.079279403,0.053141211,0.053212368,0.042087144
-Low Fat_Saccharin,0.046306988,Otu00013,0.507865941,0.869087301,Firmicutes - Clostridia - Clostridiales - Clostridiales_vadinBB60_group - Clostridiales_vadinBB60_group_ge,0.049083854,0.054261152,0.031214506,0.042133095
-Low Fat_Saccharin,0.040505868,Otu00011,0.834114953,0.95564428,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - uncultured,0.045103043,0.043442503,0.045476616,0.040859423
-Low Fat_Saccharin,0.036844819,Otu00021,0.924798272,0.966624614,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnoclostridium,0.012543307,0.02659529,0.035115925,0.066184108
-Low Fat_Stevia,0.109869425,Otu00001,0.521452381,0.869087301,Firmicutes - Clostridia - Clostridiales - Clostridiales_vadinBB60_group - Clostridiales_vadinBB60_group_ge,0.106934657,0.134523338,0.054607467,0.085151057
-Low Fat_Stevia,0.066834201,Otu00006,0.925924631,0.966624614,Firmicutes - Clostridia - Clostridiales - Ruminococcaceae - Anaerotruncus,0.048681388,0.064397564,0.06500118,0.070604239
-Low Fat_Stevia,0.065968315,Otu00013,0.342497626,0.869087301,Firmicutes - Clostridia - Clostridiales - Clostridiales_unclassified - Clostridiales_unclassified,0.049083854,0.054261152,0.070090647,0.075501788
-Low Fat_Stevia,0.060740612,Otu00009,0.919500888,0.966624614,Firmicutes - Erysipelotrichia - Erysipelotrichales - Erysipelotrichaceae - Turicibacter,0.037591262,0.068701063,0.046869437,0.081290616
-Low Fat_Stevia,0.059493824,Otu00007,0.961076611,0.981744925,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_unclassified,0.058235949,0.102558928,0.011513648,0.016411462
-Low Fat_Stevia,0.056895123,Otu00008,0.328383214,0.869087301,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_unclassified,0.079279403,0.053141211,0.057467765,0.052253643
-Low Fat_Stevia,0.054191001,Otu00005,0.374259319,0.869087301,Firmicutes - Clostridia - Clostridiales - Ruminococcaceae - Ruminiclostridium_6,0.037260338,0.028763812,0.073416468,0.077454305
-High Fat_Saccharin,0.09041296,Otu00005,0.75727775,0.953491549,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_unclassified,0.0838579,0.063598775,0.115047414,0.114382312
-High Fat_Saccharin,0.089295002,Otu00001,0.299124727,0.869087301,Firmicutes - Clostridia - Clostridiales - Clostridiales_vadinBB60_group - Clostridiales_vadinBB60_group_ge,0.057251324,0.114182811,0.071688555,0.098947094
-High Fat_Saccharin,0.080624663,Otu00006,0.616646474,0.901252539,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.07165183,0.097066583,0.063421943,0.074860586
-High Fat_Saccharin,0.058346775,Otu00013,0.497401878,0.869087301,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_unclassified,0.059605048,0.07459827,0.031214506,0.042133095
-High Fat_Saccharin,0.05706074,Otu00011,0.471813563,0.869087301,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_NK4A136_group,0.065375134,0.069248093,0.045476616,0.040859423
-High Fat_Saccharin,0.05436624,Otu00021,0.695699529,0.9053624,Firmicutes - Clostridia - Clostridiales - Ruminococcaceae - Ruminococcaceae_unclassified,0.036595394,0.082836971,0.035115925,0.066184108
-High Fat_Saccharin,0.038603529,Otu00008,0.309379737,0.869087301,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.037031549,0.033539435,0.053212368,0.042087144
-High Fat_Stevia,0.082391074,Otu00001,0.464510967,0.869087301,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_unclassified,0.057251324,0.114182811,0.054607467,0.085151057
-High Fat_Stevia,0.08154157,Otu00006,0.834931318,0.95564428,Firmicutes - Clostridia - Clostridiales - Clostridiales_vadinBB60_group - Clostridiales_vadinBB60_group_ge,0.07165183,0.097066583,0.06500118,0.070604239
-High Fat_Stevia,0.071566667,Otu00013,0.834931318,0.95564428,Firmicutes - Erysipelotrichia - Erysipelotrichales - Erysipelotrichaceae - Erysipelatoclostridium,0.059605048,0.07459827,0.070090647,0.075501788
-High Fat_Stevia,0.06983378,Otu00005,0.500581352,0.869087301,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnoclostridium,0.0838579,0.063598775,0.073416468,0.077454305
-High Fat_Stevia,0.063774137,Otu00009,0.300987649,0.869087301,Tenericutes - Mollicutes - Mollicutes_RF9 - Mollicutes_RF9_fa - Mollicutes_RF9_ge,0.03122807,0.093684211,0.046869437,0.081290616
-High Fat_Stevia,0.05861755,Otu00011,0.231506926,0.869087301,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_NK4A136_group,0.065375134,0.069248093,0.034597513,0.03784323
-High Fat_Stevia,0.049733477,Otu00021,0.612613562,0.901252539,Tenericutes - Mollicutes - Mollicutes_RF9 - Mollicutes_RF9_fa - Mollicutes_RF9_ge,0.036595394,0.082836971,0.023784073,0.067271516
-Saccharin_Stevia,0.093487058,Otu00005,0.563702862,0.877897899,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_NK4A136_group,0.115047414,0.114382312,0.073416468,0.077454305
-Saccharin_Stevia,0.082616354,Otu00001,0.657225676,0.903790055,Firmicutes - Clostridia - Clostridiales - Peptostreptococcaceae - Romboutsia,0.071688555,0.098947094,0.054607467,0.085151057
-Saccharin_Stevia,0.06982466,Otu00006,0.490858491,0.869087301,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - uncultured,0.063421943,0.074860586,0.06500118,0.070604239
-Saccharin_Stevia,0.065643972,Otu00013,0.297455214,0.869087301,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_unclassified,0.031214506,0.042133095,0.070090647,0.075501788
-Saccharin_Stevia,0.048355057,Otu00008,0.772829993,0.953491549,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.053212368,0.042087144,0.057467765,0.052253643
-Saccharin_Stevia,0.047024052,Otu00021,0.365450544,0.869087301,Firmicutes - Clostridia - Clostridiales - Clostridiales_vadinBB60_group - Clostridiales_vadinBB60_group_ge,0.035115925,0.066184108,0.023784073,0.067271516
-Saccharin_Stevia,0.045579172,Otu00009,0.652443217,0.903790055,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_unclassified,0.005700374,0.010543668,0.046869437,0.081290616
-Saccharin_Stevia,0.039378185,Otu00011,0.425069338,0.869087301,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Coprococcus_1,0.045476616,0.040859423,0.034597513,0.03784323
-Male_Female,0.097411218,Otu00006,1.02E-07,9.74E-06,Firmicutes - Clostridia - Clostridiales - Ruminococcaceae - Anaerotruncus,8.74E-05,0.000201105,0.123384115,0.058564679
-Male_Female,0.087643708,Otu00001,0.11540366,0.869087301,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_unclassified,0.049409335,0.101255394,0.098738733,0.112846069
-Male_Female,0.079723019,Otu00013,9.69E-07,4.60E-05,Firmicutes - Clostridia - Clostridiales - Ruminococcaceae - Ruminiclostridium,0.102175508,0.048783309,0.001654476,0.007019346
-Male_Female,0.070617543,Otu00005,0.001182097,0.022459834,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_unclassified,0.114163574,0.090495769,0.038618812,0.038512438
-Male_Female,0.05853134,Otu00011,9.21E-06,0.000218718,Actinobacteria - Coriobacteriia - Coriobacteriales - Coriobacteriaceae - Adlercreutzia,0.014435798,0.036121593,0.081423996,0.034688219
-Male_Female,0.055812944,Otu00008,4.46E-06,0.000141385,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_UCG-001,0.022905064,0.021275359,0.091802236,0.03907852
-Male_Female,0.044770493,Otu00009,0.461154746,0.869087301,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Roseburia,0.05397886,0.092478957,0.006200257,0.01107215
+Low Fat_High Fat,0.061189515,Otu00013,0.894641928,0.963717473,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidaceae - Bacteroides,0.049083854,0.054261152,0.059605048,0.07459827
+Low Fat_High Fat,0.057676637,Otu00005,0.094022045,0.685017756,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.037260338,0.028763812,0.0838579,0.063598775
+Low Fat_High Fat,0.057665078,Otu00011,0.402411972,0.831064731,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.045103043,0.043442503,0.065375134,0.069248093
+Low Fat_High Fat,0.057566558,Otu00007,0.322351566,0.831064731,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.058235949,0.102558928,0.011179856,0.022560401
+Low Fat_High Fat,0.055511169,Otu00009,0.24659678,0.831064731,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.037591262,0.068701063,0.03122807,0.093684211
+Low Fat_Saccharin,0.108230582,Otu00001,0.675464147,0.883299269,Tenericutes - Mollicutes - Anaeroplasmatales - Anaeroplasmataceae - Anaeroplasma,0.106934657,0.134523338,0.071688555,0.098947094
+Low Fat_Saccharin,0.084708822,Otu00005,0.072448014,0.615808115,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.037260338,0.028763812,0.115047414,0.114382312
+Low Fat_Saccharin,0.064268119,Otu00006,0.560848072,0.845554292,Firmicutes - Clostridia - Clostridiales - Ruminococcaceae - Ruminiclostridium,0.048681388,0.064397564,0.063421943,0.074860586
+Low Fat_Saccharin,0.056487518,Otu00007,0.170899356,0.831064731,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.058235949,0.102558928,0.01055645,0.031669351
+Low Fat_Saccharin,0.050126187,Otu00008,0.414216178,0.831064731,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_unclassified,0.079279403,0.053141211,0.053212368,0.042087144
+Low Fat_Saccharin,0.046306988,Otu00013,0.507865941,0.831064731,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_unclassified,0.049083854,0.054261152,0.031214506,0.042133095
+Low Fat_Saccharin,0.040505868,Otu00011,0.834114953,0.946255494,Firmicutes - Bacilli - Lactobacillales - Streptococcaceae - Lactococcus,0.045103043,0.043442503,0.045476616,0.040859423
+Low Fat_Saccharin,0.036844819,Otu00021,0.924798272,0.963717473,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_NK4A136_group,0.012543307,0.02659529,0.035115925,0.066184108
+Low Fat_Stevia,0.109869425,Otu00001,0.521452381,0.831064731,Firmicutes - Clostridia - Clostridiales - Ruminococcaceae - Oscillibacter,0.106934657,0.134523338,0.054607467,0.085151057
+Low Fat_Stevia,0.066834201,Otu00006,0.925924631,0.963717473,Firmicutes - Clostridia - Clostridiales - Clostridiales_vadinBB60_group - Clostridiales_vadinBB60_group_ge,0.048681388,0.064397564,0.06500118,0.070604239
+Low Fat_Stevia,0.065968315,Otu00013,0.342497626,0.831064731,Firmicutes - Bacilli - Lactobacillales - Lactobacillaceae - Lactobacillus,0.049083854,0.054261152,0.070090647,0.075501788
+Low Fat_Stevia,0.060740612,Otu00009,0.919500888,0.963717473,Firmicutes - Clostridia - Clostridiales - Ruminococcaceae - Ruminiclostridium_9,0.037591262,0.068701063,0.046869437,0.081290616
+Low Fat_Stevia,0.059493824,Otu00007,0.961076611,0.980298143,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_unclassified,0.058235949,0.102558928,0.011513648,0.016411462
+Low Fat_Stevia,0.056895123,Otu00008,0.328383214,0.831064731,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.079279403,0.053141211,0.057467765,0.052253643
+Low Fat_Stevia,0.054191001,Otu00005,0.374259319,0.831064731,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_NK4A136_group,0.037260338,0.028763812,0.073416468,0.077454305
+High Fat_Saccharin,0.09041296,Otu00005,0.75727775,0.93843642,Bacteroidetes - Bacteroidia - Bacteroidales - Rikenellaceae - Alistipes,0.0838579,0.063598775,0.115047414,0.114382312
+High Fat_Saccharin,0.089295002,Otu00001,0.299124727,0.831064731,Firmicutes - Clostridia - Clostridiales - Ruminococcaceae - Ruminococcaceae_unclassified,0.057251324,0.114182811,0.071688555,0.098947094
+High Fat_Saccharin,0.080624663,Otu00006,0.616646474,0.873582505,Firmicutes - Clostridia - Clostridiales - Clostridiales_vadinBB60_group - Clostridiales_vadinBB60_group_ge,0.07165183,0.097066583,0.063421943,0.074860586
+High Fat_Saccharin,0.058346775,Otu00013,0.497401878,0.831064731,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_unclassified,0.059605048,0.07459827,0.031214506,0.042133095
+High Fat_Saccharin,0.05706074,Otu00011,0.471813563,0.831064731,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_unclassified,0.065375134,0.069248093,0.045476616,0.040859423
+High Fat_Saccharin,0.05436624,Otu00021,0.695699529,0.887016899,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_NK4A136_group,0.036595394,0.082836971,0.035115925,0.066184108
+High Fat_Saccharin,0.038603529,Otu00008,0.309379737,0.831064731,Firmicutes - Clostridia - Clostridiales - Ruminococcaceae - Ruminococcaceae_ge,0.037031549,0.033539435,0.053212368,0.042087144
+High Fat_Stevia,0.082391074,Otu00001,0.464510967,0.831064731,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_NK4A136_group,0.057251324,0.114182811,0.054607467,0.085151057
+High Fat_Stevia,0.08154157,Otu00006,0.834931318,0.946255494,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.07165183,0.097066583,0.06500118,0.070604239
+High Fat_Stevia,0.071566667,Otu00013,0.834931318,0.946255494,Firmicutes - Clostridia - Clostridiales - Ruminococcaceae - Anaerotruncus,0.059605048,0.07459827,0.070090647,0.075501788
+High Fat_Stevia,0.06983378,Otu00005,0.500581352,0.831064731,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_NK4A136_group,0.0838579,0.063598775,0.073416468,0.077454305
+High Fat_Stevia,0.063774137,Otu00009,0.300987649,0.831064731,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_NK4A136_group,0.03122807,0.093684211,0.046869437,0.081290616
+High Fat_Stevia,0.05861755,Otu00011,0.231506926,0.831064731,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_unclassified,0.065375134,0.069248093,0.034597513,0.03784323
+High Fat_Stevia,0.049733477,Otu00021,0.612613562,0.873582505,Proteobacteria - Betaproteobacteria - Burkholderiales - Alcaligenaceae - Parasutterella,0.036595394,0.082836971,0.023784073,0.067271516
+Saccharin_Stevia,0.093487058,Otu00005,0.563702862,0.845554292,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_NK4A136_group,0.115047414,0.114382312,0.073416468,0.077454305
+Saccharin_Stevia,0.082616354,Otu00001,0.657225676,0.882066039,Firmicutes - Clostridia - Clostridiales - Ruminococcaceae - Oscillibacter,0.071688555,0.098947094,0.054607467,0.085151057
+Saccharin_Stevia,0.06982466,Otu00006,0.490858491,0.831064731,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_NK4A136_group,0.063421943,0.074860586,0.06500118,0.070604239
+Saccharin_Stevia,0.065643972,Otu00013,0.297455214,0.831064731,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.031214506,0.042133095,0.070090647,0.075501788
+Saccharin_Stevia,0.048355057,Otu00008,0.772829993,0.93843642,Firmicutes - Clostridia - Clostridiales - Ruminococcaceae - Ruminiclostridium,0.053212368,0.042087144,0.057467765,0.052253643
+Saccharin_Stevia,0.047024052,Otu00021,0.365450544,0.831064731,Firmicutes - Clostridia - Clostridiales - Peptococcaceae - uncultured,0.035115925,0.066184108,0.023784073,0.067271516
+Saccharin_Stevia,0.045579172,Otu00009,0.652443217,0.882066039,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_NK4A136_group,0.005700374,0.010543668,0.046869437,0.081290616
+Saccharin_Stevia,0.039378185,Otu00011,0.425069338,0.831064731,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - uncultured,0.045476616,0.040859423,0.034597513,0.03784323
+Male_Female,0.097411218,Otu00006,1.02E-07,5.23E-06,Firmicutes - Clostridia - Clostridiales - Ruminococcaceae - Ruminiclostridium_9,8.74E-05,0.000201105,0.123384115,0.058564679
+Male_Female,0.087643708,Otu00001,0.11540366,0.735698334,Bacteroidetes - Bacteroidia - Bacteroidales - Rikenellaceae - Alistipes,0.049409335,0.101255394,0.098738733,0.112846069
+Male_Female,0.079723019,Otu00013,9.69E-07,2.47E-05,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.102175508,0.048783309,0.001654476,0.007019346
+Male_Female,0.070617543,Otu00005,0.001182097,0.012057385,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_unclassified,0.114163574,0.090495769,0.038618812,0.038512438
+Male_Female,0.05853134,Otu00011,9.21E-06,0.000117417,Firmicutes - Erysipelotrichia - Erysipelotrichales - Erysipelotrichaceae - Erysipelotrichaceae_unclassified,0.014435798,0.036121593,0.081423996,0.034688219
+Male_Female,0.055812944,Otu00008,4.46E-06,7.59E-05,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Tyzzerella,0.022905064,0.021275359,0.091802236,0.03907852
+Male_Female,0.044770493,Otu00009,0.461154746,0.831064731,Firmicutes - Clostridia - Clostridiales - Ruminococcaceae - Ruminiclostridium,0.05397886,0.092478957,0.006200257,0.01107215

@@ -1,0 +1,9 @@
+Comparison,SIMPER,OTU,krusk_p.val,fdr_krusk_p.val,Taxonomy,Left.mean.abund,Left.stdev,Right.mean.abund,Right.stdev
+Pre-treatment_Post-treatment,0.164828321,Otu00001,0.001720144,0.006880574,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.423082348,0.090509419,0.275802624,0.035083234
+Pre-treatment_Post-treatment,0.131351183,Otu00002,0.037977204,0.060763526,Verrucomicrobia - Verrucomicrobiae - Verrucomicrobiales - Verrucomicrobiaceae - Akkermansia,0.045500452,0.025232776,0.153438055,0.111772141
+Pre-treatment_Post-treatment,0.10228966,Otu00015,0.000486766,0.003894128,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidaceae - Bacteroides,0.118723806,0.056917918,0.025536451,0.018120047
+Pre-treatment_Post-treatment,0.09578251,Otu00012,0.007076645,0.018871053,Tenericutes - Mollicutes - Anaeroplasmatales - Anaeroplasmataceae - Anaeroplasma,0.082476689,0.049125123,0.162135598,0.053762218
+Female_Male,0.146742642,Otu00001,0.593954675,0.593954675,Firmicutes - Clostridia - Clostridiales - Ruminococcaceae - Ruminiclostridium,0.363859571,0.119325987,0.331421129,0.075751788
+Female_Male,0.14543621,Otu00002,0.032969381,0.060763526,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_unclassified,0.141057835,0.111194842,0.047483526,0.032227187
+Female_Male,0.101176183,Otu00012,0.47719662,0.593954675,Firmicutes - Bacilli - Lactobacillales - Streptococcaceae - Lactococcus,0.106636105,0.068628481,0.141893692,0.057408903
+Female_Male,0.090279834,Otu00015,0.593954675,0.593954675,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_NK4A136_group,0.085787678,0.078340434,0.055058192,0.034204118
