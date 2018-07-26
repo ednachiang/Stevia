@@ -55,10 +55,42 @@ load("Physeq.sc.RData")
 load("Physeq.tv.RData")
 ```
 
+
+# Take-Away Points
+**There is little difference between High Fat, Saccharin, and Stevia samples.**   
+  
+**The majority of differences are between Low Fat and the other 3 treatments (all of which include a high fat diet)**  
+
+* Within-sample diversity (alpha):
+    + Driven by presence/absence of OTUs rather than their relative abundances
+    + Within Post-treatment samples, Low Fat has higher richness (# unique OTUs) compared to High Fat and Saccharin
+* Between-sample diversity (beta):
+    + For each treatment, Pre- and Post- samples are different
+    + Pre-treatment samples:
+      - Female vs. Male samples are different
+    + Post-treatment samples:
+        - Low Fat is different from all other treatments (High Fat, Saccharin, Stevia)
+        - Saccharin vs. Stevia trend towards a difference
+            - Trend seen within Females but not Males
+* Important OTUs (contribute the most to variation in between-sample diversity):
+    + Post-treatment:
+        - Majority of OTUs found between Low Fat vs. other treatments
+        - High Fat vs. Saccharin:
+            - 1 unclassified Lachnospiraceae
+        - Saccharin vs. Stevia:
+            - 1 Lachnoclostridium
+    + OTUs were identified within each treatment for Pre vs. Post
+    + OTUs were identified within Pre-treatment for Female vs. Male
+  
+  
 # Description  
 This is a quick summary of the follow-up analyses to Sarah's thesis that I've performed.  
-    
-I included only individuals with both pre-treatment and post-treatment samples as I run a few paired tests and want to keep the samples consistent throughout all analyses. I removed 4 individuals, resulting in the following final sample count:  
+A few differences between Sarah's analysis and my analysis:  
+
+* I perform my analysis at the OTU-level (97% sequence similarity, akin to species-level)
+  
+
+* I included only individuals with both pre-treatment and post-treatment samples as I run a few paired tests and want to keep the samples consistent throughout all analyses. I removed 4 individuals, resulting in the following final sample count:  
 ```{r, echo=F}
 samps <- data.frame(rep("NA",4))
 colnames(samps) <- "Treatment"
@@ -68,7 +100,8 @@ samps$Female <- c(4, 5, 5, 4)
 samps$Male <- c(5, 5, 4, 4)
 kable(samps, "html") %>% kable_styling(full_width=F)
 ```
-   
+  
+  
 # Phylum-Level Composition  
 The phyla are listed in order of highest overall relative abundance to lowest overall relative abundance. Phyla with a total relative abundance of < 0.01% were removed. Error bars represent the interquartile range.  
 
@@ -120,7 +153,10 @@ ggplot(phy.sum, aes(x=Phylum, y=Median, fill=Phylum)) +
         legend.title = element_text(size = 14),
         legend.text = element_text(size=12))
 ```
-
+  
+Visually (not statistically tested yet), there are shifts in Pre-treatment vs. Post-treatment.  
+Within Post-treatment samples, Low Fat seems to be the most different compared to all other treatments. Namely, Low Fat has a higher relative abundance of Bacteroidetes and lower relative abundance of Verrucomicrobia.  
+  
 There are some interesting (& unexpected?) trends if we take into account sex:  
 ```{r, echo=F, fig.height=10, fig.width=10}
 ### Testing barplot for sex + treatment + time
@@ -152,17 +188,17 @@ ggplot(test, aes(x=Phylum, y=Median, fill=Phylum)) +
         legend.title = element_text(size = 14),
         legend.text = element_text(size=12))
 ```
-Trends that caught my eye (not statistically tested yet):  
+  
+Sex-related trends that caught my eye (not statistically tested yet):  
 
 * Pre-treatment females generally have a higher % Bacteroidetes compared to males
     + Especially in High Fat Pre-treatment
 * Saccharin Post-treatment
     + Females have higher % Verrucomicrobia compared to males
-
-   
-# Within-Sample Diversity (Alpha) 
   
-
+  
+# Within-Sample Diversity (Alpha)  
+  
 ### Chao Richness  
 Chao is an estimate of richness (how many unique OTUs exist in a particular sample).
 ```{r, echo=F, fig.height=4, fig.width=6.5}
@@ -178,10 +214,9 @@ ggplot(adiv.pair, aes(x=Treatment, y=chao, fill = Treatment)) +
   ylab("Chao Richness")
 ```
   
-* Post-treatment groups are significantly different (adj p-val = 0.004):
+* Post-treatment groups are significantly different (adj p-val = 0.004). Specifically:
     + High Fat vs. Low Fat
     + Low Fat vs. Saccharin
-  
 * High Fat Pre-treatment and Post-treatment are significantly different (adj p-val = 0.018)
 
   
@@ -199,13 +234,12 @@ ggplot(adiv.pair, aes(x=Treatment, y=shannon, fill = Treatment)) +
   ylab("Shannon Diversity")
 ```
   
-No significant differences.
+No significant differences.  
+This suggests that differences in within-sample diversity are driven by presence/absence of OTUs rather than their relative abundances.  
   
-
-
-
 # Between-Sample Diversity (Beta)  
-I used Bray-Curtis dissimilarity, which considers both presence/absence and weight (abundance).  
+### Overall  
+I used the Bray-Curtis dissimilarity metric, which considers both OTU presence/absence and weight (abundance).  
   
 In the ordination, each point is 1 sample. The distance betwen points is inversely related to how similar the samples are.  
 Closer points = more similar.  
@@ -227,9 +261,10 @@ test$layers <- test$layers[-1]
 test
 ```
   
-Pre-treatment vs. Post-treatment samples cluster distinctly for all samples except Low Fat.
+Pre-treatment vs. Post-treatment samples visually cluster distinctly for all samples except Low Fat.  
 Within each treatment, Pre vs. Post are significantly different (all adj pvals = 0.005).  
-To determine what categorical factors are contributing to between-sample differences, I used PERMANOVA to evaluate:  
+  
+To determine to what extent the categorical factors are contributing to between-sample differences, I used PERMANOVA to evaluate:  
 
 * Time
     + Pre-treatment vs. Post-treatment
@@ -296,7 +331,7 @@ test
   
 * Unlike in Pre-treatment samples, sex is not significant in Post-treatment samples (adj p-val = 0.326)
 * Low Fat is significantly different from all other treatments (all adj pvals = 0.005)
-    + This is true overall, and within Females and within and Males
+    + This is true overall, and within sex
 * Saccharin vs. Stevia trend towards a difference (adj pval = 0.063)
     + This trend is seen within Females (adj pval = 0.063), but not within Males (adj pval = 0.571)
   
@@ -334,7 +369,7 @@ kable(tab, "html") %>% kable_styling(full_width=F)
   
 #### High Fat vs. Saccharin  
 ```{r, echo=F}
-tab <- data.frame(rep("NA", 5))
+tab <- data.frame(rep("NA", 1))
 tab[,1] <- c(4.05)
 tab$Adj_Pval <- c(0.0638)
 tab$Phylum <- c("Firmicutes")
@@ -351,7 +386,7 @@ kable(tab, "html") %>% kable_styling(full_width=F)
   
 #### Saccharin vs. Stevia  
 ```{r, echo=F}
-tab <- data.frame(rep("NA", 5))
+tab <- data.frame(rep("NA", 1))
 tab[,1] <- c(6.19)
 tab$Adj_Pval <- c(0.0043)
 tab$Phylum <- c("Firmicutes")
