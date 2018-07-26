@@ -296,4 +296,172 @@ test
 * Saccharin vs. Stevia trend towards a difference (adj pval = 0.063)
     + This trend is seen within Females (adj pval = 0.063), but not within Males (adj pval = 0.571)
   
-# Identifying Specific Genera
+# Important OTUs  
+I identified the OTUs that contribute the most to variation in between-sample diversity.  
+### Male vs. Female (Pre-treatment)  
+No OTUs were detected Post-treatment
+```{r, echo=F}
+tab <- data.frame(rep("NA", 5))
+colnames(tab) <- "Variation_Explained(%)"
+tab[,1] <- c(9.74, 7.97, 7.06, 5.85, 5.58)
+tab$Adj_Pval <- c(5.31e-06, 3.77e-05, 0.0075, 0.0002, 0.0001)
+tab$Phylum <- c("Firmicutes", "Bacteroidetes", "Firmicutes", "Firmicutes", "Firmicutes")
+tab$Class <- c("Clostridia", "Bacteroidia", "Clostridia", "Erysipelotrichia", "Clostridia")
+tab$Order <- c("Clostridiales", "Bactteroidales", "Clostridiales", "Erysipelotrichales", "Clostridiales")
+tab$Family <- c("Ruminococcaceae", "S24-7", "Lachnospiraceae", "Erysipelotrichaceae", "Lachnospiraceae")
+tab$Genus <- c("Ruminiclostridium", "Unclassified", "Unclassified", "Unclassified", "Tyzzerella")
+tab$Species <- c("OTU 6", "OTU 13", "OTU 5", "OTU 11", "OTU 8")
+tab$Female_RelAbund <- c(12.34, 0.17, 3.86, 8.14, 9.18)
+tab$Male_RelAbund <- c(0.01, 10.22, 11.42, 1.44, 2.29)
+kable(tab, "html") %>% kable_styling(full_width=F)
+```
+  
+### Post-treatment  
+#### Low Fat vs. Other Treatments  
+```{r, echo=F}
+tab <- data.frame(rep("NA", 24))
+colnames(tab) <- "Compared_Treatment"
+tab$Compared_Treatment <- c(rep("High Fat",8), rep("Saccharin",7), rep("Stevia", 9))
+tab$Variation_Explained <- c(4.03, 5.76, 4.50, 3.26, 2.48, 8.24, 4.71, 2.39, 9.57, 3.58, 2.50, 3.98, 2.08, 5.74, 4.77, 5.44, 4.72, 4.63, 4.28, 4.34, 2.47, 2.07, 4.82, 2.12)
+tab$Adj_Pval <- c(7.10e-05, 0.0002, 0.0002, 0.0002, 0.0003, 0.004, 0.0062, 0.0071, 0.0957, 0.0358, 0.0250, 0.0398, 0.0208, 0.0574, 0.0477, 0.0544, 0.0472, 0.0463, 0.0428, 0.0433, 0.0247, 0.0207, 0.0482, 0.0212)
+tab$Phylum <- c("Bacteroidetes", "Bacteroidetes", "Bacteroidetes", "Tenericutes", "Bacteroidetes", "Bacteroidetes", "Bacteroidetes", "Firmicutes", "Firmicutes", "Firmicutes", "Firmicutes", "Firmicutes", "Firmicutes", "Firmicutes", "Firmicutes", "Firmicutes", "Firmicutes", "Firmicutes", "Bacteroidetes", "Firmicutes", "Firmicutes", "Proteobacteria", "Firmicutes", "Firmicutes")
+tab$Class <- c("Bacteroidia", "Bacteroidia", "Bacteroidia", "Mollicutes", "Bacteroidia", "Bacteroidia", "Bacteroidia", "Clostridia", "Clostridia", "Clostridia", "Clostridia", "Clostridia", "Clostridia", "Clostridia", "Clostridia", "Clostridia", "Clostridia", "Clostridia", "Bacteroidia", "Clostridia", "Clostridia", "Betaproteobacteria", "Clostridia", "Clostridia")
+tab$Order <- c("Bacteroidales", "Bacteroidales", "Bacteroidales", "Anaeroplasmatales", "Bacteroidales", "Bacteroidales", "Bacteroidales", "Clostridiales", "Clostridiales", "Clostridiales", "Clostridiales", "Clostridiales", "Clostridiales", "Clostridiales", "Clostridiales", "Clostridiales", "Clostridiales", "Clostridiales", "Bacteroidales", "Clostridiales", "Clostridiales", "Burkholderiales", "Clostridiales", "Clostridiales")
+tab$Family <- c("S24-7", "Bacteroidaceae", "S24-7", "Anaeroplasmataceae", "S24-7", "S24-7", "S24-7", "Ruminococcaceae", "Lachnospiraceae", "Ruminococcaceae", "Lachnospiraceae", "vadinBB60", "Lachnospiraceae", "Lachnospiraceae", "Ruminococcaceae", "Lachnospiraceae", "Lachnospiraceae", "Ruminococcaceae", "S24-7", "Lachnospiraceae", "Lachnospiraceae", "Alcaligenaceae", "Lachnospiraceae", "Lachnospiraceae")
+tab$Genus <- c("Unclassified", "Bacteroides", "Unclassified", "Anaeroplasma", "Unclassified", "Unclassified", "Unclassified", "Ruminiclostridium", "Unclassified", "Ruminiclostridium", "Unclassified", "Unclassified", "NK4A136", "NK4A136", "Oscillibacter", "Unclassified", "NK4A136", "Unclassified", "Unclassified", "NK4A136", "NK4A136", "Parasutterella", "Unclassified", "Unclassified")
+tab$Species <- c("OTU 14", "OTU 4", "OTU 12", "OTU 10", "OTU 8", "OTU 2", "OTU 23", "OTU 3", "OTU 2", "OTU 10", "OTU 8", "OTU 12", "OTU 21", "OTU 4", "OTU 23", "OTU 14", "OTU 4", "OTU 12", "OTU 10", "OTU 2", "OTU 8", "OTU 21", "OTU 23", "OTU 3")
+tab$LowFat_RelAbund <- c(0, 1.22, 0.37, 0.81, 3.97, 0.19, 7.92, 3.39, 0.19, 0.81, 3.97, 0.37, 3.30, 1.22, 7.92, 0, 1.22, 0.37, 0.81, 0.19, 3.97, 3.30, 7.92, 3.38)
+tab$Compared_Treatment_RelAbund <- c(6.45, 10.44, 7.57, 6.03, 0, 13.29, 0.70, 6.77, 15.33, 6.48, 0.01, 6.64, 0.01, 10.04, 6.28, 8.71, 8.78, 7.77, 7.67, 7.04, 0.01, 0, 0.39, 6.29)
+kable(tab, "html") %>% kable_styling(full_width=F)
+```
+
+```{r, echo=F}
+tab <- data.frame(rep("NA", 5))
+colnames(tab) <- "Variation_Explained(%)"
+tab[,1] <- c()
+tab$Adj_Pval <- c()
+tab$Phylum <- c()
+tab$Class <- c()
+tab$Order <- c()
+tab$Family <- c()
+tab$Genus <- c()
+tab$Species <- c()
+tab$Pre_RelAbund <- c()
+tab$Post_RelAbund <- c()
+```
+
+```{r, echo=F}
+tab <- data.frame(rep("NA", 5))
+colnames(tab) <- "Variation_Explained(%)"
+tab[,1] <- c()
+tab$Adj_Pval <- c()
+tab$Phylum <- c()
+tab$Class <- c()
+tab$Order <- c()
+tab$Family <- c()
+tab$Genus <- c()
+tab$Species <- c()
+tab$Pre_RelAbund <- c()
+tab$Post_RelAbund <- c()
+```
+
+```{r, echo=F}
+tab <- data.frame(rep("NA", 5))
+colnames(tab) <- "Variation_Explained(%)"
+tab[,1] <- c()
+tab$Adj_Pval <- c()
+tab$Phylum <- c()
+tab$Class <- c()
+tab$Order <- c()
+tab$Family <- c()
+tab$Genus <- c()
+tab$Species <- c()
+tab$Pre_RelAbund <- c()
+tab$Post_RelAbund <- c()
+```
+
+```{r, echo=F}
+tab <- data.frame(rep("NA", 5))
+colnames(tab) <- "Variation_Explained(%)"
+tab[,1] <- c()
+tab$Adj_Pval <- c()
+tab$Phylum <- c()
+tab$Class <- c()
+tab$Order <- c()
+tab$Family <- c()
+tab$Genus <- c()
+tab$Species <- c()
+tab$Pre_RelAbund <- c()
+tab$Post_RelAbund <- c()
+```
+### High Fat  
+#### Pre-treatment vs. Post-treatment  
+```{r, echo=F}
+tab <- data.frame(rep("NA", 6))
+colnames(tab) <- "Variation_Explained(%)"
+tab[,1] <- c(4.91, 4.69, 4.13, 3.49, 3.25, 2.42)
+tab$Adj_Pval <- c(0.0017, 0.0036, 0.0021, 0.0125, 0.0036, 0.0040)
+tab$Phylum <- c("Bacteroidetes", "Bacteroidetes", "Bacteroidetes", "Bacteroidetes", "Firmicutes", "Bacteroidetes")
+tab$Class <- c("Bacteroidia", "Bacteroidia", "Bacteroidia", "Bacteroidia", "Clostridia", "Bacteroidia")
+tab$Order <- c("Bacteroidales", "Bacteroidales", "Bacteroidales", "Bacteroidales", "Clostridiales", "Bacteroidales")
+tab$Family <- c("Bacteroidiaceae", "S24-7", "S24-7", "S24-7", "Ruminococcaceae", "S24-7")
+tab$Genus <- c("Unclassified", "Unclassified", "Unclassified", "Unclassified", "Ruminiclostridium", "Unclassified")
+tab$Species <- c("OTU 5", "OTU 12", "OTU 14", "OTU4", "OTU 10", "OTU 15")
+tab$Pre_RelAbund <- c(8.39, 0.025, 0, 5.17, 0.96, 0.38)
+tab$Post_RelAbund <- c(0.81, 7.57, 6.45, 10.44, 6.03, 0)
+kable(tab, "html") %>% kable_styling(full_width=F)
+```
+
+### Low Fat  
+#### Pre-treatment vs. Post-treatment  
+```{r, echo=F}
+tab <- data.frame(rep("NA", 3))
+colnames(tab) <- "Variation_Explained(%)"
+tab[,1] <- c(5.83, 3.21, 3.00)
+tab$Adj_Pval <- c(0.0092, 0.0337, 0.0139)
+tab$Phylum <- c("Bacteroidetes", "Tenericutes", "Firmicutes")
+tab$Class <- c("Bacteroidia", "Mollicutes", "Clostridia")
+tab$Order <- c("Bacteroidales", "Anaeroplasmatales", "Clostridiales")
+tab$Family <- c("Bacteroidaceae", "Anaeroplasmataceae", "Ruminococcaceae")
+tab$Genus <- c("Bacteroides", "Anaeroplasma", "Ruminiclostridium")
+tab$Species <- c("OTU 23", "OTU 3", "OTU 15")
+tab$Pre_RelAbund <- c(0.61, 7.11, 4.49)
+tab$Post_RelAbund <- c(7.92, 3.38, 0.85)
+kable(tab, "html") %>% kable_styling(full_width=F)
+```
+
+### Saccharin  
+#### Pre-treatment vs. Post-treatment  
+```{r, echo=F}
+tab <- data.frame(rep("NA", 5))
+colnames(tab) <- "Variation_Explained(%)"
+tab[,1] <- c(7.12, 4.52, 4.22, 3.48, 3.16)
+tab$Adj_Pval <- c(0.0125, 0.0247, 0.0051, 0.0056, 0.0071)
+tab$Phylum <- c("Verrucomicrobia", "Bacteroidetes", "Bacteroidetes", "Bacteroidetes", "Tenericutes")
+tab$Class <- c("Verrucomicrobiae", "Bacteroidia", "Bacteroidia", "Bacteroidia", "Mollicutes")
+tab$Order <- c("Verrucomicrobiales", "S24-7", "S24-7", "S24-7", "Anaeroplasmatales")
+tab$Family <- c("Verrucomicrobiaceae", "Unclassified", "Unclassified", "Unclassified", "Anaeroplasmataceae")
+tab$Genus <- c("Akkermansia", "Unclassified", "Unclassified", "Unclassified", "Anaeroplasma")
+tab$Species <- c("OTU 5", "OTU 4", "OTU 12", "OTU 8", "OTU 10")
+tab$Pre_RelAbund <- c(11.50, 4.10, 0.24, 5.32, 1.84)
+tab$Post_RelAbund <- c(0.77, 10.04, 6.64, 0.01, 6.48)
+kable(tab, "html") %>% kable_styling(full_width=F)
+```
+
+### Stevia  
+#### Pre-treatment vs. Post-treatment  
+```{r, echo=F}
+tab <- data.frame(rep("NA", 6))
+colnames(tab) <- "Variation_Explained(%)"
+tab[,1] <- c(5.62, 4.89, 4.40, 4.18, 3.68, 3.40)
+tab$Adj_Pval <- c(0.0036, 0.0049, 0.0139, 0.0056, 0.0043, 0.0125)
+tab$Phylum <- c("Bacteroidetes", "Bacteroidetes", "Bacteroidetes", "Bacteroidetes", "Bacteroidetes", "Firmicutes")
+tab$Class <- c("Bacteroidia", "Bacteroidia", "Bacteroidia", "Bacteroidia", "Bacteroidia", "Clostridia")
+tab$Order <- c("Bacteroidales", "Bacteroidales", "Bacteroidales", "Bacteroidales", "Bacteroidales", "Clostridiales")
+tab$Family <- c("S24-7", "Bacteroidaceae", "S24-7", "S24-7", "S24-7", "Ruminococcaceae")
+tab$Genus <- c("Unclassified", "Bacteroides", "Unclassified", "Unclassified", "Unclassified", "Ruminiclostridium")
+tab$Species <- c("OTU 14", "OTU 12", "OTU 5", "OTU 10", "OTU 8", "OTU 4")
+tab$Pre_RelAbund <- c(0, 0.19, 7.34, 1.21, 5.75, 3.58)
+tab$Post_RelAbund <- c(8.71, 7.77, 0.53, 7.67, 0.01, 8.78)
+kable(tab, "html") %>% kable_styling(full_width=F)
+```
