@@ -70,7 +70,7 @@ kable(samps, "html") %>% kable_styling(full_width=F)
 ```
    
 # Phylum-Level Composition  
-The phyla are listed in order of highest overall relative abundance to lowest overall relative abundance. Phyla with a total relative abundance of < 0.01% were removed. Error bars are interquartile range.  
+The phyla are listed in order of highest overall relative abundance to lowest overall relative abundance. Phyla with a total relative abundance of < 0.01% were removed. Error bars represent the interquartile range.  
 
 ```{r, echo=F, fig.height=6, fig.width=10, warning=F}
 # Merge samples with the same taxonomic rank
@@ -174,7 +174,7 @@ ggplot(adiv.pair, aes(x=Treatment, y=chao, fill = Treatment)) +
   geom_point() + 
   facet_grid(. ~ Time) +
   xlab("Treatment") +
-  scale_fill_manual(values=c("indianred1", "orange", "springgreen3", "deepskyblue2")) +
+  scale_fill_manual(values=c("brown2", "rosybrown", "limegreen", "dodgerblue2")) +
   ylab("Chao Richness")
 ```
   
@@ -194,7 +194,7 @@ ggplot(adiv.pair, aes(x=Treatment, y=shannon, fill = Treatment)) +
   geom_boxplot(position=position_dodge(1)) +
   geom_point() + 
   facet_grid(. ~ Time) +
-  scale_fill_manual(values=c("indianred1", "orange", "springgreen3", "deepskyblue2")) +
+  scale_fill_manual(values=c("brown2", "rosybrown", "limegreen", "dodgerblue2")) +
   xlab("Treatment") +
   ylab("Shannon Diversity")
 ```
@@ -205,7 +205,7 @@ No significant differences.
 
 
 # Between-Sample Diversity (Beta)  
-I used bray-Curtis dissimilarity, which considers both presence/absence and weight (abundance).  
+I used Bray-Curtis dissimilarity, which considers both presence/absence and weight (abundance).  
   
 In the ordination, each point is 1 sample. The distance betwen points is inversely related to how similar the samples are.  
 Closer points = more similar.  
@@ -217,7 +217,7 @@ bray.nmds <- ordinate(physeq=physeq.pair, method="NMDS", distance="bray")
   # stress = 8.822573e-05
 
 test <- plot_ordination(physeq=physeq.pair, ordination=bray.nmds, color="Treatment", shape="Time") +
-  scale_color_manual(values=c("indianred1", "orange", "springgreen3", "deepskyblue2")) +
+  scale_color_manual(values=c("brown2", "rosybrown", "limegreen", "dodgerblue2")) +
   scale_shape_manual(values=c(19,24)) +
    geom_point(size=2, stroke=1.5)
 test$layers <- test$layers[-1]
@@ -228,7 +228,7 @@ test
 ```
   
 Pre-treatment vs. Post-treatment samples cluster distinctly for all samples except Low Fat.
-Within each treatment, pre- vs. post- are significantly different (all adj pvals = 0.005).  
+Within each treatment, Pre vs. Post are significantly different (all adj pvals = 0.005).  
 To determine what categorical factors are contributing to between-sample differences, I used PERMANOVA to evaluate:  
 
 * Time
@@ -262,7 +262,7 @@ bray.nmds.pre <- ordinate(physeq=physeq.pre, method="NMDS", distance="bray")
   # stress = 0.1847002
 
 test <- plot_ordination(physeq=physeq.pre, ordination=bray.nmds.pre, color="Treatment", shape="Sex") +
-  scale_color_manual(values=c("indianred1", "orange", "springgreen3", "deepskyblue2")) +
+  scale_color_manual(values=c("brown2", "rosybrown", "limegreen", "dodgerblue2")) +
   scale_shape_manual(values=c(19,24)) +
   geom_point(size=2, stroke=1.5)
 test$layers <- test$layers[-1]
@@ -283,7 +283,7 @@ bray.nmds.post <- ordinate(physeq=physeq.post, method="NMDS", distance="bray")
   # stress = 8.927466e-05
 
 test <- plot_ordination(physeq=physeq.post, ordination=bray.nmds.post, color="Treatment", shape="Sex") +
-  scale_color_manual(values=c("indianred1", "orange", "springgreen3", "deepskyblue2")) +
+  scale_color_manual(values=c("brown2", "rosybrown", "limegreen", "dodgerblue2")) +
   scale_shape_manual(values=c(19,24)) +
   geom_point(size=2, stroke=1.5)
 test$layers <- test$layers[-1]
@@ -301,7 +301,7 @@ test
     + This trend is seen within Females (adj pval = 0.063), but not within Males (adj pval = 0.571)
   
 # Important OTUs  
-I identified the OTUs that contribute the most to variation in between-sample diversity.  
+I identified the OTUs that contribute the most to variation in between-sample diversity. These OTUs are the most abundant and/or variable in the samples.    
   
 ### Post-treatment  
 #### Low Fat vs. Other Treatments  
@@ -328,6 +328,8 @@ tab$LowFat_RelAbund <- c(0, 1.22, 0.37, 0.81, 3.97, 0.19, 7.92, 3.39, 0.19, 0.81
 tab$Compared_Treatment_RelAbund <- c(6.45, 10.44, 7.57, 6.03, 0, 13.29, 0.70, 6.77, 15.33, 6.48, 0.01, 6.64, 0.01, 10.04, 6.28, 8.71, 8.78, 7.77, 7.67, 7.04, 0.01, 0, 0.39, 6.29)
 colnames(tab) <- c("Compared Treatment", "Variation Explained (%)", "Adj Pval", "Phylum", "Class", "Order", "Family", "Genus", "OTU", "Low Fat Rel Abund (%)", "Compared Treatment Rel Abund (%)")
 kable(tab, "html") %>% kable_styling(full_width=F)
+
+# 13 (higher in HF/TV), 4 (higher in all), 12 (higher in all), 10 (higher in all), 8 (lower in all), 2 (higher in all), 23 (lower in all), 3 (higher in GF/TV), 10 (Higher in SC/TV), 21 (Lower in SC/TV)
 ```
   
 #### High Fat vs. Saccharin  
