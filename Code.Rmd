@@ -1873,6 +1873,34 @@ for(i in 1:nrow(stevia.tv.simper.kw)){
 }
 #write.table(stevia.tv.simper.kw, "stevia.tv_krusk_simper.csv", sep=",")
 
+# Post-treatment w/o Low Fat
+simper.pretty(data.frame(otu_table(physeq.post.rem)),
+              data.frame(sample_data(physeq.post.rem)),
+              c("Treatment", "Sex"),
+              perc_cutoff=0.5, low_cutoff='y', low_val=0.01,
+              output_name='stevia.post.rem')
+stevia.post.simper <- read.csv("stevia.post.rem_clean_simper.csv")
+kruskal.pretty(data.frame(otu_table(physeq.post.rem)),
+               data.frame(sample_data(physeq.post.rem)),
+               csv = stevia.post.simper,
+               c("Treatment", "Sex"),
+               output_name = 'stevia.post.rem',
+               taxonomy = data.frame(tax_table(physeq.post.rem)))
+stevia.post.rem.simper.kw <- read.csv("stevia.post.rem_krusk_simper.csv")
+for(i in 1:nrow(stevia.post.rem.simper.kw)){
+  save <- which(rownames(data.frame(tax_table(physeq.post.rem))) == stevia.post.rem.simper.kw$OTU[i])
+  stevia.post.rem.simper.kw$Taxonomy[i] <-
+    paste(data.frame(tax_table(physeq.post.rem))[i,2], "-",
+          data.frame(tax_table(physeq.post.rem))[i,3], "-",
+          data.frame(tax_table(physeq.post.rem))[i,4], "-",
+          data.frame(tax_table(physeq.post.rem))[i,5], "-",
+          data.frame(tax_table(physeq.post.rem))[i,6])
+}
+#write.table(stevia.post.simper.kw, "stevia.post.rem_krusk_simper.csv", sep=",")
+
+
+
+
 ### BH CORRECTION FOR ALL OTU-LEVEL SIMPER COMPARISONS
 stevia.simper.kw$Group <- rep("All", nrow(stevia.simper.kw))
 stevia.simper.kw$OTU <- as.character(stevia.simper.kw$OTU)
@@ -1895,6 +1923,9 @@ stevia.sc.simper.kw$Comparison <- as.character(stevia.sc.simper.kw$Comparison)
 stevia.tv.simper.kw$Group <- rep("Stevia", nrow(stevia.tv.simper.kw))
 stevia.tv.simper.kw$OTU <- as.character(stevia.tv.simper.kw$OTU)
 stevia.tv.simper.kw$Comparison <- as.character(stevia.tv.simper.kw$Comparison)
+stevia.post.rem.simper.kw$Group <- rep("Post_Rem", nrow(stevia.post.rem.simper.kw))
+stevia.post.rem.simper.kw$OTU <- as.character(stevia.post.rem.simper.kw$OTU)
+stevia.post.rem.simper.kw$Comparison <- as.character(stevia.post.rem.simper.kw$Comparison)
 stevia.simper.all <- stevia.simper.kw
 stevia.simper.all[(nrow(stevia.simper.all)+1):(nrow(stevia.simper.all)+nrow(stevia.pre.simper.kw)),] <- stevia.pre.simper.kw
 stevia.simper.all[(nrow(stevia.simper.all)+1):(nrow(stevia.simper.all)+nrow(stevia.post.simper.kw)),] <- stevia.post.simper.kw
@@ -1902,8 +1933,9 @@ stevia.simper.all[(nrow(stevia.simper.all)+1):(nrow(stevia.simper.all)+nrow(stev
 stevia.simper.all[(nrow(stevia.simper.all)+1):(nrow(stevia.simper.all)+nrow(stevia.lf.simper.kw)),] <- stevia.lf.simper.kw
 stevia.simper.all[(nrow(stevia.simper.all)+1):(nrow(stevia.simper.all)+nrow(stevia.sc.simper.kw)),] <- stevia.sc.simper.kw
 stevia.simper.all[(nrow(stevia.simper.all)+1):(nrow(stevia.simper.all)+nrow(stevia.tv.simper.kw)),] <- stevia.tv.simper.kw
+stevia.simper.all[(nrow(stevia.simper.all)+1):(nrow(stevia.simper.all)+nrow(stevia.post.rem.simper.kw)),] <- stevia.post.rem.simper.kw
 stevia.simper.all$fdr_krusk_p.val <- p.adjust(stevia.simper.all$krusk_p.val, "BH")
-#write.table(stevia.simper.all, "stevia.simper.all.csv", sep=",")
+#write.table(stevia.simper.all, "stevia.simper.all2.csv", sep=",")
 
 
 
