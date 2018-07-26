@@ -2,7 +2,10 @@
 title: "Stevia Microbiota"
 author: "Edna Chiang"
 date: "July 19, 2018"
-output: html_document
+output:
+  html_document:
+    toc: true
+    toc_float: true
 ---
 
 ```{r, include=F}
@@ -65,50 +68,8 @@ samps$Female <- c(4, 5, 5, 4)
 samps$Male <- c(5, 5, 4, 4)
 kable(samps, "html") %>% kable_styling(full_width=F)
 ```
-  
-# Within-Sample Diversity (Alpha) 
-  
-
-### Chao Richness  
-Chao is an estimate of richness (how many unique OTUs exist in a particular sample).
-```{r, echo=F, fig.height=4, fig.width=6.5}
-adiv.pair <- data.frame(sample_data(physeq.pair))
-
-# Chao
-ggplot(adiv.pair, aes(x=Treatment, y=chao, fill = Treatment)) +
-  geom_boxplot(position=position_dodge(1)) +
-  geom_point() + 
-  facet_grid(. ~ Time) +
-  xlab("Treatment") +
-  scale_fill_manual(values=c("indianred1", "orange", "springgreen3", "deepskyblue2")) +
-  ylab("Chao Richness")
-```
-  
-* Post-treatment groups are significantly different (adj p-val = 0.004):
-    + High Fat vs. Low Fat
-    + Low Fat vs. Saccharin
-  
-* High Fat Pre-treatment and Post-treatment are significantly different (adj p-val = 0.018)
-
-  
-### Shannon Diversity  
-Shannon's Index is an estimate of diversity, taking into account both the presence/absence and abundance of OTUs.  
-
-```{r, echo=F, fig.height=4, fig.width=6.5}
-# Shannon
-ggplot(adiv.pair, aes(x=Treatment, y=shannon, fill = Treatment)) +
-  geom_boxplot(position=position_dodge(1)) +
-  geom_point() + 
-  facet_grid(. ~ Time) +
-  scale_fill_manual(values=c("indianred1", "orange", "springgreen3", "deepskyblue2")) +
-  xlab("Treatment") +
-  ylab("Shannon Diversity")
-```
-  
-No significant differences.
-  
-
-# Examine Phyla  
+   
+# Phylum-Level Composition  
 The phyla are listed in order of highest overall relative abundance to lowest overall relative abundance. Phyla with a total relative abundance of < 0.01% were removed. Error bars are interquartile range.  
 
 ```{r, echo=F, fig.height=6, fig.width=10, warning=F}
@@ -198,7 +159,50 @@ Trends that caught my eye (not statistically tested yet):
 * Saccharin Post-treatment
     + Females have higher % Verrucomicrobia compared to males
 
+   
+# Within-Sample Diversity (Alpha) 
   
+
+### Chao Richness  
+Chao is an estimate of richness (how many unique OTUs exist in a particular sample).
+```{r, echo=F, fig.height=4, fig.width=6.5}
+adiv.pair <- data.frame(sample_data(physeq.pair))
+
+# Chao
+ggplot(adiv.pair, aes(x=Treatment, y=chao, fill = Treatment)) +
+  geom_boxplot(position=position_dodge(1)) +
+  geom_point() + 
+  facet_grid(. ~ Time) +
+  xlab("Treatment") +
+  scale_fill_manual(values=c("indianred1", "orange", "springgreen3", "deepskyblue2")) +
+  ylab("Chao Richness")
+```
+  
+* Post-treatment groups are significantly different (adj p-val = 0.004):
+    + High Fat vs. Low Fat
+    + Low Fat vs. Saccharin
+  
+* High Fat Pre-treatment and Post-treatment are significantly different (adj p-val = 0.018)
+
+  
+### Shannon Diversity  
+Shannon's Index is an estimate of diversity, taking into account both the presence/absence and abundance of OTUs.  
+
+```{r, echo=F, fig.height=4, fig.width=6.5}
+# Shannon
+ggplot(adiv.pair, aes(x=Treatment, y=shannon, fill = Treatment)) +
+  geom_boxplot(position=position_dodge(1)) +
+  geom_point() + 
+  facet_grid(. ~ Time) +
+  scale_fill_manual(values=c("indianred1", "orange", "springgreen3", "deepskyblue2")) +
+  xlab("Treatment") +
+  ylab("Shannon Diversity")
+```
+  
+No significant differences.
+  
+
+
 
 # Between-Sample Diversity (Beta)  
 I used bray-Curtis dissimilarity, which considers both presence/absence and weight (abundance).  
@@ -298,26 +302,16 @@ test
   
 # Important OTUs  
 I identified the OTUs that contribute the most to variation in between-sample diversity.  
-### Male vs. Female (Pre-treatment)  
-No OTUs were detected Post-treatment
-```{r, echo=F}
-tab <- data.frame(rep("NA", 5))
-colnames(tab) <- "Variation_Explained(%)"
-tab[,1] <- c(9.74, 7.97, 7.06, 5.85, 5.58)
-tab$Adj_Pval <- c(5.31e-06, 3.77e-05, 0.0075, 0.0002, 0.0001)
-tab$Phylum <- c("Firmicutes", "Bacteroidetes", "Firmicutes", "Firmicutes", "Firmicutes")
-tab$Class <- c("Clostridia", "Bacteroidia", "Clostridia", "Erysipelotrichia", "Clostridia")
-tab$Order <- c("Clostridiales", "Bactteroidales", "Clostridiales", "Erysipelotrichales", "Clostridiales")
-tab$Family <- c("Ruminococcaceae", "S24-7", "Lachnospiraceae", "Erysipelotrichaceae", "Lachnospiraceae")
-tab$Genus <- c("Ruminiclostridium", "Unclassified", "Unclassified", "Unclassified", "Tyzzerella")
-tab$Species <- c("OTU 6", "OTU 13", "OTU 5", "OTU 11", "OTU 8")
-tab$Female_RelAbund <- c(12.34, 0.17, 3.86, 8.14, 9.18)
-tab$Male_RelAbund <- c(0.01, 10.22, 11.42, 1.44, 2.29)
-kable(tab, "html") %>% kable_styling(full_width=F)
-```
   
 ### Post-treatment  
 #### Low Fat vs. Other Treatments  
+The difference between Low Fat vs. other treatments is driven by the following number of OTUs:  
+
+* High Fat = 8
+* Saccharin = 7
+* Stevia = 9
+  
+Here are the significant OTUs:  
 ```{r, echo=F}
 tab <- data.frame(rep("NA", 24))
 colnames(tab) <- "Compared_Treatment"
@@ -332,37 +326,42 @@ tab$Genus <- c("Unclassified", "Bacteroides", "Unclassified", "Anaeroplasma", "U
 tab$Species <- c("OTU 14", "OTU 4", "OTU 12", "OTU 10", "OTU 8", "OTU 2", "OTU 23", "OTU 3", "OTU 2", "OTU 10", "OTU 8", "OTU 12", "OTU 21", "OTU 4", "OTU 23", "OTU 14", "OTU 4", "OTU 12", "OTU 10", "OTU 2", "OTU 8", "OTU 21", "OTU 23", "OTU 3")
 tab$LowFat_RelAbund <- c(0, 1.22, 0.37, 0.81, 3.97, 0.19, 7.92, 3.39, 0.19, 0.81, 3.97, 0.37, 3.30, 1.22, 7.92, 0, 1.22, 0.37, 0.81, 0.19, 3.97, 3.30, 7.92, 3.38)
 tab$Compared_Treatment_RelAbund <- c(6.45, 10.44, 7.57, 6.03, 0, 13.29, 0.70, 6.77, 15.33, 6.48, 0.01, 6.64, 0.01, 10.04, 6.28, 8.71, 8.78, 7.77, 7.67, 7.04, 0.01, 0, 0.39, 6.29)
+colnames(tab) <- c("Compared Treatment", "Variation Explained (%)", "Adj Pval", "Phylum", "Class", "Order", "Family", "Genus", "OTU", "Low Fat Rel Abund (%)", "Compared Treatment Rel Abund (%)")
 kable(tab, "html") %>% kable_styling(full_width=F)
 ```
-
+  
+#### High Fat vs. Saccharin  
 ```{r, echo=F}
 tab <- data.frame(rep("NA", 5))
-colnames(tab) <- "Variation_Explained(%)"
-tab[,1] <- c()
-tab$Adj_Pval <- c()
-tab$Phylum <- c()
-tab$Class <- c()
-tab$Order <- c()
-tab$Family <- c()
-tab$Genus <- c()
-tab$Species <- c()
-tab$Pre_RelAbund <- c()
-tab$Post_RelAbund <- c()
+tab[,1] <- c(4.05)
+tab$Adj_Pval <- c(0.0638)
+tab$Phylum <- c("Firmicutes")
+tab$Class <- c("Clostridia")
+tab$Order <- c("Clostridiales")
+tab$Family <- c("Lachnospiraceae")
+tab$Genus <- c("Unclassified")
+tab$Species <- c("OTU 14")
+tab$HighFat_RelAbund <- c(6.45)
+tab$Saccharin_RelAbund <- c(3.18)
+colnames(tab) <- c("Variation Explained (%)", "Adj Pval", "Phylum", "Class", "Order", "Family", "Genus", "OTU", "High Fat Rel Abund (%)", "Saccharin Rel Abund (%)")
+kable(tab, "html") %>% kable_styling(full_width=F)
 ```
-
+  
+#### Saccharin vs. Stevia  
 ```{r, echo=F}
 tab <- data.frame(rep("NA", 5))
-colnames(tab) <- "Variation_Explained(%)"
-tab[,1] <- c()
-tab$Adj_Pval <- c()
-tab$Phylum <- c()
-tab$Class <- c()
-tab$Order <- c()
-tab$Family <- c()
-tab$Genus <- c()
-tab$Species <- c()
-tab$Pre_RelAbund <- c()
-tab$Post_RelAbund <- c()
+tab[,1] <- c(6.19)
+tab$Adj_Pval <- c(0.0043)
+tab$Phylum <- c("Firmicutes")
+tab$Class <- c("Clostridia")
+tab$Order <- c("Clostridiales")
+tab$Family <- c("Lachnospiraceae")
+tab$Genus <- c("Lachnoclostridium")
+tab$Species <- c("OTU 14")
+tab$Saccharin_RelAbund <- c(3.18)
+tab$Stevia_RelAbund <- c(8.71)
+colnames(tab) <- c("Variation Explained (%)", "Adj Pval", "Phylum", "Class", "Order", "Family", "Genus", "OTU", "Saccharin Rel Abund (%)", "Stevia Rel Abund (%)")
+kable(tab, "html") %>% kable_styling(full_width=F)
 ```
 
 ```{r, echo=F}
@@ -409,6 +408,8 @@ tab$Genus <- c("Unclassified", "Unclassified", "Unclassified", "Unclassified", "
 tab$Species <- c("OTU 5", "OTU 12", "OTU 14", "OTU4", "OTU 10", "OTU 15")
 tab$Pre_RelAbund <- c(8.39, 0.025, 0, 5.17, 0.96, 0.38)
 tab$Post_RelAbund <- c(0.81, 7.57, 6.45, 10.44, 6.03, 0)
+colnames(tab) <- c("Variation Explained (%)", "Adj Pval", "Phylum", "Class", "Order", "Family", "Genus", "OTU", "Pre Rel Abund (%)", "Post Rel Abund (%)")
+kable(tab, "html") %>% kable_styling(full_width=F)
 kable(tab, "html") %>% kable_styling(full_width=F)
 ```
 
@@ -427,6 +428,7 @@ tab$Genus <- c("Bacteroides", "Anaeroplasma", "Ruminiclostridium")
 tab$Species <- c("OTU 23", "OTU 3", "OTU 15")
 tab$Pre_RelAbund <- c(0.61, 7.11, 4.49)
 tab$Post_RelAbund <- c(7.92, 3.38, 0.85)
+colnames(tab) <- c("Variation Explained (%)", "Adj Pval", "Phylum", "Class", "Order", "Family", "Genus", "OTU", "Pre Rel Abund (%)", "Post Rel Abund (%)")
 kable(tab, "html") %>% kable_styling(full_width=F)
 ```
 
@@ -445,6 +447,7 @@ tab$Genus <- c("Akkermansia", "Unclassified", "Unclassified", "Unclassified", "A
 tab$Species <- c("OTU 5", "OTU 4", "OTU 12", "OTU 8", "OTU 10")
 tab$Pre_RelAbund <- c(11.50, 4.10, 0.24, 5.32, 1.84)
 tab$Post_RelAbund <- c(0.77, 10.04, 6.64, 0.01, 6.48)
+colnames(tab) <- c("Variation Explained (%)", "Adj Pval", "Phylum", "Class", "Order", "Family", "Genus", "OTU", "Pre Rel Abund (%)", "Post Rel Abund (%)")
 kable(tab, "html") %>% kable_styling(full_width=F)
 ```
 
@@ -463,5 +466,24 @@ tab$Genus <- c("Unclassified", "Bacteroides", "Unclassified", "Unclassified", "U
 tab$Species <- c("OTU 14", "OTU 12", "OTU 5", "OTU 10", "OTU 8", "OTU 4")
 tab$Pre_RelAbund <- c(0, 0.19, 7.34, 1.21, 5.75, 3.58)
 tab$Post_RelAbund <- c(8.71, 7.77, 0.53, 7.67, 0.01, 8.78)
+colnames(tab) <- c("Variation Explained (%)", "Adj Pval", "Phylum", "Class", "Order", "Family", "Genus", "OTU", "Pre Rel Abund (%)", "Post Rel Abund (%)")
+kable(tab, "html") %>% kable_styling(full_width=F)
+```
+  
+### Male vs. Female (Pre-treatment)  
+No OTUs were detected Post-treatment
+```{r, echo=F}
+tab <- data.frame(rep("NA", 5))
+tab[,1] <- c(9.74, 7.97, 7.06, 5.85, 5.58)
+tab$Adj_Pval <- c(5.31e-06, 3.77e-05, 0.0075, 0.0002, 0.0001)
+tab$Phylum <- c("Firmicutes", "Bacteroidetes", "Firmicutes", "Firmicutes", "Firmicutes")
+tab$Class <- c("Clostridia", "Bacteroidia", "Clostridia", "Erysipelotrichia", "Clostridia")
+tab$Order <- c("Clostridiales", "Bactteroidales", "Clostridiales", "Erysipelotrichales", "Clostridiales")
+tab$Family <- c("Ruminococcaceae", "S24-7", "Lachnospiraceae", "Erysipelotrichaceae", "Lachnospiraceae")
+tab$Genus <- c("Ruminiclostridium", "Unclassified", "Unclassified", "Unclassified", "Tyzzerella")
+tab$Species <- c("OTU 6", "OTU 13", "OTU 5", "OTU 11", "OTU 8")
+tab$Female_RelAbund <- c(12.34, 0.17, 3.86, 8.14, 9.18)
+tab$Male_RelAbund <- c(0.01, 10.22, 11.42, 1.44, 2.29)
+colnames(tab) <- c("Variation Explained (%)", "Adj Pval", "Phylum", "Class", "Order", "Family", "Genus", "OTU", "Female Rel Abund (%)", "Male Rel Abund (%)")
 kable(tab, "html") %>% kable_styling(full_width=F)
 ```
