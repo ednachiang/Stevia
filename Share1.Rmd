@@ -1,7 +1,7 @@
 ---
 title: "Stevia Microbiota"
 author: "Edna Chiang"
-date: "July 19, 2018"
+date: "July 26, 2018"
 output:
   html_document:
     toc: true
@@ -56,31 +56,10 @@ load("Physeq.tv.RData")
 ```
 
 
-# Take-Away Points
-**There is little difference between High Fat, Saccharin, and Stevia samples.**   
-  
-**The majority of differences are between Low Fat and the other 3 treatments (all of which include a high fat diet)**  
+# Take-Away Points  
 
-* Within-sample diversity (alpha):
-    + Driven by presence/absence of OTUs rather than their relative abundances
-    + Within Post-treatment samples, Low Fat has higher richness (# unique OTUs) compared to High Fat and Saccharin
-* Between-sample diversity (beta):
-    + For each treatment, Pre- and Post- samples are different
-    + Pre-treatment samples:
-      - Female vs. Male samples are different
-    + Post-treatment samples:
-        - Low Fat is different from all other treatments (High Fat, Saccharin, Stevia)
-        - Saccharin vs. Stevia trend towards a difference
-            - Trend seen within Females but not Males
-* Important OTUs (contribute the most to variation in between-sample diversity):
-    + Post-treatment:
-        - Majority of OTUs found between Low Fat vs. other treatments
-        - High Fat vs. Saccharin:
-            - 1 unclassified Lachnospiraceae
-        - Saccharin vs. Stevia:
-            - 1 Lachnoclostridium
-    + OTUs were identified within each treatment for Pre vs. Post
-    + OTUs were identified within Pre-treatment for Female vs. Male
+* There is little difference between High Fat, Saccharin, and Stevia samples.
+* The majority of differences are between Low Fat and the other 3 treatments (all of which include a high fat diet)
   
   
 # Description  
@@ -90,7 +69,7 @@ A few differences between Sarah's analysis and my analysis:
 * I perform my analysis at the OTU-level (97% sequence similarity, akin to species-level)
   
 
-* I included only individuals with both pre-treatment and post-treatment samples as I run a few paired tests and want to keep the samples consistent throughout all analyses. I removed 4 individuals, resulting in the following final sample count:  
+* I included only individuals with both pre-treatment and post-treatment samples because I run a few paired tests and want to keep the samples consistent throughout all analyses. I removed 4 individuals, resulting in the following final sample count:  
 ```{r, echo=F}
 samps <- data.frame(rep("NA",4))
 colnames(samps) <- "Treatment"
@@ -157,6 +136,7 @@ ggplot(phy.sum, aes(x=Phylum, y=Median, fill=Phylum)) +
 Visually (not statistically tested yet), there are shifts in Pre-treatment vs. Post-treatment.  
 Within Post-treatment samples, Low Fat seems to be the most different compared to all other treatments. Namely, Low Fat has a higher relative abundance of Bacteroidetes and lower relative abundance of Verrucomicrobia.  
   
+  
 There are some interesting (& unexpected?) trends if we take into account sex:  
 ```{r, echo=F, fig.height=10, fig.width=10}
 ### Testing barplot for sex + treatment + time
@@ -195,12 +175,13 @@ Sex-related trends that caught my eye (not statistically tested yet):
     + Especially in High Fat Pre-treatment
 * Saccharin Post-treatment
     + Females have higher % Verrucomicrobia compared to males
+
   
   
 # Within-Sample Diversity (Alpha)  
   
-### Chao Richness  
-Chao is an estimate of richness (how many unique OTUs exist in a particular sample).
+## Chao Richness  
+Chao is an estimate of richness (# unique OTUs exist in a particular sample).
 ```{r, echo=F, fig.height=4, fig.width=6.5}
 adiv.pair <- data.frame(sample_data(physeq.pair))
 
@@ -220,7 +201,8 @@ ggplot(adiv.pair, aes(x=Treatment, y=chao, fill = Treatment)) +
 * High Fat Pre-treatment and Post-treatment are significantly different (adj p-val = 0.018)
 
   
-### Shannon Diversity  
+  
+## Shannon Diversity  
 Shannon's Index is an estimate of diversity, taking into account both the presence/absence and abundance of OTUs.  
 
 ```{r, echo=F, fig.height=4, fig.width=6.5}
@@ -238,12 +220,13 @@ No significant differences.
 This suggests that differences in within-sample diversity are driven by presence/absence of OTUs rather than their relative abundances.  
   
 # Between-Sample Diversity (Beta)  
-### Overall  
 I used the Bray-Curtis dissimilarity metric, which considers both OTU presence/absence and weight (abundance).  
   
 In the ordination, each point is 1 sample. The distance betwen points is inversely related to how similar the samples are.  
 Closer points = more similar.  
 Farther points = less similar.  
+
+## Overall  
 
 ```{r, include=F}
 ### Paired
@@ -264,7 +247,7 @@ test
 Pre-treatment vs. Post-treatment samples visually cluster distinctly for all samples except Low Fat.  
 Within each treatment, Pre vs. Post are significantly different (all adj pvals = 0.005).  
   
-To determine to what extent the categorical factors are contributing to between-sample differences, I used PERMANOVA to evaluate:  
+To determine to what extent the categorical factors contribute to between-sample differences, I used PERMANOVA to evaluate:  
 
 * Time
     + Pre-treatment vs. Post-treatment
@@ -289,7 +272,7 @@ kable(samps, "html") %>% kable_styling(full_width=F)
 * Time accounts for the most variation in the data, followed by Treatment and Sex
 * Individual accounted for quite a bit of the data variation, but was not significant (likely because we have a small n (2) for each individual)
   
-### Pre-treatment  
+## Pre-treatment  
 Given that time explains the most data variation, let's take a look within Pre-treatment samples:  
 ```{r, include=F}
 ### Pre-treatment
@@ -311,7 +294,7 @@ test
 * There is no significance between treatments.  
 * There *is* a significant difference between sex (adj pval = 0.005).
   
-### Post-treatment  
+## Post-treatment  
 ```{r, include=F}
 ### Post-treatment
 bray.nmds.post <- ordinate(physeq=physeq.post, method="NMDS", distance="bray")
@@ -334,19 +317,22 @@ test
     + This is true overall, and within sex
 * Saccharin vs. Stevia trend towards a difference (adj pval = 0.063)
     + This trend is seen within Females (adj pval = 0.063), but not within Males (adj pval = 0.571)
+
+  
   
 # Important OTUs  
-I identified the OTUs that contribute the most to variation in between-sample diversity. These OTUs are the most abundant and/or variable in the samples.    
+I identified the OTUs that contribute the most to variation in between-sample diversity using pairwise comparisons. These OTUs are the most abundant and/or variable in the samples.  
+This test (similarity percentages (SIMPER)) is run with pairwise comparisons.  
   
-### Post-treatment  
-#### Low Fat vs. Other Treatments  
+## Post-treatment  
+### Low Fat vs. Other Treatments  
 The difference between Low Fat vs. other treatments is driven by the following number of OTUs:  
 
 * High Fat = 8
 * Saccharin = 7
 * Stevia = 9
   
-Here are the significant OTUs:  
+All the identified OTUs within 1 pairwise comparison (Low Fat vs. 1 treatment) are found in at least 1 other pairwise comparison (Low Fat vs. another treatment).  
 ```{r, echo=F}
 tab <- data.frame(rep("NA", 24))
 colnames(tab) <- "Compared_Treatment"
@@ -367,7 +353,7 @@ kable(tab, "html") %>% kable_styling(full_width=F)
 # 13 (higher in HF/TV), 4 (higher in all), 12 (higher in all), 10 (higher in all), 8 (lower in all), 2 (higher in all), 23 (lower in all), 3 (higher in GF/TV), 10 (Higher in SC/TV), 21 (Lower in SC/TV)
 ```
   
-#### High Fat vs. Saccharin  
+### High Fat vs. Saccharin  
 ```{r, echo=F}
 tab <- data.frame(rep("NA", 1))
 tab[,1] <- c(4.05)
@@ -384,7 +370,7 @@ colnames(tab) <- c("Variation Explained (%)", "Adj Pval", "Phylum", "Class", "Or
 kable(tab, "html") %>% kable_styling(full_width=F)
 ```
   
-#### Saccharin vs. Stevia  
+### Saccharin vs. Stevia  
 ```{r, echo=F}
 tab <- data.frame(rep("NA", 1))
 tab[,1] <- c(6.19)
@@ -430,7 +416,8 @@ tab$Species <- c()
 tab$Pre_RelAbund <- c()
 tab$Post_RelAbund <- c()
 ```
-### High Fat  
+  
+## High Fat  
 #### Pre-treatment vs. Post-treatment  
 ```{r, echo=F}
 tab <- data.frame(rep("NA", 6))
@@ -447,10 +434,9 @@ tab$Pre_RelAbund <- c(8.39, 0.025, 0, 5.17, 0.96, 0.38)
 tab$Post_RelAbund <- c(0.81, 7.57, 6.45, 10.44, 6.03, 0)
 colnames(tab) <- c("Variation Explained (%)", "Adj Pval", "Phylum", "Class", "Order", "Family", "Genus", "OTU", "Pre Rel Abund (%)", "Post Rel Abund (%)")
 kable(tab, "html") %>% kable_styling(full_width=F)
-kable(tab, "html") %>% kable_styling(full_width=F)
 ```
-
-### Low Fat  
+  
+## Low Fat  
 #### Pre-treatment vs. Post-treatment  
 ```{r, echo=F}
 tab <- data.frame(rep("NA", 3))
@@ -468,8 +454,8 @@ tab$Post_RelAbund <- c(7.92, 3.38, 0.85)
 colnames(tab) <- c("Variation Explained (%)", "Adj Pval", "Phylum", "Class", "Order", "Family", "Genus", "OTU", "Pre Rel Abund (%)", "Post Rel Abund (%)")
 kable(tab, "html") %>% kable_styling(full_width=F)
 ```
-
-### Saccharin  
+  
+## Saccharin  
 #### Pre-treatment vs. Post-treatment  
 ```{r, echo=F}
 tab <- data.frame(rep("NA", 5))
@@ -487,8 +473,8 @@ tab$Post_RelAbund <- c(0.77, 10.04, 6.64, 0.01, 6.48)
 colnames(tab) <- c("Variation Explained (%)", "Adj Pval", "Phylum", "Class", "Order", "Family", "Genus", "OTU", "Pre Rel Abund (%)", "Post Rel Abund (%)")
 kable(tab, "html") %>% kable_styling(full_width=F)
 ```
-
-### Stevia  
+  
+## Stevia  
 #### Pre-treatment vs. Post-treatment  
 ```{r, echo=F}
 tab <- data.frame(rep("NA", 6))
@@ -507,8 +493,9 @@ colnames(tab) <- c("Variation Explained (%)", "Adj Pval", "Phylum", "Class", "Or
 kable(tab, "html") %>% kable_styling(full_width=F)
 ```
   
-### Male vs. Female (Pre-treatment)  
-No OTUs were detected Post-treatment
+## Male vs. Female   
+These results are for Pre-treatment only.  
+No OTUs were detected within Post-treatment samples overall.  
 ```{r, echo=F}
 tab <- data.frame(rep("NA", 5))
 tab[,1] <- c(9.74, 7.97, 7.06, 5.85, 5.58)
