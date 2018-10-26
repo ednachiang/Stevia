@@ -693,10 +693,10 @@ fam.top10 <- prune_taxa(taxa_sums(fam99) > 68, fam99)
 
 # Summarize data
 fam.df <- psmelt(fam.top10)
-phy.df$Phylum <- ordered(phy.df$Phylum, levels=c())
-phy.df$Phylum[which(is.na(phy.df$Phylum))] <- rep("Unclassified",length(which(is.na(phy.df$Phylum))))
-phy.sum <- phy.df %>%
-  group_by(Treatment, Time, Phylum) %>%
+fam.df$Phylum <- ordered(fam.df$Family, levels=c("S24-7", "Lachnospiraceae", "Ruminococcaceae", "Verrucomicrobiaceae", "Bacteroidaceae", "vadinBB60", "Anaeroplasmataceae", "Rikenellaceae", "Streptocccaaceae", "Erysipelotrichaceae"))
+fam.df$Family[which(is.na(fam.df$Family))] <- rep("Unclassified",length(which(is.na(fam.df$Family))))
+fam.sum <- fam.df %>%
+  group_by(Treatment, Time, Family) %>%
   summarize(Mean = mean(Abundance),
             Median = median(Abundance),
             SD = sd(Abundance),
@@ -704,21 +704,21 @@ phy.sum <- phy.df %>%
             iqr = IQR(Abundance))
 
 # Calculate IQR limits
-phy.sum$iqr.min <- phy.sum$Median - 0.5*phy.sum$iqr
-phy.sum[which(phy.sum$iqr.min < 0),10] <- 0
+fam.sum$iqr.min <- fam.sum$Median - 0.5*fam.sum$iqr
+fam.sum[which(fam.sum$iqr.min < 0),10] <- 0
   # Any IQR min < 0, change to 0 (otherwise error bar won't plot)
-phy.sum$iqr.max <- phy.sum$Median + 0.5*phy.sum$iqr
+fam.sum$iqr.max <- fam.sum$Median + 0.5*fam.sum$iqr
 
 
 ### Barplot ###
-tiff("phyla.facet.tiff", width = 13, height = 8, units = "in", res = 300)
-ggplot(phy.sum, aes(x=Phylum, y=Median, fill=Phylum)) +
+#tiff("familyfacet.tiff", width = 13, height = 8, units = "in", res = 300)
+ggplot(fam.sum, aes(x=Family, y=Median, fill=Family)) +
   geom_bar(stat="identity", color="black") +
   facet_grid(Time ~ Treatment) +
   geom_errorbar(aes(ymax=iqr.max, ymin=iqr.min), width=0.25) +
-  scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00")) +
+  scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00", "dimgray", "darkgray")) +
   xlab("Phyla") +
-  ylab("Median Relative Abundance for Phyla > 0.01%") +
+  ylab("Median Relative Abundance for Family > 0.1%") +
   scale_y_continuous(limits=c(0,80), expand=c(0,0))+
   theme(axis.text.x = element_blank(),
         panel.spacing=unit(1, "lines"),
@@ -728,7 +728,7 @@ ggplot(phy.sum, aes(x=Phylum, y=Median, fill=Phylum)) +
         axis.text.y = element_text(size=12),
         legend.title = element_text(size = 14),
         legend.text = element_text(size=12))
-dev.off()
+#dev.off()
 
 
 ### Testing barplot for sex + treatment + time
@@ -1156,8 +1156,16 @@ adonis(pair.bray ~ Time + Treatment + Sex + Subj_ID,
   # Treatment: p-value = 0.001; R2 = 0.12309
   # Sex: p-value = 0.001; R2 = 0.07370
   # Subj_ID: p-value = 0.907, R2 = 0.23038
-  
-
+  # Residuals = 0.31445
+adonis(pair.bray ~ Time*Treatment*Sex, data=pair.sampdf, permutations=100)
+  # Time: p-value = 0.009901, R2 = 0.25838
+  # Treatment: p-value = 0.009901, R2 = 0.12309
+  # Sex: p-value =  0.009901, R2 = 0.07370
+  # Time:Treatment: p-value = 0.009901, R2 = 0.09180
+  # Time:Sex: p-value = 0.00901, R2 = 0.05753
+  # Treatment:Sex: p-value = 0.277228, R2 = 0.02191
+  # Time:Treatment:Sex: p-value = 0.277228, R2= 0.02160
+  # Residuals: R2 = 0.35198
 
 ### Pre-treatment
 pre.sampdf <- data.frame(sample_data(physeq.pre))
