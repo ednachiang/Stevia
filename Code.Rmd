@@ -450,6 +450,14 @@ kruskalmc(resp = chao ~ Treatment, data = adiv.pair[which(adiv.pair$Time == "Pos
   # Post-treatment Significant:
     # High Fat - Low Fat
     # Low Fat - Saccharin
+pairwise.wilcox.test(adiv.pair$chao, adiv.pair$Treatment, p.adjust.method = "fdr")
+  # LowFat - HighFat = 0.014
+  # Saccharin - HighFat = 0.865
+  # Saccharin - LowFat = 0.007
+  # Stevia - HighFat = 0.986
+  # Stevia - LowFat = 0.018
+  # Stevia - Saccharin = 0.865
+  ## Low fat vs. high fat = sig diff
 #friedman.test(formula = chao ~ Treatment | Time, data = adiv.pair)
 wilcox.test(chao ~ Time, data=adiv.pair, paired=T)
   # p-value = 0.02096
@@ -475,76 +483,6 @@ wilcox.test(chao ~ Sex, data = adiv.pair[which(adiv.pair$Time == "Post-treatment
 summary(lmer(chao ~ Time + Treatment + Sex + (1|Subj_ID), data=adiv.pair))
   # Variance explained by Subj_ID = 1.376e-13
 
-### Berger-Parker
-# Plot
-ggplot(adiv.pair, aes(x=Treatment, y=bergerparker, fill = Treatment)) +
-  geom_boxplot(position=position_dodge(1)) +
-  geom_point() + 
-  facet_grid(.~Time) +
-  scale_fill_manual(values=c("indianred1", "orange", "springgreen3", "deepskyblue2")) +
-  xlab("Treatment") +
-  ylab("Berger-Parker")
-# Test normality
-hist(adiv.pair$bergerparker, breaks=10)
-qqnorm(adiv.pair$bergerparker)
-qqline(adiv.pair$bergerparker)
-shapiro.test(adiv.pair$bergerparker)
-  # p-value = 0.00269
-  # Not normal
-# Stats
-kruskal.test(formula = bergerparker ~ Treatment, data=adiv.pair[which(adiv.pair$Time == "Pre-treatment"),])
-  # All Pre-treatment
-  # p-value = 0.1931
-kruskal.test(formula = bergerparker ~ Treatment, data=adiv.pair[which(adiv.pair$Time == "Post-treatment"),])
-  # All Post-treatment
-  # p-value = 0.2489
-#friedman.test(formula = bergerparker ~ Treatment | Time, data = adiv.pair)
-wilcox.test(bergerparker ~ Time, data=adiv.pair, paired=T)
-  # p-value = 0.01098
-wilcox.test(bergerparker ~ Time, data=adiv.pair[which(adiv.pair$Treatment == "High Fat"),], paired=T)
-  # High Fat
-  # p-value = 0.07422
-wilcox.test(bergerparker ~ Time, data=adiv.pair[which(adiv.pair$Treatment == "Low Fat"),], paired=T)
-  # Low Fat
-  # p-value = 0.1934
-wilcox.test(bergerparker ~ Time, data=adiv.pair[which(adiv.pair$Treatment == "Saccharin"),], paired=T)
-  # Saccharin
-  # p-value = 0.8203
-wilcox.test(bergerparker ~ Time, data=adiv.pair[which(adiv.pair$Treatment == "Stevia"),], paired=T)
-  # p-value = 0.1484
-wilcox.test(bergerparker ~ Sex, data = adiv.pair[which(adiv.pair$Time == "Pre-treatment"),])
-  # Pre-treatment Sex
-  # p-value = 0.6279
-wilcox.test(bergerparker ~ Sex, data = adiv.pair[which(adiv.pair$Time == "Post-treatment"),])
-  # Post-treatment Sex
-  # p-value = 0.006402
-wilcox.test(bergerparker ~ Time, data = adiv.pair[which(adiv.pair[which(adiv.pair$Treatment == "High Fat"),]$Sex == "Female"),], paired=T)
-  # Female High Fat Time
-  # p-value = 0.375
-wilcox.test(bergerparker ~ Time, data = adiv.pair[which(adiv.pair[which(adiv.pair$Treatment == "High Fat"),]$Sex == "Male"),], paired=T)
-  # Male High Fat Time
-  # p-value = 0.3125
-wilcox.test(bergerparker ~ Time, data = adiv.pair[which(adiv.pair[which(adiv.pair$Treatment == "Low Fat"),]$Sex == "Female"),], paired=T)
-  # Female Low Fat Time
-  # p-value = 0.1875
-wilcox.test(bergerparker ~ Time, data = adiv.pair[which(adiv.pair[which(adiv.pair$Treatment == "Low Fat"),]$Sex == "Male"),], paired=T)
-  # Male Low Fat Time
-  # p-value = 0.8125
-wilcox.test(bergerparker ~ Time, data = adiv.pair[which(adiv.pair[which(adiv.pair$Treatment == "Saccharin"),]$Sex == "Female"),], paired=T)
-  # Female Saccharin Time
-  # p-value = 0.125
-wilcox.test(bergerparker ~ Time, data = adiv.pair[which(adiv.pair[which(adiv.pair$Treatment == "Saccharin"),]$Sex == "Male"),], paired=T)
-  # Male Saccharin Time
-  # p-value = 1
-wilcox.test(bergerparker ~ Time, data = adiv.pair[which(adiv.pair[which(adiv.pair$Treatment == "Stevia"),]$Sex == "Female"),], paired=T)
-  # Female Stevia Time
-  # p-value = 0.625
-wilcox.test(bergerparker ~ Time, data = adiv.pair[which(adiv.pair[which(adiv.pair$Treatment == "Stevia"),]$Sex == "Male"),], paired=T)
-  # Male Stevia Time
-  # p-value = 0.375
-# Repeated Measures
-summary(lmer(bergerparker ~ Time + Treatment + Sex + (1|Subj_ID), data=adiv.pair))
-  # Variance explained by Subj_ID = 0
 
 ### Shannon
 # Plot
@@ -570,7 +508,7 @@ summary(aov(shannon ~ Treatment, data = adiv.pair[which(adiv.pair$Time == "Post-
   # Post-treatment
   # P-value = 0.043
 TukeyHSD(aov(shannon ~ Treatment, data = adiv.pair[which(adiv.pair$Time == "Post-treatment"),]))
-  # Post-treamtent Significance:
+  # Post-treatment Significance:
     # Saccharin - Low Fat
 t.test(shannon ~ Time, data = adiv.pair, paired=T)
   # p-value = 0.9899
@@ -620,77 +558,6 @@ t.test(shannon ~ Time, data = adiv.pair[which(adiv.pair[which(adiv.pair$Treatmen
 summary(lmer(shannon ~ Time + Treatment + Sex + (1|Subj_ID), data=adiv.pair))
   # Variance explained by Subj_ID = 0
 
-### Inverse Simpson
-# Plot
-tiff("InvSimp.tiff", width=6.5, height=3, units="in", res=600)
-ggplot(adiv.pair, aes(x=Treatment, y= invsimpson, fill = Treatment)) +
-  geom_boxplot(position=position_dodge(1)) +
-  geom_point() + 
-  facet_grid(.~Time) +
-  scale_fill_manual(values=c("indianred1", "orange", "springgreen3", "deepskyblue2")) +
-  xlab("Treatment") +
-  ylab("Inverse Simpson Weighted Diversity")
-dev.off()
-# Test normality
-hist(adiv.pair$invsimpson, breaks=10)
-qqnorm(adiv.pair$invsimpson)
-qqline(adiv.pair$invsimpson)
-shapiro.test(adiv.pair$invsimpson)
-  # p-value = 0.2751
-  # Normal
-# Stats
-summary(aov(invsimpson ~ Treatment, data = adiv.pair[which(adiv.pair$Time == "Pre-treatment"),]))
-  # Pre-treatment
-  # P-value = 0.323
-summary(aov(invsimpson ~ Treatment, data = adiv.pair[which(adiv.pair$Time == "Post-treatment"),]))
-  # Post-treatment
-t.test(invsimpson ~ Time, data = adiv.pair, paired=T)
-  # p-value = 0.09364
-t.test(invsimpson ~ Time, data = adiv.pair[which(adiv.pair$Treatment == "High Fat"),], paired=T)
-  # High Fat
-  # p-value = 0.2415
-t.test(invsimpson ~ Time, data = adiv.pair[which(adiv.pair$Treatment == "Low Fat"),], paired=T)
-  # Low Fat
-  # p-value = 0.0852
-t.test(invsimpson ~ Time, data = adiv.pair[which(adiv.pair$Treatment == "Saccharin"),], paired=T)
-  # Saccharin
-  # p-value = 0.9167
-t.test(invsimpson ~ Time, data = adiv.pair[which(adiv.pair$Treatment == "Stevia"),], paired=T)
-  # Stevia
-  # p-value = 0.7599
-t.test(invsimpson ~ Sex, data = adiv.pair[which(adiv.pair$Time == "Pre-treatment"),])
-  # Pre-treatment Sex
-  # p-value = 0.9731
-t.test(invsimpson ~ Sex, data = adiv.pair[which(adiv.pair$Time == "Post-treatment"),])
-  # Post-treatment Sex
-  # p-value = 0.001503
-t.test(invsimpson ~ Time, data = adiv.pair[which(adiv.pair[which(adiv.pair$Treatment == "High Fat"),]$Sex == "Female"),], paired=T)
-  # Female High Fat Time
-  # p-value = 0.5901
-t.test(invsimpson ~ Time, data = adiv.pair[which(adiv.pair[which(adiv.pair$Treatment == "High Fat"),]$Sex == "Male"),], paired=T)
-  # Male High Fat Time
-  # p-value = 0.1063
-t.test(invsimpson ~ Time, data = adiv.pair[which(adiv.pair[which(adiv.pair$Treatment == "Low Fat"),]$Sex == "Female"),], paired=T)
-  # Female Low Fat Time
-  # p-value = 0.1735
-t.test(invsimpson ~ Time, data = adiv.pair[which(adiv.pair[which(adiv.pair$Treatment == "Low Fat"),]$Sex == "Male"),], paired=T)
-  # Male Low Fat Time
-  # p-value = 0.3996
-t.test(invsimpson ~ Time, data = adiv.pair[which(adiv.pair[which(adiv.pair$Treatment == "Saccharin"),]$Sex == "Female"),], paired=T)
-  # Female Saccharin Time
-  # p-value = 0.1378
-t.test(invsimpson ~ Time, data = adiv.pair[which(adiv.pair[which(adiv.pair$Treatment == "Saccharin"),]$Sex == "Male"),], paired=T)
-  # Male Saccharin Time
-  # p-value = 0.4341
-t.test(invsimpson ~ Time, data = adiv.pair[which(adiv.pair[which(adiv.pair$Treatment == "Stevia"),]$Sex == "Female"),], paired=T)
-  # Female Stevia Time
-  # p-value = 0.6195
-t.test(invsimpson ~ Time, data = adiv.pair[which(adiv.pair[which(adiv.pair$Treatment == "Stevia"),]$Sex == "Male"),], paired=T)
-  # Male Stevia Time
-  # p-value = 0.0892
-# Repeated Measure
-summary(lmer(invsimpson ~ Time + Treatment + Sex + (1|Subj_ID), data=adiv.pair))
-  # Variance explained by Subj_ID = 0
 ```
 
 
