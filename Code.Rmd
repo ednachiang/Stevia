@@ -17,6 +17,7 @@ library(phyloseq)
 library(grid)
 library(pgirmess)
 library(lme4)
+library(miLineage)
 theme_set(theme_bw())
 set.seed(1)
 ```
@@ -2166,6 +2167,55 @@ stevia.simper.all[(nrow(stevia.simper.all)+1):(nrow(stevia.simper.all)+nrow(stev
 stevia.simper.all$fdr_krusk_p.val <- p.adjust(stevia.simper.all$krusk_p.val, "BH")
 write.table(stevia.simper.all, "stevia.simper.nosex.csv", sep=",")
 ```
+
+
+
+
+
+
+### miLineage
+```{r}
+# Prep inputs
+tax.ml <- as.matrix(tax_table(physeq.pair))
+colnames(tax.ml) <- c("Rank1","Rank2","Rank3","Rank4","Rank5","Rank6","Rank7")
+otu.ml <- data.frame(otu_table(physeq.pair))
+otu.ml <- as.matrix(t(otu.ml))
+var.ml <- as.matrix(sample_data(physeq.pair)[,7:8])
+var1.ml <- as.matrix(sample_data(physeq.pair)[,7])
+  # Body_Weight
+var2.ml <- as.matrix(sample_data(physeq.pair)[,8])
+  # Blood_Glucose
+
+# Run test
+ml.results <- QCAT_GEE(OTU=otu.ml, Tax=tax.ml, X=var.ml, X.index = 1, Z=var.ml, Z.index=1,  fdr.alpha=0.05, n.resample = 100)
+  # $sig.lineage$`Zero-Part`
+ [1] "Anaeroplasma"                 "Anaerotruncus"               
+ [3] "Clostridiales_unclassified"   "Erysipelatoclostridium"      
+ [5] "Family_XIII_ge"               "Mollicutes_RF9_ge"           
+ [7] "Roseburia"                    "Ruminiclostridium_6"         
+ [9] "Ruminococcaceae_unclassified" "Ruminococcus_1"              
+[11] "Coriobacteriaceae"            "Family_XIII"                 
+[13] "Streptococcaceae"             "Clostridiales"               
+[15] "Lactobacillales"              "Mollicutes"                  
+[17] "Actinobacteria"              
+
+$global.pval
+     Simes_Two-Part     Simes_Zero-Part Simes_Positive-Part 
+         0.16831683          0.06905306          0.82529543 
+ml.results2 <- QCAT_GEE(OTU=otu.ml, Tax=tax.ml, X=var.ml, X.index = 2, Z=var.ml, Z.index=1,  fdr.alpha=0.05, n.resample = 100)
+
+ml.results3 <- QCAT_GEE(OTU=otu.ml, Tax=tax.ml, X=var1.ml, X.index = 1, Z=var.ml, Z.index=1,  fdr.alpha=0.05, n.resample = 100)
+ml.results4 <- QCAT_GEE(OTU=otu.ml, Tax=tax.ml, X=var2.ml, X.index = 1, Z=var.ml, Z.index=1,  fdr.alpha=0.05, n.resample = 100)
+```
+
+
+
+
+
+
+
+
+
 
 
 
