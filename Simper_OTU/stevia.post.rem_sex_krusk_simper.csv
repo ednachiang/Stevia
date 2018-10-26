@@ -1,0 +1,11 @@
+Comparison,SIMPER,OTU,krusk_p.val,fdr_krusk_p.val,Taxonomy,Left.mean.abund,Left.stdev,Right.mean.abund,Right.stdev
+Male_Female,0.044132741,Otu00018,0.005408814,0.054088143,Firmicutes - Bacilli - Lactobacillales - Lactobacillaceae - Lactobacillus,0.03952499,0.050596442,0.001936474,0.00204891
+Male_Female,0.038501904,Otu00003,0.018305613,0.091528067,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidaceae - Bacteroides,0.044732267,0.019533985,0.06971309,0.028273141
+Male_Female,0.037876751,Otu00012,0.076804922,0.256016407,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_unclassified,0.065526356,0.035087357,0.080643196,0.016019132
+Male_Female,0.132586194,Otu00002,0.111708752,0.279271879,Verrucomicrobia - Verrucomicrobiae - Verrucomicrobiales - Verrucomicrobiaceae - Akkermansia,0.086485509,0.077203219,0.154979357,0.101846409
+Male_Female,0.058596678,Otu00001,0.227835586,0.383518615,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.089033339,0.033071655,0.067895045,0.053705844
+Male_Female,0.030985109,Otu00007,0.230111169,0.383518615,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.01154626,0.016448113,0.02784408,0.028666026
+Male_Female,0.041353378,Otu00014,0.342764083,0.489662975,Firmicutes - Bacilli - Lactobacillales - Streptococcaceae - Lactococcus,0.064116174,0.032320714,0.056118291,0.032419741
+Male_Female,0.037947302,Otu00010,0.48874412,0.61093015,Firmicutes - Clostridia - Clostridiales - Ruminococcaceae - Ruminiclostridium,0.065670359,0.034422889,0.06810386,0.024183085
+Male_Female,0.04251919,Otu00004,0.626131141,0.695701267,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.100612452,0.023691729,0.09519955,0.042002921
+Male_Female,0.032973278,Otu00009,0.745939634,0.745939634,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.018912484,0.021390799,0.024461506,0.033865245

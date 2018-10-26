@@ -1,0 +1,12 @@
+Comparison,SIMPER,OTU,krusk_p.val,fdr_krusk_p.val,Taxonomy,Left.mean.abund,Left.stdev,Right.mean.abund,Right.stdev
+Pre-treatment_Post-treatment,0.042246618,Otu00012,0.000692722,0.003935654,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_unclassified,0.002398349,0.003136301,0.066422285,0.037559764
+Pre-treatment_Post-treatment,0.03476134,Otu00008,0.000811206,0.003935654,Tenericutes - Mollicutes - Anaeroplasmatales - Anaeroplasmataceae - Anaeroplasma,0.053212368,0.042087144,5.81E-05,0.000174338
+Pre-treatment_Post-treatment,0.031554867,Otu00010,0.00107336,0.003935654,Firmicutes - Clostridia - Clostridiales - Ruminococcaceae - Ruminiclostridium,0.018407239,0.015294408,0.064765424,0.031369421
+Pre-treatment_Post-treatment,0.071187749,Otu00005,0.002315807,0.006368469,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.115047414,0.114382312,0.007695629,0.005884137
+Pre-treatment_Post-treatment,0.045177243,Otu00004,0.005410534,0.011903174,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.040997008,0.014149131,0.100423194,0.040870261
+Pre-treatment_Post-treatment,0.025681855,Otu00009,0.014343597,0.026296595,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.005700374,0.010543668,0.041614691,0.035236241
+Pre-treatment_Post-treatment,0.04136155,Otu00006,0.029534952,0.046412068,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.063421943,0.074860586,0.000409052,0.00073371
+Pre-treatment_Post-treatment,0.078980861,Otu00002,0.037977204,0.052218655,Verrucomicrobia - Verrucomicrobiae - Verrucomicrobiales - Verrucomicrobiaceae - Akkermansia,0.045500452,0.025232776,0.15332186,0.111776718
+Pre-treatment_Post-treatment,0.029631134,Otu00011,0.075756063,0.092590744,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.045476616,0.040859423,0.000640447,0.000682989
+Pre-treatment_Post-treatment,0.023025857,Otu00021,0.203005001,0.223305501,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.035115925,0.066184108,5.81E-05,0.000174155
+Pre-treatment_Post-treatment,0.062159196,Otu00001,0.286814301,0.286814301,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.071688555,0.098947094,0.098038442,0.057276214
