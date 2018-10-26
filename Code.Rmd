@@ -1174,14 +1174,14 @@ adonis(pair.bray ~ Time + Treatment + Sex + Subj_ID,
   # Sex: p-value = 0.001; R2 = 0.07370
   # Subj_ID: p-value = 0.907, R2 = 0.23038
   # Residuals = 0.31445
-adonis(pair.bray ~ Time*Treatment*Sex, data=pair.sampdf, permutations=100)
-  # Time: p-value = 0.009901, R2 = 0.25838
-  # Treatment: p-value = 0.009901, R2 = 0.12309
-  # Sex: p-value =  0.009901, R2 = 0.07370
-  # Time:Treatment: p-value = 0.009901, R2 = 0.09180
-  # Time:Sex: p-value = 0.00901, R2 = 0.05753
-  # Treatment:Sex: p-value = 0.277228, R2 = 0.02191
-  # Time:Treatment:Sex: p-value = 0.277228, R2= 0.02160
+adonis(pair.bray ~ Time*Treatment*Sex, data=pair.sampdf)
+  # Time: p-value = 0.001, R2 = 0.25838
+  # Treatment: p-value = 0.001, R2 = 0.12309
+  # Sex: p-value =  0.001, R2 = 0.07370
+  # Time:Treatment: p-value = 0.001, R2 = 0.09180
+  # Time:Sex: p-value = 0.001, R2 = 0.05753
+  # Treatment:Sex: p-value = 0.259, R2 = 0.02191
+  # Time:Treatment:Sex: p-value = 0.298, R2= 0.02160
   # Residuals: R2 = 0.35198
 
 ### Pre-treatment
@@ -1196,6 +1196,9 @@ beta.tax = betadisper(d=pre.bray, group=pre.sampdf$Sex)
 p <- permutest(beta.tax)
 p$tab
   # p-value = 0.042
+anosim(pre.bray, pre.sampdf$Sex)
+  # p-value = 0.001
+  # R = 0.8267
 
 # Treatment
 adonis(pre.bray ~ Treatment, data=pre.sampdf)
@@ -1210,6 +1213,14 @@ p$tab
 adonis(pre.bray ~ Sex + Treatment, data=pre.sampdf)
   # Sex: p-value = 0.001; R2 = 0.34423
   # Treatment: p-value = 0.340; R2 = 0.06231
+adonis(pre.bray ~ Sex*Treatment, data=pre.sampdf)
+  # Sex: p-value = 0.001, R2 = 0.34423
+  # Treatment: p-value = 0.367, R2 = 0.06231
+  # Sex:Treatment: p-value = 0.414, R2 = 0.05765
+  # Residuals = 0.53580
+
+
+
 
 
 
@@ -1234,13 +1245,21 @@ beta.tax = betadisper(d=post.bray, group=post.sampdf$Treatment)
 p <- permutest(beta.tax)
 p$tab
   # p-value = 0.001
+anosim(post.bray, post.sampdf$Treatment)
+  # p-value = 0.001
+  # R = 0.4626
+
 
 # Combined Variables
 adonis(post.bray ~ Treatment + Sex, data=post.sampdf)
   # Treatment: p-value = 0.001; R2 = 0.47417
-  # R2: p-value = 0.036; R2 = 0.04196
-
-
+  # Sex: p-value = 0.036; R2 = 0.04196
+  # Residuals = 0.48387
+adonis(post.bray ~ Treatment*Sex, data=post.sampdf)
+  # Treatment: p-value = 0.001, R2 = 0.47417
+  # Sex: p-value = 0.025, R2 = 0.04196
+  # Treatment:Sex: p-value = 0.186, R2 = 0.05951
+  # Residuals = 0.42435
 
 ### Post-treatment w/o Low Fat
 post.rem.sampdf <- data.frame(sample_data(physeq.post.rem))
@@ -1268,6 +1287,12 @@ p$tab
 adonis(post.rem.bray ~ Sex + Treatment, data=post.rem.sampdf)
   # Sex: p-value = 0.002; R2 = 0.13250
   # Treatment: p-value = 0.010; R2 = 0.13259
+adonis(post.rem.bray ~ Treatment*Sex, data=post.rem.sampdf)
+  # Treatment: p-value = 0.014, R2 = 0.12945
+  # Sex: p-value = 0.001, R2 = 0.13564
+  # Treatment:Sex: p-value = 0.474, R2 = 0.06651
+  # Residuals = 0.66840
+
 
 
 
@@ -1724,11 +1749,11 @@ stevia.simper.kw <- read.csv("Simper_OTU/stevia_krusk_simper.csv")
 for(i in 1:nrow(stevia.simper.kw)){
   save <- which(rownames(data.frame(tax_table(physeq.pair))) == stevia.simper.kw$OTU[i])
   stevia.simper.kw$Taxonomy[i] <-
-    paste(data.frame(tax_table(physeq.pair))[i,2], "-",
-          data.frame(tax_table(physeq.pair))[i,3], "-",
-          data.frame(tax_table(physeq.pair))[i,4], "-",
-          data.frame(tax_table(physeq.pair))[i,5], "-",
-          data.frame(tax_table(physeq.pair))[i,6])
+    paste(data.frame(tax_table(physeq.pair))[save,2], "-",
+          data.frame(tax_table(physeq.pair))[save,3], "-",
+          data.frame(tax_table(physeq.pair))[save,4], "-",
+          data.frame(tax_table(physeq.pair))[save,5], "-",
+          data.frame(tax_table(physeq.pair))[save,6])
 }
 #write.table(stevia.simper.kw, "stevia_krusk_simper.csv", sep=",")
 
@@ -1749,11 +1774,11 @@ stevia.pre.simper.kw <- read.csv("Simper_OTU/stevia.pre_krusk_simper.csv")
 for(i in 1:nrow(stevia.pre.simper.kw)){
   save <- which(rownames(data.frame(tax_table(physeq.pre))) == stevia.pre.simper.kw$OTU[i])
   stevia.pre.simper.kw$Taxonomy[i] <-
-    paste(data.frame(tax_table(physeq.pre))[i,2], "-",
-          data.frame(tax_table(physeq.pre))[i,3], "-",
-          data.frame(tax_table(physeq.pre))[i,4], "-",
-          data.frame(tax_table(physeq.pre))[i,5], "-",
-          data.frame(tax_table(physeq.pre))[i,6])
+    paste(data.frame(tax_table(physeq.pre))[save,2], "-",
+          data.frame(tax_table(physeq.pre))[save,3], "-",
+          data.frame(tax_table(physeq.pre))[save,4], "-",
+          data.frame(tax_table(physeq.pre))[save,5], "-",
+          data.frame(tax_table(physeq.pre))[save,6])
 }
 write.table(stevia.pre.simper.kw, "stevia.pre_krusk_simper.csv", sep=",")
 
@@ -1774,11 +1799,11 @@ stevia.post.simper.kw <- read.csv("Simper_OTU/stevia.post_krusk_simper.csv")
 for(i in 1:nrow(stevia.post.simper.kw)){
   save <- which(rownames(data.frame(tax_table(physeq.post))) == stevia.post.simper.kw$OTU[i])
   stevia.post.simper.kw$Taxonomy[i] <-
-    paste(data.frame(tax_table(physeq.post))[i,2], "-",
-          data.frame(tax_table(physeq.post))[i,3], "-",
-          data.frame(tax_table(physeq.post))[i,4], "-",
-          data.frame(tax_table(physeq.post))[i,5], "-",
-          data.frame(tax_table(physeq.post))[i,6])
+    paste(data.frame(tax_table(physeq.post))[save,2], "-",
+          data.frame(tax_table(physeq.post))[save,3], "-",
+          data.frame(tax_table(physeq.post))[save,4], "-",
+          data.frame(tax_table(physeq.post))[save,5], "-",
+          data.frame(tax_table(physeq.post))[save,6])
 }
 write.table(stevia.post.simper.kw, "stevia.post_krusk_simper.csv", sep=",")
 
@@ -1799,11 +1824,11 @@ stevia.hf.simper.kw <- read.csv("Simper_OTU/stevia.hf_krusk_simper.csv")
 for(i in 1:nrow(stevia.hf.simper.kw)){
   save <- which(rownames(data.frame(tax_table(physeq.hf))) == stevia.hf.simper.kw$OTU[i])
   stevia.hf.simper.kw$Taxonomy[i] <-
-    paste(data.frame(tax_table(physeq.hf))[i,2], "-",
-          data.frame(tax_table(physeq.hf))[i,3], "-",
-          data.frame(tax_table(physeq.hf))[i,4], "-",
-          data.frame(tax_table(physeq.hf))[i,5], "-",
-          data.frame(tax_table(physeq.hf))[i,6])
+    paste(data.frame(tax_table(physeq.hf))[save,2], "-",
+          data.frame(tax_table(physeq.hf))[save,3], "-",
+          data.frame(tax_table(physeq.hf))[save,4], "-",
+          data.frame(tax_table(physeq.hf))[save,5], "-",
+          data.frame(tax_table(physeq.hf))[save,6])
 }
 write.table(stevia.hf.simper.kw, "stevia.hf_krusk_simper.csv", sep=",")
 
@@ -1824,11 +1849,11 @@ stevia.lf.simper.kw <- read.csv("Simper_OTU/stevia.lf_krusk_simper.csv")
 for(i in 1:nrow(stevia.lf.simper.kw)){
   save <- which(rownames(data.frame(tax_table(physeq.lf))) == stevia.lf.simper.kw$OTU[i])
   stevia.lf.simper.kw$Taxonomy[i] <-
-    paste(data.frame(tax_table(physeq.lf))[i,2], "-",
-          data.frame(tax_table(physeq.lf))[i,3], "-",
-          data.frame(tax_table(physeq.lf))[i,4], "-",
-          data.frame(tax_table(physeq.lf))[i,5], "-",
-          data.frame(tax_table(physeq.lf))[i,6])
+    paste(data.frame(tax_table(physeq.lf))[save,2], "-",
+          data.frame(tax_table(physeq.lf))[save,3], "-",
+          data.frame(tax_table(physeq.lf))[save,4], "-",
+          data.frame(tax_table(physeq.lf))[save,5], "-",
+          data.frame(tax_table(physeq.lf))[save,6])
 }
 write.table(stevia.lf.simper.kw, "stevia.lf_krusk_simper.csv", sep=",")
 
@@ -1849,11 +1874,11 @@ stevia.sc.simper.kw <- read.csv("Simper_OTU/stevia.sc_krusk_simper.csv")
 for(i in 1:nrow(stevia.sc.simper.kw)){
   save <- which(rownames(data.frame(tax_table(physeq.sc))) == stevia.sc.simper.kw$OTU[i])
   stevia.sc.simper.kw$Taxonomy[i] <-
-    paste(data.frame(tax_table(physeq.sc))[i,2], "-",
-          data.frame(tax_table(physeq.sc))[i,3], "-",
-          data.frame(tax_table(physeq.sc))[i,4], "-",
-          data.frame(tax_table(physeq.sc))[i,5], "-",
-          data.frame(tax_table(physeq.sc))[i,6])
+    paste(data.frame(tax_table(physeq.sc))[save,2], "-",
+          data.frame(tax_table(physeq.sc))[save,3], "-",
+          data.frame(tax_table(physeq.sc))[save,4], "-",
+          data.frame(tax_table(physeq.sc))[save,5], "-",
+          data.frame(tax_table(physeq.sc))[save,6])
 }
 write.table(stevia.sc.simper.kw, "stevia.sc_krusk_simper.csv", sep=",")
 
@@ -1874,11 +1899,11 @@ stevia.tv.simper.kw <- read.csv("Simper_OTU/stevia.tv_krusk_simper.csv")
 for(i in 1:nrow(stevia.tv.simper.kw)){
   save <- which(rownames(data.frame(tax_table(physeq.tv))) == stevia.tv.simper.kw$OTU[i])
   stevia.tv.simper.kw$Taxonomy[i] <-
-    paste(data.frame(tax_table(physeq.tv))[i,2], "-",
-          data.frame(tax_table(physeq.tv))[i,3], "-",
-          data.frame(tax_table(physeq.tv))[i,4], "-",
-          data.frame(tax_table(physeq.tv))[i,5], "-",
-          data.frame(tax_table(physeq.tv))[i,6])
+    paste(data.frame(tax_table(physeq.tv))[save,2], "-",
+          data.frame(tax_table(physeq.tv))[save,3], "-",
+          data.frame(tax_table(physeq.tv))[save,4], "-",
+          data.frame(tax_table(physeq.tv))[save,5], "-",
+          data.frame(tax_table(physeq.tv))[save,6])
 }
 write.table(stevia.tv.simper.kw, "stevia.tv_krusk_simper.csv", sep=",")
 
@@ -1899,11 +1924,11 @@ write.table(stevia.tv.simper.kw, "stevia.tv_krusk_simper.csv", sep=",")
 # for(i in 1:nrow(stevia.post.rem.simper.kw)){
 #   save <- which(rownames(data.frame(tax_table(physeq.post.rem))) == stevia.post.rem.simper.kw$OTU[i])
 #   stevia.post.rem.simper.kw$Taxonomy[i] <-
-#     paste(data.frame(tax_table(physeq.post.rem))[i,2], "-",
-#           data.frame(tax_table(physeq.post.rem))[i,3], "-",
-#           data.frame(tax_table(physeq.post.rem))[i,4], "-",
-#           data.frame(tax_table(physeq.post.rem))[i,5], "-",
-#           data.frame(tax_table(physeq.post.rem))[i,6])
+#     paste(data.frame(tax_table(physeq.post.rem))[save,2], "-",
+#           data.frame(tax_table(physeq.post.rem))[save,3], "-",
+#           data.frame(tax_table(physeq.post.rem))[save,4], "-",
+#           data.frame(tax_table(physeq.post.rem))[save,5], "-",
+#           data.frame(tax_table(physeq.post.rem))[save,6])
 # }
 #write.table(stevia.post.simper.kw, "stevia.post.rem_krusk_simper.csv", sep=",")
 
