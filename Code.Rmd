@@ -797,17 +797,17 @@ bray.nmds <- ordinate(physeq=physeq.pair, method="NMDS", distance="bray")
   # stress = 8.822573e-05
 
 plot_ordination(physeq=physeq.pair, ordination=bray.nmds, color="Treatment", shape="Time") +
-  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00")) +
-  scale_shape_manual(values=c(19,2))
+  scale_shape_manual(values=c(19,2)) +
+  scale_color_manual(values=c("brown2", "rosybrown", "limegreen", "dodgerblue2"))
+
+
 
 ### Pre-treatment
 bray.nmds.pre <- ordinate(physeq=physeq.pre, method="NMDS", distance="bray")
   # stress = 0.1847002 
 plot_ordination(physeq=physeq.pre, ordination=bray.nmds.pre, color="Treatment", shape="Sex") +
-  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00")) +
-  scale_shape_manual(values=c(19,2))
-
-
+  scale_shape_manual(values=c(19,2)) +
+  scale_color_manual(values=c("brown2", "rosybrown", "limegreen", "dodgerblue2"))
 
 # Treatment Ellipses
 sample_data(physeq.pre)$Elip.treat <- paste(sample_data(physeq.pre)$Treatment)
@@ -827,8 +827,11 @@ for(i in levels(elip.nmds.pre.treat$Group)){
 
 # Plot w/ treatment ellip
 plot_ordination(physeq=physeq.pre, ordination=bray.nmds.pre, color="Treatment") +
-  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00")) +
-  geom_path(data=elip.pre.treat.df, aes(x=NMDS1, y=NMDS2, colour=group), size=1, linetype=1)
+  geom_path(data=elip.pre.treat.df, aes(x=NMDS1, y=NMDS2, colour=group), size=1, linetype=1) +
+  scale_color_manual(values=c("brown2", "rosybrown", "limegreen", "dodgerblue2"))
+
+
+
 
 # Sex Ellipses
 sample_data(physeq.pre)$Elip.sex <- paste(sample_data(physeq.pre)$Sex)
@@ -847,8 +850,22 @@ for(i in levels(elip.nmds.pre.sex$Group)){
 
 # Plot w/ sex ellip
 plot_ordination(physeq=physeq.pre, ordination=bray.nmds.pre, color="Sex") +
-  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00")) +
   geom_path(data=elip.pre.sex.df, aes(x=NMDS1, y=NMDS2, colour=group), size=1, linetype=1)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -857,7 +874,7 @@ bray.nmds.post <- ordinate(physeq=physeq.post, method="NMDS", distance="bray")
   # stress = 8.927466e-05
 
 plot_ordination(physeq=physeq.post, ordination=bray.nmds.post, color="Treatment", shape="Sex") +
-  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00")) +
+   scale_color_manual(values=c("brown2", "rosybrown", "limegreen", "dodgerblue2")) +
   scale_shape_manual(values=c(19,2))
 
 
@@ -867,7 +884,7 @@ bray.nmds.post.rem <- ordinate(physeq=physeq.post.rem, method="NMDS", distance="
   # stress = 0.2067552
 
 plot_ordination(physeq=physeq.post.rem, ordination=bray.nmds.post.rem, color="Treatment", shape="Sex") +
-  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00")) +
+  scale_color_manual(values=c("brown2", "rosybrown", "limegreen", "dodgerblue2")) +
   scale_shape_manual(values=c(19,2))
 
 # Treatment Ellipses
@@ -888,7 +905,7 @@ for(i in levels(elip.nmds.post.rem.treat$Group)){
 
 # Plot w/ treatment ellip
 plot_ordination(physeq=physeq.post.rem, ordination=bray.nmds.post.rem, color="Treatment") +
-  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00")) +
+  scale_color_manual(values=c("brown2", "rosybrown", "limegreen", "dodgerblue2")) +
   geom_path(data=elip.post.rem.treat.df, aes(x=NMDS1, y=NMDS2, colour=group), size=1, linetype=1)
 
 # Sex Ellipses
@@ -918,7 +935,7 @@ bray.nmds.fem <- ordinate(physeq=physeq.fem, method="NMDS", distance="bray")
   # stress = 8.77398e-05
 
 plot_ordination(physeq=physeq.fem, ordination=bray.nmds.fem, color="Treatment", shape="Time") +
-  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00")) +
+  scale_color_manual(values=c("brown2", "rosybrown", "limegreen", "dodgerblue2")) +
   scale_shape_manual(values=c(19,2))
 
 
@@ -928,7 +945,7 @@ bray.nmds.mal <- ordinate(physeq=physeq.mal, method="NMDS", distance="bray")
   # stress = 8.193224e-05 
 
 plot_ordination(physeq=physeq.mal, ordination=bray.nmds.mal, color="Treatment", shape="Time") +
-  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00")) +
+  scale_color_manual(values=c("brown2", "rosybrown", "limegreen", "dodgerblue2")) +
   scale_shape_manual(values=c(19,2))
 
 
@@ -956,7 +973,7 @@ for(i in levels(elip.nmds.pre.fem.treat$Group)){
 
 # Plot w/ treatment ellip
 plot_ordination(physeq=physeq.pre.fem, ordination=bray.nmds.pre.fem, color="Treatment") +
-  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00")) +
+  scale_color_manual(values=c("brown2", "rosybrown", "limegreen", "dodgerblue2")) +
   geom_path(data=elip.pre.fem.treat.df, aes(x=NMDS1, y=NMDS2, colour=group), size=1, linetype=1)
 
 
@@ -966,8 +983,8 @@ bray.nmds.pre.mal <- ordinate(physeq=physeq.pre.mal, method="NMDS", distance="br
   # stress = 0.1949269 
   # NO CONVERGENCE!!!
 
-plot_ordination(physeq=physeq.pre.mal, ordination=bray.nmds.pre.mal, color="Treatment") #+
-  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00"))
+plot_ordination(physeq=physeq.pre.mal, ordination=bray.nmds.pre.mal, color="Treatment") +
+  scale_color_manual(values=c("brown2", "rosybrown", "limegreen", "dodgerblue2"))
 
 # Treatment Ellipses
 sample_data(physeq.pre.mal)$Elip.treat <- paste(sample_data(physeq.pre.mal)$Treatment)
@@ -986,7 +1003,7 @@ for(i in levels(elip.nmds.pre.mal.treat$Group)){
 
 # Plot w/ treatment ellip
 plot_ordination(physeq=physeq.pre.mal, ordination=bray.nmds.pre.mal, color="Treatment") +
-  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00")) +
+  scale_color_manual(values=c("brown2", "rosybrown", "limegreen", "dodgerblue2")) +
   geom_path(data=elip.pre.mal.treat.df, aes(x=NMDS1, y=NMDS2, colour=group), size=1, linetype=1)
 
 
@@ -994,8 +1011,8 @@ plot_ordination(physeq=physeq.pre.mal, ordination=bray.nmds.pre.mal, color="Trea
 bray.nmds.post.fem <- ordinate(physeq=physeq.post.fem, method="NMDS", distance="bray")
   # stress = 8.335943e-05
 
-plot_ordination(physeq=physeq.post.fem, ordination=bray.nmds.post.fem, color="Treatment") #+
-  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00"))
+plot_ordination(physeq=physeq.post.fem, ordination=bray.nmds.post.fem, color="Treatment") +
+  scale_color_manual(values=c("brown2", "rosybrown", "limegreen", "dodgerblue2"))
 
 # Treatment Ellipses
 sample_data(physeq.post.fem)$Elip.treat <- paste(sample_data(physeq.post.fem)$Treatment)
@@ -1014,7 +1031,7 @@ for(i in levels(elip.nmds.post.fem.treat$Group)){
 
 # Plot w/ treatment ellip
 plot_ordination(physeq=physeq.post.fem, ordination=bray.nmds.post.fem, color="Treatment") +
-  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00")) +
+  scale_color_manual(values=c("brown2", "rosybrown", "limegreen", "dodgerblue2")) +
   geom_path(data=elip.post.fem.treat.df, aes(x=NMDS1, y=NMDS2, colour=group), size=1, linetype=1)
 
 
@@ -1022,8 +1039,8 @@ plot_ordination(physeq=physeq.post.fem, ordination=bray.nmds.post.fem, color="Tr
 bray.nmds.post.mal <- ordinate(physeq=physeq.post.mal, method="NMDS", distance="bray")
   # stress = 8.658975e-05 
 
-plot_ordination(physeq=physeq.post.mal, ordination=bray.nmds.post.mal, color="Treatment") #+
-  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00"))
+plot_ordination(physeq=physeq.post.mal, ordination=bray.nmds.post.mal, color="Treatment") +
+  scale_color_manual(values=c("brown2", "rosybrown", "limegreen", "dodgerblue2"))
 
 # Treatment Ellipses
 sample_data(physeq.post.mal)$Elip.treat <- paste(sample_data(physeq.post.mal)$Treatment)
@@ -1042,7 +1059,7 @@ for(i in levels(elip.nmds.post.mal.treat$Group)){
 
 # Plot w/ treatment ellip
 plot_ordination(physeq=physeq.post.mal, ordination=bray.nmds.post.mal, color="Treatment") +
-  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00")) +
+  scale_color_manual(values=c("brown2", "rosybrown", "limegreen", "dodgerblue2")) +
   geom_path(data=elip.post.mal.treat.df, aes(x=NMDS1, y=NMDS2, colour=group), size=1, linetype=1)
 
 
@@ -1051,8 +1068,8 @@ plot_ordination(physeq=physeq.post.mal, ordination=bray.nmds.post.mal, color="Tr
 bray.nmds.post.fem.rem <- ordinate(physeq=physeq.post.fem.rem, method="NMDS", distance="bray")
   # stress = 0.169206 
 
-plot_ordination(physeq=physeq.post.fem.rem, ordination=bray.nmds.post.fem.rem, color="Treatment") #+
-  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00"))
+plot_ordination(physeq=physeq.post.fem.rem, ordination=bray.nmds.post.fem.rem, color="Treatment") +
+  scale_color_manual(values=c("brown2", "rosybrown", "limegreen", "dodgerblue2")) +
 
 # Treatment Ellipses
 sample_data(physeq.post.fem.rem)$Elip.treat <- paste(sample_data(physeq.post.fem.rem)$Treatment)
@@ -1071,7 +1088,7 @@ for(i in levels(elip.nmds.post.fem.rem.treat$Group)){
 
 # Plot w/ treatment ellip
 plot_ordination(physeq=physeq.post.fem.rem, ordination=bray.nmds.post.fem.rem, color="Treatment") +
-  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00")) +
+  scale_color_manual(values=c("brown2", "rosybrown", "limegreen", "dodgerblue2")) +
   geom_path(data=elip.post.fem.rem.treat.df, aes(x=NMDS1, y=NMDS2, colour=group), size=1, linetype=1)
 
 
@@ -1080,8 +1097,8 @@ plot_ordination(physeq=physeq.post.fem.rem, ordination=bray.nmds.post.fem.rem, c
 bray.nmds.post.mal.rem <- ordinate(physeq=physeq.post.mal.rem, method="NMDS", distance="bray")
   # stress = 0.160679
 
-plot_ordination(physeq=physeq.post.mal.rem, ordination=bray.nmds.post.mal.rem, color="Treatment") #+
-  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00"))
+plot_ordination(physeq=physeq.post.mal.rem, ordination=bray.nmds.post.mal.rem, color="Treatment") +
+  scale_color_manual(values=c("brown2", "rosybrown", "limegreen", "dodgerblue2"))
 
 # Treatment Ellipses
 sample_data(physeq.post.mal.rem)$Elip.treat <- paste(sample_data(physeq.post.mal.rem)$Treatment)
@@ -1100,7 +1117,7 @@ for(i in levels(elip.nmds.post.mal.rem.treat$Group)){
 
 # Plot w/ treatment ellip
 plot_ordination(physeq=physeq.post.mal.rem, ordination=bray.nmds.post.mal.rem, color="Treatment") +
-  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00")) +
+  scale_color_manual(values=c("brown2", "rosybrown", "limegreen", "dodgerblue2")) +
   geom_path(data=elip.post.mal.rem.treat.df, aes(x=NMDS1, y=NMDS2, colour=group), size=1, linetype=1)
 ```
 
