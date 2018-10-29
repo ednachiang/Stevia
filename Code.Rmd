@@ -2175,8 +2175,11 @@ write.table(stevia.simper.all, "stevia.simper.nosex.csv", sep=",")
 ### miLineage
 ```{r}
 ### Load miLineage Results
-load("ml.bodyweight.RData")
-
+load("miLineage/ml.all.bodyweight.RData")
+load("miLineage/ml.all.bloodglucose.RData")
+load("miLineage/ml.bodyweight.RData")
+load("miLineage/ml.post.bodyweight.RData")
+load("miLineage/ml.bloodglucose.RData")
 
 # Prep inputs
 tax.ml <- as.matrix(tax_table(physeq.pair))
