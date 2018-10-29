@@ -2050,6 +2050,8 @@ physeq.simper.post <- transform_sample_counts(physeq.simper.post, function(x){x*
 sample_data(physeq.simper.post)$Treatment <- ordered(sample_data(physeq.simper.post)$Treatment, levels=c("LowFat", "HighFat", "Saccharin", "Stevia"))
 
 
+tax_table(physeq.simper.post)$OTU_Classification <- ordered(tax_table(physeq.simper.post)$OTU_Classification, levels=c("Akkermansia", "Anaeroplasma", "Lactobacillus", "Lactococcus", "Lachnospiraceae", "Ruminiclostridium", "Alistipes", "S24-7", "S24-7", "S24-7", "Bacteroides"))
+
 
 
 
@@ -2063,9 +2065,35 @@ plot_heatmap(physeq.simper.post, sample.label = "Treatment", sample.order = c("L
   geom_text(aes(label=sprintf("%0.2f", round(Abundance, digits=2)))) +
   scale_fill_gradient(name="Relative Abundance", low = "#FFFFCC", high = "firebrick3") +
   scale_x_discrete(labels = c("Low Fat", "High Fat", "Saccharin", "Stevia")) +
+  scale_y_discrete(labels=c(expression(" "^ac~"Bacteroides"), expression(" "^abc~"S24-7"), 
+                            expression(" "^d~"S24-7"), expression(" "^bc~"S24-7"), 
+                            expression(" "^abc~"Alistipes"), expression(" "^abc~"Ruminiclostridium"),
+                            expression(" "^abc~"Lachnospiraceae"), expression(" "^acde~"Lactococcus"),
+                            expression(" "^c~"Lactobacillus"), expression(" "^abc~"Anaeroplasma"), 
+                            expression(" "^abc~"Akkermansia"))) +
   theme(panel.border=element_blank(),
         axis.text.x = element_text(angle=50, hjust=0.3),
-        axis.ticks.x=element_blank()
+        axis.ticks.x=element_blank(),
+        axis.ticks.y=element_blank(),
+        axis.title.y = element_text(margin = margin(t=0, r=20, b=0, l=0)),
+        axis.line=element_blank()
+  ) +
+  guides(fill = guide_colorbar(barheight = unit( 3 , "in" ),
+                                ticks.color = "black",
+                                ticks.linewidth = 1,
+                                frame.color = "black",
+                                frame.linewidth = 1))
+
+
+plot_heatmap(physeq.simper.post, sample.label = "Treatment", sample.order = c("LowFat", "HighFat", "Saccharin", "Stevia"), taxa.label = "OTU_Classification", taxa.order = "Phylum", low = "#FFFFCC", high = "firebrick3", na.value = "#FFFFFC") +
+  geom_tile(colour="gray40") +
+  geom_text(aes(label=sprintf("%0.2f", round(Abundance, digits=2)))) +
+  scale_fill_gradient(name="Relative Abundance", low = "#FFFFCC", high = "firebrick3") +
+  scale_x_discrete(labels = c("Low Fat", "High Fat", "Saccharin", "Stevia")) +
+  theme(panel.border=element_blank(),
+        axis.text.x = element_text(angle=50, hjust=0.3),
+        axis.ticks.x=element_blank(),
+        axis.title.y = element_text(margin = margin(t=0, r=20, b=0, l=0))
   ) +
   guides(fill = guide_colorbar(barheight = unit( 3 , "in" ),
                                 ticks.color = "black",
