@@ -1,77 +1,77 @@
 Sample_ID,Subj_ID,Treatment,Time,Sex,Group,Body_Weight,Blood_Glucose
-FL1A,FL1,Low Fat,Pre-treatment,Male,LowFat_Pre,22,NA
-FL1C,FL1,Low Fat,Post-treatment,Male,LowFat_Post,26.9,21785
-FL2A,FL2,Low Fat,Pre-treatment,Female,LowFat_Pre,20.8,NA
-FL2C,FL2,Low Fat,Post-treatment,Female,LowFat_Post,24.7,25870
-FL3A,FL3,Low Fat,Pre-treatment,Female,LowFat_Pre,18,NA
-FL3C,FL3,Low Fat,Post-treatment,Female,LowFat_Post,23.6,22330
-FL4A,FL4,Low Fat,Pre-treatment,Female,LowFat_Pre,18,NA
+FL1A,FL1,Low Fat,Pre-treatment,Male,LowFat_Pre,23.2,NA
+FL1C,FL1,Low Fat,Post-treatment,Male,LowFat_Post,26.7,21785
+FL2A,FL2,Low Fat,Pre-treatment,Female,LowFat_Pre,21.3,NA
+FL2C,FL2,Low Fat,Post-treatment,Female,LowFat_Post,24.9,25870
+FL3A,FL3,Low Fat,Pre-treatment,Female,LowFat_Pre,19.1,NA
+FL3C,FL3,Low Fat,Post-treatment,Female,LowFat_Post,22.4,22330
+FL4A,FL4,Low Fat,Pre-treatment,Female,LowFat_Pre,18.6,NA
 FL4C,FL4,Low Fat,Post-treatment,Female,LowFat_Post,23,19890
-FL5A,FL5,Low Fat,Pre-treatment,Male,LowFar_Pre,25.8,NA
-FL5C,FL5,Low Fat,Post-treatment,Male,LowFat_Post,27.9,17870
-FL6A,FL6,Low Fat,Pre-treatment,Female,LowFat_Pre,17.3,NA
-FL6C,FL6,Low Fat,Post-treatment,Female,LowFat_Post,21.5,22890
-FL7A,FL7,Low Fat,Pre-treatment,Male,LowFat_Pre,24.6,NA
-FL7C,FL7,Low Fat,Post-treatment,Male,LowFat_Post,30,35875
-FL8A,FL8,Low Fat,Pre-treatment,Female,LowFat_Pre,16.9,NA
-FL8C,FL8,Low Fat,Post-treatment,Female,LowFat_Post,20,21607.5
-FL9A,FL9,Low Fat,Pre-treatment,Male,LowFat_Pre,22.1,NA
+FL5A,FL5,Low Fat,Pre-treatment,Male,LowFar_Pre,25.6,NA
+FL5C,FL5,Low Fat,Post-treatment,Male,LowFat_Post,28.1,17870
+FL6A,FL6,Low Fat,Pre-treatment,Female,LowFat_Pre,18.6,NA
+FL6C,FL6,Low Fat,Post-treatment,Female,LowFat_Post,22.2,22890
+FL7A,FL7,Low Fat,Pre-treatment,Male,LowFat_Pre,25.3,NA
+FL7C,FL7,Low Fat,Post-treatment,Male,LowFat_Post,29.5,35875
+FL8A,FL8,Low Fat,Pre-treatment,Female,LowFat_Pre,17.4,NA
+FL8C,FL8,Low Fat,Post-treatment,Female,LowFat_Post,20.9,21607.5
+FL9A,FL9,Low Fat,Pre-treatment,Male,LowFat_Pre,24.7,NA
 FL9C,FL9,Low Fat,Post-treatment,Male,LowFat_Post,26.6,26352.5
-FL10A,FL10,Low Fat,Pre-treatment,Male,LowFat_Pre,25.6,NA
-FL10C,FL10,Low Fat,Post-treatment,Male,LowFat_Post,30.6,22760
-HF1A,HF1,High Fat,Pre-treatment,Male,HighFat_Pre,24.1,NA
-HF1C,HF1,High Fat,Post-treatment,Male,HighFat_Post,51.3,54187.5
-HF2A,HF2,High Fat,Pre-treatment,Female,HighFat_Pre,17.5,NA
-HF2C,HF2,High Fat,Post-treatment,Female,HighFat_Post,34.6,40387.5
-HF3A,HF3,High Fat,Pre-treatment,Male,HighFat_Pre,23.2,NA
-HF3C,HF3,High Fat,Post-treatment,Male,HighFat_Post,46.6,38932.5
-HF4A,HF4,High Fat,Pre-treatment,Male,HighFat_Pre,24.8,NA
-HF4C,HF4,High Fat,Post-treatment,Male,HighFat_Post,49.9,57077.5
-HF5A,HF5,High Fat,Pre-treatment,Female,HighFat_Pre,19.6,NA
-HF5C,HF5,High Fat,Post-treatment,Female,HighFat_Post,46.5,37397.5
-HF6A,HF6,High Fat,Pre-treatment,Female,HighFat_Pre,16.6,NA
-HF6C,HF6,High Fat,Post-treatment,Female,HighFat_Post,33.3,37837.5
-HF7A,HF7,High Fat,Pre-treatment,Female,HighFat_Pre,18.1,NA
-HF7C,HF7,High Fat,Post-treatment,Female,HighFat_Post,27.7,28442.5
-HF8C,HF8,High Fat,Post-treatment,Female,HighFat_Post,42.1,36430
-HF9A,HF9,High Fat,Pre-treatment,Male,HighFat_Pre,23.8,NA
-HF9C,HF9,High Fat,Post-treatment,Male,HighFat_Post,53.4,56740
-HF10A,HF10,High Fat,Pre-treatment,Male,HighFat_Pre,23.8,NA
+FL10A,FL10,Low Fat,Pre-treatment,Male,LowFat_Pre,27,NA
+FL10C,FL10,Low Fat,Post-treatment,Male,LowFat_Post,30.2,22760
+HF1A,HF1,High Fat,Pre-treatment,Male,HighFat_Pre,26.5,NA
+HF1C,HF1,High Fat,Post-treatment,Male,HighFat_Post,52.6,54187.5
+HF2A,HF2,High Fat,Pre-treatment,Female,HighFat_Pre,18.9,NA
+HF2C,HF2,High Fat,Post-treatment,Female,HighFat_Post,36.1,40387.5
+HF3A,HF3,High Fat,Pre-treatment,Male,HighFat_Pre,23.9,NA
+HF3C,HF3,High Fat,Post-treatment,Male,HighFat_Post,47.5,38932.5
+HF4A,HF4,High Fat,Pre-treatment,Male,HighFat_Pre,26.9,NA
+HF4C,HF4,High Fat,Post-treatment,Male,HighFat_Post,51.8,57077.5
+HF5A,HF5,High Fat,Pre-treatment,Female,HighFat_Pre,21.1,NA
+HF5C,HF5,High Fat,Post-treatment,Female,HighFat_Post,46.7,37397.5
+HF6A,HF6,High Fat,Pre-treatment,Female,HighFat_Pre,18.1,NA
+HF6C,HF6,High Fat,Post-treatment,Female,HighFat_Post,33.2,37837.5
+HF7A,HF7,High Fat,Pre-treatment,Female,HighFat_Pre,18,NA
+HF7C,HF7,High Fat,Post-treatment,Female,HighFat_Post,27.8,28442.5
+HF8C,HF8,High Fat,Post-treatment,Female,HighFat_Post,41.9,36430
+HF9A,HF9,High Fat,Pre-treatment,Male,HighFat_Pre,24.4,NA
+HF9C,HF9,High Fat,Post-treatment,Male,HighFat_Post,53.5,56740
+HF10A,HF10,High Fat,Pre-treatment,Male,HighFat_Pre,24.9,NA
 HF10C,HF10,High Fat,Post-treatment,Male,HighFat_Post,48.7,29777.5
-SC1A,SC1,Saccharin,Pre-treatment,Male,Saccharin_Pre,26,NA
-SC1C,SC1,Saccharin,Post-treatment,Male,Saccharin_Post,47.7,45385
-SC2A,SC2,Saccharin,Pre-treatment,Male,Saccharin_Pre,23,NA
-SC2C,SC2,Saccharin,Post-treatment,Male,Saccharin_Post,48.4,39175
-SC3A,SC3,Saccharin,Pre-treatment,Male,Saccharin_Pre,25,NA
+SC1A,SC1,Saccharin,Pre-treatment,Male,Saccharin_Pre,23.2,NA
+SC1C,SC1,Saccharin,Post-treatment,Male,Saccharin_Post,48.2,45385
+SC2A,SC2,Saccharin,Pre-treatment,Male,Saccharin_Pre,23.8,NA
+SC2C,SC2,Saccharin,Post-treatment,Male,Saccharin_Post,49.6,39175
+SC3A,SC3,Saccharin,Pre-treatment,Male,Saccharin_Pre,25.3,NA
 SC3C,SC3,Saccharin,Post-treatment,Male,Saccharin_Post,48.1,48645.8333
 SC4A,SC4,Saccharin,Pre-treatment,Male,Saccharin_Pre,22.2,NA
-SC5A,SC5,Saccharin,Pre-treatment,Male,Saccharin_Pre,25.8,NA
-SC5C,SC5,Saccharin,Post-treatment,Male,Saccharin_Post,49.8,48600
-SC6A,SC6,Saccharin,Pre-treatment,Female,Saccharin_Pre,18.3,NA
-SC6C,SC6,Saccharin,Post-treatment,Female,Saccharin_Post,48.4,
-SC7A,SC7,Saccharin,Pre-treatment,Female,Saccharin_Pre,17.6,NA
-SC7C,SC7,Saccharin,Post-treatment,Female,Saccharin_Post,35.7,32765
-SC8A,SC8,Saccharin,Pre-treatment,Female,Saccharin_Pre,16.4,NA
-SC8C,SC8,Saccharin,Post-treatment,Female,Saccharin_Post,31.1,32342.5
-SC9A,SC9,Saccharin,Pre-treatment,Female,Saccharin_Pre,18.1,NA
-SC9C,SC9,Saccharin,Post-treatment,Female,Saccharin_Post,38.1,24667.5
-SC10A,SC10,Saccharin,Pre-treatment,Female,Saccharin_Pre,20,NA
-SC10C,SC10,Saccharin,Post-treatment,Female,Saccharin_Post,37,29167.5
-TV1A,TV1,Stevia,Pre-treatment,Male,Stevia_Pre,22.2,NA
-TV1C,TV1,Stevia,Post-treatment,Male,Stevia_Post,47.8,39510
-TV2A,TV2,Stevia,Pre-treatment,Male,Stevia_Pre,24,NA
-TV3A,TV3,Stevia,Pre-treatment,Male,Stevia_Pre,23.5,NA
-TV3C,TV3,Stevia,Post-treatment,Male,Stevia_Post,50.3,47517.5
-TV4A,TV4,Stevia,Pre-treatment,Male,Stevia_Pre,25.9,NA
-TV4C,TV4,Stevia,Post-treatment,Male,Stevia_Post,49.1,58777.5
-TV5A,TV5,Stevia,Pre-treatment,Female,Stevia_Pre,17.3,NA
-TV5C,TV5,Stevia,Post-treatment,Female,Stevia_Post,27.4,30347.5
-TV6A,TV6,Stevia,Pre-treatment,Female,Stevia_Pre,18.5,NA
-TV6C,TV6,Stevia,Post-treatment,Female,Stevia_Post,43.4,39465
-TV7A,TV7,Stevia,Pre-treatment,Male,Stevia_Pre,25.4,NA
-TV7C,TV7,Stevia,Post-treatment,Male,Stevia_Post,49.8,50897.5
-TV8A,TV8,Stevia,Pre-treatment,Female,Stevia_Pre,19.7,NA
-TV9A,TV9,Stevia,Pre-treatment,Female,Stevia_Pre,18.9,NA
-TV9C,TV9,Stevia,Post-treatment,Female,Stevia_Post,46.4,35699.16667
-TV10A,TV10,Stevia,Pre-treatment,Female,Stevia_Pre,17,NA
-TV10C,TV10,Stevia,Post-treatment,Female,Stevia_Post,35.3,27257.5
+SC5A,SC5,Saccharin,Pre-treatment,Male,Saccharin_Pre,26.6,NA
+SC5C,SC5,Saccharin,Post-treatment,Male,Saccharin_Post,50.5,48600
+SC6A,SC6,Saccharin,Pre-treatment,Female,Saccharin_Pre,19.8,NA
+SC6C,SC6,Saccharin,Post-treatment,Female,Saccharin_Post,45.9,
+SC7A,SC7,Saccharin,Pre-treatment,Female,Saccharin_Pre,17.7,NA
+SC7C,SC7,Saccharin,Post-treatment,Female,Saccharin_Post,36.4,32765
+SC8A,SC8,Saccharin,Pre-treatment,Female,Saccharin_Pre,17.6,NA
+SC8C,SC8,Saccharin,Post-treatment,Female,Saccharin_Post,30.5,32342.5
+SC9A,SC9,Saccharin,Pre-treatment,Female,Saccharin_Pre,18.2,NA
+SC9C,SC9,Saccharin,Post-treatment,Female,Saccharin_Post,38.4,24667.5
+SC10A,SC10,Saccharin,Pre-treatment,Female,Saccharin_Pre,20.3,NA
+SC10C,SC10,Saccharin,Post-treatment,Female,Saccharin_Post,36.7,29167.5
+TV1A,TV1,Stevia,Pre-treatment,Male,Stevia_Pre,21.9,NA
+TV1C,TV1,Stevia,Post-treatment,Male,Stevia_Post,48.8,39510
+TV2A,TV2,Stevia,Pre-treatment,Male,Stevia_Pre,24.9,NA
+TV3A,TV3,Stevia,Pre-treatment,Male,Stevia_Pre,24.5,NA
+TV3C,TV3,Stevia,Post-treatment,Male,Stevia_Post,53.8,47517.5
+TV4A,TV4,Stevia,Pre-treatment,Male,Stevia_Pre,26.4,NA
+TV4C,TV4,Stevia,Post-treatment,Male,Stevia_Post,51.9,58777.5
+TV5A,TV5,Stevia,Pre-treatment,Female,Stevia_Pre,17.1,NA
+TV5C,TV5,Stevia,Post-treatment,Female,Stevia_Post,27.5,30347.5
+TV6A,TV6,Stevia,Pre-treatment,Female,Stevia_Pre,18.1,NA
+TV6C,TV6,Stevia,Post-treatment,Female,Stevia_Post,43.3,39465
+TV7A,TV7,Stevia,Pre-treatment,Male,Stevia_Pre,25.7,NA
+TV7C,TV7,Stevia,Post-treatment,Male,Stevia_Post,49.5,50897.5
+TV8A,TV8,Stevia,Pre-treatment,Female,Stevia_Pre,19.4,NA
+TV9A,TV9,Stevia,Pre-treatment,Female,Stevia_Pre,20.2,NA
+TV9C,TV9,Stevia,Post-treatment,Female,Stevia_Post,46.2,35699.16667
+TV10A,TV10,Stevia,Pre-treatment,Female,Stevia_Pre,19.1,NA
+TV10C,TV10,Stevia,Post-treatment,Female,Stevia_Post,34.4,27257.5

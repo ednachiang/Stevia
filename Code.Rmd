@@ -268,11 +268,10 @@ divsum <- read.table("mothur_outputs/final.summary", header=T)
 
 
 # Add in diversity summaries
-meta[,7:17] <- divsum[,3:12]
+meta[,9:19] <- divsum[,3:12]
 
 # Create intermin phyloseq object
 physeq <- merge_phyloseq(mothurdata, sample_data(meta))
-
 #save(physeq, file="Physeq.RData")
 
 # Subset out paired samples
