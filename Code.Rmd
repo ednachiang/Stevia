@@ -18,6 +18,8 @@ library(grid)
 library(pgirmess)
 library(lme4)
 library(miLineage)
+library(pheatmap)
+library(RColorBrewer)
 theme_set(theme_bw())
 set.seed(1)
 ```
@@ -205,6 +207,23 @@ kruskal.pretty = function(otu, metrics, csv, interesting, output_name, taxonomy)
   o_csv[,1]=NULL
   write.csv(o_csv, file=paste(output_name,"_krusk_simper.csv", sep=""))
 }
+
+
+# https://slowkow.com/notes/heatmap-tutorial/
+draw_colnames_45 <- function (coln, gaps, ...) {
+    coord <- pheatmap:::find_coordinates(length(coln), gaps)
+    x     <- coord$coord - 0.5 * coord$size
+    res   <- grid::textGrob(
+      coln, x = x, y = unit(1, "npc") - unit(3,"bigpts"),
+      vjust = 0.75, hjust = 1, rot = 45, gp = grid::gpar(...)
+    )
+    return(res)
+}
+assignInNamespace(
+  x = "draw_colnames",
+  value = "draw_colnames_45",
+  ns = asNamespace("pheatmap")
+)
 ```
 
 ### Import Data
@@ -1972,7 +1991,127 @@ stevia.simper.all[(nrow(stevia.simper.all)+1):(nrow(stevia.simper.all)+nrow(stev
 stevia.simper.all$fdr_krusk_p.val <- p.adjust(stevia.simper.all$krusk_p.val, "BH")
 #write.table(stevia.simper.all, "stevia.simper.all.csv", sep=",")
 
+
+
+
+
+### Calculate mean rel abund
+physeq.post.relabund <- transform_sample_counts(physeq.post, function(x){(x/sum(x))*100})
+otu00003 <- subset_taxa(physeq.post.relabund, Species == "Otu00003")
+otu3 <- psmelt(otu00003)
+otu3.sum <- otu3 %>%
+  group_by(Treatment) %>%
+  summarize(Mean = mean(Abundance),
+            SD = sd(Abundance))
+otu00009 <- subset_taxa(physeq.post.relabund, Species == "Otu00009")
+otu9 <- psmelt(otu00009)
+otu9.sum <- otu9 %>%
+  group_by(Treatment) %>%
+  summarize(Mean = mean(Abundance),
+            SD = sd(Abundance))
+otu00018 <- subset_taxa(physeq.post.relabund, Species == "Otu00018")
+otu18 <- psmelt(otu00018)
+otu18.sum <- otu18 %>%
+  group_by(Treatment) %>%
+  summarize(Mean = mean(Abundance),
+            SD = sd(Abundance))
+otu00021 <- subset_taxa(physeq.post.relabund, Species == "Otu00021")
+otu21 <- psmelt(otu00021)
+otu21.sum <- otu21 %>%
+  group_by(Treatment) %>%
+  summarize(Mean = mean(Abundance),
+            SD = sd(Abundance))
+
+
 ```
+
+
+
+### SIMPER Heatmap
+```{r}
+### Prep
+physeq.simper.post <- subset_taxa(physeq.post, Species == "Otu00002" | Species == "Otu00003" | Species == "Otu00004" | Species == "Otu00008" | Species == "Otu00009" | Species == "Otu00010" | Species == "Otu00012" | Species == "Otu00014" | Species == "Otu00018" | Species == "Otu00021" | Species == "Otu00023")
+physeq.simper.post.tax <- data.frame(tax_table(physeq.simper.post))
+physeq.simper.post.tax$Name <- c("Akkermansia", "Bacteroides", "S24-7", "Anaeroplasma", "S24-7", "Ruminiclostridium", "Lachnospiraceae", "Lactococcus", "Lactobacillus", "S24-7", "Alistipes")
+physeq.simper.post.tax <- tax_table(physeq.simper.post.tax)
+taxa_names(physeq.simper.post.tax) <- taxa_names(physeq.simper.post)
+simper.post.treat <- read.csv("Simper_OTU_post.csv")
+simper.post.treat.hm <- simper.post.treat
+rownames(simper.post.treat.hm) <- simper.post.treat.hm$OTU
+simper.post.treat.hm <- simper.post.treat.hm[,-1]
+simper.post.treat.hm <- simper.post.treat.hm[,-5:-7]
+simper.post.sampdat <- data.frame(c("LowFat", "HighFat", "Saccharin", "Stevia"))
+colnames(simper.post.sampdat) <- "Treatment"
+rownames(simper.post.sampdat) <- simper.post.sampdat$Treatment
+physeq.simper.post <- merge_phyloseq(otu_table(simper.post.treat.hm, taxa_are_rows=T), physeq.simper.post.tax, sample_data(simper.post.sampdat))
+colnames(tax_table(physeq.simper.post)) <- 
+  c("Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species", "OTU_Classification")
+physeq.simper.post <- transform_sample_counts(physeq.simper.post, function(x){x*100})
+sample_data(physeq.simper.post)$Treatment <- ordered(sample_data(physeq.simper.post)$Treatment, levels=c("LowFat", "HighFat", "Saccharin", "Stevia"))
+
+
+
+
+
+
+
+# http://www.roymfrancis.com/a-guide-to-elegant-tiled-heatmaps-in-r/
+# https://github.com/tidyverse/ggplot2/pull/2541
+
+plot_heatmap(physeq.simper.post, sample.label = "Treatment", sample.order = c("LowFat", "HighFat", "Saccharin", "Stevia"), taxa.label = "OTU_Classification", taxa.order = "Phylum", low = "#FFFFCC", high = "firebrick3", na.value = "#FFFFFC") +
+  geom_tile(colour="gray40") +
+  geom_text(aes(label=sprintf("%0.2f", round(Abundance, digits=2)))) +
+  scale_fill_gradient(name="Relative Abundance", low = "#FFFFCC", high = "firebrick3") +
+  scale_x_discrete(labels = c("Low Fat", "High Fat", "Saccharin", "Stevia")) +
+  theme(panel.border=element_blank(),
+        axis.text.x = element_text(angle=50, hjust=0.3),
+        axis.ticks.x=element_blank()
+  ) +
+  guides(fill = guide_colorbar(barheight = unit( 3 , "in" ),
+                                ticks.color = "black",
+                                ticks.linewidth = 1,
+                                frame.color = "black",
+                                frame.linewidth = 1))
+
+
+
+
+
+simper.post.treat <- read.csv("Simper_OTU_post.csv")
+simper.post.treat.hm <- simper.post.treat.hm[,-6:-8]
+rownames(simper.post.treat.hm) <- simper.post.treat.hm[,1]
+#colnames(simper.post.treat.hm) <- simper.post.treat.hm[1,]
+simper.post.treat.hm <- simper.post.treat.hm[,-1]
+simper.post.treat.mat <- as.matrix(simper.post.treat[,-6:-8])
+test <- data.frame(simper.post.treat[,8])
+rownames(test) <- simper.post.treat[,1]
+
+simper.post.treat.annot <- data.frame(simper.post.treat[,1])
+simper.post.treat.annot[,2] <- simper.post.treat[,6]
+
+
+test <- simper.post.treat %>%
+  group_by(OTU, LowFat, HighFat, Saccharin, Stevia)
+
+
+pheatmap(simper.post.treat.hm, cluster_rows=F, show_rownames=T, cluster_cols=F, treeheight_col=0, showcolnames=T, border_color="gray40", fontsize=12, width=3, height=3, color = colorRampPalette(brewer.pal(8, "YlOrRd"))(100), labels_row=simper.post.treat[,8], cellwidth=30, cellheight=30)
+
+
+test <- read.csv("Simper_OTU_post_test.csv")
+test$Relative_Abundance <- test$Relative_Abundance * 100
+test$OTU <- ordered(test$OTU, levels=c("Otu00003", "Otu00004", "Otu00009", "Otu00009", "Otu00021", "Otu00023", "Otu00010", "Otu00012", "Otu00014", "Otu00018", "Otu00008", "Otu00002")
+
+
+
+ggplot(data=test, aes(x=Treatment, y = OTU)) + geom_tile(aes(fill = Relative_Abundance), colour="gray40") +
+  geom_text(aes(label=sprintf("%0.2f", round(Relative_Abundance, digits=2)))) +
+  scale_fill_gradient(low = "#FFFFCC", high = "firebrick3") + ylab("OTU Classification") +
+  scale_y_discrete(labels=test$Name)
+# https://stackoverflow.com/questions/38369855/how-to-put-exact-number-of-decimal-places-on-label-ggplot-bar-chart/38370083
+
+
+```
+
 
 ### SIMPER OTU No Sex
 ```{r}
