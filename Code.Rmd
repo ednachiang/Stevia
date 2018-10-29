@@ -264,6 +264,7 @@ meta <- read.csv("metadata.csv")
 colnames(meta)[1] <- "Sample_ID"
 rownames(meta) <- meta$Sample
 meta$Time <- ordered(meta$Time, levels=c("Pre-treatment", "Post-treatment"))
+meta$Treatment <- ordered(meta$Treatment, levels=c("Low Fat", "High Fat", "Saccharin", "Stevia"))
 divsum <- read.table("mothur_outputs/final.summary", header=T)
 
 
