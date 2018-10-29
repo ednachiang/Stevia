@@ -2174,37 +2174,50 @@ write.table(stevia.simper.all, "stevia.simper.nosex.csv", sep=",")
 
 ### miLineage
 ```{r}
+### Load miLineage Results
+load("ml.bodyweight.RData")
+
+
 # Prep inputs
 tax.ml <- as.matrix(tax_table(physeq.pair))
 colnames(tax.ml) <- c("Rank1","Rank2","Rank3","Rank4","Rank5","Rank6","Rank7")
 otu.ml <- data.frame(otu_table(physeq.pair))
 otu.ml <- as.matrix(t(otu.ml))
-var.ml <- as.matrix(sample_data(physeq.pair)[,7:8])
-var1.ml <- as.matrix(sample_data(physeq.pair)[,7])
+var.bw.ml <- as.matrix(sample_data(physeq.pair)[,7])
   # Body_Weight
-var2.ml <- as.matrix(sample_data(physeq.pair)[,8])
+
+
+# Prep post inputs
+tax2.ml <- as.matrix(tax_table(physeq.post))
+colnames(tax2.ml) <- c("Rank1","Rank2","Rank3","Rank4","Rank5","Rank6","Rank7")
+otu2.ml <- data.frame(otu_table(physeq.post))
+otu2.ml <- as.matrix(t(otu2.ml))
+var.ml <- as.matrix(sample_data(physeq.post)[,7:8])
+var1.ml <- as.matrix(sample_data(physeq.post)[,7])
+  # Body_Weight
+var2.ml <- as.matrix(sample_data(physeq.post)[,8])
   # Blood_Glucose
 
+
 # Run test
-ml.results <- QCAT_GEE(OTU=otu.ml, Tax=tax.ml, X=var.ml, X.index = 1, Z=var.ml, Z.index=1,  fdr.alpha=0.05, n.resample = 100)
-  # $sig.lineage$`Zero-Part`
- [1] "Anaeroplasma"                 "Anaerotruncus"               
- [3] "Clostridiales_unclassified"   "Erysipelatoclostridium"      
- [5] "Family_XIII_ge"               "Mollicutes_RF9_ge"           
- [7] "Roseburia"                    "Ruminiclostridium_6"         
- [9] "Ruminococcaceae_unclassified" "Ruminococcus_1"              
-[11] "Coriobacteriaceae"            "Family_XIII"                 
-[13] "Streptococcaceae"             "Clostridiales"               
-[15] "Lactobacillales"              "Mollicutes"                  
-[17] "Actinobacteria"              
+ml.all.bw.results <- QCAT_GEE(OTU=otu2.ml, Tax=tax2.ml, X=var.ml, X.index = 1, Z=var.ml, Z.index=1,  fdr.alpha=0.05, n.resample = 100)
+#save(ml.all.bw.results, file="ml.all.bodyweight.RData")
 
-$global.pval
-     Simes_Two-Part     Simes_Zero-Part Simes_Positive-Part 
-         0.16831683          0.06905306          0.82529543 
-ml.results2 <- QCAT_GEE(OTU=otu.ml, Tax=tax.ml, X=var.ml, X.index = 2, Z=var.ml, Z.index=1,  fdr.alpha=0.05, n.resample = 100)
+ml.all.bg.results <- QCAT_GEE(OTU=otu2.ml, Tax=tax2.ml, X=var.ml, X.index = 2, Z=var.ml, Z.index=1,  fdr.alpha=0.05, n.resample = 100)
+#save(ml.all.bg.results, file="ml.all.bloodglucose.RData")
 
-ml.results3 <- QCAT_GEE(OTU=otu.ml, Tax=tax.ml, X=var1.ml, X.index = 1, Z=var.ml, Z.index=1,  fdr.alpha=0.05, n.resample = 100)
-ml.results4 <- QCAT_GEE(OTU=otu.ml, Tax=tax.ml, X=var2.ml, X.index = 1, Z=var.ml, Z.index=1,  fdr.alpha=0.05, n.resample = 100)
+ml.bw.results <- QCAT_GEE(OTU=otu.ml, Tax=tax.ml, X=var.bw.ml, X.index = 1, Z=var.bw.ml, Z.index=1,  fdr.alpha=0.05, n.resample = 100)
+#save(ml.bw.results, file = "ml.bodyweight.RData")
+
+ml.bg.results <- QCAT_GEE(OTU=otu2.ml, Tax=tax2.ml, X=var2.ml, X.index = 1, Z=var2.ml, Z.index=1,  fdr.alpha=0.05, n.resample = 100)
+#save(ml.bg.results, file = "ml.bloodglucose.RData")
+
+ml.post.bw.results <- QCAT_GEE(OTU=otu2.ml, Tax=tax2.ml, X=var2.ml, X.index = 1, Z=var1.ml, Z.index=1,  fdr.alpha=0.05, n.resample = 100)
+#save(ml.post.bw.results, file = "ml.post.bodyweight.RData")
+
+# Two-part test = Weighted
+# Zero-part test = Unweighted
+# Positive-part = Removes any lineages w/ 0 in any sample; looks at abundance
 ```
 
 
