@@ -21,11 +21,11 @@ library(miLineage)
 library(pheatmap)
 library(RColorBrewer)
 library(extrafont)
-library(cowplot)
+#library(cowplot)
 loadfonts(device="win")
 windowsFonts(Times="Arial")
 theme_set(theme_bw())
-theme_set(theme_cowplot(font_family = "Arial"))
+#theme_set(theme_cowplot(font_family = "Arial"))
 set.seed(1)
 ```
 
@@ -383,7 +383,7 @@ ggplot(adiv.pair, aes(x=Treatment, y= coverage, fill = Treatment)) +
   geom_point() + 
   facet_grid(.~Time) +
   xlab("Treatment") +
-  scale_fill_manual(values=c("indianred1", "orange", "springgreen3", "deepskyblue2")) +
+  scale_fill_manual(values=c("rosybrown", "brown2", "limegreen", "dodgerblue2")) +
   ylab("Coverage")
 # Test normality
 hist(adiv.pair$coverage, breaks=10)
@@ -411,7 +411,7 @@ ggplot(adiv.pair, aes(x=Treatment, y=Total_OTUs, fill = Treatment)) +
   geom_point() + 
   facet_grid(.~Time) +
   xlab("Treatment") +
-  scale_fill_manual(values=c("indianred1", "orange", "springgreen3", "deepskyblue2")) +
+  scale_fill_manual(values=c("rosybrown", "brown2", "limegreen", "dodgerblue2")) +
   ylab("Total OTUs")
 # Test normality
 hist(adiv.pair$Total_OTUs, breaks=10)
@@ -448,15 +448,42 @@ summary(lmer(Total_OTUs ~ Time + Treatment + Sex + (1|Subj_ID), data=adiv.pair))
 
 ### Chao
 # Plot
-tiff("Chao.tiff", width=6.5, height=3, units="in", res=600)
-ggplot(adiv.pair, aes(x=Treatment, y=chao, fill = Treatment)) +
+#tiff("Chao.tiff", width=6.5, height=3, units="in", res=600)
+chao.ann <- data.frame(lab=c("ab", "c", "c", "bc"), Time = factor(c("Post-treatment", "Post-treatment", "Post-treatment", "Post-treatment")), Treatment = factor(c("Low Fat", "High Fat", "Saccharin", "Stevia")))
+  # Annotations
+chao.plot <- ggplot(adiv.pair, aes(x=Treatment, y=chao, fill = Treatment)) +
   geom_boxplot(position=position_dodge(1)) +
-  geom_point() + 
+  geom_point(position = position_dodge(width = 0.2)) + 
   facet_grid(.~Time) +
-  xlab("Treatment") +
-  scale_fill_manual(values=c("indianred1", "orange", "springgreen3", "deepskyblue2")) +
-  ylab("Chao Richness")
-dev.off()
+  xlab("Treatment") + 
+  scale_fill_manual(values=c("rosybrown", "brown2", "limegreen", "dodgerblue2")) +
+  ylab("Chao Richness") +
+  scale_y_continuous(breaks = c(50, 100, 150, 200, 250, 300, 350), limits = c(50,350)) +
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        axis.text.x = element_text(family="Arial", size=10),
+        axis.text.y = element_text(family="Arial", size=10),
+        axis.title.x = element_text(family="Arial", size=10, face="bold"),
+        axis.title.y = element_text(family="Arial", size=10, face="bold"),
+        legend.title = element_text(family="Arial", size=10, face="bold"),
+        legend.text = element_text(family="Arial", size=10),
+        plot.title = element_text(family = "Arial", size=10, face="bold"),
+        strip.text.x = element_text(family="Arial", size=10)
+        ) +
+  geom_text(data = chao.ann, aes(label=lab), x=c(1,2,3,4), y=c(350,350,350,350), 
+            size=4, color="black", family="Arial")
+
+
+
+Post-treatment groups are significantly different (adj p-val = 0.004). Specifically:
+High Fat vs. Low Fat
+Low Fat vs. Saccharin
+High Fat Pre-treatment and Post-treatment are significantly different (adj p-val = 0.018)
+
+
+
+
+#dev.off()
 # Test normality
 hist(adiv.pair$chao, breaks=10)
 qqnorm(adiv.pair$chao)
@@ -511,13 +538,25 @@ summary(lmer(chao ~ Time + Treatment + Sex + (1|Subj_ID), data=adiv.pair))
 
 ### Shannon
 # Plot
-ggplot(adiv.pair, aes(x=Treatment, y=shannon, fill = Treatment)) +
+shannon.plot <- ggplot(adiv.pair, aes(x=Treatment, y=shannon, fill = Treatment)) +
   geom_boxplot(position=position_dodge(1)) +
-  geom_point() + 
+  geom_point(position = position_dodge(width = 0.2)) + 
   facet_grid(.~Time) +
-  scale_fill_manual(values=c("indianred1", "orange", "springgreen3", "deepskyblue2")) +
+  scale_fill_manual(values=c("rosybrown", "brown2", "limegreen", "dodgerblue2")) +
   xlab("Treatment") +
-  ylab("Shannon Diversity")
+  ylab("Shannon Diversity") +
+  scale_y_continuous(breaks=c(2.75, 3.00, 3.25, 3.50, 3.75), limits= c(2.75, 3.75)) +
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        axis.text.x = element_text(family="Arial", size=10),
+        axis.text.y = element_text(family="Arial", size=10),
+        axis.title.x = element_text(family="Arial", size=10, face="bold"),
+        axis.title.y = element_text(family="Arial", size=10, face="bold"),
+        legend.title = element_text(family="Arial", size=10, face="bold"),
+        legend.text = element_text(family="Arial", size=10),
+        plot.title = element_text(family = "Arial", size=10, face="bold"),
+        strip.text.x = element_text(family="Arial", size=10)
+        )
 # Test normality
 hist(adiv.pair$shannon, breaks=10)
 qqnorm(adiv.pair$shannon)
@@ -586,6 +625,19 @@ summary(lmer(shannon ~ Time + Treatment + Sex + (1|Subj_ID), data=adiv.pair))
 ```
 
 
+### Alpha Div Plot
+```{r}
+tiff("adiv.tiff", width=180, height = 125, units="mm", res = 600)
+grid.newpage()
+pushViewport(viewport(layout=(grid.layout(4,1, widths=c(1,1,1,1), heights=c(0.055,1,0.055,1)))))
+grid.text("A", x=unit(0.03, "npc"), vp=viewport(layout.pos.row=1, layout.pos.col=1),
+          gp=gpar(fontsize=12,fontface="bold",fontfamily="Arial"))
+print(chao.plot, vp=viewport(layout.pos.row=2, layout.pos.col=1))
+grid.text("B", x=unit(0.03, "npc"), vp=viewport(layout.pos.row=3, layout.pos.col=1),
+          gp=gpar(fontsize=12,fontface="bold",fontfamily="Arial"))
+print(shannon.plot, vp=viewport(layout.pos.row=4, layout.pos.col=1))
+dev.off()
+```
 ### Examine Phyla
 ```{r}
 # Merge samples with the same taxonomic rank
@@ -2145,8 +2197,8 @@ post.hm <- plot_heatmap(physeq.simper.post, sample.label = "Treatment", sample.o
         axis.text.y = element_text(family="Arial", size=10),
         axis.ticks.x=element_blank(),
         axis.ticks.y=element_blank(),
-        axis.title.x = element_text(size=12, face="bold"),
-        axis.title.y = element_text(margin = margin(t=0, r=20, b=0, l=0), size=12, face="bold"),
+        axis.title.x = element_text(size=12, face="bold", family="Arial"),
+        axis.title.y = element_text(margin = margin(t=0, r=20, b=0, l=0), size=12, face="bold", family="Arial"),
         axis.line=element_blank(),
         legend.title = element_text(family = "Arial", size=10, face="bold"),
         legend.text = element_text(family = "Arial", size=10),
@@ -2206,8 +2258,8 @@ time.hm <- plot_heatmap(physeq.simper.time, sample.label = "Treatment_Time", sam
         axis.text.y = element_text(family="Arial", size=10),
         axis.ticks.x=element_blank(),
         axis.ticks.y=element_blank(),
-        axis.title.x = element_text(size=12, face="bold"),
-        axis.title.y = element_text(margin = margin(t=0, r=20, b=0, l=0), size=12, face="bold"),
+        axis.title.x = element_text(size=12, face="bold", family="Arial"),
+        axis.title.y = element_text(margin = margin(t=0, r=20, b=0, l=0), size=12, face="bold", family="Arial"),
         axis.line=element_blank(),
         legend.title = element_text(family = "Arial", size=10, face="bold"),
         legend.text = element_text(family = "Arial", size=10),
@@ -2232,9 +2284,9 @@ time.hm <- plot_heatmap(physeq.simper.time, sample.label = "Treatment_Time", sam
 tiff("hm.tiff", width=180, height = 210, units="mm", res = 600)
 grid.newpage()
 pushViewport(viewport(layout=(grid.layout(4,1, widths=c(1,1,1,1), heights=c(0.04,1,0.04,1)))))
-grid.text("A", x=unit(0.03, "npc"), vp=viewport(layout.pos.row=1, layout.pos.col=1), gp=gpar(fontsize=18,fontface="bold",fontfamily="Arial"))
+grid.text("A", x=unit(0.03, "npc"), vp=viewport(layout.pos.row=1, layout.pos.col=1), gp=gpar(fontsize=16,fontface="bold",fontfamily="Arial"))
 print(time.hm, vp=viewport(layout.pos.row=2, layout.pos.col=1))
-grid.text("B", x=unit(0.03, "npc"), vp=viewport(layout.pos.row=3, layout.pos.col=1), gp=gpar(fontsize=18,fontface="bold",fontfamily="Arial"))
+grid.text("B", x=unit(0.03, "npc"), vp=viewport(layout.pos.row=3, layout.pos.col=1), gp=gpar(fontsize=16,fontface="bold",fontfamily="Arial"))
 print(post.hm, vp=viewport(layout.pos.row=4, layout.pos.col=1))
 dev.off()
 
