@@ -681,7 +681,7 @@ phy.sum$iqr.max <- phy.sum$Median + 0.5*phy.sum$iqr
 
 
 ### Barplot ###
-tiff("phyla.facet.tiff", width = 13, height = 8, units = "in", res = 300)
+tiff("phyla.tiff", width = 180, height = 100, units = "mm", res = 600)
 ggplot(phy.sum, aes(x=Phylum, y=Median, fill=Phylum)) +
   geom_bar(stat="identity", color="black") +
   facet_grid(Time ~ Treatment) +
@@ -690,14 +690,17 @@ ggplot(phy.sum, aes(x=Phylum, y=Median, fill=Phylum)) +
   xlab("Phyla") +
   ylab("Median Relative Abundance for Phyla > 0.1%") +
   scale_y_continuous(limits=c(0,80), expand=c(0,0))+
-  theme(axis.text.x = element_blank(),
+  theme(panel.grid.major = element_blank(),
+        #panel.grid.minor = element_blank(),
+        axis.text.x = element_blank(),
         panel.spacing=unit(1, "lines"),
-        axis.title = element_text(size=20),
-        strip.text.x = element_text(size=14),
-        strip.text.y = element_text(size=14),
-        axis.text.y = element_text(size=12),
-        legend.title = element_text(size = 14),
-        legend.text = element_text(size=12))
+        axis.title = element_text(size=12, family="Arial", face="bold"),
+        strip.text.x = element_text(size=12, family="Arial"),
+        strip.text.y = element_text(size=12, family="Arial"),
+        axis.text.y = element_text(size=12, family="Arial"),
+        legend.title = element_text(size=12, family="Arial", face="bold"),
+        legend.text = element_text(size=12, family="Arial"),
+        axis.ticks.x=element_blank())
 dev.off()
 
 
