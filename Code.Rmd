@@ -2549,6 +2549,16 @@ TukeyHSD(aov(Blood_Glucose ~ Treatment, data=phys.post.df))
   # High Fat-Stevia: p-value = 0.9939547
   # Saccharin-Stevia: p-value = 0.7810005
 
+
+### Cross-Correlation
+pairs(phys.post.df[,7:8])
+  # Looks correlated
+xyplot(Blood_Glucose ~ Body_Weight, phys.post.df)
+summary(lm(Blood_Glucose ~ Body_Weight, phys.post.df))
+  # p-value = 1.09e-10
+  # R2 = 0.742
+confint(lm(Blood_Glucose ~ Body_Weight, phys.post.df), level=0.95)
+
 ```
 
 
@@ -2557,10 +2567,38 @@ TukeyHSD(aov(Blood_Glucose ~ Treatment, data=phys.post.df))
 ```{r}
 ### Load miLineage Results
 load("miLineage/ml.all.bodyweight.RData")
+  # ml.all.bw.results
+  # No sig
 load("miLineage/ml.all.bloodglucose.RData")
+  # ml.all.bg.results
+  # No sig
 load("miLineage/ml.bodyweight.RData")
+  # ml.bw.results
+  # Sig
 load("miLineage/ml.post.bodyweight.RData")
+  # ml.post.bw.results
+  # Sig
 load("miLineage/ml.bloodglucose.RData")
+  # ml.bg.results
+  # Sig
+load("ml.post.both.bodyweight.RData")
+  # ml.post.both.bw.results
+  # No sig
+load("ml.post.both.bloodglucose.RData")
+  # ml.post.both.bg.results
+  # No sig
+load("ml.post.rem.bodyweight.RData")
+  # ml.post.rem.bw.results
+  # No sig
+load("ml.post.rem.bloodglucose.RData")
+  # ml.post.rem.bg.results
+  # No sig
+load("ml.post.rem.bodyweight.only.RData")
+  # ml.post.rem.bw.only.results
+  # No sig
+load("ml.post.rem.bloodglucose.only.RData")
+  # ml.post.rem.bg.only.results
+  # No sig
 
 # Prep inputs
 tax.ml <- as.matrix(tax_table(physeq.pair))
@@ -2583,11 +2621,22 @@ var2.ml <- as.matrix(sample_data(physeq.post)[,8])
   # Blood_Glucose
 
 
+# Prep post no Low Fat inputs
+tax3.ml <- as.matrix(tax_table(physeq.post.rem))
+colnames(tax3.ml) <- c("Rank1","Rank2","Rank3","Rank4","Rank5","Rank6","Rank7")
+otu3.ml <- data.frame(otu_table(physeq.post.rem))
+otu3.ml <- as.matrix(t(otu3.ml))
+var.rem.ml <- as.matrix(sample_data(physeq.post.rem)[,7:8])
+var.rem1.ml <- as.matrix(sample_data(physeq.post.rem)[,7])
+  # Body_Weight
+var.rem2.ml <- as.matrix(sample_data(physeq.post.rem)[,8])
+  # Blood_Glucose
+
 # Run test
 ml.all.bw.results <- QCAT_GEE(OTU=otu2.ml, Tax=tax2.ml, X=var.ml, X.index = 1, Z=var.ml, Z.index=1,  fdr.alpha=0.05, n.resample = 100)
 #save(ml.all.bw.results, file="ml.all.bodyweight.RData")
 
-ml.all.bg.results <- QCAT_GEE(OTU=otu2.ml, Tax=tax2.ml, X=var.ml, X.index = 2, Z=var.ml, Z.index=1,  fdr.alpha=0.05, n.resample = 100)
+ml.all.bg.results <- QCAT_GEE(OTU=otu2.ml, Tax=tax2.ml, X=var.ml, X.index = 2, Z=var.ml, Z.index=2,  fdr.alpha=0.05, n.resample = 100)
 #save(ml.all.bg.results, file="ml.all.bloodglucose.RData")
 
 ml.bw.results <- QCAT_GEE(OTU=otu.ml, Tax=tax.ml, X=var.bw.ml, X.index = 1, Z=var.bw.ml, Z.index=1,  fdr.alpha=0.05, n.resample = 100)
@@ -2596,8 +2645,31 @@ ml.bw.results <- QCAT_GEE(OTU=otu.ml, Tax=tax.ml, X=var.bw.ml, X.index = 1, Z=va
 ml.bg.results <- QCAT_GEE(OTU=otu2.ml, Tax=tax2.ml, X=var2.ml, X.index = 1, Z=var2.ml, Z.index=1,  fdr.alpha=0.05, n.resample = 100)
 #save(ml.bg.results, file = "ml.bloodglucose.RData")
 
+
+### Post
 ml.post.bw.results <- QCAT_GEE(OTU=otu2.ml, Tax=tax2.ml, X=var2.ml, X.index = 1, Z=var1.ml, Z.index=1,  fdr.alpha=0.05, n.resample = 100)
 #save(ml.post.bw.results, file = "ml.post.bodyweight.RData")
+
+ml.post.both.bw.results <- QCAT_GEE(OTU=otu2.ml, Tax=tax2.ml, X=var.ml, X.index = 1, Z=var.ml, Z.index=1,  fdr.alpha=0.05, n.resample = 100)
+#save(ml.post.both.bw.results, file = "ml.post.both.bodyweight.RData")
+
+ml.post.both.bg.results <- QCAT_GEE(OTU=otu2.ml, Tax=tax2.ml, X=var.ml, X.index = 2, Z=var.ml, Z.index=2,  fdr.alpha=0.05, n.resample = 100)
+save(ml.post.both.bg.results, file = "ml.post.both.bloodglucose.RData")
+
+
+
+### Post No Low Fat
+ml.post.rem.bw.results <- QCAT_GEE(OTU=otu3.ml, Tax=tax3.ml, X=var.rem.ml, X.index = 1, Z=var.rem.ml, Z.index=1,  fdr.alpha=0.05, n.resample = 100)
+#save(ml.post.rem.bw.results, file = "ml.post.rem.bodyweight.RData")
+
+ml.post.rem.bg.results <- QCAT_GEE(OTU=otu3.ml, Tax=tax3.ml, X=var.rem.ml, X.index = 2, Z=var.rem.ml, Z.index=2,  fdr.alpha=0.05, n.resample = 100)
+save(ml.post.rem.bg.results, file = "ml.post.rem.bloodglucose.RData")
+
+ml.post.rem.bw.only.results <- QCAT_GEE(OTU=otu3.ml, Tax=tax3.ml, X=var.rem1.ml, X.index = 1, Z=var.rem1.ml, Z.index=1,  fdr.alpha=0.05, n.resample = 100)
+save(ml.post.rem.bw.only.results, file = "ml.post.rem.bodyweight.only.RData")
+
+ml.post.rem.bg.only.results <- QCAT_GEE(OTU=otu3.ml, Tax=tax3.ml, X=var.rem2.ml, X.index = 1, Z=var.rem2.ml, Z.index=1,  fdr.alpha=0.05, n.resample = 100)
+save(ml.post.rem.bg.only.results, file = "ml.post.rem.bloodglucose.only.RData")
 
 # Two-part test = Weighted
 # Zero-part test = Unweighted
