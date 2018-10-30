@@ -1,0 +1,12 @@
+OTU,LF_Pre,LF_Post,HF_Pre,HF_Post,SC_Pre,SC_Post,TV_Pre,TV_Post,Taxonomy,OTU_Classification,Significance
+Otu00003,0.071097,0.033837,0.068589,0.067666,0.050065,0.041757,0.061568,0.062873,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidaceae - Bacteroides,Bacteroides,LF
+Otu00004,0.030819,0.012194,0.051729,0.104364,0.040997,0.100423,0.035807,0.087808,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,S24-7,HF_SC_TV
+Otu00005,0.037260,0.018117,0.083858,0.008122,0.115047,0.007696,0.073416,0.005315,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,S24-7,HF_SC_TV
+Otu00006,0.048681,0.032828,0.071652,0.002335,0.063422,0.000409,0.065001,0.000263,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,S24-7,SC
+Otu00008,0.079279,0.039653,0.037032,0.000000,0.053212,0.000058,0.057468,0.000131,Tenericutes - Mollicutes - Anaeroplasmatales - Anaeroplasmataceae - Anaeroplasma,Anaeroplasma,SC_TV
+Otu00009,0.037591,0.016449,0.031228,0.006998,0.005700,0.041615,0.046869,0.015794,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,S24-7,SC
+Otu00010,0.007798,0.008114,0.009592,0.060303,0.018407,0.064765,0.012067,0.076681,Firmicutes - Clostridia - Clostridiales - Ruminococcaceae - Ruminiclostridium,Ruminiclostridium,HF_SC_TV
+Otu00012,0.000842,0.003671,0.002512,0.075658,0.002398,0.066422,0.001907,0.077685,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_unclassified,Lachnospiraceae,HF_SC_TV
+Otu00014,0.000000,0.000000,0.000000,0.064457,0.000000,0.031826,0.000000,0.087063,Firmicutes - Bacilli - Lactobacillales - Streptococcaceae - Lactococcus,Lactococcus,TV
+Otu00015,0.044882,0.008532,0.037784,0.000000,0.035266,0.000000,0.048058,0.000065,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_NK4A136_group,NK4A136,LF_HF_SC_TV
+Otu00023,0.006047,0.079151,0.003271,0.007020,0.000118,0.006283,0.000066,0.003855,Bacteroidetes - Bacteroidia - Bacteroidales - Rikenellaceae - Alistipes,Alistipes,LF
