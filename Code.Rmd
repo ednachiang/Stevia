@@ -352,23 +352,23 @@ physeq.tv <- subset_samples(physeq.pair, Treatment == "Stevia")
 
 ### Load Phyloseq Object
 ```{r}
-load("Physeq.RData")
-load("Physeq.pair.RData")
-load("Physeq.pre.RData")
-load("Physeq.post.RData")
-load("Physeq.post.rem.RData")
-load("Physeq.fem.RData")
-load("Physeq.mal.RData")
-load("Physeq.pre.fem.RData")
-load("Physeq.pre.mal.RData")
-load("Physeq.post.fem.RData")
-load("Physeq.post.mal.RData")
-load("Physeq.post.fem.rem.RData")
-load("Physeq.post.mal.rem.RData")
-load("Physeq.hf.RData")
-load("Physeq.lf.RData")
-load("Physeq.sc.RData")
-load("Physeq.tv.RData")
+load("physeq/Physeq.RData")
+load("physeq/Physeq.pair.RData")
+load("physeq/Physeq.pre.RData")
+load("physeq/Physeq.post.RData")
+load("physeq/Physeq.post.rem.RData")
+load("physeq/Physeq.fem.RData")
+load("physeq/Physeq.mal.RData")
+load("physeq/Physeq.pre.fem.RData")
+load("physeq/Physeq.pre.mal.RData")
+load("physeq/Physeq.post.fem.RData")
+load("physeq/Physeq.post.mal.RData")
+load("physeq/Physeq.post.fem.rem.RData")
+load("physeq/Physeq.post.mal.rem.RData")
+load("physeq/Physeq.hf.RData")
+load("physeq/Physeq.lf.RData")
+load("physeq/Physeq.sc.RData")
+load("physeq/Physeq.tv.RData")
 ```
 
 ### Alpha Div
@@ -2141,7 +2141,7 @@ post.hm <- plot_heatmap(physeq.simper.post, sample.label = "Treatment", sample.o
                             expression(" "^abc~"Akkermansia"))) +
   ylab("OTU Classification") + xlab("Post-treatment Group") +
   theme(panel.border=element_blank(),
-        axis.text.x = element_text(angle=50, hjust=0.3, family="Arial", size=10),
+        axis.text.x = element_text(angle=50, hjust=1, vjust=1.2, family="Arial", size=10),
         axis.text.y = element_text(family="Arial", size=10),
         axis.ticks.x=element_blank(),
         axis.ticks.y=element_blank(),
@@ -2201,8 +2201,8 @@ time.hm <- plot_heatmap(physeq.simper.time, sample.label = "Treatment_Time", sam
                             expression(" "^cd~"Anaeroplasma"))) +
   ylab("OTU Classification") + xlab("Group") +
   theme(panel.border=element_blank(),
-        axis.text.x = element_text(angle=50, hjust=0.1, vjust=0.6, family="Arial", size=10, 
-                                   margin = margin(t=10, r=10, b=0, l=0)),
+        axis.text.x = element_text(angle=50, hjust=1.1, vjust=1.18, family="Arial", size=10, 
+                                   margin = margin(t=0, r=0, b=0, l=0)),
         axis.text.y = element_text(family="Arial", size=10),
         axis.ticks.x=element_blank(),
         axis.ticks.y=element_blank(),
@@ -2220,51 +2220,29 @@ time.hm <- plot_heatmap(physeq.simper.time, sample.label = "Treatment_Time", sam
                                 frame.linewidth = 1))
 
 
+```
+
+### HeatMap Plot
+```{r}
+# https://cran.r-project.org/web/packages/cowplot/vignettes/plot_grid.html
+#theme_set(theme_cowplot(font_family = "Arial"))
+#save_plot("hm.tiff", plot_grid(post.hm, time.hm, labels= "AUTO", ncol = 1, align = 'v'), base_width = 7, #base_height = 10, dpi=600)
 
 
+tiff("hm.tiff", width=180, height = 210, units="mm", res = 600)
+grid.newpage()
+pushViewport(viewport(layout=(grid.layout(4,1, widths=c(1,1,1,1), heights=c(0.04,1,0.04,1)))))
+grid.text("A", x=unit(0.03, "npc"), vp=viewport(layout.pos.row=1, layout.pos.col=1), gp=gpar(fontsize=18,fontface="bold",fontfamily="Arial"))
+print(time.hm, vp=viewport(layout.pos.row=2, layout.pos.col=1))
+grid.text("B", x=unit(0.03, "npc"), vp=viewport(layout.pos.row=3, layout.pos.col=1), gp=gpar(fontsize=18,fontface="bold",fontfamily="Arial"))
+print(post.hm, vp=viewport(layout.pos.row=4, layout.pos.col=1))
+dev.off()
 
 
-
-
-
-
-
-
-
-simper.post.treat <- read.csv("Simper_OTU_post.csv")
-simper.post.treat.hm <- simper.post.treat.hm[,-6:-8]
-rownames(simper.post.treat.hm) <- simper.post.treat.hm[,1]
-#colnames(simper.post.treat.hm) <- simper.post.treat.hm[1,]
-simper.post.treat.hm <- simper.post.treat.hm[,-1]
-simper.post.treat.mat <- as.matrix(simper.post.treat[,-6:-8])
-test <- data.frame(simper.post.treat[,8])
-rownames(test) <- simper.post.treat[,1]
-
-simper.post.treat.annot <- data.frame(simper.post.treat[,1])
-simper.post.treat.annot[,2] <- simper.post.treat[,6]
-
-
-test <- simper.post.treat %>%
-  group_by(OTU, LowFat, HighFat, Saccharin, Stevia)
-
-
-pheatmap(simper.post.treat.hm, cluster_rows=F, show_rownames=T, cluster_cols=F, treeheight_col=0, showcolnames=T, border_color="gray40", fontsize=12, width=3, height=3, color = colorRampPalette(brewer.pal(8, "YlOrRd"))(100), labels_row=simper.post.treat[,8], cellwidth=30, cellheight=30)
-
-
-test <- read.csv("Simper_OTU_post_test.csv")
-test$Relative_Abundance <- test$Relative_Abundance * 100
-test$OTU <- ordered(test$OTU, levels=c("Otu00003", "Otu00004", "Otu00009", "Otu00009", "Otu00021", "Otu00023", "Otu00010", "Otu00012", "Otu00014", "Otu00018", "Otu00008", "Otu00002")
-
-
-
-ggplot(data=test, aes(x=Treatment, y = OTU)) + geom_tile(aes(fill = Relative_Abundance), colour="gray40") +
-  geom_text(aes(label=sprintf("%0.2f", round(Relative_Abundance, digits=2)))) +
-  scale_fill_gradient(low = "#FFFFCC", high = "firebrick3") + ylab("OTU Classification") +
-  scale_y_discrete(labels=test$Name)
-# https://stackoverflow.com/questions/38369855/how-to-put-exact-number-of-decimal-places-on-label-ggplot-bar-chart/38370083
 
 
 ```
+
 
 
 ### SIMPER OTU No Sex
@@ -2680,14 +2658,6 @@ save(ml.post.rem.bg.only.results, file = "ml.post.rem.bloodglucose.only.RData")
 
 
 
-### HeatMap Plot
-```{r}
-# https://cran.r-project.org/web/packages/cowplot/vignettes/plot_grid.html
-theme_set(theme_cowplot(font_family = "Arial"))
-save_plot("hm.tiff", plot_grid(post.hm, time.hm, labels= "AUTO", ncol = 1, align = 'v'), base_width = 7, base_height = 10, dpi=600)
-
-
-```
 
 
 
