@@ -20,7 +20,12 @@ library(lme4)
 library(miLineage)
 library(pheatmap)
 library(RColorBrewer)
+library(extrafont)
+library(cowplot)
+loadfonts(device="win")
+windowsFonts(Times="Arial")
 theme_set(theme_bw())
+theme_set(theme_cowplot(font_family = "Arial"))
 set.seed(1)
 ```
 
@@ -1995,7 +2000,7 @@ stevia.simper.all$fdr_krusk_p.val <- p.adjust(stevia.simper.all$krusk_p.val, "BH
 
 
 
-### Calculate mean rel abund
+### Calculate mean rel abund for post-treatment
 physeq.post.relabund <- transform_sample_counts(physeq.post, function(x){(x/sum(x))*100})
 otu00003 <- subset_taxa(physeq.post.relabund, Species == "Otu00003")
 otu3 <- psmelt(otu00003)
@@ -2023,13 +2028,84 @@ otu21.sum <- otu21 %>%
             SD = sd(Abundance))
 
 
+
+
+
+### Calculate mean rel abund for Time comparison
+physeq.pair.relabund <- transform_sample_counts(physeq.pair, function(x){(x/sum(x))*100})
+otu00003 <- subset_taxa(physeq.pair.relabund, Species == "Otu00003")
+otu3 <- psmelt(otu00003)
+otu3.sum <- otu3 %>%
+  group_by(Treatment, Time) %>%
+  summarize(Mean = mean(Abundance),
+            SD = sd(Abundance))
+otu00004 <- subset_taxa(physeq.pair.relabund, Species == "Otu00004")
+otu4 <- psmelt(otu00004)
+otu4.sum <- otu4 %>%
+  group_by(Treatment, Time) %>%
+  summarize(Mean = mean(Abundance),
+            SD = sd(Abundance))
+otu00005 <- subset_taxa(physeq.pair.relabund, Species == "Otu00005")
+otu5 <- psmelt(otu00005)
+otu5.sum <- otu5 %>%
+  group_by(Treatment, Time) %>%
+  summarize(Mean = mean(Abundance),
+            SD = sd(Abundance))
+otu00006 <- subset_taxa(physeq.pair.relabund, Species == "Otu00006")
+otu6 <- psmelt(otu00006)
+otu6.sum <- otu6 %>%
+  group_by(Treatment, Time) %>%
+  summarize(Mean = mean(Abundance),
+            SD = sd(Abundance))
+otu00008 <- subset_taxa(physeq.pair.relabund, Species == "Otu00008")
+otu8 <- psmelt(otu00008)
+otu8.sum <- otu8 %>%
+  group_by(Treatment, Time) %>%
+  summarize(Mean = mean(Abundance),
+            SD = sd(Abundance))
+otu00009 <- subset_taxa(physeq.pair.relabund, Species == "Otu00009")
+otu9 <- psmelt(otu00009)
+otu9.sum <- otu9 %>%
+  group_by(Treatment, Time) %>%
+  summarize(Mean = mean(Abundance),
+            SD = sd(Abundance))
+otu00010 <- subset_taxa(physeq.pair.relabund, Species == "Otu00010")
+otu10 <- psmelt(otu00010)
+otu10.sum <- otu10 %>%
+  group_by(Treatment, Time) %>%
+  summarize(Mean = mean(Abundance),
+            SD = sd(Abundance))
+otu00012 <- subset_taxa(physeq.pair.relabund, Species == "Otu00012")
+otu12 <- psmelt(otu00012)
+otu12.sum <- otu12 %>%
+  group_by(Treatment, Time) %>%
+  summarize(Mean = mean(Abundance),
+            SD = sd(Abundance))
+otu00014 <- subset_taxa(physeq.pair.relabund, Species == "Otu00014")
+otu14 <- psmelt(otu00014)
+otu14.sum <- otu14 %>%
+  group_by(Treatment, Time) %>%
+  summarize(Mean = mean(Abundance),
+            SD = sd(Abundance))
+otu00015 <- subset_taxa(physeq.pair.relabund, Species == "Otu00015")
+otu15 <- psmelt(otu00015)
+otu15.sum <- otu15 %>%
+  group_by(Treatment, Time) %>%
+  summarize(Mean = mean(Abundance),
+            SD = sd(Abundance))
+otu00023 <- subset_taxa(physeq.pair.relabund, Species == "Otu00023")
+otu23 <- psmelt(otu00023)
+otu23.sum <- otu23 %>%
+  group_by(Treatment, Time) %>%
+  summarize(Mean = mean(Abundance),
+            SD = sd(Abundance))
 ```
 
 
 
 ### SIMPER Heatmap
 ```{r}
-### Prep
+### Prep Post-Treatment
 physeq.simper.post <- subset_taxa(physeq.post, Species == "Otu00002" | Species == "Otu00003" | Species == "Otu00004" | Species == "Otu00008" | Species == "Otu00009" | Species == "Otu00010" | Species == "Otu00012" | Species == "Otu00014" | Species == "Otu00018" | Species == "Otu00021" | Species == "Otu00023")
 physeq.simper.post.tax <- data.frame(tax_table(physeq.simper.post))
 physeq.simper.post.tax$Name <- c("Akkermansia", "Bacteroides", "S24-7", "Anaeroplasma", "S24-7", "Ruminiclostridium", "Lachnospiraceae", "Lactococcus", "Lactobacillus", "S24-7", "Alistipes")
@@ -2049,21 +2125,13 @@ colnames(tax_table(physeq.simper.post)) <-
 physeq.simper.post <- transform_sample_counts(physeq.simper.post, function(x){x*100})
 sample_data(physeq.simper.post)$Treatment <- ordered(sample_data(physeq.simper.post)$Treatment, levels=c("LowFat", "HighFat", "Saccharin", "Stevia"))
 
-
-tax_table(physeq.simper.post)$OTU_Classification <- ordered(tax_table(physeq.simper.post)$OTU_Classification, levels=c("Akkermansia", "Anaeroplasma", "Lactobacillus", "Lactococcus", "Lachnospiraceae", "Ruminiclostridium", "Alistipes", "S24-7", "S24-7", "S24-7", "Bacteroides"))
-
-
-
-
-
-
+### HeatMap Post-Treatment
 # http://www.roymfrancis.com/a-guide-to-elegant-tiled-heatmaps-in-r/
 # https://github.com/tidyverse/ggplot2/pull/2541
-
-plot_heatmap(physeq.simper.post, sample.label = "Treatment", sample.order = c("LowFat", "HighFat", "Saccharin", "Stevia"), taxa.label = "OTU_Classification", taxa.order = "Phylum", low = "#FFFFCC", high = "firebrick3", na.value = "#FFFFFC") +
+post.hm <- plot_heatmap(physeq.simper.post, sample.label = "Treatment", sample.order = c("LowFat", "HighFat", "Saccharin", "Stevia"), taxa.label = "OTU_Classification", taxa.order = "Phylum", low = "#FFFFCC", high = "firebrick3", na.value = "#FFFFFC") +
   geom_tile(colour="gray40") +
   geom_text(aes(label=sprintf("%0.2f", round(Abundance, digits=2)))) +
-  scale_fill_gradient(name="Relative Abundance", low = "#FFFFCC", high = "firebrick3") +
+  scale_fill_gradient(name="Relative Abundance (%)", low = "#FFFFCC", high = "firebrick3") +
   scale_x_discrete(labels = c("Low Fat", "High Fat", "Saccharin", "Stevia")) +
   scale_y_discrete(labels=c(expression(" "^ac~"Bacteroides"), expression(" "^abc~"S24-7"), 
                             expression(" "^d~"S24-7"), expression(" "^bc~"S24-7"), 
@@ -2071,12 +2139,18 @@ plot_heatmap(physeq.simper.post, sample.label = "Treatment", sample.order = c("L
                             expression(" "^abc~"Lachnospiraceae"), expression(" "^acde~"Lactococcus"),
                             expression(" "^c~"Lactobacillus"), expression(" "^abc~"Anaeroplasma"), 
                             expression(" "^abc~"Akkermansia"))) +
+  ylab("OTU Classification") + xlab("Post-treatment Group") +
   theme(panel.border=element_blank(),
-        axis.text.x = element_text(angle=50, hjust=0.3),
+        axis.text.x = element_text(angle=50, hjust=0.3, family="Arial", size=10),
+        axis.text.y = element_text(family="Arial", size=10),
         axis.ticks.x=element_blank(),
         axis.ticks.y=element_blank(),
-        axis.title.y = element_text(margin = margin(t=0, r=20, b=0, l=0)),
-        axis.line=element_blank()
+        axis.title.x = element_text(size=12, face="bold"),
+        axis.title.y = element_text(margin = margin(t=0, r=20, b=0, l=0), size=12, face="bold"),
+        axis.line=element_blank(),
+        legend.title = element_text(family = "Arial", size=10, face="bold"),
+        legend.text = element_text(family = "Arial", size=10),
+        plot.title = element_text(family = "Arial", size=10, face="bold")
   ) +
   guides(fill = guide_colorbar(barheight = unit( 3 , "in" ),
                                 ticks.color = "black",
@@ -2085,21 +2159,73 @@ plot_heatmap(physeq.simper.post, sample.label = "Treatment", sample.order = c("L
                                 frame.linewidth = 1))
 
 
-plot_heatmap(physeq.simper.post, sample.label = "Treatment", sample.order = c("LowFat", "HighFat", "Saccharin", "Stevia"), taxa.label = "OTU_Classification", taxa.order = "Phylum", low = "#FFFFCC", high = "firebrick3", na.value = "#FFFFFC") +
+
+
+### Prep Time
+physeq.simper.time <- subset_taxa(physeq.pair, Species == "Otu00003" | Species == "Otu00004" | 
+                                    Species == "Otu00005" | Species == "Otu00006" | Species == "Otu00008" | 
+                                    Species == "Otu00009" | Species == "Otu00010" | Species == "Otu00012" | 
+                                    Species == "Otu00014" | Species == "Otu00015" | Species == "Otu00023")
+physeq.simper.time.tax <- data.frame(tax_table(physeq.simper.time))
+physeq.simper.time.tax$Name <- c("Bacteroides", "S24-7", "S24-7", "S24-7", "Anaeroplasma", "S24-7", "Ruminiclostridium", "Lachnospiraceae", "Lactococcus", "NK4A136", "Alistipes")
+physeq.simper.time.tax <- tax_table(physeq.simper.time.tax)
+taxa_names(physeq.simper.time.tax) <- taxa_names(physeq.simper.time)
+simper.time.treat <- read.csv("Simper_OTU_time.csv")
+simper.time.treat.hm <- simper.time.treat
+rownames(simper.time.treat.hm) <- simper.time.treat.hm$OTU
+simper.time.treat.hm <- simper.time.treat.hm[,-1]
+simper.time.treat.hm <- simper.time.treat.hm[,-9:-11]
+simper.time.sampdat <- data.frame(c("LF_Pre", "LF_Post", "HF_Pre", "HF_Post", "SC_Pre", "SC_Post", "TV_Pre", "TV_Post"))
+colnames(simper.time.sampdat) <- "Treatment_Time"
+rownames(simper.time.sampdat) <- simper.time.sampdat$Treatment_Time
+physeq.simper.time <- merge_phyloseq(otu_table(simper.time.treat.hm, taxa_are_rows=T), physeq.simper.time.tax, sample_data(simper.time.sampdat))
+colnames(tax_table(physeq.simper.time)) <- 
+  c("Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species", "OTU_Classification")
+physeq.simper.time <- transform_sample_counts(physeq.simper.time, function(x){x*100})
+sample_data(physeq.simper.time)$Treatment_Time <- ordered(sample_data(physeq.simper.time)$Treatment_Time, levels=c("LF_Pre", "LF_Post", "HF_Pre", "HF_Post", "SC_Pre", "SC_Post", "TV_Pre", "TV_Post"))
+
+### HeatMap Time
+# http://www.roymfrancis.com/a-guide-to-elegant-tiled-heatmaps-in-r/
+# https://github.com/tidyverse/ggplot2/pull/2541
+time.hm <- plot_heatmap(physeq.simper.time, sample.label = "Treatment_Time", sample.order = c("LF_Pre", "LF_Post", "HF_Pre", "HF_Post", "SC_Pre", "SC_Post", "TV_Pre", "TV_Post"), taxa.label = "OTU_Classification", taxa.order = "Phylum", low = "#FFFFCC", high = "firebrick3", na.value = "#FFFFFC") +
   geom_tile(colour="gray40") +
   geom_text(aes(label=sprintf("%0.2f", round(Abundance, digits=2)))) +
-  scale_fill_gradient(name="Relative Abundance", low = "#FFFFCC", high = "firebrick3") +
-  scale_x_discrete(labels = c("Low Fat", "High Fat", "Saccharin", "Stevia")) +
+  scale_fill_gradient(name="Relative Abundance (%)", low = "#FFFFCC", high = "firebrick3", limits=c(0,12)) +
+  scale_x_discrete(labels = c("Low Fat Pre", "Low Fat Post", "High Fat Pre", "High Fat Post",
+                              "Saccharin Pre", "Saccharin Post", "Stevia Pre", "Stevia Post")) +
+  scale_y_discrete(labels=c(expression(" "^a~"Bacteroides"), expression(" "^bcd~"S24-7"), 
+                            expression(" "^bcd~"S24-7"), expression(" "^c~"S24-7"), 
+                            expression(" "^c~"S24-7"), expression(" "^a~"Alistipes"),
+                            expression(" "^bcd~"Ruminiclostridium"), expression(" "^bcd~"Lachnospiraceae"),
+                            expression(" "^d~"Lactococcus"), expression(" "^abcd~"NK4A136"),
+                            expression(" "^cd~"Anaeroplasma"))) +
+  ylab("OTU Classification") + xlab("Group") +
   theme(panel.border=element_blank(),
-        axis.text.x = element_text(angle=50, hjust=0.3),
+        axis.text.x = element_text(angle=50, hjust=0.1, vjust=0.6, family="Arial", size=10, 
+                                   margin = margin(t=10, r=10, b=0, l=0)),
+        axis.text.y = element_text(family="Arial", size=10),
         axis.ticks.x=element_blank(),
-        axis.title.y = element_text(margin = margin(t=0, r=20, b=0, l=0))
+        axis.ticks.y=element_blank(),
+        axis.title.x = element_text(size=12, face="bold"),
+        axis.title.y = element_text(margin = margin(t=0, r=20, b=0, l=0), size=12, face="bold"),
+        axis.line=element_blank(),
+        legend.title = element_text(family = "Arial", size=10, face="bold"),
+        legend.text = element_text(family = "Arial", size=10),
+        plot.title = element_text(family = "Arial", size=10, face="bold")
   ) +
   guides(fill = guide_colorbar(barheight = unit( 3 , "in" ),
                                 ticks.color = "black",
                                 ticks.linewidth = 1,
                                 frame.color = "black",
                                 frame.linewidth = 1))
+
+
+
+
+
+
+
+
 
 
 
@@ -2395,7 +2521,14 @@ ml.post.bw.results <- QCAT_GEE(OTU=otu2.ml, Tax=tax2.ml, X=var2.ml, X.index = 1,
 
 
 
+### HeatMap Plot
+```{r}
+# https://cran.r-project.org/web/packages/cowplot/vignettes/plot_grid.html
+theme_set(theme_cowplot(font_family = "Arial"))
+save_plot("hm.tiff", plot_grid(post.hm, time.hm, labels= "AUTO", ncol = 1, align = 'v'), base_width = 7, base_height = 10, dpi=600)
 
+
+```
 
 
 
