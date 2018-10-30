@@ -2466,6 +2466,93 @@ write.table(stevia.simper.all, "stevia.simper.nosex.csv", sep=",")
 
 
 
+
+### Physiology
+```{r}
+### Summarize Data
+phys.df <- data.frame(sample_data(physeq.pair))
+phys.sum <- phys.df %>%
+  group_by(Time, Treatment) %>%
+  summarize(BW_Mean = mean(Body_Weight),
+            BW_Median = median(Body_Weight),
+            BW_SD = sd(Body_Weight),
+            BW_SE = (sd(Body_Weight)/sqrt(length(Body_Weight))),
+            BW_IQR = IQR(Body_Weight))
+phys.post.df <- data.frame(sample_data(physeq.post))
+phys.post.sum <- phys.post.df %>%
+  group_by(Treatment) %>%
+  summarize(BW_Mean = mean(Body_Weight),
+            BW_Median = median(Body_Weight),
+            BW_SD = sd(Body_Weight),
+            BW_SE = (sd(Body_Weight)/sqrt(length(Body_Weight))),
+            BW_IQR = IQR(Body_Weight),
+            BG_Mean = mean(Blood_Glucose),
+            BG_Median = median(Blood_Glucose),
+            BG_SD = sd(Blood_Glucose),
+            BG_SE = (sd(Blood_Glucose)/sqrt(length(Blood_Glucose))),
+            BG_IQR = IQR(Blood_Glucose))
+
+### Check Normality
+# All, Body Weight
+hist(phys.df$Body_Weight, breaks=10)
+qqnorm(phys.df$Body_Weight)
+qqline(phys.df$Body_Weight)
+shapiro.test(phys.df$Body_Weight)
+  # p-value = 4.363e-07
+  # Not Normal
+# Post, Body Weight
+hist(phys.post.df$Body_Weight, breaks=10)
+qqnorm(phys.post.df$Body_Weight)
+qqline(phys.post.df$Body_Weight)
+shapiro.test(phys.post.df$Body_Weight)
+  # p-value = 0.00312
+  # Not Normal
+# Post, Blood Glucose
+hist(phys.post.df$Blood_Glucose, breaks=10)
+qqnorm(phys.post.df$Blood_Glucose)
+qqline(phys.post.df$Blood_Glucose)
+shapiro.test(phys.post.df$Blood_Glucose)
+  # p-value = 0.0958
+  # Normal
+
+
+### Plot
+
+
+
+### Test
+# All, Time, Body Weight
+wilcox.test(Body_Weight ~ Time, data=phys.df, paired=T)
+  # p-value = 1.752e-07
+# Post, Treatment, Body Weight
+kruskal.test(formula = Body_Weight ~ Treatment, data=phys.post.df)
+  # p-value = 0.0002352
+kruskalmc(resp = Body_Weight ~ Treatment, data = phys.post.df)
+  # Low Fat-High Fat
+  # Low Fat-Saccharin
+  # Low Fat-Stevia
+pairwise.wilcox.test(phys.post.df$Body_Weight, phys.post.df$Treatment, p.adjust.method="fdr")
+  # Low Fat-High Fat: p-value = 0.00045
+  # Low Fat-Saccharin: p-value = 0.00013
+  # Low Fat-Stevia: p-value = 0.00064
+  # High Fat-Saccharin: p-value = 0.79977
+  # High Fat-Stevia: p-value = 1.00000
+  # Saccharin-Stevia: 0.79977
+# Post, Treatment, Blood Glucose
+summary(aov(Blood_Glucose ~ Treatment, data=phys.post.df))
+  # p-value = 0.000262
+TukeyHSD(aov(Blood_Glucose ~ Treatment, data=phys.post.df))
+  # Low Fat-High Fat: p-value = 0.0004913
+  # Low Fat-Saccharin: p-value = 0.0150677
+  # Low Fat-Stevia: p-value = 0.0015190
+  # High Fat-Saccharin: p-value = 0.6075598
+  # High Fat-Stevia: p-value = 0.9939547
+  # Saccharin-Stevia: p-value = 0.7810005
+
+```
+
+
+
 ### miLineage
 ```{r}
 ### Load miLineage Results
