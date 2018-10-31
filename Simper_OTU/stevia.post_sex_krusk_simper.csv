@@ -1,0 +1,14 @@
+Comparison,SIMPER,OTU,krusk_p.val,fdr_krusk_p.val,Taxonomy,Left.mean.abund,Left.stdev,Right.mean.abund,Right.stdev
+Male_Female,0.091548502,Otu00002,0.269829912,0.729163264,Verrucomicrobia - Verrucomicrobiae - Verrucomicrobiales - Verrucomicrobiaceae - Akkermansia,0.062490586,0.076107375,0.112954546,0.110452915
+Male_Female,0.053207703,Otu00007,0.392626373,0.729163264,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.035451111,0.072461584,0.049456857,0.063850747
+Male_Female,0.038294214,Otu00012,0.223101893,0.729163264,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_unclassified,0.048343694,0.041054453,0.059262582,0.037964432
+Male_Female,0.034529475,Otu00023,0.217979747,0.729163264,Bacteroidetes - Bacteroidia - Bacteroidales - Rikenellaceae - Alistipes,0.023527338,0.049437397,0.028810136,0.042644044
+Male_Female,0.025946254,Otu00003,0.342478133,0.729163264,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidaceae - Bacteroides,0.044830629,0.019230016,0.05662269,0.032504773
+Male_Female,0.023746389,Otu00018,0.130130973,0.729163264,Firmicutes - Bacilli - Lactobacillales - Lactobacillaceae - Lactobacillus,0.028690886,0.046155052,0.001950365,0.001889473
+Male_Female,0.017740458,Otu00029,0.355411258,0.729163264,Firmicutes - Clostridia - Clostridiales - Ruminococcaceae - Ruminococcaceae_ge,0.006098229,0.006927823,0.021196861,0.025353816
+Male_Female,0.045643825,Otu00001,0.526749518,0.767848162,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.091009771,0.037701912,0.082806606,0.057597345
+Male_Female,0.036217801,Otu00014,0.554098657,0.767848162,Firmicutes - Bacilli - Lactobacillales - Streptococcaceae - Lactococcus,0.046306126,0.040132428,0.040529877,0.037561567
+Male_Female,0.034847789,Otu00010,0.590652432,0.767848162,Firmicutes - Clostridia - Clostridiales - Ruminococcaceae - Ruminiclostridium,0.04969033,0.039379043,0.051432394,0.034371309
+Male_Female,0.023905545,Otu00009,0.683344548,0.807589011,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.022651486,0.02543204,0.017812496,0.030516929
+Male_Female,0.046483867,Otu00004,0.836949778,0.836949778,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.076331662,0.045446837,0.0718626,0.052618433
+Male_Female,0.017085083,Otu00008,0.791720519,0.836949778,Tenericutes - Mollicutes - Anaeroplasmatales - Anaeroplasmataceae - Anaeroplasma,0.005148615,0.014054734,0.016968244,0.04196235
