@@ -2265,7 +2265,7 @@ time.hm <- plot_heatmap(physeq.simper.time, sample.label = "Treatment_Time", sam
                             expression(" "^bcd~"S24-7"), expression(" "^c~"S24-7"), 
                             expression(" "^c~"S24-7"), expression(" "^a~"Alistipes"),
                             expression(" "^bcd~"Ruminiclostridium"), expression(" "^bcd~"Lachnospiraceae"),
-                            expression(" "^d~"Lactococcus"), expression(" "^abcd~"NK4A136"),
+                            expression(" "^bd~"Lactococcus"), expression(" "^ab~"NK4A136"),
                             expression(" "^cd~"Anaeroplasma"))) +
   ylab("OTU Classification") + xlab("Group") +
   theme(panel.border=element_blank(),
