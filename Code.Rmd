@@ -483,11 +483,6 @@ chao.plot <- ggplot(adiv.pair, aes(x=Treatment, y=chao, fill = Treatment)) +
 
 
 
-Post-treatment groups are significantly different (adj p-val = 0.004). Specifically:
-High Fat vs. Low Fat
-Low Fat vs. Saccharin
-High Fat Pre-treatment and Post-treatment are significantly different (adj p-val = 0.018)
-
 
 
 
@@ -761,6 +756,50 @@ ggplot(test, aes(x=Phylum, y=Median, fill=Phylum)) +
         legend.text = element_text(size=12))
 ```
 
+
+### Test Phyla
+```{r}
+### Code to answer Sarah's questions
+
+### Firmicutes in Stevia, Pre vs. Post
+fir.phy <- subset_taxa(phy99, Phylum == "Firmicutes")
+fir.tv <- subset_samples(fir.phy, Treatment == "Stevia")
+fir.tv.df <- data.frame(sample_data(fir.tv))
+fir.tv.df$RelAbund <- t(data.frame(otu_table(fir.tv)))
+# Wilcoxon (Paired)
+wilcox.test(RelAbund ~ Time, data=fir.tv.df, paired=T, alternative = "less")
+  # p-value = 0.01172
+  # Pre < Post
+
+### Firmicutes in all Post High Fat diets vs. Low Fat
+fir.phy <- subset_taxa(phy99, Phylum == "Firmicutes")
+fir.post <- subset_samples(fir.phy, Time == "Post-treatment")
+fir.post.df <- data.frame(sample_data(fir.post))
+fir.post.df$RelAbund <- t(data.frame(otu_table(fir.post)))
+fir.post.df$Diet <- NA
+fir.post.df$Diet[which(fir.post.df$Treatment == "Low Fat")] <- "Low Fat"
+fir.post.df$Diet[which(fir.post.df$Treatment != "Low Fat")] <- "High Fat"
+# Wilcoxon
+wilcox.test(RelAbund ~ Diet, data=fir.post.df, alternative = "greater")
+  # p-value = 3.05e-05
+  # High Fat > Low Fat
+
+
+### Bacteroidetes in all Post High Fat diets vs. Low Fat
+bac.phy <- subset_taxa(phy99, Phylum == "Bacteroidetes")
+bac.post <- subset_samples(bac.phy, Time == "Post-treatment")
+bac.post.df <- data.frame(sample_data(bac.post))
+bac.post.df$RelAbund <- t(data.frame(otu_table(bac.post)))
+bac.post.df$Diet <- NA
+bac.post.df$Diet[which(bac.post.df$Treatment == "Low Fat")] <- "Low Fat"
+bac.post.df$Diet[which(bac.post.df$Treatment != "Low Fat")] <- "High Fat"
+# Wilcoxon
+wilcox.test(RelAbund ~ Diet, data=bac.post.df, alternative = "less")
+  # p-value = .3.934e-09
+  # High Fat < Low Fat
+
+```
+
 ### Examine Family
 ```{r}
 # Merge samples with the same taxonomic rank
@@ -875,6 +914,9 @@ ggplot(test, aes(x=Phylum, y=Median, fill=Phylum)) +
         legend.title = element_text(size = 14),
         legend.text = element_text(size=12))
 ```
+
+
+
 
 
 
