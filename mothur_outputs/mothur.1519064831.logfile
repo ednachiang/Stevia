@@ -1,0 +1,2920 @@
+Linux version
+
+Using ReadLine
+
+Running 64Bit Version
+
+mothur v.1.39.5
+Last updated: 3/20/2017
+
+by
+Patrick D. Schloss
+
+Department of Microbiology & Immunology
+University of Michigan
+http://www.mothur.org
+
+When using, please cite:
+Schloss, P.D., et al., Introducing mothur: Open-source, platform-independent, community-supported software for describing and comparing microbial communities. Appl Environ Microbiol, 2009. 75(23):7537-41.
+
+Distributed under the GNU General Public License
+
+Type 'help()' for information on the commands that are available
+
+For questions and analysis support, please visit our forum at https://www.mothur.org/forum
+
+Type 'quit()' to exit program
+Batch Mode
+
+
+mothur > make.contigs(file=/home/GLBRCORG/echiang3/SwoapLab/stability.files, processors=30)
+
+Using 30 processors.
+
+>>>>>	Processing file pair fastq/PCR1_S261_L001_R1_001.fastq.gz - fastq/PCR1_S261_L001_R2_001.fastq.gz (files 40 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 1 secs to assemble 27 reads.
+
+
+>>>>>	Processing file pair fastq/PCR2_S262_L001_R1_001.fastq.gz - fastq/PCR2_S262_L001_R2_001.fastq.gz (files 41 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 0 secs to assemble 43 reads.
+
+
+mothur > make.contigs(file=/home/GLBRCORG/echiang3/SwoapLab/stability.files, processors=30)
+
+Using 30 processors.
+
+>>>>>	Processing file pair fastq/TV1C_S214_L001_R1_001.fastq.gz - fastq/TV1C_S214_L001_R2_001.fastq.gz (files 64 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 3 secs to assemble 2396 reads.
+
+
+>>>>>	Processing file pair fastq/SC10A_S194_L001_R1_001.fastq.gz - fastq/SC10A_S194_L001_R2_001.fastq.gz (files 42 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 3 secs to assemble 2752 reads.
+
+
+mothur > make.contigs(file=/home/GLBRCORG/echiang3/SwoapLab/stability.files, processors=30)
+
+Using 30 processors.
+
+>>>>>	Processing file pair fastq/FL8A_S229_L001_R1_001.fastq.gz - fastq/FL8A_S229_L001_R2_001.fastq.gz (files 17 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 4 secs to assemble 2388 reads.
+
+
+mothur > make.contigs(file=/home/GLBRCORG/echiang3/SwoapLab/stability.files, processors=30)
+
+Using 30 processors.
+
+>>>>>	Processing file pair fastq/FL3A_S224_L001_R1_001.fastq.gz - fastq/FL3A_S224_L001_R2_001.fastq.gz (files 7 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 4 secs to assemble 2530 reads.
+
+
+mothur > make.contigs(file=/home/GLBRCORG/echiang3/SwoapLab/stability.files, processors=30)
+
+Using 30 processors.
+
+>>>>>	Processing file pair fastq/FL4A_S225_L001_R1_001.fastq.gz - fastq/FL4A_S225_L001_R2_001.fastq.gz (files 9 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 4 secs to assemble 2568 reads.
+
+
+mothur > make.contigs(file=/home/GLBRCORG/echiang3/SwoapLab/stability.files, processors=30)
+
+Using 30 processors.
+
+>>>>>	Processing file pair fastq/SC3C_S197_L001_R1_001.fastq.gz - fastq/SC3C_S197_L001_R2_001.fastq.gz (files 49 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 5 secs to assemble 2708 reads.
+
+
+mothur > make.contigs(file=/home/GLBRCORG/echiang3/SwoapLab/stability.files, processors=30)
+
+Using 30 processors.
+
+>>>>>	Processing file pair fastq/SC5C_S198_L001_R1_001.fastq.gz - fastq/SC5C_S198_L001_R2_001.fastq.gz (files 52 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 5 secs to assemble 3147 reads.
+
+
+mothur > make.contigs(file=/home/GLBRCORG/echiang3/SwoapLab/stability.files, processors=30)
+
+Using 30 processors.
+
+>>>>>	Processing file pair fastq/FL2A_S223_L001_R1_001.fastq.gz - fastq/FL2A_S223_L001_R2_001.fastq.gz (files 5 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 5 secs to assemble 2895 reads.
+
+
+mothur > make.contigs(file=/home/GLBRCORG/echiang3/SwoapLab/stability.files, processors=30)
+
+Using 30 processors.
+
+>>>>>	Processing file pair fastq/FL9A_S230_L001_R1_001.fastq.gz - fastq/FL9A_S230_L001_R2_001.fastq.gz (files 19 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 5 secs to assemble 3295 reads.
+
+
+mothur > make.contigs(file=/home/GLBRCORG/echiang3/SwoapLab/stability.files, processors=30)
+
+Using 30 processors.
+
+>>>>>	Processing file pair fastq/SC7A_S191_L001_R1_001.fastq.gz - fastq/SC7A_S191_L001_R2_001.fastq.gz (files 55 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 5 secs to assemble 3837 reads.
+
+
+mothur > make.contigs(file=/home/GLBRCORG/echiang3/SwoapLab/stability.files, processors=30)
+
+Using 30 processors.
+
+>>>>>	Processing file pair fastq/FL6A_S227_L001_R1_001.fastq.gz - fastq/FL6A_S227_L001_R2_001.fastq.gz (files 13 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 6 secs to assemble 3531 reads.
+
+
+mothur > make.contigs(file=/home/GLBRCORG/echiang3/SwoapLab/stability.files, processors=30)
+
+Using 30 processors.
+
+>>>>>	Processing file pair fastq/TV6C_S218_L001_R1_001.fastq.gz - fastq/TV6C_S218_L001_R2_001.fastq.gz (files 73 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 6 secs to assemble 3541 reads.
+
+
+mothur > make.contigs(file=/home/GLBRCORG/echiang3/SwoapLab/stability.files, processors=30)
+
+Using 30 processors.
+
+>>>>>	Processing file pair fastq/FL10A_S231_L001_R1_001.fastq.gz - fastq/FL10A_S231_L001_R2_001.fastq.gz (files 1 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 6 secs to assemble 3691 reads.
+
+
+mothur > make.contigs(file=/home/GLBRCORG/echiang3/SwoapLab/stability.files, processors=30)
+
+Using 30 processors.
+
+>>>>>	Processing file pair fastq/HF5A_S246_L001_R1_001.fastq.gz - fastq/HF5A_S246_L001_R2_001.fastq.gz (files 31 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 6 secs to assemble 6048 reads.
+
+
+mothur > make.contigs(file=/home/GLBRCORG/echiang3/SwoapLab/stability.files, processors=30)
+
+Using 30 processors.
+
+>>>>>	Processing file pair fastq/SC2A_S186_L001_R1_001.fastq.gz - fastq/SC2A_S186_L001_R2_001.fastq.gz (files 46 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 6 secs to assemble 4080 reads.
+
+
+mothur > make.contigs(file=/home/GLBRCORG/echiang3/SwoapLab/stability.files, processors=30)
+
+Using 30 processors.
+
+>>>>>	Processing file pair fastq/TV10A_S213_L001_R1_001.fastq.gz - fastq/TV10A_S213_L001_R2_001.fastq.gz (files 61 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 8 secs to assemble 4817 reads.
+
+
+mothur > make.contigs(file=/home/GLBRCORG/echiang3/SwoapLab/stability.files, processors=30)
+
+Using 30 processors.
+
+>>>>>	Processing file pair fastq/HF3C_S253_L001_R1_001.fastq.gz - fastq/HF3C_S253_L001_R2_001.fastq.gz (files 28 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 8 secs to assemble 5635 reads.
+
+
+mothur > make.contigs(file=/home/GLBRCORG/echiang3/SwoapLab/stability.files, processors=30)
+
+Using 30 processors.
+
+>>>>>	Processing file pair fastq/FL1A_S222_L001_R1_001.fastq.gz - fastq/FL1A_S222_L001_R2_001.fastq.gz (files 3 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 9 secs to assemble 5848 reads.
+
+
+>>>>>	Processing file pair fastq/SC4A_S188_L001_R1_001.fastq.gz - fastq/SC4A_S188_L001_R2_001.fastq.gz (files 50 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 5 secs to assemble 3773 reads.
+
+
+mothur > make.contigs(file=/home/GLBRCORG/echiang3/SwoapLab/stability.files, processors=30)
+
+Using 30 processors.
+
+>>>>>	Processing file pair fastq/SC10C_S203_L001_R1_001.fastq.gz - fastq/SC10C_S203_L001_R2_001.fastq.gz (files 43 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 10 secs to assemble 7397 reads.
+
+
+>>>>>	Processing file pair fastq/TV2A_S205_L001_R1_001.fastq.gz - fastq/TV2A_S205_L001_R2_001.fastq.gz (files 65 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 8 secs to assemble 6680 reads.
+
+
+>>>>>	Processing file pair fastq/SC7C_S200_L001_R1_001.fastq.gz - fastq/SC7C_S200_L001_R2_001.fastq.gz (files 56 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 6 secs to assemble 4445 reads.
+
+
+>>>>>	Processing file pair fastq/FL6C_S237_L001_R1_001.fastq.gz - fastq/FL6C_S237_L001_R2_001.fastq.gz (files 14 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 5 secs to assemble 4406 reads.
+
+
+>>>>>	Processing file pair fastq/SC2C_S196_L001_R1_001.fastq.gz - fastq/SC2C_S196_L001_R2_001.fastq.gz (files 47 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 5 secs to assemble 3557 reads.
+
+
+>>>>>	Processing file pair fastq/SC6A_S190_L001_R1_001.fastq.gz - fastq/SC6A_S190_L001_R2_001.fastq.gz (files 53 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 7 secs to assemble 4738 reads.
+
+
+>>>>>	Processing file pair fastq/FL10C_S241_L001_R1_001.fastq.gz - fastq/FL10C_S241_L001_R2_001.fastq.gz (files 2 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 6 secs to assemble 4448 reads.
+
+
+>>>>>	Processing file pair fastq/HF4A_S245_L001_R1_001.fastq.gz - fastq/HF4A_S245_L001_R2_001.fastq.gz (files 29 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 5 secs to assemble 3642 reads.
+
+
+>>>>>	Processing file pair fastq/FL1C_S232_L001_R1_001.fastq.gz - fastq/FL1C_S232_L001_R2_001.fastq.gz (files 4 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 5 secs to assemble 3787 reads.
+
+
+>>>>>	Processing file pair fastq/SC1A_S185_L001_R1_001.fastq.gz - fastq/SC1A_S185_L001_R2_001.fastq.gz (files 44 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 4 secs to assemble 3850 reads.
+
+
+>>>>>	Processing file pair fastq/TV3A_S206_L001_R1_001.fastq.gz - fastq/TV3A_S206_L001_R2_001.fastq.gz (files 66 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 4 secs to assemble 3286 reads.
+
+
+>>>>>	Processing file pair fastq/SC5A_S189_L001_R1_001.fastq.gz - fastq/SC5A_S189_L001_R2_001.fastq.gz (files 51 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 6 secs to assemble 5810 reads.
+
+
+>>>>>	Processing file pair fastq/TV10C_S221_L001_R1_001.fastq.gz - fastq/TV10C_S221_L001_R2_001.fastq.gz (files 62 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 8 secs to assemble 6824 reads.
+
+
+>>>>>	Processing file pair fastq/SC6C_S199_L001_R1_001.fastq.gz - fastq/SC6C_S199_L001_R2_001.fastq.gz (files 54 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 4 secs to assemble 3725 reads.
+
+
+>>>>>	Processing file pair fastq/FL9C_S240_L001_R1_001.fastq.gz - fastq/FL9C_S240_L001_R2_001.fastq.gz (files 20 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 12 secs to assemble 9378 reads.
+
+
+>>>>>	Processing file pair fastq/SC3A_S187_L001_R1_001.fastq.gz - fastq/SC3A_S187_L001_R2_001.fastq.gz (files 48 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 6 secs to assemble 4938 reads.
+
+
+>>>>>	Processing file pair fastq/FL3C_S234_L001_R1_001.fastq.gz - fastq/FL3C_S234_L001_R2_001.fastq.gz (files 8 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 13 secs to assemble 10451 reads.
+
+
+>>>>>	Processing file pair fastq/SC8A_S192_L001_R1_001.fastq.gz - fastq/SC8A_S192_L001_R2_001.fastq.gz (files 57 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 6 secs to assemble 4722 reads.
+
+
+>>>>>	Processing file pair fastq/HF5C_S255_L001_R1_001.fastq.gz - fastq/HF5C_S255_L001_R2_001.fastq.gz (files 32 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 14 secs to assemble 10855 reads.
+
+
+>>>>>	Processing file pair fastq/TV1A_S204_L001_R1_001.fastq.gz - fastq/TV1A_S204_L001_R2_001.fastq.gz (files 63 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 5 secs to assemble 4918 reads.
+
+
+mothur > make.contigs(file=/home/GLBRCORG/echiang3/SwoapLab/stability.files, processors=30)
+
+Using 30 processors.
+
+>>>>>	Processing file pair fastq/HF8C_S258_L001_R1_001.fastq.gz - fastq/HF8C_S258_L001_R2_001.fastq.gz (files 37 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 30 secs to assemble 28138 reads.
+
+
+>>>>>	Processing file pair fastq/HF9A_S249_L001_R1_001.fastq.gz - fastq/HF9A_S249_L001_R2_001.fastq.gz (files 38 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 3 secs to assemble 3867 reads.
+
+
+>>>>>	Processing file pair fastq/FL8C_S239_L001_R1_001.fastq.gz - fastq/FL8C_S239_L001_R2_001.fastq.gz (files 18 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 35 secs to assemble 35773 reads.
+
+
+>>>>>	Processing file pair fastq/HF9C_S259_L001_R1_001.fastq.gz - fastq/HF9C_S259_L001_R2_001.fastq.gz (files 39 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 7 secs to assemble 6200 reads.
+
+
+mothur > make.contigs(file=/home/GLBRCORG/echiang3/SwoapLab/stability.files, processors=30)
+
+Using 30 processors.
+
+>>>>>	Processing file pair fastq/FL5A_S226_L001_R1_001.fastq.gz - fastq/FL5A_S226_L001_R2_001.fastq.gz (files 11 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 41 secs to assemble 37141 reads.
+
+
+mothur > make.contigs(file=/home/GLBRCORG/echiang3/SwoapLab/stability.files, processors=30)
+
+Using 30 processors.
+
+>>>>>	Processing file pair fastq/HF1A_S242_L001_R1_001.fastq.gz - fastq/HF1A_S242_L001_R2_001.fastq.gz (files 23 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 46 secs to assemble 44454 reads.
+
+
+>>>>>	Processing file pair fastq/HF4C_S254_L001_R1_001.fastq.gz - fastq/HF4C_S254_L001_R2_001.fastq.gz (files 30 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 33 secs to assemble 28962 reads.
+
+
+mothur > make.contigs(file=/home/GLBRCORG/echiang3/SwoapLab/stability.files, processors=30)
+
+Using 30 processors.
+
+>>>>>	Processing file pair fastq/HF6C_S256_L001_R1_001.fastq.gz - fastq/HF6C_S256_L001_R2_001.fastq.gz (files 34 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 50 secs to assemble 47625 reads.
+
+
+>>>>>	Processing file pair fastq/SC1C_S195_L001_R1_001.fastq.gz - fastq/SC1C_S195_L001_R2_001.fastq.gz (files 45 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 40 secs to assemble 44809 reads.
+
+
+mothur > make.contigs(file=/home/GLBRCORG/echiang3/SwoapLab/stability.files, processors=30)
+
+Using 30 processors.
+
+>>>>>	Processing file pair fastq/TV5A_S208_L001_R1_001.fastq.gz - fastq/TV5A_S208_L001_R2_001.fastq.gz (files 70 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 55 secs to assemble 54355 reads.
+
+
+mothur > make.contigs(file=/home/GLBRCORG/echiang3/SwoapLab/stability.files, processors=30)
+
+Using 30 processors.
+
+>>>>>	Processing file pair fastq/TV8A_S211_L001_R1_001.fastq.gz - fastq/TV8A_S211_L001_R2_001.fastq.gz (files 76 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 58 secs to assemble 55653 reads.
+
+
+mothur > make.contigs(file=/home/GLBRCORG/echiang3/SwoapLab/stability.files, processors=30)
+
+Using 30 processors.
+
+>>>>>	Processing file pair fastq/FL7A_S228_L001_R1_001.fastq.gz - fastq/FL7A_S228_L001_R2_001.fastq.gz (files 15 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 58 secs to assemble 56596 reads.
+
+
+>>>>>	Processing file pair fastq/FL2C_S233_L001_R1_001.fastq.gz - fastq/FL2C_S233_L001_R2_001.fastq.gz (files 6 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 54 secs to assemble 54955 reads.
+
+
+>>>>>	Processing file pair fastq/TV5C_S217_L001_R1_001.fastq.gz - fastq/TV5C_S217_L001_R2_001.fastq.gz (files 71 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 4 secs to assemble 3687 reads.
+
+
+mothur > make.contigs(file=/home/GLBRCORG/echiang3/SwoapLab/stability.files, processors=30)
+
+Using 30 processors.
+
+>>>>>	Processing file pair fastq/HF2A_S243_L001_R1_001.fastq.gz - fastq/HF2A_S243_L001_R2_001.fastq.gz (files 25 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 60 secs to assemble 57644 reads.
+
+
+>>>>>	Processing file pair fastq/TV7A_S210_L001_R1_001.fastq.gz - fastq/TV7A_S210_L001_R2_001.fastq.gz (files 74 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 54 secs to assemble 55855 reads.
+
+
+mothur > make.contigs(file=/home/GLBRCORG/echiang3/SwoapLab/stability.files, processors=30)
+
+Using 30 processors.
+
+>>>>>	Processing file pair fastq/SC8C_S201_L001_R1_001.fastq.gz - fastq/SC8C_S201_L001_R2_001.fastq.gz (files 58 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 61 secs to assemble 58296 reads.
+
+
+>>>>>	Processing file pair fastq/TV9A_S212_L001_R1_001.fastq.gz - fastq/TV9A_S212_L001_R2_001.fastq.gz (files 77 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 4 secs to assemble 3228 reads.
+
+
+>>>>>	Processing file pair fastq/FL7C_S238_L001_R1_001.fastq.gz - fastq/FL7C_S238_L001_R2_001.fastq.gz (files 16 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 4 secs to assemble 3588 reads.
+
+
+>>>>>	Processing file pair fastq/HF2C_S252_L001_R1_001.fastq.gz - fastq/HF2C_S252_L001_R2_001.fastq.gz (files 26 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 3 secs to assemble 2982 reads.
+
+
+mothur > make.contigs(file=/home/GLBRCORG/echiang3/SwoapLab/stability.files, processors=30)
+
+Using 30 processors.
+
+>>>>>	Processing file pair fastq/TV3C_S215_L001_R1_001.fastq.gz - fastq/TV3C_S215_L001_R2_001.fastq.gz (files 67 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 64 secs to assemble 63543 reads.
+
+
+>>>>>	Processing file pair fastq/TV4A_S207_L001_R1_001.fastq.gz - fastq/TV4A_S207_L001_R2_001.fastq.gz (files 68 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 4 secs to assemble 4464 reads.
+
+
+>>>>>	Processing file pair fastq/FL4C_S235_L001_R1_001.fastq.gz - fastq/FL4C_S235_L001_R2_001.fastq.gz (files 10 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 73 secs to assemble 74225 reads.
+
+
+>>>>>	Processing file pair fastq/SC9A_S193_L001_R1_001.fastq.gz - fastq/SC9A_S193_L001_R2_001.fastq.gz (files 59 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 21 secs to assemble 25008 reads.
+
+
+>>>>>	Processing file pair fastq/HF6A_S247_L001_R1_001.fastq.gz - fastq/HF6A_S247_L001_R2_001.fastq.gz (files 33 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 69 secs to assemble 78525 reads.
+
+
+>>>>>	Processing file pair fastq/HF7A_S248_L001_R1_001.fastq.gz - fastq/HF7A_S248_L001_R2_001.fastq.gz (files 35 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 47 secs to assemble 55086 reads.
+
+
+>>>>>	Processing file pair fastq/HF1C_S251_L001_R1_001.fastq.gz - fastq/HF1C_S251_L001_R2_001.fastq.gz (files 24 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 57 secs to assemble 66338 reads.
+
+
+>>>>>	Processing file pair fastq/HF7C_S257_L001_R1_001.fastq.gz - fastq/HF7C_S257_L001_R2_001.fastq.gz (files 36 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 9 secs to assemble 11117 reads.
+
+
+>>>>>	Processing file pair fastq/TV6A_S209_L001_R1_001.fastq.gz - fastq/TV6A_S209_L001_R2_001.fastq.gz (files 72 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 48 secs to assemble 55973 reads.
+
+
+>>>>>	Processing file pair fastq/TV4C_S216_L001_R1_001.fastq.gz - fastq/TV4C_S216_L001_R2_001.fastq.gz (files 69 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 42 secs to assemble 49421 reads.
+
+
+>>>>>	Processing file pair fastq/TV9C_S220_L001_R1_001.fastq.gz - fastq/TV9C_S220_L001_R2_001.fastq.gz (files 78 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 51 secs to assemble 58552 reads.
+
+
+>>>>>	Processing file pair fastq/HF3A_S244_L001_R1_001.fastq.gz - fastq/HF3A_S244_L001_R2_001.fastq.gz (files 27 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 51 secs to assemble 58476 reads.
+
+
+>>>>>	Processing file pair fastq/TV7C_S219_L001_R1_001.fastq.gz - fastq/TV7C_S219_L001_R2_001.fastq.gz (files 75 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 55 secs to assemble 62464 reads.
+
+
+>>>>>	Processing file pair fastq/FL5C_S236_L001_R1_001.fastq.gz - fastq/FL5C_S236_L001_R2_001.fastq.gz (files 12 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 82 secs to assemble 94531 reads.
+
+
+>>>>>	Processing file pair fastq/SC9C_S202_L001_R1_001.fastq.gz - fastq/SC9C_S202_L001_R2_001.fastq.gz (files 60 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 59 secs to assemble 72780 reads.
+
+
+mothur > make.contigs(file=/home/GLBRCORG/echiang3/SwoapLab/stability.files, processors=30)
+
+Using 30 processors.
+
+>>>>>	Processing file pair fastq/HF10A_S250_L001_R1_001.fastq.gz - fastq/HF10A_S250_L001_R2_001.fastq.gz (files 21 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 142 secs to assemble 157433 reads.
+
+
+>>>>>	Processing file pair fastq/HF10C_S260_L001_R1_001.fastq.gz - fastq/HF10C_S260_L001_R2_001.fastq.gz (files 22 of 78)	<<<<<
+Making contigs...
+Done.
+
+It took 2 secs to assemble 2643 reads.
+
+It took 200 secs to process 1855794 sequences.
+
+Group count: 
+FL10A	3691
+FL10C	4448
+FL1A	5848
+FL1C	3787
+FL2A	2895
+FL2C	54955
+FL3A	2530
+FL3C	10451
+FL4A	2568
+FL4C	74225
+FL5A	37141
+FL5C	94531
+FL6A	3531
+FL6C	4406
+FL7A	56596
+FL7C	3588
+FL8A	2388
+FL8C	35773
+FL9A	3295
+FL9C	9378
+HF10A	157433
+HF10C	2643
+HF1A	44454
+HF1C	66338
+HF2A	57644
+HF2C	2982
+HF3A	58476
+HF3C	5635
+HF4A	3642
+HF4C	28962
+HF5A	6048
+HF5C	10855
+HF6A	78525
+HF6C	47625
+HF7A	55086
+HF7C	11117
+HF8C	28138
+HF9A	3867
+HF9C	6200
+PCR1	27
+PCR2	43
+SC10A	2752
+SC10C	7397
+SC1A	3850
+SC1C	44809
+SC2A	4080
+SC2C	3557
+SC3A	4938
+SC3C	2708
+SC4A	3773
+SC5A	5810
+SC5C	3147
+SC6A	4738
+SC6C	3725
+SC7A	3837
+SC7C	4445
+SC8A	4722
+SC8C	58296
+SC9A	25008
+SC9C	72780
+TV10A	4817
+TV10C	6824
+TV1A	4918
+TV1C	2396
+TV2A	6680
+TV3A	3286
+TV3C	63543
+TV4A	4464
+TV4C	49421
+TV5A	54355
+TV5C	3687
+TV6A	55973
+TV6C	3541
+TV7A	55855
+TV7C	62464
+TV8A	55653
+TV9A	3228
+TV9C	58552
+
+Total of all groups is 1855794
+
+Output File Names: 
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.fasta
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.qual
+/home/GLBRCORG/echiang3/SwoapLab/stability.contigs.report
+/home/GLBRCORG/echiang3/SwoapLab/stability.scrap.contigs.fasta
+/home/GLBRCORG/echiang3/SwoapLab/stability.scrap.contigs.qual
+/home/GLBRCORG/echiang3/SwoapLab/stability.contigs.groups
+
+[WARNING]: your sequence names contained ':'.  I changed them to '_' to avoid problems in your downstream analysis.
+
+mothur > summary.seqs(fasta=current)
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.fasta as input file for the fasta parameter.
+
+Using 30 processors.
+
+		Start	End	NBases	Ambigs	Polymer	NumSeqs
+Minimum:	1	245	245	0	3	1
+2.5%-tile:	1	252	252	0	4	46395
+25%-tile:	1	252	252	0	4	463949
+Median: 	1	253	253	0	4	927898
+75%-tile:	1	253	253	0	5	1391846
+97.5%-tile:	1	253	253	3	5	1809400
+Maximum:	1	500	500	87	241	1855794
+Mean:	1	252.966	252.966	0.360434	4.47385
+# of Seqs:	1855794
+
+Output File Names: 
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.summary
+
+It took 6 secs to summarize 1855794 sequences.
+
+mothur > screen.seqs(fasta=current, group=current, summary=current, maxambig=0, maxlength=300, maxhomop=8)
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.fasta as input file for the fasta parameter.
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.contigs.groups as input file for the group parameter.
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.summary as input file for the summary parameter.
+
+Using 30 processors.
+
+Output File Names: 
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.summary
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.fasta
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.bad.accnos
+/home/GLBRCORG/echiang3/SwoapLab/stability.contigs.good.groups
+
+
+It took 15 secs to screen 1855794 sequences.
+
+mothur > summary.seqs(fasta=current)
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.fasta as input file for the fasta parameter.
+
+Using 30 processors.
+
+		Start	End	NBases	Ambigs	Polymer	NumSeqs
+Minimum:	1	250	250	0	3	1
+2.5%-tile:	1	252	252	0	4	39357
+25%-tile:	1	252	252	0	4	393561
+Median: 	1	253	253	0	4	787121
+75%-tile:	1	253	253	0	5	1180681
+97.5%-tile:	1	253	253	0	5	1534885
+Maximum:	1	298	298	0	8	1574240
+Mean:	1	252.589	252.589	0	4.4671
+# of Seqs:	1574240
+
+Output File Names: 
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.summary
+
+It took 4 secs to summarize 1574240 sequences.
+
+mothur > unique.seqs(fasta=current)
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.fasta as input file for the fasta parameter.
+1574240	95803
+
+Output File Names: 
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.names
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.fasta
+
+
+mothur > summary.seqs(fasta=current)
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.fasta as input file for the fasta parameter.
+
+Using 30 processors.
+[WARNING]: This command can take a namefile and you did not provide one. The current namefile is /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.names which seems to match /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.fasta.
+
+		Start	End	NBases	Ambigs	Polymer	NumSeqs
+Minimum:	1	250	250	0	3	1
+2.5%-tile:	1	252	252	0	4	2396
+25%-tile:	1	252	252	0	4	23951
+Median: 	1	253	253	0	4	47902
+75%-tile:	1	253	253	0	5	71853
+97.5%-tile:	1	254	254	0	5	93408
+Maximum:	1	298	298	0	8	95803
+Mean:	1	252.775	252.775	0	4.47996
+# of Seqs:	95803
+
+Output File Names: 
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.summary
+
+It took 0 secs to summarize 95803 sequences.
+
+mothur > count.seqs(name=current, group=current)
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.contigs.good.groups as input file for the group parameter.
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.names as input file for the name parameter.
+
+Using 30 processors.
+It took 6 secs to create a table for 1574240 sequences.
+
+
+Total number of sequences: 1574240
+
+Output File Names: 
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.count_table
+
+
+mothur > summary.seqs(count=current)
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.count_table as input file for the count parameter.
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.fasta as input file for the fasta parameter.
+
+Using 30 processors.
+
+		Start	End	NBases	Ambigs	Polymer	NumSeqs
+Minimum:	1	250	250	0	3	1
+2.5%-tile:	1	252	252	0	4	39357
+25%-tile:	1	252	252	0	4	393561
+Median: 	1	253	253	0	4	787121
+75%-tile:	1	253	253	0	5	1180681
+97.5%-tile:	1	253	253	0	5	1534885
+Maximum:	1	298	298	0	8	1574240
+Mean:	1	252.589	252.589	0	4.4671
+# of unique seqs:	95803
+total # of seqs:	1574240
+
+Output File Names: 
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.summary
+
+It took 1 secs to summarize 1574240 sequences.
+
+mothur > align.seqs(fasta=current, reference=/home/GLBRCORG/echiang3/mothur/silva.db/silva.nr_v128.align, flip=T)
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.fasta as input file for the fasta parameter.
+
+Using 30 processors.
+
+Reading in the /home/GLBRCORG/echiang3/mothur/silva.db/silva.nr_v128.align template sequences...	DONE.
+It took 200 to read  190661 sequences.
+Aligning sequences from /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.fasta ...
+[WARNING]: Some of your sequences generated alignments that eliminated too many bases, a list is provided in /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.flip.accnos. If the reverse compliment proved to be better it was reported.
+It took 229 secs to align 95803 sequences.
+
+
+Output File Names: 
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.align
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.align.report
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.flip.accnos
+
+
+mothur > summary.seqs(fasta=current, count=current)
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.count_table as input file for the count parameter.
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.align as input file for the fasta parameter.
+
+Using 30 processors.
+
+		Start	End	NBases	Ambigs	Polymer	NumSeqs
+Minimum:	1046	1069	2	0	1	1
+2.5%-tile:	13862	23444	252	0	4	39357
+25%-tile:	13862	23444	252	0	4	393561
+Median: 	13862	23444	253	0	4	787121
+75%-tile:	13862	23444	253	0	5	1180681
+97.5%-tile:	13862	23444	253	0	5	1534885
+Maximum:	43115	43116	298	0	8	1574240
+Mean:	13862	23444.3	252.588	0	4.46709
+# of unique seqs:	95803
+total # of seqs:	1574240
+
+Output File Names: 
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.summary
+
+It took 39 secs to summarize 1574240 sequences.
+
+mothur > screen.seqs(fasta=current, count=current, summary=current, start=13862, end=23444)
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.count_table as input file for the count parameter.
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.align as input file for the fasta parameter.
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.summary as input file for the summary parameter.
+
+Using 30 processors.
+
+Output File Names: 
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.summary
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.align
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.bad.accnos
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.good.count_table
+
+
+It took 155 secs to screen 95803 sequences.
+
+mothur > summary.seqs(fasta=current, count=current)
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.good.count_table as input file for the count parameter.
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.align as input file for the fasta parameter.
+
+Using 30 processors.
+
+		Start	End	NBases	Ambigs	Polymer	NumSeqs
+Minimum:	10368	23444	250	0	3	1
+2.5%-tile:	13862	23444	252	0	4	39323
+25%-tile:	13862	23444	252	0	4	393228
+Median: 	13862	23444	253	0	4	786455
+75%-tile:	13862	23444	253	0	5	1179682
+97.5%-tile:	13862	23444	253	0	5	1533586
+Maximum:	13862	26152	298	0	8	1572908
+Mean:	13862	23444.3	252.589	0	4.46705
+# of unique seqs:	95174
+total # of seqs:	1572908
+
+Output File Names: 
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.summary
+
+It took 22 secs to summarize 1572908 sequences.
+
+mothur > filter.seqs(fasta=current, vertical=T, trump=.)
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.align as input file for the fasta parameter.
+
+Using 30 processors.
+Creating Filter... 
+
+
+Running Filter... 
+
+
+
+Length of filtered alignment: 497
+Number of columns removed: 49503
+Length of the original alignment: 50000
+Number of sequences used to construct filter: 95174
+
+Output File Names: 
+/home/GLBRCORG/echiang3/SwoapLab/stability.filter
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.fasta
+
+
+mothur > summary.seqs(fasta=current)
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.fasta as input file for the fasta parameter.
+
+Using 30 processors.
+[WARNING]: This command can take a namefile and you did not provide one. The current namefile is /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.names which seems to match /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.fasta.
+
+		Start	End	NBases	Ambigs	Polymer	NumSeqs
+Minimum:	1	497	222	0	3	1
+2.5%-tile:	1	497	252	0	4	2380
+25%-tile:	1	497	252	0	4	23794
+Median: 	1	497	253	0	4	47588
+75%-tile:	1	497	253	0	5	71381
+97.5%-tile:	1	497	254	0	5	92795
+Maximum:	1	497	265	0	8	95174
+Mean:	1	497	252.687	0	4.47926
+# of Seqs:	95174
+
+Output File Names: 
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.summary
+
+It took 4 secs to summarize 95174 sequences.
+
+mothur > unique.seqs(fasta=current, count=current)
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.good.count_table as input file for the count parameter.
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.fasta as input file for the fasta parameter.
+95174	95090
+
+Output File Names: 
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.count_table
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.fasta
+
+
+mothur > summary.seqs(fasta=current, count=current)
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.count_table as input file for the count parameter.
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.fasta as input file for the fasta parameter.
+
+Using 30 processors.
+
+		Start	End	NBases	Ambigs	Polymer	NumSeqs
+Minimum:	1	497	222	0	3	1
+2.5%-tile:	1	497	252	0	4	39323
+25%-tile:	1	497	252	0	4	393228
+Median: 	1	497	253	0	4	786455
+75%-tile:	1	497	253	0	5	1179682
+97.5%-tile:	1	497	253	0	5	1533586
+Maximum:	1	497	265	0	8	1572908
+Mean:	1	497	252.583	0	4.46703
+# of unique seqs:	95090
+total # of seqs:	1572908
+
+Output File Names: 
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.summary
+
+It took 4 secs to summarize 1572908 sequences.
+
+mothur > pre.cluster(fasta=current, count=current, diffs=2)
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.count_table as input file for the count parameter.
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.fasta as input file for the fasta parameter.
+
+Using 30 processors.
+
+Processing group FL1A:
+
+Using 30 processors.
+
+Processing group FL2A:
+
+Using 30 processors.
+
+Processing group FL3A:
+
+Using 30 processors.
+
+Processing group FL4A:
+
+Using 30 processors.
+
+Processing group FL5A:
+
+Using 30 processors.
+
+Processing group FL7A:
+
+Using 30 processors.
+
+Processing group FL6A:
+361	154	207
+Total number of sequences before pre.cluster was 361.
+pre.cluster removed 207 sequences.
+
+464	165	299
+Total number of sequences before pre.cluster was 464.
+pre.cluster removed 299 sequences.
+
+It took 1 secs to cluster 361 sequences.
+
+Processing group FL4C:
+524	190	334
+Total number of sequences before pre.cluster was 524.
+pre.cluster removed 334 sequences.
+
+441	179	262
+Total number of sequences before pre.cluster was 441.
+pre.cluster removed 262 sequences.
+
+It took 1 secs to cluster 464 sequences.
+
+Processing group FL2C:
+770	245	525
+Total number of sequences before pre.cluster was 770.
+pre.cluster removed 525 sequences.
+
+It took 1 secs to cluster 524 sequences.
+
+Processing group FL6C:
+It took 1 secs to cluster 441 sequences.
+
+Processing group FL3C:
+It took 1 secs to cluster 770 sequences.
+
+Processing group FL1C:
+588	218	370
+Total number of sequences before pre.cluster was 588.
+pre.cluster removed 370 sequences.
+
+736	246	490
+Total number of sequences before pre.cluster was 736.
+pre.cluster removed 490 sequences.
+
+It took 0 secs to cluster 588 sequences.
+It took 0 secs to cluster 736 sequences.
+1514	450	1064
+Total number of sequences before pre.cluster was 1514.
+pre.cluster removed 1064 sequences.
+
+It took 0 secs to cluster 1514 sequences.
+3512	677	2835
+Total number of sequences before pre.cluster was 3512.
+pre.cluster removed 2835 sequences.
+
+It took 1 secs to cluster 3512 sequences.
+
+Processing group FL5C:
+
+Using 30 processors.
+
+Processing group HF1A:
+5306	941	4365
+Total number of sequences before pre.cluster was 5306.
+pre.cluster removed 4365 sequences.
+
+It took 0 secs to cluster 5306 sequences.
+5819	972	4847
+Total number of sequences before pre.cluster was 5819.
+pre.cluster removed 4847 sequences.
+
+It took 0 secs to cluster 5819 sequences.
+5244	1070	4174
+Total number of sequences before pre.cluster was 5244.
+pre.cluster removed 4174 sequences.
+
+It took 1 secs to cluster 5244 sequences.
+
+Processing group FL7C:
+568	207	361
+Total number of sequences before pre.cluster was 568.
+pre.cluster removed 361 sequences.
+
+It took 0 secs to cluster 568 sequences.
+
+Using 30 processors.
+
+Processing group HF3C:
+806	278	528
+Total number of sequences before pre.cluster was 806.
+pre.cluster removed 528 sequences.
+
+It took 0 secs to cluster 806 sequences.
+
+Processing group HF4A:
+
+Using 30 processors.
+
+Processing group FL8A:
+386	136	250
+Total number of sequences before pre.cluster was 386.
+pre.cluster removed 250 sequences.
+
+621	243	378
+Total number of sequences before pre.cluster was 621.
+pre.cluster removed 378 sequences.
+
+It took 0 secs to cluster 386 sequences.
+
+Processing group FL8C:
+It took 0 secs to cluster 621 sequences.
+
+Processing group HF4C:
+
+Using 30 processors.
+
+Processing group HF10A:
+4463	805	3658
+Total number of sequences before pre.cluster was 4463.
+pre.cluster removed 3658 sequences.
+
+It took 0 secs to cluster 4463 sequences.
+
+Processing group HF1C:
+
+Using 30 processors.
+
+Processing group HF2A:
+3717	733	2984
+Total number of sequences before pre.cluster was 3717.
+pre.cluster removed 2984 sequences.
+
+
+Using 30 processors.
+
+Processing group FL9A:
+It took 1 secs to cluster 3717 sequences.
+503	202	301
+Total number of sequences before pre.cluster was 503.
+pre.cluster removed 301 sequences.
+
+It took 0 secs to cluster 503 sequences.
+
+Processing group FL9C:
+1187	342	845
+Total number of sequences before pre.cluster was 1187.
+pre.cluster removed 845 sequences.
+
+It took 0 secs to cluster 1187 sequences.
+
+Using 30 processors.
+
+Processing group HF8C:
+4426	760	3666
+Total number of sequences before pre.cluster was 4426.
+pre.cluster removed 3666 sequences.
+
+It took 1 secs to cluster 4426 sequences.
+
+Processing group HF2C:
+453	146	307
+Total number of sequences before pre.cluster was 453.
+pre.cluster removed 307 sequences.
+
+It took 0 secs to cluster 453 sequences.
+
+Processing group HF3A:
+4282	1488	2794
+Total number of sequences before pre.cluster was 4282.
+pre.cluster removed 2794 sequences.
+
+It took 1 secs to cluster 4282 sequences.
+7978	1434	6544
+Total number of sequences before pre.cluster was 7978.
+pre.cluster removed 6544 sequences.
+
+2944	664	2280
+Total number of sequences before pre.cluster was 2944.
+pre.cluster removed 2280 sequences.
+
+It took 1 secs to cluster 7978 sequences.
+It took 0 secs to cluster 2944 sequences.
+
+Processing group HF9A:
+496	189	307
+Total number of sequences before pre.cluster was 496.
+pre.cluster removed 307 sequences.
+
+It took 0 secs to cluster 496 sequences.
+
+Processing group HF9C:
+5737	1068	4669
+Total number of sequences before pre.cluster was 5737.
+pre.cluster removed 4669 sequences.
+
+
+Using 30 processors.
+
+Processing group HF5A:
+It took 1 secs to cluster 5737 sequences.
+928	355	573
+Total number of sequences before pre.cluster was 928.
+pre.cluster removed 573 sequences.
+
+It took 0 secs to cluster 928 sequences.
+850	266	584
+Total number of sequences before pre.cluster was 850.
+pre.cluster removed 584 sequences.
+
+It took 0 secs to cluster 850 sequences.
+
+Processing group HF5C:
+5303	956	4347
+Total number of sequences before pre.cluster was 5303.
+pre.cluster removed 4347 sequences.
+
+It took 0 secs to cluster 5303 sequences.
+
+Using 30 processors.
+
+Processing group HF6C:
+1806	518	1288
+Total number of sequences before pre.cluster was 1806.
+pre.cluster removed 1288 sequences.
+
+It took 0 secs to cluster 1806 sequences.
+
+Processing group HF6A:
+4755	885	3870
+Total number of sequences before pre.cluster was 4755.
+pre.cluster removed 3870 sequences.
+
+It took 0 secs to cluster 4755 sequences.
+
+Processing group HF7A:
+
+Using 30 processors.
+
+Processing group PCR1:
+5019	915	4104
+Total number of sequences before pre.cluster was 5019.
+pre.cluster removed 4104 sequences.
+
+9	9	0
+Total number of sequences before pre.cluster was 9.
+pre.cluster removed 0 sequences.
+
+It took 0 secs to cluster 9 sequences.
+
+Processing group PCR2:
+
+Using 30 processors.
+
+Processing group SC2A:
+5	5	0
+Total number of sequences before pre.cluster was 5.
+pre.cluster removed 0 sequences.
+
+It took 1 secs to cluster 5019 sequences.
+
+Processing group HF7C:
+It took 0 secs to cluster 5 sequences.
+
+Processing group SC10A:
+Total number of sequences before pre.cluster was 700.
+pre.cluster removed 475 sequences.
+
+444	164	280
+Total number of sequences before pre.cluster was 444.
+pre.cluster removed 280 sequences.
+
+It took 0 secs to cluster 700 sequences.
+
+Processing group SC2C:
+It took 0 secs to cluster 444 sequences.
+598	200	398
+Total number of sequences before pre.cluster was 598.
+pre.cluster removed 398 sequences.
+
+It took 0 secs to cluster 598 sequences.
+
+Processing group SC3A:
+1624	497	1127
+Total number of sequences before pre.cluster was 1624.
+pre.cluster removed 1127 sequences.
+
+777	252	525
+Total number of sequences before pre.cluster was 777.
+pre.cluster removed 525 sequences.
+
+It took 0 secs to cluster 777 sequences.
+It took 0 secs to cluster 1624 sequences.
+6613	1169	5444
+Total number of sequences before pre.cluster was 6613.
+pre.cluster removed 5444 sequences.
+
+It took 1 secs to cluster 6613 sequences.
+10835	1877	8958
+Total number of sequences before pre.cluster was 10835.
+pre.cluster removed 8958 sequences.
+
+It took 2 secs to cluster 10835 sequences.
+
+Processing group HF10C:
+491	215	276
+Total number of sequences before pre.cluster was 491.
+pre.cluster removed 276 sequences.
+
+It took 0 secs to cluster 491 sequences.
+
+Using 30 processors.
+
+Processing group TV10A:
+
+Using 30 processors.
+
+Processing group SC5C:
+618	200	418
+Total number of sequences before pre.cluster was 618.
+pre.cluster removed 418 sequences.
+
+It took 0 secs to cluster 618 sequences.
+
+Processing group TV10C:
+661	278	383
+Total number of sequences before pre.cluster was 661.
+pre.cluster removed 383 sequences.
+
+It took 0 secs to cluster 661 sequences.
+
+Processing group SC6A:
+1115	421	694
+Total number of sequences before pre.cluster was 1115.
+pre.cluster removed 694 sequences.
+
+811	322	489
+Total number of sequences before pre.cluster was 811.
+pre.cluster removed 489 sequences.
+
+It took 0 secs to cluster 1115 sequences.
+
+Processing group TV1A:
+It took 0 secs to cluster 811 sequences.
+
+Processing group SC6C:
+650	193	457
+Total number of sequences before pre.cluster was 650.
+pre.cluster removed 457 sequences.
+
+649	227	422
+Total number of sequences before pre.cluster was 649.
+pre.cluster removed 422 sequences.
+
+It took 0 secs to cluster 650 sequences.
+It took 0 secs to cluster 649 sequences.
+
+Using 30 processors.
+
+Processing group SC10C:
+1072	333	739
+Total number of sequences before pre.cluster was 1072.
+pre.cluster removed 739 sequences.
+
+It took 0 secs to cluster 1072 sequences.
+
+Processing group SC1A:
+
+Using 30 processors.
+
+Processing group SC8C:
+596	213	383
+Total number of sequences before pre.cluster was 596.
+pre.cluster removed 383 sequences.
+
+It took 1 secs to cluster 596 sequences.
+
+Processing group SC1C:
+
+Using 30 processors.
+
+Processing group SC3C:
+405	138	267
+Total number of sequences before pre.cluster was 405.
+pre.cluster removed 267 sequences.
+
+It took 0 secs to cluster 405 sequences.
+
+Processing group SC4A:
+711	270	441
+Total number of sequences before pre.cluster was 711.
+pre.cluster removed 441 sequences.
+
+It took 0 secs to cluster 711 sequences.
+
+Processing group SC5A:
+
+Using 30 processors.
+
+Processing group TV1C:
+392	144	248
+Total number of sequences before pre.cluster was 392.
+pre.cluster removed 248 sequences.
+
+It took 0 secs to cluster 392 sequences.
+
+Processing group TV2A:
+807	289	518
+Total number of sequences before pre.cluster was 807.
+pre.cluster removed 518 sequences.
+
+It took 0 secs to cluster 807 sequences.
+737	249	488
+Total number of sequences before pre.cluster was 737.
+pre.cluster removed 488 sequences.
+
+It took 0 secs to cluster 737 sequences.
+
+Processing group TV3A:
+522	256	266
+Total number of sequences before pre.cluster was 522.
+pre.cluster removed 266 sequences.
+
+It took 0 secs to cluster 522 sequences.
+
+Using 30 processors.
+
+Processing group TV3C:
+
+Using 30 processors.
+
+Processing group SC7A:
+
+Using 30 processors.
+
+Processing group TV5A:
+523	204	319
+Total number of sequences before pre.cluster was 523.
+pre.cluster removed 319 sequences.
+
+It took 0 secs to cluster 523 sequences.
+
+Processing group SC7C:
+5594	1231	4363
+Total number of sequences before pre.cluster was 5594.
+pre.cluster removed 4363 sequences.
+
+770	260	510
+Total number of sequences before pre.cluster was 770.
+pre.cluster removed 510 sequences.
+
+It took 0 secs to cluster 770 sequences.
+
+Processing group SC8A:
+It took 0 secs to cluster 5594 sequences.
+
+Using 30 processors.
+
+Processing group TV6C:
+804	245	559
+Total number of sequences before pre.cluster was 804.
+pre.cluster removed 559 sequences.
+
+It took 0 secs to cluster 804 sequences.
+551	208	343
+Total number of sequences before pre.cluster was 551.
+pre.cluster removed 343 sequences.
+
+It took 0 secs to cluster 551 sequences.
+
+Processing group TV7A:
+6258	1430	4828
+Total number of sequences before pre.cluster was 6258.
+pre.cluster removed 4828 sequences.
+
+It took 1 secs to cluster 6258 sequences.
+
+Processing group SC9A:
+4978	771	4207
+Total number of sequences before pre.cluster was 4978.
+pre.cluster removed 4207 sequences.
+
+
+Using 30 processors.
+
+Processing group TV8A:
+It took 0 secs to cluster 4978 sequences.
+
+Processing group TV5C:
+650	250	400
+Total number of sequences before pre.cluster was 650.
+pre.cluster removed 400 sequences.
+
+It took 0 secs to cluster 650 sequences.
+
+Processing group TV6A:
+
+Using 30 processors.
+
+Processing group FL10A:
+536	216	320
+Total number of sequences before pre.cluster was 536.
+pre.cluster removed 320 sequences.
+
+It took 0 secs to cluster 536 sequences.
+
+Processing group FL10C:
+2817	575	2242
+Total number of sequences before pre.cluster was 2817.
+pre.cluster removed 2242 sequences.
+
+It took 0 secs to cluster 2817 sequences.
+
+Processing group SC9C:
+699	238	461
+Total number of sequences before pre.cluster was 699.
+pre.cluster removed 461 sequences.
+
+It took 0 secs to cluster 699 sequences.
+4927	872	4055
+Total number of sequences before pre.cluster was 4927.
+pre.cluster removed 4055 sequences.
+
+It took 0 secs to cluster 4927 sequences.
+
+Processing group TV7C:
+4332	653	3679
+Total number of sequences before pre.cluster was 4332.
+pre.cluster removed 3679 sequences.
+
+It took 0 secs to cluster 4332 sequences.
+
+Processing group TV9A:
+505	191	314
+Total number of sequences before pre.cluster was 505.
+pre.cluster removed 314 sequences.
+
+It took 0 secs to cluster 505 sequences.
+
+Processing group TV9C:
+6786	1477	5309
+Total number of sequences before pre.cluster was 6786.
+pre.cluster removed 5309 sequences.
+
+It took 0 secs to cluster 6786 sequences.
+
+Processing group TV4A:
+4946	821	4125
+Total number of sequences before pre.cluster was 4946.
+pre.cluster removed 4125 sequences.
+
+It took 0 secs to cluster 4946 sequences.
+676	242	434
+Total number of sequences before pre.cluster was 676.
+pre.cluster removed 434 sequences.
+
+It took 0 secs to cluster 676 sequences.
+
+Processing group TV4C:
+6236	926	5310
+Total number of sequences before pre.cluster was 6236.
+pre.cluster removed 5310 sequences.
+
+It took 1 secs to cluster 6236 sequences.
+6638	1406	5232
+Total number of sequences before pre.cluster was 6638.
+pre.cluster removed 5232 sequences.
+
+It took 1 secs to cluster 6638 sequences.
+4543	1167	3376
+Total number of sequences before pre.cluster was 4543.
+pre.cluster removed 3376 sequences.
+
+It took 1 secs to cluster 4543 sequences.
+6061	1605	4456
+Total number of sequences before pre.cluster was 6061.
+pre.cluster removed 4456 sequences.
+
+It took 1 secs to cluster 6061 sequences.
+It took 11 secs to run pre.cluster.
+
+Output File Names: 
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.fasta
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.count_table
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.FL10A.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.FL10C.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.FL1A.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.FL1C.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.FL2A.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.FL2C.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.FL3A.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.FL3C.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.FL4A.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.FL4C.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.FL5A.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.FL5C.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.FL6A.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.FL6C.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.FL7A.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.FL7C.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.FL8A.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.FL8C.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.FL9A.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.FL9C.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.HF10A.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.HF10C.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.HF1A.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.HF1C.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.HF2A.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.HF2C.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.HF3A.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.HF3C.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.HF4A.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.HF4C.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.HF5A.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.HF5C.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.HF6A.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.HF6C.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.HF7A.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.HF7C.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.HF8C.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.HF9A.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.HF9C.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.PCR1.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.PCR2.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.SC10A.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.SC10C.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.SC1A.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.SC1C.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.SC2A.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.SC2C.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.SC3A.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.SC3C.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.SC4A.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.SC5A.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.SC5C.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.SC6A.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.SC6C.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.SC7A.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.SC7C.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.SC8A.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.SC8C.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.SC9A.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.SC9C.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.TV10A.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.TV10C.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.TV1A.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.TV1C.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.TV2A.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.TV3A.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.TV3C.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.TV4A.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.TV4C.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.TV5A.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.TV5C.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.TV6A.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.TV6C.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.TV7A.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.TV7C.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.TV8A.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.TV9A.map
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.TV9C.map
+
+
+mothur > summary.seqs(fasta=current, count=current)
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.count_table as input file for the count parameter.
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.fasta as input file for the fasta parameter.
+
+Using 30 processors.
+
+		Start	End	NBases	Ambigs	Polymer	NumSeqs
+Minimum:	1	497	222	0	3	1
+2.5%-tile:	1	497	252	0	4	39323
+25%-tile:	1	497	252	0	4	393228
+Median: 	1	497	253	0	4	786455
+75%-tile:	1	497	253	0	5	1179682
+97.5%-tile:	1	497	253	0	5	1533586
+Maximum:	1	497	265	0	8	1572908
+Mean:	1	497	252.575	0	4.46515
+# of unique seqs:	24279
+total # of seqs:	1572908
+
+Output File Names: 
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.summary
+
+It took 4 secs to summarize 1572908 sequences.
+
+mothur > chimera.uchime(fasta=current, count=current, dereplicate=t)
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.count_table as input file for the count parameter.
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.fasta as input file for the fasta parameter.
+
+Using 30 processors.
+
+uchime by Robert C. Edgar
+http://drive5.com/uchime
+This code is donated to the public domain.
+
+Checking sequences from /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.fasta ...
+
+It took 2 secs to check 165 sequences from group FL2A.
+
+It took 1 secs to check 154 sequences from group FL4A.
+
+It took 1 secs to check 136 sequences from group FL8A.
+
+It took 1 secs to check 179 sequences from group FL3A.
+
+It took 1 secs to check 190 sequences from group FL6A.
+
+It took 2 secs to check 245 sequences from group FL1A.
+
+It took 1 secs to check 202 sequences from group FL9A.
+
+It took 1 secs to check 9 sequences from group PCR1.
+
+It took 1 secs to check 278 sequences from group HF3C.
+
+It took 0 secs to check 5 sequences from group PCR2.
+
+It took 1 secs to check 246 sequences from group FL6C.
+
+It took 1 secs to check 266 sequences from group HF5A.
+
+It took 1 secs to check 218 sequences from group FL1C.
+
+It took 0 secs to check 138 sequences from group SC3C.
+
+It took 2 secs to check 225 sequences from group SC2A.
+
+It took 1 secs to check 164 sequences from group SC10A.
+
+It took 2 secs to check 333 sequences from group SC10C.
+
+It took 2 secs to check 450 sequences from group FL3C.
+
+It took 1 secs to check 200 sequences from group TV10A.
+
+It took 1 secs to check 278 sequences from group SC5C.
+
+It took 2 secs to check 342 sequences from group FL9C.
+
+It took 1 secs to check 204 sequences from group SC7A.
+
+It took 1 secs to check 243 sequences from group HF4A.
+
+It took 1 secs to check 144 sequences from group TV1C.
+
+It took 0 secs to check 200 sequences from group SC2C.
+
+It took 1 secs to check 208 sequences from group TV6C.
+
+It took 1 secs to check 216 sequences from group FL10A.
+
+It took 2 secs to check 270 sequences from group SC4A.
+
+It took 1 secs to check 213 sequences from group SC1A.
+
+It took 2 secs to check 260 sequences from group SC7C.
+
+It took 5 secs to check 677 sequences from group FL5A.
+
+It took 2 secs to check 322 sequences from group SC6A.
+
+It took 4 secs to check 664 sequences from group HF8C.
+
+It took 2 secs to check 249 sequences from group TV2A.
+
+It took 2 secs to check 252 sequences from group SC3A.
+
+It took 3 secs to check 518 sequences from group HF5C.
+
+It took 1 secs to check 238 sequences from group FL10C.
+
+It took 2 secs to check 289 sequences from group SC5A.
+
+It took 1 secs to check 193 sequences from group SC6C.
+
+It took 3 secs to check 421 sequences from group TV10C.
+
+It took 1 secs to check 245 sequences from group SC8A.
+
+It took 1 secs to check 189 sequences from group HF9A.
+
+It took 5 secs to check 733 sequences from group FL8C.
+
+It took 6 secs to check 760 sequences from group HF2A.
+
+It took 2 secs to check 256 sequences from group TV3A.
+
+It took 1 secs to check 227 sequences from group TV1A.
+
+It took 7 secs to check 805 sequences from group HF1A.
+
+It took 0 secs to check 146 sequences from group HF2C.
+
+It took 6 secs to check 972 sequences from group FL4C.
+
+It took 2 secs to check 355 sequences from group HF9C.
+
+It took 5 secs to check 653 sequences from group TV8A.
+
+It took 5 secs to check 771 sequences from group TV5A.
+
+It took 7 secs to check 885 sequences from group HF6C.
+
+It took 1 secs to check 191 sequences from group TV9A.
+
+It took 1 secs to check 250 sequences from group TV5C.
+
+It took 9 secs to check 1070 sequences from group FL7A.
+
+It took 1 secs to check 207 sequences from group FL7C.
+
+It took 9 secs to check 941 sequences from group FL2C.
+
+It took 8 secs to check 872 sequences from group TV7A.
+
+It took 10 secs to check 1488 sequences from group HF4C.
+
+It took 9 secs to check 1231 sequences from group SC1C.
+
+It took 6 secs to check 1068 sequences from group HF1C.
+
+It took 11 secs to check 1477 sequences from group TV3C.
+
+It took 6 secs to check 915 sequences from group HF7A.
+
+It took 5 secs to check 821 sequences from group TV6A.
+
+It took 13 secs to check 1430 sequences from group SC8C.
+
+It took 10 secs to check 1169 sequences from group HF6A.
+
+It took 1 secs to check 242 sequences from group TV4A.
+
+It took 8 secs to check 956 sequences from group HF3A.
+
+It took 2 secs to check 497 sequences from group HF7C.
+
+It took 3 secs to check 575 sequences from group SC9A.
+
+It took 6 secs to check 926 sequences from group TV7C.
+
+It took 14 secs to check 1434 sequences from group FL5C.
+
+It took 12 secs to check 1605 sequences from group TV9C.
+
+It took 21 secs to check 1877 sequences from group HF10A.
+
+It took 1 secs to check 215 sequences from group HF10C.
+
+It took 7 secs to check 1167 sequences from group TV4C.
+
+It took 10 secs to check 1406 sequences from group SC9C.
+
+Output File Names: 
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.denovo.uchime.pick.count_table
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.denovo.uchime.chimeras
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.denovo.uchime.accnos
+
+
+mothur > remove.seqs(fasta=current, count=current, accnos=current)
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.denovo.uchime.accnos as input file for the accnos parameter.
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.denovo.uchime.pick.count_table as input file for the count parameter.
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.fasta as input file for the fasta parameter.
+
+[NOTE]: The count file should contain only unique names, so mothur assumes your fasta, list and taxonomy files also contain only uniques.
+
+Removed 13424 sequences from your fasta file.
+Removed 0 sequences from your count file.
+
+Output File Names: 
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.fasta
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.denovo.uchime.pick.pick.count_table
+
+
+mothur > summary.seqs(fasta=current, count=current)
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.denovo.uchime.pick.pick.count_table as input file for the count parameter.
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.fasta as input file for the fasta parameter.
+
+Using 30 processors.
+
+		Start	End	NBases	Ambigs	Polymer	NumSeqs
+Minimum:	1	497	222	0	3	1
+2.5%-tile:	1	497	252	0	4	38442
+25%-tile:	1	497	252	0	4	384414
+Median: 	1	497	253	0	4	768827
+75%-tile:	1	497	253	0	5	1153240
+97.5%-tile:	1	497	253	0	5	1499211
+Maximum:	1	497	260	0	8	1537652
+Mean:	1	497	252.574	0	4.46464
+# of unique seqs:	10855
+total # of seqs:	1537652
+
+Output File Names: 
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.summary
+
+It took 5 secs to summarize 1537652 sequences.
+
+mothur > classify.seqs(fasta=current, count=current, reference=/home/GLBRCORG/echiang3/mothur/silva.db/silva.nr_v128.align, taxonomy=/home/GLBRCORG/echiang3/mothur/silva.db/silva.nr_v128.tax, cutoff=80)
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.denovo.uchime.pick.pick.count_table as input file for the count parameter.
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.fasta as input file for the fasta parameter.
+
+Using 30 processors.
+Generating search database...    DONE.
+It took 195 seconds generate search database. 
+
+Reading in the /home/GLBRCORG/echiang3/mothur/silva.db/silva.nr_v128.tax taxonomy...	DONE.
+Calculating template taxonomy tree...     DONE.
+Calculating template probabilities...     DONE.
+It took 359 seconds get probabilities. 
+Classifying sequences from /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.fasta ...
+[WARNING]: M04026_240_000000000-BKR9M_1_1111_17741_19961 could not be classified. You can use the remove.lineage command with taxon=unknown; to remove such sequences.
+
+It took 24 secs to classify 10855 sequences.
+
+
+It took 0 secs to create the summary file for 10855 sequences.
+
+
+Output File Names: 
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.nr_v128.wang.taxonomy
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.nr_v128.wang.tax.summary
+
+
+mothur > remove.lineage(fasta=current, count=current, taxonomy=current, taxon=Chloroplast-Mitochondria-unknown-Archaea-Eukaryota)
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.denovo.uchime.pick.pick.count_table as input file for the count parameter.
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.fasta as input file for the fasta parameter.
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.nr_v128.wang.taxonomy as input file for the taxonomy parameter.
+
+[NOTE]: The count file should contain only unique names, so mothur assumes your fasta, list and taxonomy files also contain only uniques.
+
+
+Output File Names: 
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.nr_v128.wang.pick.taxonomy
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.fasta
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.denovo.uchime.pick.pick.pick.count_table
+
+
+mothur > summary.seqs(fasta=current, count=current)
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.denovo.uchime.pick.pick.pick.count_table as input file for the count parameter.
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.fasta as input file for the fasta parameter.
+
+Using 30 processors.
+
+		Start	End	NBases	Ambigs	Polymer	NumSeqs
+Minimum:	1	497	222	0	3	1
+2.5%-tile:	1	497	252	0	4	38423
+25%-tile:	1	497	252	0	4	384223
+Median: 	1	497	253	0	4	768445
+75%-tile:	1	497	253	0	5	1152667
+97.5%-tile:	1	497	253	0	5	1498467
+Maximum:	1	497	260	0	8	1536889
+Mean:	1	497	252.574	0	4.46425
+# of unique seqs:	10811
+total # of seqs:	1536889
+
+Output File Names: 
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.summary
+
+It took 4 secs to summarize 1536889 sequences.
+
+mothur > dist.seqs(fasta=current)
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.fasta as input file for the fasta parameter.
+
+Using 30 processors.
+
+Output File Names: 
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.dist
+
+It took 169 seconds to calculate the distances for 10811 sequences.
+
+mothur > cluster.split(column=current, count=current, method=average)
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.dist as input file for the column parameter.
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.denovo.uchime.pick.pick.pick.count_table as input file for the count parameter.
+
+Using 30 processors.
+Splitting the file...
+It took 137 seconds to split the distance file.
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.dist.5.temp
+
+Reading /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.dist.5.temp
+********************#****#****#****#****#****#****#****#****#****#****#
+Reading matrix:     |||||||||||||||||||||||||||||||||||||||||||||||||||
+***********************************************************************
+
+Clustering /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.dist.5.temp
+Cutoff was 0.15 changed cutoff to 0.1
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.dist.5.temp
+
+Reading /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.dist.8.temp
+********************#****#****#****#****#****#****#****#****#****#****#
+Reading matrix:     |||||||||||||||||||||||||||||||||||||||||||||||||||
+***********************************************************************
+
+Clustering /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.dist.8.temp
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.dist.5.temp
+
+Reading /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.dist.9.temp
+********************#****#****#****#****#****#****#****#****#****#****#
+Reading matrix:     |||||||||||||||||||||||||||||||||||||||||||||||||||
+***********************************************************************
+
+Clustering /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.dist.9.temp
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.dist.5.temp
+
+Reading /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.dist.13.temp
+********************#****#****#****#****#****#****#****#****#****#****#
+Reading matrix:     |||||||||||||||||||||||||||||||||||||||||||||||||||
+***********************************************************************
+
+Clustering /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.dist.13.temp
+Cutoff was 0.15 changed cutoff to 0.09
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.dist.5.temp
+
+Reading /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.dist.11.temp
+********************#****#****#****#****#****#****#****#****#****#****#
+Reading matrix:     |||||||||||||||||||||||||||||||||||||||||||||||||||
+***********************************************************************
+
+Clustering /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.dist.11.temp
+Cutoff was 0.15 changed cutoff to 0.13
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.dist.5.temp
+
+Reading /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.dist.17.temp
+********************#****#****#****#****#****#****#****#****#****#****#
+Reading matrix:     |||||||||||||||||||||||||||||||||||||||||||||||||||
+***********************************************************************
+
+Clustering /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.dist.17.temp
+Cutoff was 0.15 changed cutoff to 0.11
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.dist.5.temp
+
+Reading /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.dist.18.temp
+********************#****#****#****#****#****#****#****#****#****#****#
+Reading matrix:     |||||||||||||||||||||||||||||||||||||||||||||||||||
+***********************************************************************
+
+Clustering /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.dist.18.temp
+Cutoff was 0.15 changed cutoff to 0.13
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.dist.5.temp
+
+Reading /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.dist.22.temp
+********************#****#****#****#****#****#****#****#****#****#****#
+Reading matrix:     |||||||||||||||||||||||||||||||||||||||||||||||||||
+***********************************************************************
+
+Clustering /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.dist.22.temp
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.dist.5.temp
+
+Reading /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.dist.25.temp
+********************#****#****#****#****#****#****#****#****#****#****#
+Reading matrix:     |||||||||||||||||||||||||||||||||||||||||||||||||||
+***********************************************************************
+
+Clustering /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.dist.25.temp
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.dist.5.temp
+
+Reading /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.dist.21.temp
+********************#****#****#****#****#****#****#****#****#****#****#
+Reading matrix:     |||||||||||||||||||||||||||||||||||||||||||||||||||
+***********************************************************************
+
+Clustering /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.dist.21.temp
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.dist.5.temp
+
+Reading /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.dist.23.temp
+********************#****#****#****#****#****#****#****#****#****#****#
+Reading matrix:     |||||||||||||||||||||||||||||||||||||||||||||||||||
+***********************************************************************
+
+Clustering /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.dist.23.temp
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.dist.5.temp
+
+Reading /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.dist.24.temp
+********************#****#****#****#****#****#****#****#****#****#****#
+Reading matrix:     |||||||||||||||||||||||||||||||||||||||||||||||||||
+***********************************************************************
+
+Clustering /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.dist.24.temp
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.dist.5.temp
+
+Reading /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.dist.26.temp
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.dist.5.temp
+
+Reading /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.dist.0.temp
+********************#****#****#****#****#****#****#****#****#****#****#
+Reading matrix:     |||||||||||||||||||||||||||||||||||||||||||||||||||
+***********************************************************************
+
+Clustering /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.dist.26.temp
+********************#****#****#****#****#****#****#****#****#****#****#
+Reading matrix:     |||||||||||||||||||||||||||||||||||||||||||||||||||
+***********************************************************************
+
+Clustering /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.dist.0.temp
+Cutoff was 0.15 changed cutoff to 0.05
+
+Cutoff was 0.15 changed cutoff to 0.05
+It took 238 seconds to cluster
+Merging the clustered files...
+It took 2 seconds to merge.
+
+Output File Names: 
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.an.unique_list.list
+
+
+mothur > make.shared(list=current, count=current, label=0.03)
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.denovo.uchime.pick.pick.pick.count_table as input file for the count parameter.
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.an.unique_list.list as input file for the list parameter.
+0.03
+
+Output File Names: 
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.an.unique_list.shared
+
+
+mothur > classify.seqs(fasta=current, count=current, template=/home/GLBRCORG/echiang3/mothur/silva.db/silva.nr_v128.align, taxonomy=/home/GLBRCORG/echiang3/mothur/silva.db/silva.nr_v128.tax, cutoff=80)
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.denovo.uchime.pick.pick.pick.count_table as input file for the count parameter.
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.fasta as input file for the fasta parameter.
+
+Using 30 processors.
+Reading template taxonomy...     DONE.
+Reading template probabilities...     DONE.
+It took 16 seconds get probabilities. 
+Classifying sequences from /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.fasta ...
+
+It took 27 secs to classify 10811 sequences.
+
+
+It took 1 secs to create the summary file for 10811 sequences.
+
+
+Output File Names: 
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.nr_v128.wang.taxonomy
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.nr_v128.wang.tax.summary
+
+
+mothur > classify.otu(list=current, taxonomy=current, count=current, label=0.03, cutoff=80, basis=otu, probs=F)
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.denovo.uchime.pick.pick.pick.count_table as input file for the count parameter.
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.an.unique_list.list as input file for the list parameter.
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.nr_v128.wang.taxonomy as input file for the taxonomy parameter.
+0.03	859
+
+Output File Names: 
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.an.unique_list.0.03.cons.taxonomy
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.an.unique_list.0.03.cons.tax.summary
+
+
+mothur > summary.seqs(fasta=current, count=current)
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.denovo.uchime.pick.pick.pick.count_table as input file for the count parameter.
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.fasta as input file for the fasta parameter.
+
+Using 30 processors.
+
+		Start	End	NBases	Ambigs	Polymer	NumSeqs
+Minimum:	1	497	222	0	3	1
+2.5%-tile:	1	497	252	0	4	38423
+25%-tile:	1	497	252	0	4	384223
+Median: 	1	497	253	0	4	768445
+75%-tile:	1	497	253	0	5	1152667
+97.5%-tile:	1	497	253	0	5	1498467
+Maximum:	1	497	260	0	8	1536889
+Mean:	1	497	252.574	0	4.46425
+# of unique seqs:	10811
+total # of seqs:	1536889
+
+Output File Names: 
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.summary
+
+It took 4 secs to summarize 1536889 sequences.
+
+mothur > rarefaction.single(shared=current, label=0.03)
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.an.unique_list.shared as input file for the shared parameter.
+
+Using 30 processors.
+
+Processing group FL10A
+
+0.03
+
+Processing group FL10C
+
+0.03
+
+Processing group FL1A
+
+0.03
+
+Processing group FL1C
+
+0.03
+
+Processing group FL2A
+
+0.03
+
+Processing group FL2C
+
+0.03
+
+Processing group FL3A
+
+0.03
+
+Processing group FL3C
+
+0.03
+
+Processing group FL4A
+
+0.03
+
+Processing group FL4C
+
+0.03
+
+Processing group FL5A
+
+0.03
+
+Processing group FL5C
+
+0.03
+
+Processing group FL6A
+
+0.03
+
+Processing group FL6C
+
+0.03
+
+Processing group FL7A
+
+0.03
+
+Processing group FL7C
+
+0.03
+
+Processing group FL8A
+
+0.03
+
+Processing group FL8C
+
+0.03
+
+Processing group FL9A
+
+0.03
+
+Processing group FL9C
+
+0.03
+
+Processing group HF10A
+
+0.03
+
+Processing group HF10C
+
+0.03
+
+Processing group HF1A
+
+0.03
+
+Processing group HF1C
+
+0.03
+
+Processing group HF2A
+
+0.03
+
+Processing group HF2C
+
+0.03
+
+Processing group HF3A
+
+0.03
+
+Processing group HF3C
+
+0.03
+
+Processing group HF4A
+
+0.03
+
+Processing group HF4C
+
+0.03
+
+Processing group HF5A
+
+0.03
+
+Processing group HF5C
+
+0.03
+
+Processing group HF6A
+
+0.03
+
+Processing group HF6C
+
+0.03
+
+Processing group HF7A
+
+0.03
+
+Processing group HF7C
+
+0.03
+
+Processing group HF8C
+
+0.03
+
+Processing group HF9A
+
+0.03
+
+Processing group HF9C
+
+0.03
+
+Processing group PCR1
+
+0.03
+
+Processing group PCR2
+
+0.03
+
+Processing group SC10A
+
+0.03
+
+Processing group SC10C
+
+0.03
+
+Processing group SC1A
+
+0.03
+
+Processing group SC1C
+
+0.03
+
+Processing group SC2A
+
+0.03
+
+Processing group SC2C
+
+0.03
+
+Processing group SC3A
+
+0.03
+
+Processing group SC3C
+
+0.03
+
+Processing group SC4A
+
+0.03
+
+Processing group SC5A
+
+0.03
+
+Processing group SC5C
+
+0.03
+
+Processing group SC6A
+
+0.03
+
+Processing group SC6C
+
+0.03
+
+Processing group SC7A
+
+0.03
+
+Processing group SC7C
+
+0.03
+
+Processing group SC8A
+
+0.03
+
+Processing group SC8C
+
+0.03
+
+Processing group SC9A
+
+0.03
+
+Processing group SC9C
+
+0.03
+
+Processing group TV10A
+
+0.03
+
+Processing group TV10C
+
+0.03
+
+Processing group TV1A
+
+0.03
+
+Processing group TV1C
+
+0.03
+
+Processing group TV2A
+
+0.03
+
+Processing group TV3A
+
+0.03
+
+Processing group TV3C
+
+0.03
+
+Processing group TV4A
+
+0.03
+
+Processing group TV4C
+
+0.03
+
+Processing group TV5A
+
+0.03
+
+Processing group TV5C
+
+0.03
+
+Processing group TV6A
+
+0.03
+
+Processing group TV6C
+
+0.03
+
+Processing group TV7A
+
+0.03
+
+Processing group TV7C
+
+0.03
+
+Processing group TV8A
+
+0.03
+
+Processing group TV9A
+
+0.03
+
+Processing group TV9C
+
+0.03
+
+Output File Names: 
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.an.unique_list.groups.rarefaction
+
+
+mothur > summary.single(shared=current label=0.03, calc=nseqs-sobs-coverage)
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.an.unique_list.shared as input file for the shared parameter.
+
+Processing group FL10A
+
+0.03
+
+Processing group FL10C
+
+0.03
+
+Processing group FL1A
+
+0.03
+
+Processing group FL1C
+
+0.03
+
+Processing group FL2A
+
+0.03
+
+Processing group FL2C
+
+0.03
+
+Processing group FL3A
+
+0.03
+
+Processing group FL3C
+
+0.03
+
+Processing group FL4A
+
+0.03
+
+Processing group FL4C
+
+0.03
+
+Processing group FL5A
+
+0.03
+
+Processing group FL5C
+
+0.03
+
+Processing group FL6A
+
+0.03
+
+Processing group FL6C
+
+0.03
+
+Processing group FL7A
+
+0.03
+
+Processing group FL7C
+
+0.03
+
+Processing group FL8A
+
+0.03
+
+Processing group FL8C
+
+0.03
+
+Processing group FL9A
+
+0.03
+
+Processing group FL9C
+
+0.03
+
+Processing group HF10A
+
+0.03
+
+Processing group HF10C
+
+0.03
+
+Processing group HF1A
+
+0.03
+
+Processing group HF1C
+
+0.03
+
+Processing group HF2A
+
+0.03
+
+Processing group HF2C
+
+0.03
+
+Processing group HF3A
+
+0.03
+
+Processing group HF3C
+
+0.03
+
+Processing group HF4A
+
+0.03
+
+Processing group HF4C
+
+0.03
+
+Processing group HF5A
+
+0.03
+
+Processing group HF5C
+
+0.03
+
+Processing group HF6A
+
+0.03
+
+Processing group HF6C
+
+0.03
+
+Processing group HF7A
+
+0.03
+
+Processing group HF7C
+
+0.03
+
+Processing group HF8C
+
+0.03
+
+Processing group HF9A
+
+0.03
+
+Processing group HF9C
+
+0.03
+
+Processing group PCR1
+
+0.03
+
+Processing group PCR2
+
+0.03
+
+Processing group SC10A
+
+0.03
+
+Processing group SC10C
+
+0.03
+
+Processing group SC1A
+
+0.03
+
+Processing group SC1C
+
+0.03
+
+Processing group SC2A
+
+0.03
+
+Processing group SC2C
+
+0.03
+
+Processing group SC3A
+
+0.03
+
+Processing group SC3C
+
+0.03
+
+Processing group SC4A
+
+0.03
+
+Processing group SC5A
+
+0.03
+
+Processing group SC5C
+
+0.03
+
+Processing group SC6A
+
+0.03
+
+Processing group SC6C
+
+0.03
+
+Processing group SC7A
+
+0.03
+
+Processing group SC7C
+
+0.03
+
+Processing group SC8A
+
+0.03
+
+Processing group SC8C
+
+0.03
+
+Processing group SC9A
+
+0.03
+
+Processing group SC9C
+
+0.03
+
+Processing group TV10A
+
+0.03
+
+Processing group TV10C
+
+0.03
+
+Processing group TV1A
+
+0.03
+
+Processing group TV1C
+
+0.03
+
+Processing group TV2A
+
+0.03
+
+Processing group TV3A
+
+0.03
+
+Processing group TV3C
+
+0.03
+
+Processing group TV4A
+
+0.03
+
+Processing group TV4C
+
+0.03
+
+Processing group TV5A
+
+0.03
+
+Processing group TV5C
+
+0.03
+
+Processing group TV6A
+
+0.03
+
+Processing group TV6C
+
+0.03
+
+Processing group TV7A
+
+0.03
+
+Processing group TV7C
+
+0.03
+
+Processing group TV8A
+
+0.03
+
+Processing group TV9A
+
+0.03
+
+Processing group TV9C
+
+0.03
+
+Output File Names: 
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.an.unique_list.groups.summary
+
+
+mothur > quit()
+
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<^>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<^>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<^>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+Detected 4 [WARNING] messages, please review.
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<^>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<^>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<^>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

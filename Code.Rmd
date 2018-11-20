@@ -667,6 +667,13 @@ phy.sum <- phy.df %>%
             SD = sd(Abundance),
             SE = (sd(Abundance)/(sqrt(length(Abundance)))),
             iqr = IQR(Abundance))
+phy.all.sum <- phy.df %>%
+  group_by(Phylum) %>%
+  summarize(Mean = mean(Abundance),
+            Median = median(Abundance),
+            SD = sd(Abundance),
+            SE = (sd(Abundance)/(sqrt(length(Abundance)))),
+            iqr = IQR(Abundance))
 
 # Calculate IQR limits
 phy.sum$iqr.min <- phy.sum$Median - 0.5*phy.sum$iqr

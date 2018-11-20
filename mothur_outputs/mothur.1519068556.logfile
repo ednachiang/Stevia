@@ -1,0 +1,351 @@
+Linux version
+
+Using ReadLine
+
+Running 64Bit Version
+
+mothur v.1.39.5
+Last updated: 3/20/2017
+
+by
+Patrick D. Schloss
+
+Department of Microbiology & Immunology
+University of Michigan
+http://www.mothur.org
+
+When using, please cite:
+Schloss, P.D., et al., Introducing mothur: Open-source, platform-independent, community-supported software for describing and comparing microbial communities. Appl Environ Microbiol, 2009. 75(23):7537-41.
+
+Distributed under the GNU General Public License
+
+Type 'help()' for information on the commands that are available
+
+For questions and analysis support, please visit our forum at https://www.mothur.org/forum
+
+Type 'quit()' to exit program
+Interactive Mode
+
+
+mothur > normalize.shared(shared=/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.an.unique_list.shared, norm=1907)
+PCR1 contains 10. Eliminating.
+PCR2 contains 5. Eliminating.
+Normalizing to 1907.
+0.03
+
+Output File Names: 
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.an.unique_list.0.03.norm.shared
+
+
+mothur > summary.single(shared=current, label=0.03, calc=coverage-nseqs-bergerparker-chao-shannon-invsimpson)
+Using /home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.an.unique_list.0.03.norm.shared as input file for the shared parameter.
+
+Processing group FL10A
+
+0.03
+
+Processing group FL10C
+
+0.03
+
+Processing group FL1A
+
+0.03
+
+Processing group FL1C
+
+0.03
+
+Processing group FL2A
+
+0.03
+
+Processing group FL2C
+
+0.03
+
+Processing group FL3A
+
+0.03
+
+Processing group FL3C
+
+0.03
+
+Processing group FL4A
+
+0.03
+
+Processing group FL4C
+
+0.03
+
+Processing group FL5A
+
+0.03
+
+Processing group FL5C
+
+0.03
+
+Processing group FL6A
+
+0.03
+
+Processing group FL6C
+
+0.03
+
+Processing group FL7A
+
+0.03
+
+Processing group FL7C
+
+0.03
+
+Processing group FL8A
+
+0.03
+
+Processing group FL8C
+
+0.03
+
+Processing group FL9A
+
+0.03
+
+Processing group FL9C
+
+0.03
+
+Processing group HF10A
+
+0.03
+
+Processing group HF10C
+
+0.03
+
+Processing group HF1A
+
+0.03
+
+Processing group HF1C
+
+0.03
+
+Processing group HF2A
+
+0.03
+
+Processing group HF2C
+
+0.03
+
+Processing group HF3A
+
+0.03
+
+Processing group HF3C
+
+0.03
+
+Processing group HF4A
+
+0.03
+
+Processing group HF4C
+
+0.03
+
+Processing group HF5A
+
+0.03
+
+Processing group HF5C
+
+0.03
+
+Processing group HF6A
+
+0.03
+
+Processing group HF6C
+
+0.03
+
+Processing group HF7A
+
+0.03
+
+Processing group HF7C
+
+0.03
+
+Processing group HF8C
+
+0.03
+
+Processing group HF9A
+
+0.03
+
+Processing group HF9C
+
+0.03
+
+Processing group SC10A
+
+0.03
+
+Processing group SC10C
+
+0.03
+
+Processing group SC1A
+
+0.03
+
+Processing group SC1C
+
+0.03
+
+Processing group SC2A
+
+0.03
+
+Processing group SC2C
+
+0.03
+
+Processing group SC3A
+
+0.03
+
+Processing group SC3C
+
+0.03
+
+Processing group SC4A
+
+0.03
+
+Processing group SC5A
+
+0.03
+
+Processing group SC5C
+
+0.03
+
+Processing group SC6A
+
+0.03
+
+Processing group SC6C
+
+0.03
+
+Processing group SC7A
+
+0.03
+
+Processing group SC7C
+
+0.03
+
+Processing group SC8A
+
+0.03
+
+Processing group SC8C
+
+0.03
+
+Processing group SC9A
+
+0.03
+
+Processing group SC9C
+
+0.03
+
+Processing group TV10A
+
+0.03
+
+Processing group TV10C
+
+0.03
+
+Processing group TV1A
+
+0.03
+
+Processing group TV1C
+
+0.03
+
+Processing group TV2A
+
+0.03
+
+Processing group TV3A
+
+0.03
+
+Processing group TV3C
+
+0.03
+
+Processing group TV4A
+
+0.03
+
+Processing group TV4C
+
+0.03
+
+Processing group TV5A
+
+0.03
+
+Processing group TV5C
+
+0.03
+
+Processing group TV6A
+
+0.03
+
+Processing group TV6C
+
+0.03
+
+Processing group TV7A
+
+0.03
+
+Processing group TV7C
+
+0.03
+
+Processing group TV8A
+
+0.03
+
+Processing group TV9A
+
+0.03
+
+Processing group TV9C
+
+0.03
+
+Output File Names: 
+/home/GLBRCORG/echiang3/SwoapLab/stability.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.an.unique_list.0.03.norm.groups.summary
+
+
+mothur > quit()
