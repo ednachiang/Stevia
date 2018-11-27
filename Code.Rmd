@@ -690,10 +690,8 @@ ggplot(test, aes(x=Phylum, y=Median, fill=Phylum)) +
 ```
 
 
-### Test Phyla
+### Test Firmicutes & Bacteroidetes
 ```{r}
-### Code to answer Sarah's questions
-
 ### Firmicutes in Stevia, Pre vs. Post
 fir.phy <- subset_taxa(phy99, Phylum == "Firmicutes")
 fir.tv <- subset_samples(fir.phy, Treatment == "Stevia")
@@ -718,6 +716,17 @@ wilcox.test(RelAbund ~ Diet, data=fir.post.df, alternative = "greater")
   # High Fat > Low Fat
 
 
+
+### Bacteroidetes in Stevia, Pre vs. Post
+bac.phy <- subset_taxa(phy99, Phylum == "Bacteroidetes")
+bac.tv <- subset_samples(bac.phy, Treatment == "Stevia")
+bac.tv.df <- data.frame(sample_data(bac.tv))
+bac.tv.df$RelAbund <- t(data.frame(otu_table(bac.tv)))
+# Wilcoxon (Paired)
+wilcox.test(RelAbund ~ Time, data=bac.tv.df, paired=T, alternative = "greater")
+  # p-value = 0.01172
+  # Pre < Post
+
 ### Bacteroidetes in all Post High Fat diets vs. Low Fat
 bac.phy <- subset_taxa(phy99, Phylum == "Bacteroidetes")
 bac.post <- subset_samples(bac.phy, Time == "Post-treatment")
@@ -728,8 +737,138 @@ bac.post.df$Diet[which(bac.post.df$Treatment == "Low Fat")] <- "Low Fat"
 bac.post.df$Diet[which(bac.post.df$Treatment != "Low Fat")] <- "High Fat"
 # Wilcoxon
 wilcox.test(RelAbund ~ Diet, data=bac.post.df, alternative = "less")
-  # p-value = .3.934e-09
+  # p-value = 3.934e-09
   # High Fat < Low Fat
+
+
+
+### Calculate Firmicutes:Bacteroidetes Ratio
+fir.phy <- subset_taxa(phy99, Phylum == "Firmicutes")
+bac.phy <- subset_taxa(phy99, Phylum == "Bacteroidetes")
+fb.df <- data.frame(sample_data(fir.phy))
+fb.df$Fir_RelAbund <- t(data.frame(otu_table(fir.phy)))
+fb.df$Bac_RelAbund <- t(data.frame(otu_table(bac.phy)))
+fb.df$FB_Ratio <- fb.df$Fir_RelAbund/fb.df$Bac_RelAbund
+# Test normality of ratios
+hist(fb.df$FB_Ratio, breaks=10)
+qqnorm(fb.df$FB_Ratio)
+qqline(fb.df$FB_Ratio)
+shapiro.test(fb.df$FB_Ratio)
+  # p-value = 0.0001835
+  # Not Normal
+
+# Test Low Fat Pre vs. Post
+fb.lf <- fb.df[which(fb.df$Treatment == "Low Fat"),]
+# Test normality of ratios
+hist(fb.lf$FB_Ratio, breaks=10)
+qqnorm(fb.lf$FB_Ratio)
+qqline(fb.lf$FB_Ratio)
+shapiro.test(fb.lf$FB_Ratio)
+  # p-value = 0.001
+  # Not Normal
+# Wilcoxon (Paired)
+wilcox.test(FB_Ratio ~ Time, data=fb.lf, paired=T, alternative="greater")
+  # p-value = 0.01367
+  # Pre > Post
+
+# Test High Fat Pre vs. Post
+fb.hf <- fb.df[which(fb.df$Treatment == "High Fat"),]
+# Test normality of ratios
+hist(fb.hf$FB_Ratio, breaks=10)
+qqnorm(fb.hf$FB_Ratio)
+qqline(fb.hf$FB_Ratio)
+shapiro.test(fb.hf$FB_Ratio)
+  # p-value = 0.21
+  # Normal
+  # However, since Low Fat Pre vs. Post is Not Normal, I'll use a non-parametric test. This is conservative.
+# Wilcoxon (Paired)
+wilcox.test(FB_Ratio ~ Time, data=fb.hf, paired=T)
+  # p-value = 0.25
+# T-test (Paired)
+t.test(FB_Ratio ~ Time, data=fb.hf, paired=T)
+  # p-value = 0.2167
+
+# Test Saccharin Pre vs. Post
+fb.sc <- fb.df[which(fb.df$Treatment == "Saccharin"),]
+# Test normality of ratios
+hist(fb.sc$FB_Ratio, breaks=10)
+qqnorm(fb.sc$FB_Ratio)
+qqline(fb.sc$FB_Ratio)
+shapiro.test(fb.sc$FB_Ratio)
+  # p-value = 0.6282
+  # However, since Low Fat Pre vs. Post is Not Normal, I'll use a non-parametric test. This is conservative.
+# Wilcoxon (Paired)
+wilcox.test(FB_Ratio ~ Time, data=fb.sc, paired=T, alternative="less")
+  # p-value = 0.003906
+  # Pre < Post
+# T-test (Paired)
+t.test(FB_Ratio ~ Time, data=fb.sc, paired=T, alternative="less")
+  # p-value = 0.001252
+
+
+# Test Stevia Pre vs. Post
+fb.tv <- fb.df[which(fb.df$Treatment == "Stevia"),]
+# Test normality of ratios
+hist(fb.tv$FB_Ratio, breaks=10)
+qqnorm(fb.tv$FB_Ratio)
+qqline(fb.tv$FB_Ratio)
+shapiro.test(fb.tv$FB_Ratio)
+  # p-value = 0.1139
+  # However, since Low Fat Pre vs. Post is Not Normal, I'll use a non-parametric test. This is conservative.
+
+# Wilcoxon (Paired)
+wilcox.test(FB_Ratio ~ Time, data=fb.tv, paired=T, alternative="less")
+  # p-value = 0.007813
+  # Pre < Post
+# T-test (Paired)
+t.test(FB_Ratio ~ Time, data=fb.tv, paired=T, alternative="less")
+  # p-value = 0.0009076
+
+# Test Pre HF diets vs. Low Fat
+fb.pre <- fb.df[which(fb.df$Time == "Pre-treatment"),]
+fb.pre$Diet <- NA
+fb.pre$Diet[which(fb.pre$Treatment == "Low Fat")] <- "Low Fat"
+fb.pre$Diet[which(fb.pre$Treatment != "Low Fat")] <- "High Fat"
+fb.pre$Diet <- ordered(fb.pre$Diet, levels=c("High Fat", "Low Fat"))
+wilcox.test(FB_Ratio ~ Diet, data=fb.pre, alternative="greater")
+  # p-value = 0.9585
+kruskal.test(formula = FB_Ratio ~ Treatment, data=fb.pre)
+  # p-value = 0.7042
+
+# P-value adjustment for pre vs. post within-treatment comparisons
+p.adjust(c(0.01367, 0.25, 0.003906, 0.007813), method="BH")
+  # 0.01822667 0.25000000 0.01562400 0.01562600
+  # Low Fat, High Fat, Saccharin, Stevia
+
+# Test Post HF diets vs. Low Fat
+fb.post <- fb.df[which(fb.df$Time == "Post-treatment"),]
+fb.post$Diet <- NA
+fb.post$Diet[which(fb.post$Treatment == "Low Fat")] <- "Low Fat"
+fb.post$Diet[which(fb.post$Treatment != "Low Fat")] <- "High Fat"
+fb.post$Diet <- ordered(fb.post$Diet, levels=c("High Fat", "Low Fat"))
+wilcox.test(FB_Ratio ~ Diet, data=fb.post, alternative="greater")
+  # p-value = 4.721e-08
+  # High Fat > Low Fat
+
+
+
+
+
+# Summarize Firmicutes:Bacteroidetes Ratio
+fb.sum <- fb.df %>%
+  group_by(Treatment, Time) %>%
+  summarize(Mean = mean(FB_Ratio),
+            Median = median(FB_Ratio),
+            SD = sd(FB_Ratio),
+            iqr = IQR(FB_Ratio))
+fb.diet.sum <- fb.post %>%
+  group_by(Diet) %>%
+  summarize(Mean = mean(FB_Ratio),
+            Median = median(FB_Ratio),
+            SD = sd(FB_Ratio),
+            iqr = IQR(FB_Ratio))
+
+
 
 ```
 
