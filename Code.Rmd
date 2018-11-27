@@ -16,15 +16,11 @@ library(vegan)
 library(phyloseq)
 library(grid)
 library(pgirmess)
-library(lme4)
-#library(pheatmap)
 library(RColorBrewer)
 library(extrafont)
-#library(cowplot)
 loadfonts(device="win")
 windowsFonts(Times="Arial")
 theme_set(theme_bw())
-#theme_set(theme_cowplot(font_family = "Arial"))
 set.seed(1)
 ```
 
@@ -400,59 +396,6 @@ shapiro.test(adiv.pair$coverage)
   # p-value = 0.003709
   # Not normal
 
-
-### Total OTUs
-otu.tot <- data.frame(sample_names(physeq.pair))
-# Pull out # of OTUs from all samples
-otu.tot$Total_OTUs <- rep("NA", 72)
-for(i in 1:72){
-  otu.tot[i,2] <- length(which(otu_table(physeq.pair)[,i] != 0))
-}
-adiv.pair$Total_OTUs <- otu.tot$Total_OTUs
-adiv.pair$Total_OTUs <- as.numeric(adiv.pair$Total_OTUs)
-adiv.pair.pre <- adiv.pair[which(adiv.pair$Time == "Pre-treatment"),]
-adiv.pair.post <- adiv.pair[which(adiv.pair$Time == "Post-treatment"),]
-# Plot
-ggplot(adiv.pair, aes(x=Treatment, y=Total_OTUs, fill = Treatment)) +
-  geom_boxplot(position=position_dodge(1)) +
-  geom_point() + 
-  facet_grid(.~Time) +
-  xlab("Treatment") +
-  scale_fill_manual(values=c("rosybrown", "brown2", "limegreen", "dodgerblue2")) +
-  ylab("Total OTUs")
-# Test normality
-hist(adiv.pair$Total_OTUs, breaks=10)
-qqnorm(adiv.pair$Total_OTUs)
-qqline(adiv.pair$Total_OTUs)
-shapiro.test(adiv.pair$Total_OTUs)
-  # p-value = 0.002107
-  # Not normal
-# Stats
-kruskal.test(formula = Total_OTUs ~ Treatment, data=adiv.pair[which(adiv.pair$Time == "Pre-treatment"),])
-  # All Pre-treatment
-  # p-value = 0.003924
-kruskalmc(resp = Total_OTUs ~ Treatment, data = adiv.pair[which(adiv.pair$Time == "Pre-treatment"),])
-  # Pre-treatment Significant:  
-      # Low fat - saccharin
-kruskal.test(formula = Total_OTUs ~ Treatment, data=adiv.pair[which(adiv.pair$Time == "Post-treatment"),])
-  # All Post-treatment
-  # p-value = 0.009035
-kruskalmc(resp = Total_OTUs ~ Treatment, data = adiv.pair[which(adiv.pair$Time == "Post-treatment"),])
-  # Post-treatment Significant:
-    # High Fat - Low Fat
-#friedman.test(formula = Total_OTUs ~ Treatment | Time, data = adiv.pair)
-wilcox.test(Total_OTUs ~ Time, data=adiv.pair, paired=T)
-  # p-value = 0.5245
-wilcox.test(Total_OTUs ~ Sex, data = adiv.pair[which(adiv.pair$Time == "Pre-treatment"),])
-  # Pre-treatment Sex
-  # p-value = 0.6015
-wilcox.test(Total_OTUs ~ Sex, data = adiv.pair[which(adiv.pair$Time == "Post-treatment"),])
-  # Post-treatment Sex
-  # p-value = 0.1589
-# Repeated Measure
-summary(lmer(Total_OTUs ~ Time + Treatment + Sex + (1|Subj_ID), data=adiv.pair))
-  # Variance explained by Subj_ID = 0.0
-
 ### Chao
 # Plot
 #tiff("Chao.tiff", width=6.5, height=3, units="in", res=600)
@@ -479,13 +422,9 @@ chao.plot <- ggplot(adiv.pair, aes(x=Treatment, y=chao, fill = Treatment)) +
         ) +
   geom_text(data = chao.ann, aes(label=lab), x=c(1,2,3,4), y=c(350,350,350,350), 
             size=4, color="black", family="Arial")
-
-
-
-
-
-
 #dev.off()
+
+
 # Test normality
 hist(adiv.pair$chao, breaks=10)
 qqnorm(adiv.pair$chao)
@@ -2299,8 +2238,6 @@ time.hm <- plot_heatmap(physeq.simper.time, sample.label = "Treatment_Time", sam
 ### HeatMap Plot
 ```{r}
 # https://cran.r-project.org/web/packages/cowplot/vignettes/plot_grid.html
-#theme_set(theme_cowplot(font_family = "Arial"))
-#save_plot("hm.tiff", plot_grid(post.hm, time.hm, labels= "AUTO", ncol = 1, align = 'v'), base_width = 7, #base_height = 10, dpi=600)
 
 
 tiff("hm.tiff", width=180, height = 210, units="mm", res = 600)
