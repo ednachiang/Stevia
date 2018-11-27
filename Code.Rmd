@@ -6,16 +6,11 @@ output: html_document
 ---
 ### Load Libraries
 ```{r}
-library(ape)
 library(dplyr)
 library(ggplot2)
-library(gplots)
-library(phangorn)
-library(tidyr)
 library(vegan)
 library(phyloseq)
 library(grid)
-library(pgirmess)
 library(RColorBrewer)
 library(extrafont)
 loadfonts(device="win")
@@ -439,10 +434,7 @@ kruskal.test(formula = chao ~ Treatment, data=adiv.pair[which(adiv.pair$Time == 
 kruskal.test(formula = chao ~ Treatment, data=adiv.pair[which(adiv.pair$Time == "Post-treatment"),])
   # All Post-treatment
   # p-value = 0.0003939
-kruskalmc(resp = chao ~ Treatment, data = adiv.pair[which(adiv.pair$Time == "Post-treatment"),])
-  # Post-treatment Significant:
-    # High Fat - Low Fat
-    # Low Fat - Saccharin
+
 pairwise.wilcox.test(adiv.pair$chao, adiv.pair$Treatment, p.adjust.method = "fdr")
   # LowFat - HighFat = 0.014
   # Saccharin - HighFat = 0.865
