@@ -725,7 +725,11 @@ wilcox.test(RelAbund ~ Time, data=fir.tv.df, paired=T, alternative="less")
   # Pre < Post
 # Post-treatment Low Fat vs. High Fat Diets
 fir.post.df <- fir.df[which(fir.df$Time == "Post-treatment"),]
-wilcox.test(RelAbund ~ Diet, data=fir.post.df)
+wilcox.test(RelAbund ~ Diet, data=fir.post.df, alternative = "less")
+  # p-value = 3.05e-05
+  # Low Fat < High Fat
+
+
 
 ### Bacteroidetes
 bac.phy <- subset_taxa(phy99, Phylum == "Bacteroidetes")
@@ -759,6 +763,11 @@ wilcox.test(RelAbund ~ Time, data=bac.tv.df, paired=T, alternative= "greater")
   # Stevia
   # p-value = 0.01172
   # Pre > Post
+# Post-treatment Low Fat vs. High Fat Diets
+bac.post.df <- bac.df[which(bac.df$Time == "Post-treatment"),]
+wilcox.test(RelAbund ~ Diet, data=bac.post.df, alternative = "greater")
+  # p-value = 3.934e-09
+  # Low Fat > High Fat
 
 
 
@@ -793,6 +802,11 @@ wilcox.test(RelAbund ~ Time, data=ver.sc.df, paired=T, alternative = "less")
 wilcox.test(RelAbund ~ Time, data=ver.tv.df, paired=T)
   # Stevia
   # p-value = 0.6406
+# Post-treatment Low Fat vs. High Fat Diets
+ver.post.df <- ver.df[which(ver.df$Time == "Post-treatment"),]
+wilcox.test(RelAbund ~ Diet, data=ver.post.df, alternative = "less")
+  # p-value = 2.957e-05
+  # Low Fat < High Fat
 
 
 
@@ -828,6 +842,11 @@ wilcox.test(RelAbund ~ Time, data=ten.tv.df, paired=T, alternative = "greater")
   # Stevia
   # p-value = 0.003906
   # Pre > Post
+# Post-treatment Low Fat vs. High Fat Diets
+ten.post.df <- ten.df[which(ten.df$Time == "Post-treatment"),]
+wilcox.test(RelAbund ~ Diet, data=ten.post.df, alternative = "greater")
+  # p-value = 5.445e-05
+  # Low Fat > High Fat
 
 
 
@@ -863,7 +882,11 @@ wilcox.test(RelAbund ~ Time, data=pro.tv.df, paired=T, alternative = "less")
   # Stevia
   # p-value = 0.01172
   # Pre < Post
-
+# Post-treatment Low Fat vs. High Fat Diets
+pro.post.df <- pro.df[which(pro.df$Time == "Post-treatment"),]
+wilcox.test(RelAbund ~ Diet, data=pro.post.df, alternative = "less")
+  # p-value = 0.0007064
+  # Low Fat < High Fat
 
 
 ### Actinobacteria
@@ -897,10 +920,17 @@ wilcox.test(RelAbund ~ Time, data=act.tv.df, paired=T, alternative = "less")
   # Stevia
   # p-value = 0.003906
   # Pre < Post
+# Post-treatment Low Fat vs. High Fat Diets
+act.post.df <- act.df[which(act.df$Time == "Post-treatment"),]
+wilcox.test(RelAbund ~ Diet, data=act.post.df, alternative = "less")
+  # p-value = 4.732e-05
+  # Low Fat < High Fat
+
 
 
 
 ### Adjust p-values
+# Pre vs. Post Within-Treatment
 p.adjust(c(0.1055, 0.1641, 0.02734, 0.01172, 0.004883, 0.01367, 0.001953, 0.01172, 0.004883, 0.009766, 0.01953, 0.6406, 0.04199, 0.009766, 0.003906, 0.003906, 0.00293, 0.001953, 0.003906, 0.01172, 0.6241, 0.001953, 0.001953, 0.003906), method="BH")
   # Firmicutes: 0.12057143 0.17901818 0.03453474 0.01758000
     # SC, TV
@@ -915,7 +945,9 @@ p.adjust(c(0.1055, 0.1641, 0.02734, 0.01172, 0.004883, 0.01367, 0.001953, 0.0117
     # All
   # Actinobacteria: 0.64060000 0.01041600 0.01041600 0.01041600
     # HF, SC, TV
-
+# Post-treatment Diet
+p.adjust(c(3.05e-05, 3.934e-09, 2.957e-05, 5.445e-05, 0.0007064, 4.732e-05), method="BH")
+  # 6.1000e-05 2.3604e-08 6.1000e-05 6.5340e-05 7.0640e-04 6.5340e-05
 
 ```
 
