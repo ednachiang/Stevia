@@ -379,10 +379,11 @@ shapiro.test(adiv.pair$coverage)
 
 ### Chao
 # Plot
-#tiff("Chao.tiff", width=6.5, height=3, units="in", res=600)
-chao.ann <- data.frame(lab=c("ab", "c", "c", "bc"), Time = factor(c("Post-treatment", "Post-treatment", "Post-treatment", "Post-treatment")), Treatment = factor(c("Low Fat", "High Fat", "Saccharin", "Stevia")))
+chao.ann <- data.frame(lab=c("a", "b", "b", "b"), Time = factor(c("Post-treatment", "Post-treatment", "Post-treatment", "Post-treatment")), Treatment = factor(c("Low Fat", "High Fat", "Saccharin", "Stevia")))
   # Annotations
-chao.plot <- ggplot(adiv.pair, aes(x=Treatment, y=chao, fill = Treatment)) +
+tiff("Chao.tiff", width=180, height=55, units="mm", res=600)
+#chao.plot <-
+ggplot(adiv.pair, aes(x=Treatment, y=chao, fill = Treatment)) +
   geom_boxplot(position=position_dodge(1)) +
   geom_point(position = position_dodge(width = 0.2)) + 
   facet_grid(.~Time) +
@@ -403,7 +404,7 @@ chao.plot <- ggplot(adiv.pair, aes(x=Treatment, y=chao, fill = Treatment)) +
         ) +
   geom_text(data = chao.ann, aes(label=lab), x=c(1,2,3,4), y=c(350,350,350,350), 
             size=4, color="black", family="Arial")
-#dev.off()
+dev.off()
 
 
 # Test normality
@@ -420,7 +421,6 @@ kruskal.test(formula = chao ~ Treatment, data=adiv.pair[which(adiv.pair$Time == 
 kruskal.test(formula = chao ~ Treatment, data=adiv.pair[which(adiv.pair$Time == "Post-treatment"),])
   # All Post-treatment
   # p-value = 0.0003939
-
 pairwise.wilcox.test(adiv.pair$chao, adiv.pair$Treatment, p.adjust.method = "fdr")
   # LowFat - HighFat = 0.014
   # Saccharin - HighFat = 0.865
@@ -429,7 +429,9 @@ pairwise.wilcox.test(adiv.pair$chao, adiv.pair$Treatment, p.adjust.method = "fdr
   # Stevia - LowFat = 0.018
   # Stevia - Saccharin = 0.865
   ## Low fat vs. high fat = sig diff
-#friedman.test(formula = chao ~ Treatment | Time, data = adiv.pair)
+wilcox.test(chao ~ Diet, data=adiv.pair, alternative = "greater")
+  # p-value = 0.003649
+  # Low Fat > High Fat
 wilcox.test(chao ~ Time, data=adiv.pair, paired=T)
   # p-value = 0.02096
 wilcox.test(chao ~ Time, data=adiv.pair[which(adiv.pair$Treatment == "High Fat"),], paired=T)
@@ -444,14 +446,16 @@ wilcox.test(chao ~ Time, data=adiv.pair[which(adiv.pair$Treatment == "Saccharin"
 wilcox.test(chao ~ Time, data=adiv.pair[which(adiv.pair$Treatment == "Stevia"),], paired=T)
   # Stevia
   # p-value = 0.3125
-wilcox.test(chao ~ Sex, data = adiv.pair[which(adiv.pair$Time == "Pre-treatment"),])
+p.adjust(c(0.003906, 0.4316, 0.07422,0.3125), method="BH")
+  # 0.0156240 0.4316000 0.1484400 0.4166667
+#wilcox.test(chao ~ Sex, data = adiv.pair[which(adiv.pair$Time == "Pre-treatment"),])
   # Pre-treatment Sex
   # p-value = 1
-wilcox.test(chao ~ Sex, data = adiv.pair[which(adiv.pair$Time == "Post-treatment"),])
+#wilcox.test(chao ~ Sex, data = adiv.pair[which(adiv.pair$Time == "Post-treatment"),])
   # Post-treatment Sex
   # p-value = 0.8147
 # Repeated Measures
-summary(lmer(chao ~ Time + Treatment + Sex + (1|Subj_ID), data=adiv.pair))
+#summary(lmer(chao ~ Time + Treatment + Sex + (1|Subj_ID), data=adiv.pair))
   # Variance explained by Subj_ID = 1.376e-13
 
 
