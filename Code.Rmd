@@ -272,11 +272,12 @@ colnames(meta)[1] <- "Sample_ID"
 rownames(meta) <- meta$Sample
 meta$Time <- ordered(meta$Time, levels=c("Pre-treatment", "Post-treatment"))
 meta$Treatment <- ordered(meta$Treatment, levels=c("Low Fat", "High Fat", "Saccharin", "Stevia"))
+meta$Diet <- ordered(meta$Diet, levels=c("Low Fat", "High Fat"))
 divsum <- read.table("mothur_outputs/final.summary", header=T)
 
 
 # Add in diversity summaries
-meta[,9:19] <- divsum[,3:12]
+meta[,10:20] <- divsum[,3:12]
 
 # Create intermin phyloseq object
 physeq <- merge_phyloseq(mothurdata, sample_data(meta))
@@ -722,8 +723,9 @@ wilcox.test(RelAbund ~ Time, data=fir.tv.df, paired=T, alternative="less")
   # Stevia
   # p-value = 0.01172
   # Pre < Post
-
-
+# Post-treatment Low Fat vs. High Fat Diets
+fir.post.df <- fir.df[which(fir.df$Time == "Post-treatment"),]
+wilcox.test(RelAbund ~ Diet, data=fir.post.df)
 
 ### Bacteroidetes
 bac.phy <- subset_taxa(phy99, Phylum == "Bacteroidetes")
