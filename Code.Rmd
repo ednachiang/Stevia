@@ -690,6 +690,234 @@ ggplot(test, aes(x=Phylum, y=Median, fill=Phylum)) +
 ```
 
 
+### Test Phyla
+```{r}
+### Firmicutes
+fir.phy <- subset_taxa(phy99, Phylum == "Firmicutes")
+fir.df <- data.frame(sample_data(fir.phy))
+fir.df$RelAbund <- t(data.frame(otu_table(fir.phy)))
+# Test normality
+hist(fir.df$RelAbund, breaks=10)
+qqnorm(fir.df$RelAbund)
+qqline(fir.df$RelAbund)
+shapiro.test(fir.df$RelAbund)
+  # p-value = 0.02563
+# Separate treatments
+fir.lf.df <- fir.df[which(fir.df$Treatment == "Low Fat"),]
+fir.hf.df <- fir.df[which(fir.df$Treatment == "High Fat"),]
+fir.sc.df <- fir.df[which(fir.df$Treatment == "Saccharin"),]
+fir.tv.df <- fir.df[which(fir.df$Treatment == "Stevia"),]
+# Wilcoxon (Paired)
+wilcox.test(RelAbund ~ Time, data=fir.lf.df, paired=T)
+  # Low Fat
+  # p-value = 0.1055
+wilcox.test(RelAbund ~ Time, data=fir.hf.df, paired=T)
+  # High Fat
+  # p-value = 0.1641
+wilcox.test(RelAbund ~ Time, data=fir.sc.df, paired=T, alternative="less")
+  # Saccharin
+  # p-value = 0.02734
+  # Pre < Post
+wilcox.test(RelAbund ~ Time, data=fir.tv.df, paired=T, alternative="less")
+  # Stevia
+  # p-value = 0.01172
+  # Pre < Post
+
+
+
+### Bacteroidetes
+bac.phy <- subset_taxa(phy99, Phylum == "Bacteroidetes")
+bac.df <- data.frame(sample_data(bac.phy))
+bac.df$RelAbund <- t(data.frame(otu_table(bac.phy)))
+# Test normality
+hist(bac.df$RelAbund, breaks=10)
+qqnorm(bac.df$RelAbund)
+qqline(bac.df$RelAbund)
+shapiro.test(bac.df$RelAbund)
+  # p-value = 0.02563
+# Separate treatments
+bac.lf.df <- bac.df[which(bac.df$Treatment == "Low Fat"),]
+bac.hf.df <- bac.df[which(bac.df$Treatment == "High Fat"),]
+bac.sc.df <- bac.df[which(bac.df$Treatment == "Saccharin"),]
+bac.tv.df <- bac.df[which(bac.df$Treatment == "Stevia"),]
+# Wilcoxon (Paired)
+wilcox.test(RelAbund ~ Time, data=bac.lf.df, paired=T, alternative="less")
+  # Low Fat
+  # p-value = 0.004883
+  # Pre < Post
+wilcox.test(RelAbund ~ Time, data=bac.hf.df, paired=T, alternative="greater")
+  # High Fat
+  # p-value = 0.01367
+  # Pre > Post
+wilcox.test(RelAbund ~ Time, data=bac.sc.df, paired=T, alternative = "greater")
+  # Saccharin
+  # p-value = 0.001953
+  # Pre > Post
+wilcox.test(RelAbund ~ Time, data=bac.tv.df, paired=T, alternative= "greater")
+  # Stevia
+  # p-value = 0.01172
+  # Pre > Post
+
+
+
+### Verrucomicrobia
+ver.phy <- subset_taxa(phy99, Phylum == "Verrucomicrobia")
+ver.df <- data.frame(sample_data(ver.phy))
+ver.df$RelAbund <- t(data.frame(otu_table(ver.phy)))
+# Test normality
+hist(ver.df$RelAbund, breaks=10)
+qqnorm(ver.df$RelAbund)
+qqline(ver.df$RelAbund)
+shapiro.test(ver.df$RelAbund)
+  # p-value = 0.02563
+# Separate treatments
+ver.lf.df <- ver.df[which(ver.df$Treatment == "Low Fat"),]
+ver.hf.df <- ver.df[which(ver.df$Treatment == "High Fat"),]
+ver.sc.df <- ver.df[which(ver.df$Treatment == "Saccharin"),]
+ver.tv.df <- ver.df[which(ver.df$Treatment == "Stevia"),]
+# Wilcoxon (Paired)
+wilcox.test(RelAbund ~ Time, data=ver.lf.df, paired=T, alternative="greater")
+  # Low Fat
+  # p-value = 0.004883
+  # Pre > Post
+wilcox.test(RelAbund ~ Time, data=ver.hf.df, paired=T, alternative = "less")
+  # High Fat
+  # p-value = 0.009766
+  # Pre < Post
+wilcox.test(RelAbund ~ Time, data=ver.sc.df, paired=T, alternative = "less")
+  # Saccharin
+  # p-value = 0.01953
+  # Pre < Post
+wilcox.test(RelAbund ~ Time, data=ver.tv.df, paired=T)
+  # Stevia
+  # p-value = 0.6406
+
+
+
+### Tenericutes
+ten.phy <- subset_taxa(phy99, Phylum == "Tenericutes")
+ten.df <- data.frame(sample_data(ten.phy))
+ten.df$RelAbund <- t(data.frame(otu_table(ten.phy)))
+# Test normality
+hist(ten.df$RelAbund, breaks=10)
+qqnorm(ten.df$RelAbund)
+qqline(ten.df$RelAbund)
+shapiro.test(ten.df$RelAbund)
+  # p-value = 0.02563
+# Separate treatments
+ten.lf.df <- ten.df[which(ten.df$Treatment == "Low Fat"),]
+ten.hf.df <- ten.df[which(ten.df$Treatment == "High Fat"),]
+ten.sc.df <- ten.df[which(ten.df$Treatment == "Saccharin"),]
+ten.tv.df <- ten.df[which(ten.df$Treatment == "Stevia"),]
+# Wilcoxon (Paired)
+wilcox.test(RelAbund ~ Time, data=ten.lf.df, paired=T, alternative="greater")
+  # Low Fat
+  # p-value = 0.04199
+  # Pre > Post
+wilcox.test(RelAbund ~ Time, data=ten.hf.df, paired=T, alternative = "greater")
+  # High Fat
+  # p-value = 0.009766
+  # Pre > Post
+wilcox.test(RelAbund ~ Time, data=ten.sc.df, paired=T, alternative = "greater")
+  # Saccharin
+  # p-value = 0.003906
+  # Pre > Post
+wilcox.test(RelAbund ~ Time, data=ten.tv.df, paired=T, alternative = "greater")
+  # Stevia
+  # p-value = 0.003906
+  # Pre > Post
+
+
+
+### Proteobacteria
+pro.phy <- subset_taxa(phy99, Phylum == "Proteobacteria")
+pro.df <- data.frame(sample_data(pro.phy))
+pro.df$RelAbund <- t(data.frame(otu_table(pro.phy)))
+# Test normality
+hist(pro.df$RelAbund, breaks=10)
+qqnorm(pro.df$RelAbund)
+qqline(pro.df$RelAbund)
+shapiro.test(pro.df$RelAbund)
+  # p-value = 0.02563
+# Separate treatments
+pro.lf.df <- pro.df[which(pro.df$Treatment == "Low Fat"),]
+pro.hf.df <- pro.df[which(pro.df$Treatment == "High Fat"),]
+pro.sc.df <- pro.df[which(pro.df$Treatment == "Saccharin"),]
+pro.tv.df <- pro.df[which(pro.df$Treatment == "Stevia"),]
+# Wilcoxon (Paired)
+wilcox.test(RelAbund ~ Time, data=pro.lf.df, paired=T, alternative = "less")
+  # Low Fat
+  # p-value = 0.00293
+  # Pre < Post
+wilcox.test(RelAbund ~ Time, data=pro.hf.df, paired=T, alternative = "less")
+  # High Fat
+  # p-value = 0.001953
+  # Pre < Post
+wilcox.test(RelAbund ~ Time, data=pro.sc.df, paired=T, alternative = "less")
+  # Saccharin
+  # p-value = 0.003906
+  # Pre < Post
+wilcox.test(RelAbund ~ Time, data=pro.tv.df, paired=T, alternative = "less")
+  # Stevia
+  # p-value = 0.01172
+  # Pre < Post
+
+
+
+### Actinobacteria
+act.phy <- subset_taxa(phy99, Phylum == "Actinobacteria")
+act.df <- data.frame(sample_data(act.phy))
+act.df$RelAbund <- t(data.frame(otu_table(act.phy)))
+# Test normality
+hist(act.df$RelAbund, breaks=10)
+qqnorm(act.df$RelAbund)
+qqline(act.df$RelAbund)
+shapiro.test(act.df$RelAbund)
+  # p-value = 0.02563
+# Separate treatments
+act.lf.df <- act.df[which(act.df$Treatment == "Low Fat"),]
+act.hf.df <- act.df[which(act.df$Treatment == "High Fat"),]
+act.sc.df <- act.df[which(act.df$Treatment == "Saccharin"),]
+act.tv.df <- act.df[which(act.df$Treatment == "Stevia"),]
+# Wilcoxon (Paired)
+wilcox.test(RelAbund ~ Time, data=act.lf.df, paired=T)
+  # Low Fat
+  # p-value = 0.6241
+wilcox.test(RelAbund ~ Time, data=act.hf.df, paired=T, alternative = "less")
+  # High Fat
+  # p-value = 0.001953
+  # Pre < Post
+wilcox.test(RelAbund ~ Time, data=act.sc.df, paired=T, alternative = "less")
+  # Saccharin
+  # p-value = 0.001953
+  # Pre < Post
+wilcox.test(RelAbund ~ Time, data=act.tv.df, paired=T, alternative = "less")
+  # Stevia
+  # p-value = 0.003906
+  # Pre < Post
+
+
+
+### Adjust p-values
+p.adjust(c(0.1055, 0.1641, 0.02734, 0.01172, 0.004883, 0.01367, 0.001953, 0.01172, 0.004883, 0.009766, 0.01953, 0.6406, 0.04199, 0.009766, 0.003906, 0.003906, 0.00293, 0.001953, 0.003906, 0.01172, 0.6241, 0.001953, 0.001953, 0.003906), method="BH")
+  # Firmicutes: 0.12057143 0.17901818 0.03453474 0.01758000
+    # SC, TV
+  # Bacteroidetes: 0.01065382 0.01929882 0.01041600 0.01758000
+    # All
+  # Verrucomicrobia: 0.01065382 0.01758000 0.02604000 0.64060000
+    # LF, HF, SC
+  # Tenericutes: 0.05038800 0.01758000 0.01041600 0.01041600
+    # LF (Trend)
+    # HF, SC, TV
+  # Proteobacteria: 0.01041600 0.01041600 0.01041600 0.01758000
+    # All
+  # Actinobacteria: 0.64060000 0.01041600 0.01041600 0.01041600
+    # HF, SC, TV
+
+
+```
+
+
 ### Test Firmicutes & Bacteroidetes
 ```{r}
 ### Firmicutes in Stevia, Pre vs. Post
