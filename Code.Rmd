@@ -357,7 +357,6 @@ load("physeq/Physeq.tv.RData")
 
 ### Alpha Div
 ```{r}
-adiv <- data.frame(sample_data(physeq))
 adiv.pair <- data.frame(sample_data(physeq.pair))
 
 ### Coverage
@@ -381,7 +380,7 @@ shapiro.test(adiv.pair$coverage)
 # Plot
 chao.ann <- data.frame(lab=c("a", "b", "b", "b"), Time = factor(c("Post-treatment", "Post-treatment", "Post-treatment", "Post-treatment")), Treatment = factor(c("Low Fat", "High Fat", "Saccharin", "Stevia")))
   # Annotations
-tiff("Chao.tiff", width=180, height=55, units="mm", res=600)
+#tiff("Chao.tiff", width=180, height=55, units="mm", res=600)
 #chao.plot <-
 ggplot(adiv.pair, aes(x=Treatment, y=chao, fill = Treatment)) +
   geom_boxplot(position=position_dodge(1)) +
@@ -404,7 +403,7 @@ ggplot(adiv.pair, aes(x=Treatment, y=chao, fill = Treatment)) +
         ) +
   geom_text(data = chao.ann, aes(label=lab), x=c(1,2,3,4), y=c(350,350,350,350), 
             size=4, color="black", family="Arial")
-dev.off()
+#dev.off()
 
 
 # Test normality
@@ -548,19 +547,6 @@ summary(lmer(shannon ~ Time + Treatment + Sex + (1|Subj_ID), data=adiv.pair))
 ```
 
 
-### Alpha Div Plot
-```{r}
-tiff("adiv.tiff", width=180, height = 125, units="mm", res = 600)
-grid.newpage()
-pushViewport(viewport(layout=(grid.layout(4,1, widths=c(1,1,1,1), heights=c(0.055,1,0.055,1)))))
-grid.text("A", x=unit(0.03, "npc"), vp=viewport(layout.pos.row=1, layout.pos.col=1),
-          gp=gpar(fontsize=12,fontface="bold",fontfamily="Arial"))
-print(chao.plot, vp=viewport(layout.pos.row=2, layout.pos.col=1))
-grid.text("B", x=unit(0.03, "npc"), vp=viewport(layout.pos.row=3, layout.pos.col=1),
-          gp=gpar(fontsize=12,fontface="bold",fontfamily="Arial"))
-print(shannon.plot, vp=viewport(layout.pos.row=4, layout.pos.col=1))
-dev.off()
-```
 ### Examine Phyla
 ```{r}
 # Merge samples with the same taxonomic rank
@@ -615,7 +601,7 @@ phy.sex.sum[which(phy.sex.sum$iqr.min < 0),10] <- 0
 phy.sex.sum$iqr.max <- phy.sex.sum$Median + 0.5*phy.sex.sum$iqr
 
 ### Barplot ###
-tiff("phyla.tiff", width = 180, height = 100, units = "mm", res = 600)
+#tiff("phyla.tiff", width = 180, height = 100, units = "mm", res = 600)
 ggplot(phy.sum, aes(x=Phylum, y=Median, fill=Phylum)) +
   geom_bar(stat="identity", color="black") +
   facet_grid(Time ~ Treatment) +
@@ -635,10 +621,10 @@ ggplot(phy.sum, aes(x=Phylum, y=Median, fill=Phylum)) +
         legend.title = element_text(size=12, family="Arial", face="bold"),
         legend.text = element_text(size=12, family="Arial"),
         axis.ticks.x=element_blank())
-dev.off()
+#dev.off()
 
 ### Supplemental Barplot ###
-tiff("phyla.supp.tiff", width = 180, height = 150, units = "mm", res = 600)
+#tiff("phyla.supp.tiff", width = 180, height = 150, units = "mm", res = 600)
 ggplot(phy.sex.sum, aes(x=Phylum, y=Median, fill=Phylum)) +
   geom_bar(stat="identity", color="black") +
   facet_grid(Time + Sex ~ Treatment) +
@@ -658,7 +644,7 @@ ggplot(phy.sex.sum, aes(x=Phylum, y=Median, fill=Phylum)) +
         legend.title = element_text(size=12, family="Arial", face="bold"),
         legend.text = element_text(size=12, family="Arial"),
         axis.ticks.x=element_blank())
-dev.off()
+#dev.off()
 
 
 
@@ -1146,10 +1132,10 @@ fb.diet.sum <- fb.post %>%
 ```{r}
 ### Paired
 bray.nmds <- ordinate(physeq=physeq.pair, method="NMDS", distance="bray")
-  # stress = 7.705923e-05 
+  # stress = 7.565278e-05 
 
 all.nmds <- plot_ordination(physeq=physeq.pair, ordination=bray.nmds, color="Treatment", shape="Time") +
-  scale_shape_manual(values=c(19,2)) +
+  scale_shape_manual(values=c(19,2), labels=c("Pre-treat", "Post-treat")) +
   scale_color_manual(values=c("rosybrown", "brown2", "limegreen", "dodgerblue2")) +
   ggtitle("All Samples") +
   #geom_point(size=2, stroke=1.5) +
@@ -1159,61 +1145,20 @@ all.nmds <- plot_ordination(physeq=physeq.pair, ordination=bray.nmds, color="Tre
         axis.text.y = element_text(family="Arial", size=8),
         axis.title.x = element_text(family="Arial", size=8, face="bold"),
         axis.title.y = element_text(family="Arial", size=8, face="bold"),
-        legend.title = element_text(family="Arial", size=10, face="bold"),
-        legend.text = element_text(family="Arial", size=10),
-        plot.title = element_text(family = "Arial", size=10, face="bold", hjust=0.5)
+        legend.title = element_text(family="Arial", size=8, face="bold"),
+        legend.text = element_text(family="Arial", size=8),
+        plot.title = element_text(family = "Arial", size=8, face="bold", hjust=0.5),
+        plot.margin = unit(c(1,1,1,1), "mm"),      # top, right, bottom, left
+        legend.margin=margin(0,0,0,0),
+        legend.box.margin=margin(-10,0,-10,-8)
         ) +
-  annotate("text", x = 0.61, y = -1.12e-04, label = "stress = 0.00007", size=3, family="Arial")
- 
+  annotate("text", x = 0.56, y = -1.3e-04, label = "stress = 0.00008", size=2, family="Arial") +
+  guides(color = guide_legend(order=1), shape = guide_legend(order=2))
+
 
 ### Pre-treatment
 bray.nmds.pre <- ordinate(physeq=physeq.pre, method="NMDS", distance="bray")
   # stress = 0.1929748 
-pre.nmds <- plot_ordination(physeq=physeq.pre, ordination=bray.nmds.pre, color="Treatment", shape="Sex") +
-  scale_shape_manual(values=c(19,2)) +
-  scale_color_manual(values=c("rosybrown", "brown2", "limegreen", "dodgerblue2")) +
-  ggtitle("Pre-treatment") +
-  #geom_point(size=2, stroke=1.5) +
-  theme(panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank(),
-        axis.text.x = element_text(family="Arial", size=8),
-        axis.text.y = element_text(family="Arial", size=8),
-        axis.title.x = element_text(family="Arial", size=8, face="bold"),
-        axis.title.y = element_text(family="Arial", size=8, face="bold"),
-        legend.title = element_text(family="Arial", size=10, face="bold"),
-        legend.text = element_text(family="Arial", size=10),
-        plot.title = element_text(family = "Arial", size=10, face="bold", hjust=0.5)
-        ) +
-  annotate("text", x = 0.29, y = -0.52, label = "stress = 0.193", size=2, family="Arial") +
-  guides(colour=FALSE, shape=FALSE)
-# Steal legend
-nmds.legend <- g_legend(pre.nmds)
-
-
-# Treatment Ellipses
-sample_data(physeq.pre)$Elip.treat <- paste(sample_data(physeq.pre)$Treatment)
-elip.nmds.pre.treat <- data.frame(MDS1 = bray.nmds.pre$points[,1], MDS2 = bray.nmds.pre$points[,2],
-                        Group = sample_data(physeq.pre)$Elip.treat)
-plot.new()
-elip.ord.pre.treat <- ordiellipse(bray.nmds.pre, sample_data(physeq.pre)$Elip.treat, display="sites", kind="se", conf=0.95, label=T)
-elip.pre.treat.df <- data.frame()
-for(i in levels(elip.nmds.pre.treat$Group)){
-  elip.pre.treat.df <- rbind(elip.pre.treat.df, cbind(as.data.frame(with(elip.nmds.pre.treat[elip.nmds.pre.treat$Group==i,],
-                                                     veganCovEllipse(elip.ord.pre.treat[[i]]$cov,
-                                                                     elip.ord.pre.treat[[i]]$center,
-                                                                     elip.ord.pre.treat[[i]]$scale))),
-                                  group=i))
-  
-}
-
-# Plot w/ treatment ellip
-plot_ordination(physeq=physeq.pre, ordination=bray.nmds.pre, color="Treatment") +
-  geom_path(data=elip.pre.treat.df, aes(x=NMDS1, y=NMDS2, colour=group), size=1, linetype=1) +
-  scale_color_manual(values=c("brown2", "rosybrown", "limegreen", "dodgerblue2"))
-
-
-
-
 # Sex Ellipses
 sample_data(physeq.pre)$Elip.sex <- paste(sample_data(physeq.pre)$Sex)
 elip.nmds.pre.sex <- data.frame(MDS1 = bray.nmds.pre$points[,1], MDS2 = bray.nmds.pre$points[,2],
@@ -1228,36 +1173,11 @@ for(i in levels(elip.nmds.pre.sex$Group)){
                                                                      elip.ord.pre.sex[[i]]$scale))),
                                   group=i))
 }
-
-# Plot w/ sex ellip
-plot_ordination(physeq=physeq.pre, ordination=bray.nmds.pre, color="Sex") +
-  geom_path(data=elip.pre.sex.df, aes(x=NMDS1, y=NMDS2, colour=group), size=1, linetype=1)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Post-treatment
-bray.nmds.post <- ordinate(physeq=physeq.post, method="NMDS", distance="bray")
-  # stress = 8.309702e-05
-
-post.nmds <- plot_ordination(physeq=physeq.post, ordination=bray.nmds.post, color="Treatment", shape="Sex") +
-  scale_color_manual(values=c("rosybrown", "brown2", "limegreen", "dodgerblue2")) +
+# Ordination
+pre.nmds <- plot_ordination(physeq=physeq.pre, ordination=bray.nmds.pre, shape="Sex") +
   scale_shape_manual(values=c(19,2)) +
-  ggtitle("Post-treatment") +
+  geom_path(data=elip.pre.sex.df, aes(x=NMDS1, y=NMDS2, shape=group), size=1, linetype=1) +
+  ggtitle("Pre-treatment") +
   #geom_point(size=2, stroke=1.5) +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
@@ -1265,15 +1185,15 @@ post.nmds <- plot_ordination(physeq=physeq.post, ordination=bray.nmds.post, colo
         axis.text.y = element_text(family="Arial", size=8),
         axis.title.x = element_text(family="Arial", size=8, face="bold"),
         axis.title.y = element_text(family="Arial", size=8, face="bold"),
-        legend.title = element_text(family="Arial", size=10, face="bold"),
-        legend.text = element_text(family="Arial", size=10),
-        plot.title = element_text(family = "Arial", size=10, face="bold", hjust=0.5)
+        legend.title = element_text(family="Arial", size=8, face="bold"),
+        legend.text = element_text(family="Arial", size=8),
+        legend.key.width = unit(0.9, "cm"),
+        plot.margin = unit(c(1,1,1,1), "mm"),      # top, right, bottom, left
+        legend.margin=margin(0,0,0,0),
+        legend.box.margin=margin(-10,0,-10,-7),
+        plot.title = element_text(family = "Arial", size=8, face="bold", hjust=0.5)
         ) +
-  annotate("text", x = 0.15, y = -3e-04, label = "stress = 0.00008", size=2, family="Arial") +
-  guides(colour=FALSE, shape=FALSE)
-
-
-
+  annotate("text", x = 0.31, y = -0.52, label = "stress = 0.193", size=2, family="Arial")
 
 
 
@@ -1283,8 +1203,10 @@ post.nmds <- plot_ordination(physeq=physeq.post, ordination=bray.nmds.post, colo
 
 
 ### Post-treatment w/o Low Fat
-bray.nmds.post.rem <- ordinate(physeq=physeq.post.rem, method="NMDS", distance="bray")
-  # stress = 0.1981966 
+#bray.nmds.post.rem <- ordinate(physeq=physeq.post.rem, method="NMDS", distance="bray")
+  # stress = 0.1979704
+#save(bray.nmds.post.rem, file="bray.nmds.post.rem.RData")
+load("bray.nmds.post.rem.RData")
 
 post.rem.nmds <- plot_ordination(physeq=physeq.post.rem, ordination=bray.nmds.post.rem, color="Treatment",
                                  shape="Sex") +
@@ -1298,96 +1220,36 @@ post.rem.nmds <- plot_ordination(physeq=physeq.post.rem, ordination=bray.nmds.po
         axis.text.y = element_text(family="Arial", size=8),
         axis.title.x = element_text(family="Arial", size=8, face="bold"),
         axis.title.y = element_text(family="Arial", size=8, face="bold"),
-        legend.title = element_text(family="Arial", size=10, face="bold"),
-        legend.text = element_text(family="Arial", size=10),
-        plot.title = element_text(family = "Arial", size=10, face="bold", hjust=0.5)
+        legend.title = element_text(family="Arial", size=8, face="bold"),
+        legend.text = element_text(family="Arial", size=8),
+        plot.title = element_text(family = "Arial", size=8, face="bold", hjust=0.5),
+        plot.margin = unit(c(1,1,1,1), "mm"),      # top, right, bottom, left
+        legend.margin=margin(0,0,0,0),
+        legend.box.margin=margin(-10,0,-10,-8)
         ) +
-  #guides(colour = guide_legend(order = 1), 
-  #            shape = guide_legend(order = 2)) +
-  annotate("text", x = 0.23, y = -0.26, label = "stress = 0.198", size=2, family="Arial") +
-  guides(colour=FALSE, shape=FALSE)
-
-# Treatment Ellipses
-sample_data(physeq.post.rem)$Elip.treat <- paste(sample_data(physeq.post.rem)$Treatment)
-elip.nmds.post.rem.treat <- data.frame(MDS1 = bray.nmds.post.rem$points[,1], MDS2 = bray.nmds.post.rem$points[,2],
-                        Group = sample_data(physeq.post.rem)$Elip.treat)
-plot.new()
-elip.ord.post.rem.treat <- ordiellipse(bray.nmds.post.rem, sample_data(physeq.post.rem)$Elip.treat, display="sites", kind="se", conf=0.95, label=T)
-elip.post.rem.treat.df <- data.frame()
-for(i in levels(elip.nmds.post.rem.treat$Group)){
-  elip.post.rem.treat.df <- rbind(elip.post.rem.treat.df, cbind(as.data.frame(with(elip.nmds.post.rem.treat[elip.nmds.post.rem.treat$Group==i,],
-                                                     veganCovEllipse(elip.ord.post.rem.treat[[i]]$cov,
-                                                                     elip.ord.post.rem.treat[[i]]$center,
-                                                                     elip.ord.post.rem.treat[[i]]$scale))),
-                                  group=i))
+  guides(color = guide_legend(order=1), shape = guide_legend(order=2)) +
+  annotate("text", x = 0.24, y = -0.37, label = "stress = 0.198", size=2, family="Arial")
   
-}
-
-# Plot w/ treatment ellip
-plot_ordination(physeq=physeq.post.rem, ordination=bray.nmds.post.rem, color="Treatment") +
-  scale_color_manual(values=c("brown2", "rosybrown", "limegreen", "dodgerblue2")) +
-  geom_path(data=elip.post.rem.treat.df, aes(x=NMDS1, y=NMDS2, colour=group), size=1, linetype=1)
-
-# Sex Ellipses
-sample_data(physeq.post.rem)$Elip.sex <- paste(sample_data(physeq.post.rem)$Sex)
-elip.nmds.post.rem.sex <- data.frame(MDS1 = bray.nmds.post.rem$points[,1], MDS2 = bray.nmds.post.rem$points[,2],
-                        Group = sample_data(physeq.post.rem)$Elip.sex)
-plot.new()
-elip.ord.post.rem.sex <- ordiellipse(bray.nmds.post.rem, sample_data(physeq.post.rem)$Elip.sex, display="sites", kind="se", conf=0.95, label=T)
-elip.post.rem.sex.df <- data.frame()
-for(i in levels(elip.nmds.post.rem.sex$Group)){
-  elip.post.rem.sex.df <- rbind(elip.post.rem.sex.df, cbind(as.data.frame(with(elip.nmds.post.rem.sex[elip.nmds.post.rem.sex$Group==i,],
-                                                     veganCovEllipse(elip.ord.post.rem.sex[[i]]$cov,
-                                                                     elip.ord.post.rem.sex[[i]]$center,
-                                                                     elip.ord.post.rem.sex[[i]]$scale))),
-                                  group=i))
-}
-
-# Plot w/ sex ellip
-plot_ordination(physeq=physeq.post.rem, ordination=bray.nmds.post.rem, color="Sex") +
-  #scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00")) +
-  geom_path(data=elip.post.rem.sex.df, aes(x=NMDS1, y=NMDS2, colour=group), size=1, linetype=1)
-
-
 
 ```
 ### NMDS Plot
 ```{r}
 tiff("nmds.tiff", width=85, height = 150, units="mm", res = 600)
 grid.newpage()
-pushViewport(viewport(layout=(grid.layout(6,2, widths=c(1,0.38), heights=c(0.07, 1, 0.07, 1, 0.07, 1)))))
+pushViewport(viewport(layout=(grid.layout(6,1, widths=c(1), heights=c(0.07, 1, 0.07, 1, 0.07, 1)))))
 grid.text("A", x=unit(0.03, "npc"), vp=viewport(layout.pos.row=1, layout.pos.col=1),
           gp=gpar(fontsize=12,fontface="bold",fontfamily="Arial"))
-print(pre.nmds, vp=viewport(layout.pos.row=2, layout.pos.col=1))
+print(all.nmds, vp=viewport(layout.pos.row=2, layout.pos.col=1))
 grid.text("B", x=unit(0.03, "npc"), vp=viewport(layout.pos.row=3, layout.pos.col=1),
           gp=gpar(fontsize=12,fontface="bold",fontfamily="Arial"))
-print(post.nmds, vp=viewport(layout.pos.row=4, layout.pos.col=1))
+print(pre.nmds, vp=viewport(layout.pos.row=4, layout.pos.col=1))
 grid.text("C", x=unit(0.03, "npc"), vp=viewport(layout.pos.row=5, layout.pos.col=1),
           gp=gpar(fontsize=12,fontface="bold",fontfamily="Arial"))
 print(post.rem.nmds, vp=viewport(layout.pos.row=6, layout.pos.col=1))
-nmds.legend$vp <- viewport(layout.pos.row = 1:6, layout.pos.col = 2)
-grid.draw(nmds.legend)
 dev.off()
 
 
 
-
-# tiff("nmds.tiff", width=180, height = 125, units="mm", res = 600)
-# grid.newpage()
-# pushViewport(viewport(layout=(grid.layout(4,2, widths=c(1,1), heights=c(0.055,10,0.055,10)))))
-# grid.text("A", x=unit(0.03, "npc"), vp=viewport(layout.pos.row=1, layout.pos.col=1),
-#           gp=gpar(fontsize=12,fontface="bold",fontfamily="Arial"))
-# print(all.nmds, vp=viewport(layout.pos.row=2, layout.pos.col=1))
-# grid.text("B", x=unit(0.03, "npc"), vp=viewport(layout.pos.row=1, layout.pos.col=2),
-#           gp=gpar(fontsize=12,fontface="bold",fontfamily="Arial"))
-# print(pre.nmds, vp=viewport(layout.pos.row=2, layout.pos.col=2))
-# grid.text("C", x=unit(0.03, "npc"), vp=viewport(layout.pos.row=3, layout.pos.col=1),
-#           gp=gpar(fontsize=12,fontface="bold",fontfamily="Arial"))
-# print(post.nmds, vp=viewport(layout.pos.row=4, layout.pos.col=1))
-# grid.text("D", x=unit(0.03, "npc"), vp=viewport(layout.pos.row=3, layout.pos.col=2),
-#           gp=gpar(fontsize=12,fontface="bold",fontfamily="Arial"))
-# print(post.rem.nmds, vp=viewport(layout.pos.row=4, layout.pos.col=2))
-# dev.off()
 
 ```
 
