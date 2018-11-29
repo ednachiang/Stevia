@@ -1249,8 +1249,6 @@ print(post.rem.nmds, vp=viewport(layout.pos.row=6, layout.pos.col=1))
 dev.off()
 
 
-
-
 ```
 
 ### PERMANOVA Bray-Curtis
