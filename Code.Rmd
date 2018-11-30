@@ -341,6 +341,24 @@ physeq.sc.post <- subset_samples(physeq.sc, Time == "Post-treatment")
 #save(physeq.sc.post, file = "Physeq.sc.post.RData")
 physeq.tv.post <- subset_samples(physeq.tv, Time == "Post-treatment")
 #save(physeq.tv.post, file = "Physeq.tv.post.RData")
+
+# Subset out treatment by sex
+physeq.lf.fem <- subset_samples(physeq.lf, Sex == "Female")
+#save(physeq.lf.fem, file = "Physeq.lf.fem.RData")
+physeq.lf.mal <- subset_samples(physeq.lf, Sex == "Male")
+#save(physeq.lf.mal, file = "Physeq.lf.mal.RData")
+physeq.hf.fem <- subset_samples(physeq.lf, Sex == "Female")
+#save(physeq.hf.fem, file = "Physeq.hf.fem.RData")
+physeq.hf.mal <- subset_samples(physeq.lf, Sex == "Male")
+#save(physeq.hf.mal, file = "Physeq.hf.mal.RData")
+physeq.sc.fem <- subset_samples(physeq.lf, Sex == "Female")
+#save(physeq.sc.fem, file = "Physeq.sc.fem.RData")
+physeq.sc.mal <- subset_samples(physeq.lf, Sex == "Male")
+#save(physeq.sc.mal, file = "Physeq.sc.mal.RData")
+physeq.tv.fem <- subset_samples(physeq.lf, Sex == "Female")
+#save(physeq.tv.fem, file = "Physeq.tv.fem.RData")
+physeq.tv.mal <- subset_samples(physeq.lf, Sex == "Male")
+#save(physeq.tv.mal, file = "Physeq.tv.mal.RData")
 ```
 
 ### Load Phyloseq Object
@@ -358,10 +376,14 @@ load("physeq/Physeq.post.fem.RData")
 load("physeq/Physeq.post.mal.RData")
 load("physeq/Physeq.post.fem.rem.RData")
 load("physeq/Physeq.post.mal.rem.RData")
-load("physeq/Physeq.hf.RData")
 load("physeq/Physeq.lf.RData")
+load("physeq/Physeq.hf.RData")
 load("physeq/Physeq.sc.RData")
 load("physeq/Physeq.tv.RData")
+load("physeq/Physeq.lf.post.RData")
+load("physeq/Physeq.hf.post.RData")
+load("physeq/Physeq.sc.post.RData")
+load("physeq/Physeq.tv.post.RData")
 ```
 
 ### Alpha Div
@@ -1457,22 +1479,72 @@ adonis(post.bray ~ Treatment*Sex, data=post.sampdf)
   # Residuals = 0.42435
 
 
+
+
+
+
 ### Post-treatment Low Fat
-post.lf
+lf.post.sampdf <- data.frame(sample_data(physeq.lf.post))
+lf.post.bray <- phyloseq::distance(physeq=physeq.lf.post, method="bray")
 
-post.sampdf <- data.frame(sample_data(physeq.post))
-post.bray <- phyloseq::distance(physeq=physeq.post, method="bray")
-
-
+# Sex
+adonis(lf.post.bray ~ Sex, data=lf.post.sampdf)
+  # p-value = 0.168
+  # R2 = 0.1441
+beta.tax = betadisper(d=lf.post.bray, group=lf.post.sampdf$Sex)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.312
 
 
 ### Post-treatment High Fat
+hf.post.sampdf <- data.frame(sample_data(physeq.hf.post))
+hf.post.bray <- phyloseq::distance(physeq=physeq.hf.post, method="bray")
+
+# Sex
+adonis(hf.post.bray ~ Sex, data=hf.post.sampdf)
+  # p-value = 0.172
+  # R2 = 0.18592
+beta.tax = betadisper(d=hf.post.bray, group=hf.post.sampdf$Sex)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.65
 
 
 ### Post-treatment Saccharin
+sc.post.sampdf <- data.frame(sample_data(physeq.sc.post))
+sc.post.bray <- phyloseq::distance(physeq=physeq.sc.post, method="bray")
+
+# Sex
+adonis(sc.post.bray ~ Sex, data=sc.post.sampdf)
+  # p-value = 0.01
+  # R2 = 0.31108
+beta.tax = betadisper(d=sc.post.bray, group=sc.post.sampdf$Sex)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.551
 
 
 ### Post-treatment Stevia
+tv.post.sampdf <- data.frame(sample_data(physeq.tv.post))
+tv.post.bray <- phyloseq::distance(physeq=physeq.tv.post, method="bray")
+
+# Sex
+adonis(tv.post.bray ~ Sex, data=tv.post.sampdf)
+  # p-value = 0.193
+  # R2 = 0.17863
+beta.tax = betadisper(d=tv.post.bray, group=tv.post.sampdf$Sex)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.386
+
+### Adj Pvals
+# Compare Post-treatment Treatment Groups
+p.adjust(c(0.168, 0.172, 0.01, 0.093), method="BH")
+  # LF, HF, SC, TV
+  # 0.172 0.172 0.040 0.172
+
+
 
 
 
