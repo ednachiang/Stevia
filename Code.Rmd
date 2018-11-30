@@ -1591,12 +1591,12 @@ hf.fem.bray <- phyloseq::distance(physeq=physeq.hf.fem, method="bray")
 
 # Time
 adonis(hf.fem.bray ~ Time, data=hf.fem.sampdf)
-  # p-value = 0.012
-  # R2 = 0.31507
+  # p-value = 0.019
+  # R2 = 0.67693
 beta.tax = betadisper(d=hf.fem.bray, group=hf.fem.sampdf$Time)
 p <- permutest(beta.tax)
 p$tab
-  # p-value = 0.09
+  # p-value = 0.386
 
 
 ### High Fat Male
@@ -1605,12 +1605,12 @@ hf.mal.bray <- phyloseq::distance(physeq=physeq.hf.mal, method="bray")
 
 # Time
 adonis(hf.mal.bray ~ Time, data=hf.mal.sampdf)
-  # p-value = 0.013
-  # R2 = 0.29349
+  # p-value = 0.012
+  # R2 = 0.59587
 beta.tax = betadisper(d=hf.mal.bray, group=hf.mal.sampdf$Time)
 p <- permutest(beta.tax)
 p$tab
-  # p-value = 0.03
+  # p-value = 0.358
 
 
 ### Saccharin Female
@@ -1619,12 +1619,12 @@ sc.fem.bray <- phyloseq::distance(physeq=physeq.sc.fem, method="bray")
 
 # Time
 adonis(sc.fem.bray ~ Time, data=sc.fem.sampdf)
-  # p-value = 0.012
-  # R2 = 0.31507
+  # p-value = 0.01
+  # R2 = 0.61226
 beta.tax = betadisper(d=sc.fem.bray, group=sc.fem.sampdf$Time)
 p <- permutest(beta.tax)
 p$tab
-  # p-value = 0.09
+  # p-value = 0.337
 
 
 ### Saccharin Male
@@ -1633,14 +1633,40 @@ sc.mal.bray <- phyloseq::distance(physeq=physeq.sc.mal, method="bray")
 
 # Time
 adonis(sc.mal.bray ~ Time, data=sc.mal.sampdf)
-  # p-value = 0.013
-  # R2 = 0.29349
+  # p-value = 0.036
+  # R2 = 0.55684
 beta.tax = betadisper(d=sc.mal.bray, group=sc.mal.sampdf$Time)
 p <- permutest(beta.tax)
 p$tab
-  # p-value = 0.03
+  # p-value = 0.645
 
 
+### Stevia Female
+tv.fem.sampdf <- data.frame(sample_data(physeq.tv.fem))
+tv.fem.bray <- phyloseq::distance(physeq=physeq.tv.fem, method="bray")
+
+# Time
+adonis(tv.fem.bray ~ Time, data=tv.fem.sampdf)
+  # p-value = 0.017
+  # R2 = 0.72228
+beta.tax = betadisper(d=tv.fem.bray, group=tv.fem.sampdf$Time)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.712
+
+
+### Stevia Male
+tv.mal.sampdf <- data.frame(sample_data(physeq.tv.mal))
+tv.mal.bray <- phyloseq::distance(physeq=physeq.tv.mal, method="bray")
+
+# Time
+adonis(tv.mal.bray ~ Time, data=tv.mal.sampdf)
+  # p-value = 0.033
+  # R2 = 0.63093
+beta.tax = betadisper(d=tv.mal.bray, group=tv.mal.sampdf$Time)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.842
 
 
 
