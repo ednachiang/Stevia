@@ -323,15 +323,24 @@ physeq.post.mal.rem <- subset_samples(physeq.post.mal, Treatment != "Low Fat")
 #save(physeq.post.mal.rem, file="Physeq.post.mal.rem.RData")
 
 # Subset out treatments
-physeq.hf <- subset_samples(physeq.pair, Treatment == "High Fat")
-#save(physeq.hf, file = "Physeq.hf.RData")
 physeq.lf <- subset_samples(physeq.pair, Treatment == "Low Fat")
 #save(physeq.lf, file = "Physeq.lf.RData")
+physeq.hf <- subset_samples(physeq.pair, Treatment == "High Fat")
+#save(physeq.hf, file = "Physeq.hf.RData")
 physeq.sc <- subset_samples(physeq.pair, Treatment == "Saccharin")
 #save(physeq.sc, file = "Physeq.sc.RData")
 physeq.tv <- subset_samples(physeq.pair, Treatment == "Stevia")
 #save(physeq.tv, file = "Physeq.tv.RData")
 
+# Subset out Post-treatment treatments
+physeq.lf.post <- subset_samples(physeq.lf, Time == "Post-treatment")
+#save(physeq.lf.post, file = "Physeq.lf.post.RData")
+physeq.hf.post <- subset_samples(physeq.hf, Time == "Post-treatment")
+#save(physeq.hf.post, file = "Physeq.hf.post.RData")
+physeq.sc.post <- subset_samples(physeq.sc, Time == "Post-treatment")
+#save(physeq.sc.post, file = "Physeq.sc.post.RData")
+physeq.tv.post <- subset_samples(physeq.tv, Time == "Post-treatment")
+#save(physeq.tv.post, file = "Physeq.tv.post.RData")
 ```
 
 ### Load Phyloseq Object
@@ -1205,6 +1214,45 @@ dev.off()
 ```{r}
 ##### Compare Pre- vs. Post- Within Treatments #####
 
+
+### Low Fat
+lf.sampdf <- data.frame(sample_data(physeq.lf))
+lf.bray <- phyloseq::distance(physeq=physeq.lf, method="bray")
+
+# Time
+adonis(lf.bray ~ Time, data=lf.sampdf)
+  # p-value = 0.001
+  # R2 = 0.20248
+beta.tax = betadisper(d=lf.bray, group=lf.sampdf$Time)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.528
+
+# # Sex
+# adonis(lf.bray ~ Sex, data=lf.sampdf)
+#   # p-value = 0.001
+#   # R2 = 0.14304
+# beta.tax = betadisper(d=lf.bray, group=lf.sampdf$Sex)
+# p <- permutest(beta.tax)
+# p$tab
+#   # p-value = 0.169
+# 
+# # Subj_ID
+# adonis(lf.bray ~ Subj_ID, data=lf.sampdf)
+#   # p-value = 0.45
+#   # R2 = 0.46743
+# beta.tax = betadisper(d=lf.bray, group=lf.sampdf$Subj_ID)
+# p <- permutest(beta.tax)
+# p$tab
+#   # p-value = 0.001
+
+# Combined
+adonis(lf.bray ~ Time + Sex + Subj_ID, data=lf.sampdf)
+  # Time: p-value = 0.001; R2 = 0.20248
+  # Sex: p-value = 0.001; R2 = 0.14304
+  # Subj_ID: p-value = 0.303; R2 = 0.32439
+
+
 ### High Fat
 hf.sampdf <- data.frame(sample_data(physeq.hf))
 hf.bray <- phyloseq::distance(physeq=physeq.hf, method="bray")
@@ -1244,45 +1292,6 @@ adonis(hf.bray ~ Time + Sex + Subj_ID, data=hf.sampdf)
   # Residual: 0.23065
 
 
-### Low Fat
-lf.sampdf <- data.frame(sample_data(physeq.lf))
-lf.bray <- phyloseq::distance(physeq=physeq.lf, method="bray")
-
-# Time
-adonis(lf.bray ~ Time, data=lf.sampdf)
-  # p-value = 0.001
-  # R2 = 0.20248
-beta.tax = betadisper(d=lf.bray, group=lf.sampdf$Time)
-p <- permutest(beta.tax)
-p$tab
-  # p-value = 0.528
-
-# Sex
-adonis(lf.bray ~ Sex, data=lf.sampdf)
-  # p-value = 0.001
-  # R2 = 0.14304
-beta.tax = betadisper(d=lf.bray, group=lf.sampdf$Sex)
-p <- permutest(beta.tax)
-p$tab
-  # p-value = 0.169
-
-# Subj_ID
-adonis(lf.bray ~ Subj_ID, data=lf.sampdf)
-  # p-value = 0.45
-  # R2 = 0.46743
-beta.tax = betadisper(d=lf.bray, group=lf.sampdf$Subj_ID)
-p <- permutest(beta.tax)
-p$tab
-  # p-value = 0.001
-
-# Combined
-adonis(lf.bray ~ Time + Sex + Subj_ID, data=lf.sampdf)
-  # Time: p-value = 0.001; R2 = 0.20248
-  # Sex: p-value = 0.001; R2 = 0.14304
-  # Subj_ID: p-value = 0.303; R2 = 0.32439
-
-
-
 ### Saccharin
 sc.sampdf <- data.frame(sample_data(physeq.sc))
 sc.bray <- phyloseq::distance(physeq=physeq.sc, method="bray")
@@ -1296,23 +1305,23 @@ p <- permutest(beta.tax)
 p$tab
   # p-value = 0.007
 
-# Sex
-adonis(sc.bray ~ Sex, data=sc.sampdf)
-  # p-value = 0.149
-  # R2 = 0.09876
-beta.tax = betadisper(d=sc.bray, group=sc.sampdf$Sex)
-p <- permutest(beta.tax)
-p$tab
-  # p-value = 0.815
-
-# Subj_ID
-adonis(sc.bray ~ Subj_ID, data=sc.sampdf)
-  # p-value = 0.966
-  # R2 = 0.33888
-beta.tax = betadisper(d=sc.bray, group=sc.sampdf$Subj_ID)
-p <- permutest(beta.tax)
-p$tab
-  # p-value = 0.001
+# # Sex
+# adonis(sc.bray ~ Sex, data=sc.sampdf)
+#   # p-value = 0.149
+#   # R2 = 0.09876
+# beta.tax = betadisper(d=sc.bray, group=sc.sampdf$Sex)
+# p <- permutest(beta.tax)
+# p$tab
+#   # p-value = 0.815
+# 
+# # Subj_ID
+# adonis(sc.bray ~ Subj_ID, data=sc.sampdf)
+#   # p-value = 0.966
+#   # R2 = 0.33888
+# beta.tax = betadisper(d=sc.bray, group=sc.sampdf$Subj_ID)
+# p <- permutest(beta.tax)
+# p$tab
+#   # p-value = 0.001
 
 # Combined
 adonis(sc.bray ~ Time + Sex + Subj_ID, data=sc.sampdf)
@@ -1335,23 +1344,23 @@ p <- permutest(beta.tax)
 p$tab
   # p-value = 0.001
 
-# Sex
-adonis(tv.bray ~ Sex, data=tv.sampdf)
-  # p-value = 0.165
-  # R2 = 0.11129
-beta.tax = betadisper(d=tv.bray, group=tv.sampdf$Sex)
-p <- permutest(beta.tax)
-p$tab
-  # p-value = 0.512
-
-# Subj_ID
-adonis(tv.bray ~ Subj_ID, data=tv.sampdf)
-  # p-value = 0.985
-  # R2 = 0.29089
-beta.tax = betadisper(d=tv.bray, group=tv.sampdf$Subj_ID)
-p <- permutest(beta.tax)
-p$tab
-  # p-value = 0.001
+# # Sex
+# adonis(tv.bray ~ Sex, data=tv.sampdf)
+#   # p-value = 0.165
+#   # R2 = 0.11129
+# beta.tax = betadisper(d=tv.bray, group=tv.sampdf$Sex)
+# p <- permutest(beta.tax)
+# p$tab
+#   # p-value = 0.512
+# 
+# # Subj_ID
+# adonis(tv.bray ~ Subj_ID, data=tv.sampdf)
+#   # p-value = 0.985
+#   # R2 = 0.29089
+# beta.tax = betadisper(d=tv.bray, group=tv.sampdf$Subj_ID)
+# p <- permutest(beta.tax)
+# p$tab
+#   # p-value = 0.001
 
 # Combined
 adonis(tv.bray ~ Time + Sex + Subj_ID, data=tv.sampdf)
@@ -1361,17 +1370,11 @@ adonis(tv.bray ~ Time + Sex + Subj_ID, data=tv.sampdf)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
+### Adj Pvals
+# Compare within each treatment, Pre vs. Post
+p.adjust(c(0.001, 0.001, 0.002, 0.001), method="BH")
+  # LF, HF, SC, TV
+  # 0.001333333 0.001333333 0.002000000 0.001333333
 
 
 
@@ -1392,9 +1395,6 @@ p <- permutest(beta.tax)
 p$tab
   # p-value = 0.042
   # Right on edge of 0.05 due to variation in test
-anosim(pre.bray, pre.sampdf$Sex)
-  # p-value = 0.001
-  # R = 0.8267
 
 # # Treatment
 # adonis(pre.bray ~ Treatment, data=pre.sampdf)
@@ -1445,7 +1445,6 @@ anosim(post.bray, post.sampdf$Treatment)
   # p-value = 0.001
   # R = 0.4626
 
-
 # Combined Variables
 adonis(post.bray ~ Treatment + Sex, data=post.sampdf)
   # Treatment: p-value = 0.001; R2 = 0.47417
@@ -1456,6 +1455,26 @@ adonis(post.bray ~ Treatment*Sex, data=post.sampdf)
   # Sex: p-value = 0.025, R2 = 0.04196
   # Treatment:Sex: p-value = 0.186, R2 = 0.05951
   # Residuals = 0.42435
+
+
+### Post-treatment Low Fat
+post.lf
+
+post.sampdf <- data.frame(sample_data(physeq.post))
+post.bray <- phyloseq::distance(physeq=physeq.post, method="bray")
+
+
+
+
+### Post-treatment High Fat
+
+
+### Post-treatment Saccharin
+
+
+### Post-treatment Stevia
+
+
 
 ### Post-treatment w/o Low Fat
 post.rem.sampdf <- data.frame(sample_data(physeq.post.rem))
