@@ -347,17 +347,17 @@ physeq.lf.fem <- subset_samples(physeq.lf, Sex == "Female")
 #save(physeq.lf.fem, file = "Physeq.lf.fem.RData")
 physeq.lf.mal <- subset_samples(physeq.lf, Sex == "Male")
 #save(physeq.lf.mal, file = "Physeq.lf.mal.RData")
-physeq.hf.fem <- subset_samples(physeq.lf, Sex == "Female")
+physeq.hf.fem <- subset_samples(physeq.hf, Sex == "Female")
 #save(physeq.hf.fem, file = "Physeq.hf.fem.RData")
-physeq.hf.mal <- subset_samples(physeq.lf, Sex == "Male")
+physeq.hf.mal <- subset_samples(physeq.hf, Sex == "Male")
 #save(physeq.hf.mal, file = "Physeq.hf.mal.RData")
-physeq.sc.fem <- subset_samples(physeq.lf, Sex == "Female")
+physeq.sc.fem <- subset_samples(physeq.sc, Sex == "Female")
 #save(physeq.sc.fem, file = "Physeq.sc.fem.RData")
-physeq.sc.mal <- subset_samples(physeq.lf, Sex == "Male")
+physeq.sc.mal <- subset_samples(physeq.sc, Sex == "Male")
 #save(physeq.sc.mal, file = "Physeq.sc.mal.RData")
-physeq.tv.fem <- subset_samples(physeq.lf, Sex == "Female")
+physeq.tv.fem <- subset_samples(physeq.tv, Sex == "Female")
 #save(physeq.tv.fem, file = "Physeq.tv.fem.RData")
-physeq.tv.mal <- subset_samples(physeq.lf, Sex == "Male")
+physeq.tv.mal <- subset_samples(physeq.tv, Sex == "Male")
 #save(physeq.tv.mal, file = "Physeq.tv.mal.RData")
 ```
 
@@ -384,6 +384,14 @@ load("physeq/Physeq.lf.post.RData")
 load("physeq/Physeq.hf.post.RData")
 load("physeq/Physeq.sc.post.RData")
 load("physeq/Physeq.tv.post.RData")
+load("physeq/Physeq.lf.fem.RData")
+load("physeq/Physeq.lf.mal.RData")
+load("physeq/Physeq.hf.fem.RData")
+load("physeq/Physeq.hf.mal.RData")
+load("physeq/Physeq.sc.fem.RData")
+load("physeq/Physeq.sc.mal.RData")
+load("physeq/Physeq.tv.fem.RData")
+load("physeq/Physeq.tv.mal.RData")
 ```
 
 ### Alpha Div
@@ -1543,6 +1551,110 @@ p$tab
 p.adjust(c(0.168, 0.172, 0.01, 0.093), method="BH")
   # LF, HF, SC, TV
   # 0.172 0.172 0.040 0.172
+
+
+
+
+### Within-Treatment Within-Sex Time Comparisons
+
+### Low Fat Female
+lf.fem.sampdf <- data.frame(sample_data(physeq.lf.fem))
+lf.fem.bray <- phyloseq::distance(physeq=physeq.lf.fem, method="bray")
+
+# Time
+adonis(lf.fem.bray ~ Time, data=lf.fem.sampdf)
+  # p-value = 0.009
+  # R2 = 0.31507
+beta.tax = betadisper(d=lf.fem.bray, group=lf.fem.sampdf$Time)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.105
+
+
+### Low Fat Male
+lf.mal.sampdf <- data.frame(sample_data(physeq.lf.mal))
+lf.mal.bray <- phyloseq::distance(physeq=physeq.lf.mal, method="bray")
+
+# Time
+adonis(lf.mal.bray ~ Time, data=lf.mal.sampdf)
+  # p-value = 0.016
+  # R2 = 0.29349
+beta.tax = betadisper(d=lf.mal.bray, group=lf.mal.sampdf$Time)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.068
+
+
+### High Fat Female
+hf.fem.sampdf <- data.frame(sample_data(physeq.hf.fem))
+hf.fem.bray <- phyloseq::distance(physeq=physeq.hf.fem, method="bray")
+
+# Time
+adonis(hf.fem.bray ~ Time, data=hf.fem.sampdf)
+  # p-value = 0.012
+  # R2 = 0.31507
+beta.tax = betadisper(d=hf.fem.bray, group=hf.fem.sampdf$Time)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.09
+
+
+### High Fat Male
+hf.mal.sampdf <- data.frame(sample_data(physeq.hf.mal))
+hf.mal.bray <- phyloseq::distance(physeq=physeq.hf.mal, method="bray")
+
+# Time
+adonis(hf.mal.bray ~ Time, data=hf.mal.sampdf)
+  # p-value = 0.013
+  # R2 = 0.29349
+beta.tax = betadisper(d=hf.mal.bray, group=hf.mal.sampdf$Time)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.03
+
+
+### Saccharin Female
+sc.fem.sampdf <- data.frame(sample_data(physeq.sc.fem))
+sc.fem.bray <- phyloseq::distance(physeq=physeq.sc.fem, method="bray")
+
+# Time
+adonis(sc.fem.bray ~ Time, data=sc.fem.sampdf)
+  # p-value = 0.012
+  # R2 = 0.31507
+beta.tax = betadisper(d=sc.fem.bray, group=sc.fem.sampdf$Time)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.09
+
+
+### Saccharin Male
+sc.mal.sampdf <- data.frame(sample_data(physeq.sc.mal))
+sc.mal.bray <- phyloseq::distance(physeq=physeq.sc.mal, method="bray")
+
+# Time
+adonis(sc.mal.bray ~ Time, data=sc.mal.sampdf)
+  # p-value = 0.013
+  # R2 = 0.29349
+beta.tax = betadisper(d=sc.mal.bray, group=sc.mal.sampdf$Time)
+p <- permutest(beta.tax)
+p$tab
+  # p-value = 0.03
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
