@@ -384,14 +384,14 @@ load("physeq/Physeq.lf.post.RData")
 load("physeq/Physeq.hf.post.RData")
 load("physeq/Physeq.sc.post.RData")
 load("physeq/Physeq.tv.post.RData")
-load("physeq/Physeq.lf.fem.RData")
-load("physeq/Physeq.lf.mal.RData")
-load("physeq/Physeq.hf.fem.RData")
-load("physeq/Physeq.hf.mal.RData")
-load("physeq/Physeq.sc.fem.RData")
-load("physeq/Physeq.sc.mal.RData")
-load("physeq/Physeq.tv.fem.RData")
-load("physeq/Physeq.tv.mal.RData")
+#load("physeq/Physeq.lf.fem.RData")
+#load("physeq/Physeq.lf.mal.RData")
+#load("physeq/Physeq.hf.fem.RData")
+#load("physeq/Physeq.hf.mal.RData")
+#load("physeq/Physeq.sc.fem.RData")
+#load("physeq/Physeq.sc.mal.RData")
+#load("physeq/Physeq.tv.fem.RData")
+#load("physeq/Physeq.tv.mal.RData")
 ```
 
 ### Alpha Div
@@ -1560,55 +1560,6 @@ bray.pairwise.pvals.post$Adj.BH <- p.adjust(bray.pairwise.pvals.post$pval, metho
 ```{r}
 ### OTU-Level
 
-# All
-# simper.pretty(data.frame(otu_table(physeq.pair)),
-#               data.frame(sample_data(physeq.pair)),
-#               c("Treatment", "Time", "Sex"),
-#               perc_cutoff=0.5, low_cutoff='y', low_val=0.01,
-#               output_name='stevia')
-# stevia.simper <- read.csv("stevia_clean_simper.csv")
-# kruskal.pretty(data.frame(otu_table(physeq.pair)),
-#                data.frame(sample_data(physeq.pair)),
-#                csv = stevia.simper,
-#                c("Treatment", "Time", "Sex"),
-#                output_name = 'stevia',
-#                taxonomy = data.frame(tax_table(physeq.pair)))
-stevia.simper.kw <- read.csv("Simper_OTU/stevia_krusk_simper.csv")
-for(i in 1:nrow(stevia.simper.kw)){
-  save <- which(rownames(data.frame(tax_table(physeq.pair))) == stevia.simper.kw$OTU[i])
-  stevia.simper.kw$Taxonomy[i] <-
-    paste(data.frame(tax_table(physeq.pair))[save,2], "-",
-          data.frame(tax_table(physeq.pair))[save,3], "-",
-          data.frame(tax_table(physeq.pair))[save,4], "-",
-          data.frame(tax_table(physeq.pair))[save,5], "-",
-          data.frame(tax_table(physeq.pair))[save,6])
-}
-write.table(stevia.simper.kw, "stevia_krusk_simper.csv", sep=",")
-
-# Pre-treatment
-simper.pretty(data.frame(otu_table(physeq.pre)),
-              data.frame(sample_data(physeq.pre)),
-              c("Sex"),
-              perc_cutoff=0.5, low_cutoff='y', low_val=0.01,
-              output_name='stevia.pre')
-stevia.pre.simper <- read.csv("stevia.pre_sex_clean_simper.csv")
-kruskal.pretty(data.frame(otu_table(physeq.pre)),
-               data.frame(sample_data(physeq.pre)),
-               csv = stevia.pre.simper,
-               c("Sex"),
-               output_name = 'stevia.pre_sex',
-               taxonomy = data.frame(tax_table(physeq.pre)))
-stevia.pre.simper.kw <- read.csv("Simper_OTU/stevia.pre_sex_krusk_simper.csv")
-for(i in 1:nrow(stevia.pre.simper.kw)){
-  save <- which(rownames(data.frame(tax_table(physeq.pre))) == stevia.pre.simper.kw$OTU[i])
-  stevia.pre.simper.kw$Taxonomy[i] <-
-    paste(data.frame(tax_table(physeq.pre))[save,2], "-",
-          data.frame(tax_table(physeq.pre))[save,3], "-",
-          data.frame(tax_table(physeq.pre))[save,4], "-",
-          data.frame(tax_table(physeq.pre))[save,5], "-",
-          data.frame(tax_table(physeq.pre))[save,6])
-}
-#write.table(stevia.pre.simper.kw, "Simper_OTU/stevia.pre_sex_krusk_simper.csv", sep=",")
 
 # Post-treatment - Treatment
 simper.pretty(data.frame(otu_table(physeq.post)),
@@ -1762,30 +1713,7 @@ for(i in 1:nrow(stevia.tv.simper.kw)){
 }
 #write.table(stevia.tv.simper.kw, "Simper_OTU/stevia.tv_time_krusk_simper.csv", sep=",")
 
-# Post-treatment w/o Low Fat
-simper.pretty(data.frame(otu_table(physeq.post.rem)),
-              data.frame(sample_data(physeq.post.rem)),
-              c("Sex"),
-              perc_cutoff=0.5, low_cutoff='y', low_val=0.01,
-              output_name='stevia.post.rem_sex')
-stevia.post.simper <- read.csv("stevia.post.rem_sex_clean_simper.csv")
-kruskal.pretty(data.frame(otu_table(physeq.post.rem)),
-               data.frame(sample_data(physeq.post.rem)),
-               csv = stevia.post.simper,
-               c("Sex"),
-               output_name = 'stevia.post.rem_sex',
-               taxonomy = data.frame(tax_table(physeq.post.rem)))
-stevia.post.rem.simper.kw <- read.csv("Simper_OTU/stevia.post.rem_sex_krusk_simper.csv")
-for(i in 1:nrow(stevia.post.rem.simper.kw)){
-  save <- which(rownames(data.frame(tax_table(physeq.post.rem))) == stevia.post.rem.simper.kw$OTU[i])
-  stevia.post.rem.simper.kw$Taxonomy[i] <-
-    paste(data.frame(tax_table(physeq.post.rem))[save,2], "-",
-          data.frame(tax_table(physeq.post.rem))[save,3], "-",
-          data.frame(tax_table(physeq.post.rem))[save,4], "-",
-          data.frame(tax_table(physeq.post.rem))[save,5], "-",
-          data.frame(tax_table(physeq.post.rem))[save,6])
-}
-#write.table(stevia.post.rem.simper.kw, "Simper_OTU/stevia.post.rem_sex_krusk_simper.csv", sep=",")
+
 
 
 
