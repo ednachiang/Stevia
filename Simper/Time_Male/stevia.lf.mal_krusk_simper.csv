@@ -1,0 +1,10 @@
+Comparison,SIMPER,OTU,krusk_p.val,fdr_krusk_p.val,Taxonomy,Left.mean.abund,Left.stdev,Right.mean.abund,Right.stdev
+Pre-treatment_Post-treatment,0.073554396,Otu00013,0.005345677,0.036934812,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_unclassified,0.098167709,0.024526549,0,0
+Pre-treatment_Post-treatment,0.031196254,Otu00033,0.008207736,0.036934812,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_NK4A136_group,0.00083953,0.000467084,0.042171109,0.037270788
+Pre-treatment_Post-treatment,0.057909368,Otu00023,0.05821274,0.130978665,Bacteroidetes - Bacteroidia - Bacteroidales - Rikenellaceae - Alistipes,0.010836402,0.024230931,0.080823662,0.068495855
+Pre-treatment_Post-treatment,0.040785177,Otu00003,0.047201768,0.130978665,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidaceae - Bacteroides,0.097327088,0.039747235,0.045086371,0.020658643
+Pre-treatment_Post-treatment,0.086168844,Otu00001,0.169264985,0.21762641,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.080493566,0.145611465,0.096148494,0.052097874
+Pre-treatment_Post-treatment,0.035826286,Otu00142,0.136037128,0.21762641,Bacteroidetes - Bacteroidia - Bacteroidales - Rikenellaceae - Alistipes,0,0,0.047345581,0.066814616
+Pre-treatment_Post-treatment,0.028939916,Otu00011,0.146100466,0.21762641,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.0140625,0.031444706,0.038275325,0.034506936
+Pre-treatment_Post-treatment,0.08796146,Otu00007,0.674235876,0.75851536,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.09815688,0.134182151,0.097603724,0.121728812
+Pre-treatment_Post-treatment,0.054577504,Otu00009,0.829356961,0.829356961,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.066291172,0.091370539,0.032372891,0.034822199

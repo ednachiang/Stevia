@@ -1,0 +1,11 @@
+OTU,LowFat_Pre,LowFat_Post,HighFat_Pre,HighFat_Post,Saccharin_Pre,Saccharin_Post,Stevia_Pre,Stevia_Post,Taxonomy,Significance,Trend,Species
+Otu00002,1.71,0.37,3.35,14.20,4.96,23.23,7.08,7.15,Verrucomicrobia - Verrucomicrobiae - Verrucomicrobiales - Verrucomicrobiaceae - Akkermansia,SC_,NA,Akkermansia
+Otu00006,9.73,6.57,16.12,0.53,11.39,0.06,13.00,0.05,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,HF_SC_TV,NA,S24-7
+Otu00007,1.83,10.57,1.46,2.59,1.90,1.39,2.30,4.71,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,NA,LF,S24-7
+Otu00008,11.75,6.10,6.78,0.00,7.63,0.00,10.30,0.01,Tenericutes - Mollicutes - Anaeroplasmatales - Anaeroplasmataceae - Anaeroplasma,HF_SC_TV,NA,Anaeroplasma
+Otu00010,1.29,0.81,0.74,7.17,1.77,5.03,1.33,8.67,Firmicutes - Clostridia - Clostridiales - Ruminococcaceae - Ruminiclostridium,HF_TV,NA,Ruminiclostridium
+Otu00011,7.61,2.78,11.35,0.08,7.09,0.08,6.92,0.08,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,HF_SC_TV,LF,S24-7
+Otu00012,0.00,0.37,0.03,7.96,0.00,7.47,0.00,8.92,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_unclassified,HF_SC_TV,NA,Lachnospiraceae
+Otu00014,0.00,0.00,0.00,6.07,0.00,3.08,0.00,8.32,Firmicutes - Bacilli - Lactobacillales - Streptococcaceae - Lactococcus,TV,NA,Lactococcus
+Otu00015,5.15,0.90,3.83,0.00,5.25,0.00,6.61,0.01,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_NK4A136_group,LF_SC_TV,NA,NK4A136
+Otu00023,0.13,7.75,0.57,1.43,0.00,0.92,0.01,0.69,Bacteroidetes - Bacteroidia - Bacteroidales - Rikenellaceae - Alistipes,LF,NA,Alistipes

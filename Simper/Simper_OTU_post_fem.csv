@@ -1,0 +1,9 @@
+OTU,LowFat,HighFat,Saccharin,Stevia,Taxonomy,Significance,Trend,Species
+Otu00002,0.37,14.20,23.23,7.15,Verrucomicrobia - Verrucomicrobiae - Verrucomicrobiales - Verrucomicrobiaceae - Akkermansia,LFSC_,LFTV_SCTV,Akkermansia
+Otu00003,2.26,8.62,5.19,7.55,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidaceae - Bacteroides,LFHF_,NA,Bacteroides
+Otu00004,1.12,9.47,9.85,9.16,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,LFHF_LFTV,NA,S24-7
+Otu00006,6.57,0.53,0.06,0.05,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,LFHF_LFSC_LFTV,NA,S24-7
+Otu00008,6.10,0.00,0.00,0.01,Tenericutes - Mollicutes - Anaeroplasmatales - Anaeroplasmataceae - Anaeroplasma,LFHF_LFSC_LFTV,NA,Anaeroplasma
+Otu00010,0.81,7.17,5.03,8.67,Firmicutes - Clostridia - Clostridiales - Ruminococcaceae - Ruminiclostridium,LFHF_LFTV,NA,Ruminiclostridium
+Otu00012,0.37,7.96,7.47,8.92,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_unclassified,LFHF_LFSC_LFTV,NA,Lachnospiraceae
+Otu00014,0.00,6.07,3.08,8.32,Firmicutes - Bacilli - Lactobacillales - Streptococcaceae - Lactococcus,LFHF_LFTV_SCTV,NA,Lactococcus

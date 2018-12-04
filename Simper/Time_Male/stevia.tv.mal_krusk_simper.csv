@@ -1,0 +1,10 @@
+Comparison,SIMPER,OTU,krusk_p.val,fdr_krusk_p.val,Taxonomy,Left.mean.abund,Left.stdev,Right.mean.abund,Right.stdev
+Pre-treatment_Post-treatment,0.083998538,Otu00013,0.020921335,0.031382003,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_unclassified,0.140181294,0.014166263,0.009058563,0.010058695
+Pre-treatment_Post-treatment,0.073731784,Otu00005,0.020921335,0.031382003,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.11740558,0.088922327,0.002364512,0.001389698
+Pre-treatment_Post-treatment,0.058659613,Otu00014,0.013874406,0.031382003,Firmicutes - Bacilli - Lactobacillales - Streptococcaceae - Lactococcus,0,0,0.090916493,0.031344848
+Pre-treatment_Post-treatment,0.044714406,Otu00018,0.020164573,0.031382003,Firmicutes - Bacilli - Lactobacillales - Lactobacillaceae - Lactobacillus,0.000531075,0.000749454,0.069894092,0.082722841
+Pre-treatment_Post-treatment,0.040271832,Otu00012,0.020164573,0.031382003,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_unclassified,0.003814501,0.004190434,0.066216937,0.017781785
+Pre-treatment_Post-treatment,0.036087019,Otu00010,0.020921335,0.031382003,Firmicutes - Clostridia - Clostridiales - Ruminococcaceae - Ruminiclostridium,0.010803609,0.010759733,0.066625249,0.046706139
+Pre-treatment_Post-treatment,0.058230487,Otu00001,0.245383458,0.315493018,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.048090958,0.095832279,0.085594811,0.031434855
+Pre-treatment_Post-treatment,0.057135532,Otu00009,0.538472381,0.605781429,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.088984515,0.102950577,0.011791329,0.014133867
+Pre-treatment_Post-treatment,0.043218809,Otu00002,0.663117245,0.663117245,Verrucomicrobia - Verrucomicrobiae - Verrucomicrobiales - Verrucomicrobiaceae - Akkermansia,0.035220358,0.031485918,0.069279111,0.081266476

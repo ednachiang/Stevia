@@ -1,0 +1,49 @@
+Comparison,SIMPER,OTU,krusk_p.val,fdr_krusk_p.val,Taxonomy,Left.mean.abund,Left.stdev,Right.mean.abund,Right.stdev
+Low Fat_High Fat,0.05309784,Otu00004,0.014305878,0.038149009,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.01118653,0.010112469,0.094726587,0.035913702
+Low Fat_High Fat,0.048204375,Otu00012,0.014305878,0.038149009,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_unclassified,0.003672986,0.002692655,0.079580352,0.021899333
+Low Fat_High Fat,0.040400236,Otu00010,0.014305878,0.038149009,Firmicutes - Clostridia - Clostridiales - Ruminococcaceae - Ruminiclostridium,0.008086585,0.003815481,0.071704597,0.01863181
+Low Fat_High Fat,0.040376812,Otu00003,0.014305878,0.038149009,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidaceae - Bacteroides,0.022587651,0.009347431,0.086174786,0.025926451
+Low Fat_High Fat,0.038664999,Otu00008,0.010515246,0.038149009,Tenericutes - Mollicutes - Anaeroplasmatales - Anaeroplasmataceae - Anaeroplasma,0.060981076,0.064271127,0,0
+Low Fat_High Fat,0.038545,Otu00014,0.007290358,0.038149009,Firmicutes - Bacilli - Lactobacillales - Streptococcaceae - Lactococcus,0,0,0.060722047,0.035278882
+Low Fat_High Fat,0.038246077,Otu00006,0.014305878,0.038149009,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.065655198,0.053129305,0.00525411,0.007078219
+Low Fat_Saccharin,0.141803668,Otu00002,0.007058332,0.038149009,Verrucomicrobia - Verrucomicrobiae - Verrucomicrobiales - Verrucomicrobiaceae - Akkermansia,0.003690037,0.008251173,0.232340308,0.077740635
+Low Fat_Saccharin,0.044044393,Otu00012,0.009023439,0.038149009,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_unclassified,0.003672986,0.002692655,0.074685918,0.011757191
+Low Fat_Saccharin,0.040087302,Otu00006,0.008207736,0.038149009,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.065655198,0.053129305,0.00063169,0.000941256
+Low Fat_Saccharin,0.037638303,Otu00008,0.005345677,0.038149009,Tenericutes - Mollicutes - Anaeroplasmatales - Anaeroplasmataceae - Anaeroplasma,0.060981076,0.064271127,0,0
+Low Fat_Stevia,0.05291576,Otu00012,0.014305878,0.038149009,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_unclassified,0.003672986,0.002692655,0.089152637,0.014330341
+Low Fat_Stevia,0.051480584,Otu00014,0.007290358,0.038149009,Firmicutes - Bacilli - Lactobacillales - Streptococcaceae - Lactococcus,0,0,0.083209335,0.028474412
+Low Fat_Stevia,0.049780003,Otu00004,0.014305878,0.038149009,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.01118653,0.010112469,0.091608023,0.039440915
+Low Fat_Stevia,0.048669893,Otu00010,0.014305878,0.038149009,Firmicutes - Clostridia - Clostridiales - Ruminococcaceae - Ruminiclostridium,0.008086585,0.003815481,0.086736177,0.02658585
+Low Fat_Stevia,0.040150404,Otu00006,0.013902988,0.038149009,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.065655198,0.053129305,0.000525562,0.000429967
+Low Fat_Stevia,0.037554732,Otu00008,0.012725353,0.038149009,Tenericutes - Mollicutes - Anaeroplasmatales - Anaeroplasmataceae - Anaeroplasma,0.060981076,0.064271127,0.000130753,0.000261506
+Saccharin_Stevia,0.060440724,Otu00014,0.014305878,0.038149009,Firmicutes - Bacilli - Lactobacillales - Streptococcaceae - Lactococcus,0.03076245,0.00726688,0.083209335,0.028474412
+Saccharin_Stevia,0.188514943,Otu00002,0.027486336,0.069439165,Verrucomicrobia - Verrucomicrobiae - Verrucomicrobiales - Verrucomicrobiaceae - Akkermansia,0.232340308,0.077740635,0.071457037,0.067060799
+Low Fat_Stevia,0.042215451,Otu00002,0.040684909,0.097643781,Verrucomicrobia - Verrucomicrobiae - Verrucomicrobiales - Verrucomicrobiaceae - Akkermansia,0.003690037,0.008251173,0.071457037,0.067060799
+Low Fat_High Fat,0.043689803,Otu00023,0.049090116,0.100087042,Bacteroidetes - Bacteroidia - Bacteroidales - Rikenellaceae - Alistipes,0.077478517,0.056990092,0.014349658,0.016582104
+Low Fat_Saccharin,0.044384812,Otu00023,0.046532985,0.100087042,Bacteroidetes - Bacteroidia - Bacteroidales - Rikenellaceae - Alistipes,0.077478517,0.056990092,0.009218247,0.009855783
+Low Fat_Stevia,0.045258908,Otu00023,0.049090116,0.100087042,Bacteroidetes - Bacteroidia - Bacteroidales - Rikenellaceae - Alistipes,0.077478517,0.056990092,0.006925,0.008068321
+High Fat_Saccharin,0.04064895,Otu00014,0.050043521,0.100087042,Firmicutes - Bacilli - Lactobacillales - Streptococcaceae - Lactococcus,0.060722047,0.035278882,0.03076245,0.00726688
+High Fat_Saccharin,0.063974344,Otu00009,0.055008834,0.105616961,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.000526039,0.001052078,0.047341973,0.04241086
+Low Fat_High Fat,0.088932209,Otu00002,0.060340533,0.111397907,Verrucomicrobia - Verrucomicrobiae - Verrucomicrobiales - Verrucomicrobiaceae - Akkermansia,0.003690037,0.008251173,0.14180049,0.097098214
+Saccharin_Stevia,0.046106991,Otu00010,0.086410733,0.153619081,Firmicutes - Clostridia - Clostridiales - Ruminococcaceae - Ruminiclostridium,0.050317416,0.014436946,0.086736177,0.02658585
+Low Fat_Saccharin,0.056881101,Otu00004,0.093692619,0.155077439,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.01118653,0.010112469,0.098451143,0.055967513
+High Fat_Saccharin,0.047949494,Otu00046,0.093532513,0.155077439,Bacteroidetes - Bacteroidia - Bacteroidales - Rikenellaceae - Alistipes,0.035396755,0.041349499,0,0
+Low Fat_Saccharin,0.063630021,Otu00007,0.131379419,0.21020707,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.105650079,0.096935368,0.013944463,0.019276591
+Low Fat_Stevia,0.051950649,Otu00001,0.139982524,0.212467035,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.121576666,0.053335518,0.046764969,0.056488034
+High Fat_Saccharin,0.050893226,Otu00003,0.14164469,0.212467035,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidaceae - Bacteroides,0.086174786,0.025926451,0.051900116,0.023526914
+High Fat_Stevia,0.05250318,Otu00014,0.148914673,0.216603161,Firmicutes - Bacilli - Lactobacillales - Streptococcaceae - Lactococcus,0.060722047,0.035278882,0.083209335,0.028474412
+Low Fat_High Fat,0.063861238,Otu00007,0.212881092,0.291951212,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.105650079,0.096935368,0.025923068,0.030579614
+Saccharin_Stevia,0.04728824,Otu00009,0.212881092,0.291951212,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.047341973,0.04241086,0.019796389,0.022861575
+High Fat_Saccharin,0.156734334,Otu00002,0.220671362,0.294228483,Verrucomicrobia - Verrucomicrobiae - Verrucomicrobiales - Verrucomicrobiaceae - Akkermansia,0.14180049,0.097098214,0.232340308,0.077740635
+Low Fat_Saccharin,0.043751666,Otu00001,0.250592051,0.308420985,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.121576666,0.053335518,0.0832436,0.069268651
+High Fat_Stevia,0.145305044,Otu00002,0.248213079,0.308420985,Verrucomicrobia - Verrucomicrobiae - Verrucomicrobiales - Verrucomicrobiaceae - Akkermansia,0.14180049,0.097098214,0.071457037,0.067060799
+High Fat_Stevia,0.050154619,Otu00007,0.245383458,0.308420985,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.025923068,0.030579614,0.047139612,0.032141243
+High Fat_Stevia,0.044141542,Otu00029,0.30942406,0.371308872,Firmicutes - Clostridia - Clostridiales - Ruminococcaceae - Ruminococcaceae_ge,0.028994383,0.023868647,0.045683159,0.032552465
+High Fat_Stevia,0.04838592,Otu00046,0.321121071,0.375946619,Bacteroidetes - Bacteroidia - Bacteroidales - Rikenellaceae - Alistipes,0.035396755,0.041349499,0.015298117,0.030596234
+Saccharin_Stevia,0.078386924,Otu00001,0.454816522,0.519790311,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.0832436,0.069268651,0.046764969,0.056488034
+High Fat_Stevia,0.071773883,Otu00001,0.56136321,0.626638002,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.069839426,0.0309171,0.046764969,0.056488034
+Low Fat_Stevia,0.059494322,Otu00007,0.624206115,0.651345511,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.105650079,0.096935368,0.047139612,0.032141243
+High Fat_Saccharin,0.062115779,Otu00004,0.624206115,0.651345511,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.094726587,0.035913702,0.098451143,0.055967513
+Saccharin_Stevia,0.054250676,Otu00004,0.624206115,0.651345511,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.098451143,0.055967513,0.091608023,0.039440915
+High Fat_Stevia,0.051757876,Otu00004,0.772829993,0.789273184,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.094726587,0.035913702,0.091608023,0.039440915
+High Fat_Saccharin,0.073054705,Otu00001,1,1,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.069839426,0.0309171,0.0832436,0.069268651
