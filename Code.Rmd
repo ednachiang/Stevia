@@ -2129,11 +2129,11 @@ physeq.simper.post.fem.tax$Name <- c("Akkermansia", "Bacteroides", "S24-7", "S24
                                      "Ruminiclostridium", "Lachnospiraceae", "Lactococcus")
 physeq.simper.post.fem.tax <- tax_table(physeq.simper.post.fem.tax)
 taxa_names(physeq.simper.post.fem.tax) <- taxa_names(physeq.simper.post.fem)
-simper.post.fem.treat <- read.csv("Simper_OTU_post_fem.csv")
+simper.post.fem.treat <- read.csv("Simper/Simper_OTU_post_fem.csv")
 simper.post.fem.treat.hm <- simper.post.fem.treat
 rownames(simper.post.fem.treat.hm) <- simper.post.fem.treat.hm$OTU
 simper.post.fem.treat.hm <- simper.post.fem.treat.hm[,-1]
-simper.post.fem.treat.hm <- simper.post.fem.treat.hm[,-5:-7]
+simper.post.fem.treat.hm <- simper.post.fem.treat.hm[,-5:-8]
 simper.post.fem.sampdat <- data.frame(c("LowFat", "HighFat", "Saccharin", "Stevia"))
 colnames(simper.post.fem.sampdat) <- "Treatment"
 rownames(simper.post.fem.sampdat) <- simper.post.fem.sampdat$Treatment
@@ -2156,11 +2156,11 @@ physeq.simper.post.mal.tax$Name <- c("Akkermansia", "S24-7", "Ruminiclostridium"
                                      "Lactobacillus", "NK4A136")
 physeq.simper.post.mal.tax <- tax_table(physeq.simper.post.mal.tax)
 taxa_names(physeq.simper.post.mal.tax) <- taxa_names(physeq.simper.post.mal)
-simper.post.mal.treat <- read.csv("Simper_OTU_post_mal.csv")
+simper.post.mal.treat <- read.csv("Simper/Simper_OTU_post_mal.csv")
 simper.post.mal.treat.hm <- simper.post.mal.treat
 rownames(simper.post.mal.treat.hm) <- simper.post.mal.treat.hm$OTU
 simper.post.mal.treat.hm <- simper.post.mal.treat.hm[,-1]
-simper.post.mal.treat.hm <- simper.post.mal.treat.hm[,-5:-7]
+simper.post.mal.treat.hm <- simper.post.mal.treat.hm[,-5:-8]
 simper.post.mal.sampdat <- data.frame(c("LowFat", "HighFat", "Saccharin", "Stevia"))
 colnames(simper.post.mal.sampdat) <- "Treatment"
 rownames(simper.post.mal.sampdat) <- simper.post.mal.sampdat$Treatment
@@ -2186,12 +2186,7 @@ post.fem.hm <- plot_heatmap(physeq.simper.post.fem, sample.label = "Treatment", 
   #geom_text(aes(label=sprintf("%0.2f", round(Abundance, digits=2)))) +
   scale_fill_gradient(name="Relative Abundance (%)", low = "#FFFFCC", high = "firebrick3") +
   scale_x_discrete(labels = c("Low Fat", "High Fat", "Saccharin", "Stevia")) +
-  scale_y_discrete(labels=c(expression(" "^ac~"Bacteroides"), expression(" "^abc~"S24-7"), 
-                            expression(" "^d~"S24-7"), expression(" "^bc~"S24-7"), 
-                            expression(" "^abc~"Alistipes"), expression(" "^abc~"Ruminiclostridium"),
-                            expression(" "^abc~"Lachnospiraceae"), expression(" "^acde~"Lactococcus"),
-                            expression(" "^c~"Lactobacillus"), expression(" "^abc~"Anaeroplasma"), 
-                            expression(" "^abc~"Akkermansia"))) +
+  scale_y_discrete(labels = c(expression(" "^A~italic("Bacteroides")), expression(" "^AC~"S24-7"), expression(" "^ABC~"S24-7"), expression(" "^AC~italic("Ruminiclostridium")), expression(" "^ABC~"Lachnospiraceae"), expression(" "^ACD~italic("Lactococcus")), expression(" "^ABC~italic("Anaeroplasma")), expression(" "^Bcd~italic("Akkermansia")))) +
   ylab("OTU Classification") + xlab("Female Post-treatment Group") +
   theme(panel.border=element_blank(),
         axis.text.x = element_text(angle=50, hjust=1, vjust=1.2, family="Arial", size=10),
@@ -2205,7 +2200,7 @@ post.fem.hm <- plot_heatmap(physeq.simper.post.fem, sample.label = "Treatment", 
         legend.text = element_text(family = "Arial", size=10),
         plot.title = element_text(family = "Arial", size=10, face="bold")
   ) +
-  guides(fill = guide_colorbar(barheight = unit( 3 , "in" ),
+  guides(fill = guide_colorbar(barheight = unit( 3, "in" ),
                                 ticks.color = "black",
                                 ticks.linewidth = 1,
                                 frame.color = "black",
@@ -2216,12 +2211,7 @@ post.mal.hm <- plot_heatmap(physeq.simper.post.mal, sample.label = "Treatment", 
   #geom_text(aes(label=sprintf("%0.2f", round(Abundance, digits=2)))) +
   scale_fill_gradient(name="Relative Abundance (%)", low = "#FFFFCC", high = "firebrick3") +
   scale_x_discrete(labels = c("Low Fat", "High Fat", "Saccharin", "Stevia")) +
-  scale_y_discrete(labels=c(expression(" "^ac~"Bacteroides"), expression(" "^abc~"S24-7"), 
-                            expression(" "^d~"S24-7"), expression(" "^bc~"S24-7"), 
-                            expression(" "^abc~"Alistipes"), expression(" "^abc~"Ruminiclostridium"),
-                            expression(" "^abc~"Lachnospiraceae"), expression(" "^acde~"Lactococcus"),
-                            expression(" "^c~"Lactobacillus"), expression(" "^abc~"Anaeroplasma"), 
-                            expression(" "^abc~"Akkermansia"))) +
+  scale_y_discrete(labels=c(expression(" "^abc~"S24-7"), expression(" "^abc~italic("Ruminiclostridium")), expression(" "^ac~"Lachnospiraceae"), expression(" "^abcd~italic("Lactococcus")), expression(" "^c~italic("Lactobacillus")), expression(" "^abc~italic("NK4A136")), expression(" "^bc~italic("Akkermansia")))) +
   ylab("OTU Classification") + xlab("Male Post-treatment Group") +
   theme(panel.border=element_blank(),
         axis.text.x = element_text(angle=50, hjust=1, vjust=1.2, family="Arial", size=10),
@@ -2247,7 +2237,7 @@ post.mal.hm <- plot_heatmap(physeq.simper.post.mal, sample.label = "Treatment", 
 
 ### Prep Time - Females
 physeq.simper.time.fem <- subset_taxa(physeq.pair, Species == "Otu00002" | Species == "Otu00006" | 
-                                      Spcies == "Otu00007" | Species == "Otu00008" | Species == "Otu00010" | 
+                                      Species == "Otu00007" | Species == "Otu00008" | Species == "Otu00010" | 
                                       Species == "Otu00011" | Species == "Otu00012" | Species == "Otu00014" |
                                       Species == "Otu00015" | Species == "Otu00023")
 physeq.simper.time.fem.tax <- data.frame(tax_table(physeq.simper.time.fem))
@@ -2255,19 +2245,24 @@ physeq.simper.time.fem.tax$Name <- c("Akkermansia", "S24-7", "S24-7", "Anaeropla
                                      "Lachnospiraceae", "Lactococcus", "NK4A136", "Alistipes")
 physeq.simper.time.fem.tax <- tax_table(physeq.simper.time.fem.tax)
 taxa_names(physeq.simper.time.fem.tax) <- taxa_names(physeq.simper.time.fem)
-simper.time.fem.treat <- read.csv("Simper_OTU_time_fem.csv")
+simper.time.fem.treat <- read.csv("Simper/Simper_OTU_time_fem.csv")
 simper.time.fem.treat.hm <- simper.time.fem.treat
 rownames(simper.time.fem.treat.hm) <- simper.time.fem.treat.hm$OTU
 simper.time.fem.treat.hm <- simper.time.fem.treat.hm[,-1]
-simper.time.fem.treat.hm <- simper.time.fem.treat.hm[,-9:-11]
-simper.time.fem.sampdat <- data.frame(c("LF_Pre", "LF_Post", "HF_Pre", "HF_Post", "SC_Pre", "SC_Post", "TV_Pre", "TV_Post"))
+simper.time.fem.treat.hm <- simper.time.fem.treat.hm[,-9:-12]
+simper.time.fem.sampdat <- data.frame(c("LowFat_Pre", "LowFat_Post", "HighFat_Pre", "HighFat_Post", "Saccharin_Pre",
+                                        "Saccharin_Post", "Stevia_Pre", "Stevia_Post"))
 colnames(simper.time.fem.sampdat) <- "Treatment_Time"
 rownames(simper.time.fem.sampdat) <- simper.time.fem.sampdat$Treatment_Time
 physeq.simper.time.fem <- merge_phyloseq(otu_table(simper.time.fem.treat.hm, taxa_are_rows=T), physeq.simper.time.fem.tax, sample_data(simper.time.fem.sampdat))
 colnames(tax_table(physeq.simper.time.fem)) <- 
   c("Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species", "OTU_Classification")
 #physeq.simper.time.fem <- transform_sample_counts(physeq.simper.time.fem, function(x){x*100})
-sample_data(physeq.simper.time.fem)$Treatment_Time <- ordered(sample_data(physeq.simper.time.fem)$Treatment_Time, levels=c("LF_Pre", "LF_Post", "HF_Pre", "HF_Post", "SC_Pre", "SC_Post", "TV_Pre", "TV_Post"))
+sample_data(physeq.simper.time.fem)$Treatment_Time <- ordered(sample_data(physeq.simper.time.fem)$Treatment_Time,
+                                                              levels=c("LowFat_Pre", "LowFat_Post", "HighFat_Pre",
+                                                                       "HighFat_Post", "Saccharin_Pre",
+                                                                       "Saccharin_Post", "Stevia_Pre",
+                                                                       "Stevia_Post"))
 
 
 
@@ -2283,19 +2278,24 @@ physeq.simper.time.mal.tax$Name <- c("S24-7", "Bacteroides", "S24-7", "S24-7", "
                                      "NK4A136")
 physeq.simper.time.mal.tax <- tax_table(physeq.simper.time.mal.tax)
 taxa_names(physeq.simper.time.mal.tax) <- taxa_names(physeq.simper.time.mal)
-simper.time.mal.treat <- read.csv("Simper_OTU_time_mal.csv")
+simper.time.mal.treat <- read.csv("Simper/Simper_OTU_time_mal.csv")
 simper.time.mal.treat.hm <- simper.time.mal.treat
 rownames(simper.time.mal.treat.hm) <- simper.time.mal.treat.hm$OTU
 simper.time.mal.treat.hm <- simper.time.mal.treat.hm[,-1]
-simper.time.mal.treat.hm <- simper.time.mal.treat.hm[,-9:-11]
-simper.time.mal.sampdat <- data.frame(c("LF_Pre", "LF_Post", "HF_Pre", "HF_Post", "SC_Pre", "SC_Post", "TV_Pre", "TV_Post"))
+simper.time.mal.treat.hm <- simper.time.mal.treat.hm[,-9:-12]
+simper.time.mal.sampdat <- data.frame(c("LowFat_Pre", "LowFat_Post", "HighFat_Pre", "HighFat_Post", "Saccharin_Pre",
+                                        "Saccharin_Post", "Stevia_Pre", "Stevia_Post"))
 colnames(simper.time.mal.sampdat) <- "Treatment_Time"
 rownames(simper.time.mal.sampdat) <- simper.time.mal.sampdat$Treatment_Time
 physeq.simper.time.mal <- merge_phyloseq(otu_table(simper.time.mal.treat.hm, taxa_are_rows=T), physeq.simper.time.mal.tax, sample_data(simper.time.mal.sampdat))
 colnames(tax_table(physeq.simper.time.mal)) <- 
   c("Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species", "OTU_Classification")
 #physeq.simper.time.mal <- transform_sample_counts(physeq.simper.time.mal, function(x){x*100})
-sample_data(physeq.simper.time.mal)$Treatment_Time <- ordered(sample_data(physeq.simper.time.mal)$Treatment_Time, levels=c("LF_Pre", "LF_Post", "HF_Pre", "HF_Post", "SC_Pre", "SC_Post", "TV_Pre", "TV_Post"))
+sample_data(physeq.simper.time.mal)$Treatment_Time <- ordered(sample_data(physeq.simper.time.mal)$Treatment_Time,
+                                                              levels=c("LowFat_Pre", "LowFat_Post", "HighFat_Pre",
+                                                                       "HighFat_Post", "Saccharin_Pre",
+                                                                       "Saccharin_Post", "Stevia_Pre",
+                                                                       "Stevia_Post"))
 
 
 
@@ -2308,19 +2308,24 @@ sample_data(physeq.simper.time.mal)$Treatment_Time <- ordered(sample_data(physeq
 ### HeatMap Time
 # http://www.roymfrancis.com/a-guide-to-elegant-tiled-heatmaps-in-r/
 # https://github.com/tidyverse/ggplot2/pull/2541
-time.fem.hm <- plot_heatmap(physeq.simper.time.fem, sample.label = "Treatment_Time", sample.order = c("LF_Pre", "LF_Post", "HF_Pre", "HF_Post", "SC_Pre", "SC_Post", "TV_Pre", "TV_Post"), taxa.label = "OTU_Classification", taxa.order = "Phylum", low = "#FFFFCC", high = "firebrick3", na.value = "#FFFFFC") +
+time.fem.hm <- plot_heatmap(physeq.simper.time.fem, sample.label = "Treatment_Time", 
+                            sample.order = c("LowFat_Pre", "LowFat_Post", "HighFat_Pre", "HighFat_Post",
+                                             "Saccharin_Pre","Saccharin_Post", "Stevia_Pre", "Stevia_Post"),
+                            taxa.label = "OTU_Classification", taxa.order = "Phylum", low = "#FFFFCC", 
+                            high = "firebrick3", na.value = "#FFFFFC") +
   geom_tile(colour="gray40") +
   #geom_text(aes(label=sprintf("%0.2f", round(Abundance, digits=2)))) +
-  scale_fill_gradient(name="Relative Abundance (%)", low = "#FFFFCC", high = "firebrick3", limits=c(0,12)) +
+  scale_fill_gradient(name="Relative Abundance (%)", low = "#FFFFCC", high = "firebrick3", limits=c(0,23.5)) +
   scale_x_discrete(labels = c("Low Fat Pre", "Low Fat Post", "High Fat Pre", "High Fat Post",
                               "Saccharin Pre", "Saccharin Post", "Stevia Pre", "Stevia Post")) +
-  scale_y_discrete(labels=c(expression(" "^a~"Bacteroides"), expression(" "^bcd~"S24-7"), 
-                            expression(" "^bcd~"S24-7"), expression(" "^c~"S24-7"), 
-                            expression(" "^c~"S24-7"), expression(" "^a~"Alistipes"),
-                            expression(" "^bcd~"Ruminiclostridium"), expression(" "^bcd~"Lachnospiraceae"),
-                            expression(" "^bd~"Lactococcus"), expression(" "^ab~"NK4A136"),
-                            expression(" "^cd~"Anaeroplasma"))) +
-  ylab("OTU Classification") + xlab("Group") +
+  scale_y_discrete(labels=c(expression(" "^BCD~"S24-7"), expression(" "^a~"S24-7"), expression(" "^aBCD~"S24-7"), expression(" "^A~italic("Alistipes")), expression(" "^BD~italic("Ruminiclostridium")), expression(" "^BCD~"Lachnospiraceae"), expression(" "^D~italic("Lactococcus")), expression(" "^ACD~italic("NK4A136")), expression(" "^BCD~italic("Anaeroplasma")), expression(" "^C~italic("Akkermansia")))) + 
+  #scale_y_discrete(labels=c(expression(" "^a~"Bacteroides"), expression(" "^bcd~"S24-7"), 
+  #                          expression(" "^bcd~"S24-7"), expression(" "^c~"S24-7"), 
+  #                          expression(" "^c~"S24-7"), expression(" "^a~"Alistipes"),
+  #                          expression(" "^bcd~"Ruminiclostridium"), expression(" "^bcd~"Lachnospiraceae"),
+  #                          expression(" "^bd~"Lactococcus"), expression(" "^ab~"NK4A136"),
+  #                          expression(" "^cd~"Anaeroplasma"))) +
+  ylab("OTU Classification") + xlab("Female Group") +
   theme(panel.border=element_blank(),
         axis.text.x = element_text(angle=50, hjust=1.1, vjust=1.18, family="Arial", size=10, 
                                    margin = margin(t=0, r=0, b=0, l=0)),

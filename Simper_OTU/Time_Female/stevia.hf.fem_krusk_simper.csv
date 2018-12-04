@@ -1,8 +1,0 @@
-Comparison,SIMPER,OTU,krusk_p.val,fdr_krusk_p.val,Taxonomy,Left.mean.abund,Left.stdev,Right.mean.abund,Right.stdev
-Pre-treatment_Post-treatment,0.100354052,Otu00006,0.020921335,0.029289869,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.161216617,0.076633421,0.00525411,0.007078219
-Pre-treatment_Post-treatment,0.072504934,Otu00011,0.019418663,0.029289869,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.113454541,0.049577067,0.000788444,0.000305064
-Pre-treatment_Post-treatment,0.051276819,Otu00012,0.019418663,0.029289869,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_unclassified,0.000263852,0.00030467,0.079580352,0.021899333
-Pre-treatment_Post-treatment,0.04363975,Otu00008,0.013874406,0.029289869,Tenericutes - Mollicutes - Anaeroplasmatales - Anaeroplasmataceae - Anaeroplasma,0.067811574,0.021822203,0,0
-Pre-treatment_Post-treatment,0.041599596,Otu00010,0.020921335,0.029289869,Firmicutes - Clostridia - Clostridiales - Ruminococcaceae - Ruminiclostridium,0.007387726,0.003634159,0.071704597,0.01863181
-Pre-treatment_Post-treatment,0.080952663,Otu00002,0.248213079,0.289581925,Verrucomicrobia - Verrucomicrobiae - Verrucomicrobiales - Verrucomicrobiaceae - Akkermansia,0.033504579,0.029807032,0.14180049,0.097098214
-Pre-treatment_Post-treatment,0.082848566,Otu00001,1,1,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.128685204,0.150068144,0.069839426,0.0309171
