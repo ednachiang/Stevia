@@ -1556,11 +1556,37 @@ bray.pairwise.pvals.post$Adj.BH <- p.adjust(bray.pairwise.pvals.post$pval, metho
 
 
 
-### Simper (OTU-level)
+### Simper
 ```{r}
-### OTU-Level
+# ### Pre-treatment - Sex
+# simper.pretty(data.frame(otu_table(physeq.pre)),
+#               data.frame(sample_data(physeq.pre)),
+#               c("Sex"),
+#               perc_cutoff=0.5, low_cutoff='y', low_val=0.01,
+#               output_name='stevia.pre')
+# stevia.pre.simper <- read.csv("stevia.pre_clean_simper.csv")
+# kruskal.pretty(data.frame(otu_table(physeq.pre)),
+#                data.frame(sample_data(physeq.pre)),
+#                csv = stevia.pre.simper,
+#                c("Sex"),
+#                output_name = 'stevia.pre',
+#                taxonomy = data.frame(tax_table(physeq.pre)))
+# stevia.pre.simper.kw <- read.csv("stevia.pre_krusk_simper.csv")
+# for(i in 1:nrow(stevia.pre.simper.kw)){
+#   save <- which(rownames(data.frame(tax_table(physeq.pre))) == stevia.pre.simper.kw$OTU[i])
+#   stevia.pre.simper.kw$Taxonomy[i] <-
+#     paste(tax_table(physeq.pre)[save,2][[1]], "-",
+#           tax_table(physeq.pre)[save,3][[1]], "-",
+#           tax_table(physeq.pre)[save,4][[1]], "-",
+#           tax_table(physeq.pre)[save,5][[1]], "-",
+#           tax_table(physeq.pre)[save,6][[1]])
+# }
+# write.table(stevia.pre.simper.kw, "stevia.pre_krusk_simper.csv", sep=",")
 
-# # Post-treatment Females - Treatment
+
+
+
+# ### Post-treatment Females - Treatment
 # simper.pretty(data.frame(otu_table(physeq.post.fem)),
 #               data.frame(sample_data(physeq.post.fem)),
 #               c("Treatment"),
@@ -1588,7 +1614,7 @@ bray.pairwise.pvals.post$Adj.BH <- p.adjust(bray.pairwise.pvals.post$pval, metho
 # 
 # 
 # 
-# # Post-treatment Males - Treatment
+# ### Post-treatment Males - Treatment
 # simper.pretty(data.frame(otu_table(physeq.post.mal)),
 #               data.frame(sample_data(physeq.post.mal)),
 #               c("Treatment"),
@@ -1616,7 +1642,7 @@ bray.pairwise.pvals.post$Adj.BH <- p.adjust(bray.pairwise.pvals.post$pval, metho
 # 
 # 
 #
-# # Low Fat Females
+# ### Low Fat Females
 # simper.pretty(data.frame(otu_table(physeq.lf.fem)),
 #               data.frame(sample_data(physeq.lf.fem)),
 #               c("Time"),
@@ -1643,7 +1669,7 @@ bray.pairwise.pvals.post$Adj.BH <- p.adjust(bray.pairwise.pvals.post$pval, metho
 # 
 # 
 # 
-# # Low Fat Males
+# ### Low Fat Males
 # simper.pretty(data.frame(otu_table(physeq.lf.mal)),
 #               data.frame(sample_data(physeq.lf.mal)),
 #               c("Time"),
@@ -1672,7 +1698,7 @@ bray.pairwise.pvals.post$Adj.BH <- p.adjust(bray.pairwise.pvals.post$pval, metho
 # 
 # 
 # 
-# # High Fat Females
+# ### High Fat Females
 # simper.pretty(data.frame(otu_table(physeq.hf.fem)),
 #               data.frame(sample_data(physeq.hf.fem)),
 #               c("Time"),
@@ -1699,7 +1725,7 @@ bray.pairwise.pvals.post$Adj.BH <- p.adjust(bray.pairwise.pvals.post$pval, metho
 # 
 # 
 # 
-# # High Fat Males
+# ### High Fat Males
 # simper.pretty(data.frame(otu_table(physeq.hf.mal)),
 #               data.frame(sample_data(physeq.hf.mal)),
 #               c("Time"),
@@ -1728,7 +1754,7 @@ bray.pairwise.pvals.post$Adj.BH <- p.adjust(bray.pairwise.pvals.post$pval, metho
 # 
 # 
 # 
-# # Saccharin Females
+# ### Saccharin Females
 # simper.pretty(data.frame(otu_table(physeq.sc.fem)),
 #               data.frame(sample_data(physeq.sc.fem)),
 #               c("Time"),
@@ -1755,7 +1781,7 @@ bray.pairwise.pvals.post$Adj.BH <- p.adjust(bray.pairwise.pvals.post$pval, metho
 # 
 # 
 # 
-# # Saccharin Males
+# ### Saccharin Males
 # simper.pretty(data.frame(otu_table(physeq.sc.mal)),
 #               data.frame(sample_data(physeq.sc.mal)),
 #               c("Time"),
@@ -1783,7 +1809,7 @@ bray.pairwise.pvals.post$Adj.BH <- p.adjust(bray.pairwise.pvals.post$pval, metho
 # 
 # 
 # 
-# # Stevia Females
+# ### Stevia Females
 # simper.pretty(data.frame(otu_table(physeq.tv.fem)),
 #               data.frame(sample_data(physeq.tv.fem)),
 #               c("Time"),
@@ -1810,7 +1836,7 @@ bray.pairwise.pvals.post$Adj.BH <- p.adjust(bray.pairwise.pvals.post$pval, metho
 # 
 # 
 # 
-# # Stevia Males
+# ### Stevia Males
 # simper.pretty(data.frame(otu_table(physeq.tv.mal)),
 #               data.frame(sample_data(physeq.tv.mal)),
 #               c("Time"),
@@ -2356,7 +2382,7 @@ time.mal.hm <- plot_heatmap(physeq.simper.time.mal, sample.label = "Treatment_Ti
                       breaks=c(0, 5.25, 10.5, 15.75, 21), labels=c("0", "5.25", "10.5", "15.75", "21")) +
   scale_x_discrete(labels = c("Low Fat Pre", "Low Fat Post", "High Fat Pre", "High Fat Post",
                               "Saccharin Pre", "Saccharin Post", "Stevia Pre", "Stevia Post")) +
-  scale_y_discrete(labels=c(expression(" "^B~"S24-7"), expression(" "^C~italic("Bacteroides")), 
+  scale_y_discrete(labels=c(expression(" "^B~"S24-7"), expression(" "^aC~italic("Bacteroides")), 
                             expression(" "^BC~"S24-7"), expression(" "^BCD~"S24-7"), 
                             expression(" "^BCD~italic("Ruminiclostridium")), expression(" "^BD~"Lachnospiraceae"),
                             expression(" "^AD~"Lachnospiraceae"), expression(" "^BCD~italic("Lactococcus")),
@@ -2404,200 +2430,5 @@ dev.off()
 
 ```
 
-
-
-### SIMPER OTU No Sex
-```{r}
-# Pre-treatment
-simper.pretty(data.frame(otu_table(physeq.pre)),
-              data.frame(sample_data(physeq.pre)),
-              c("Treatment", "Sex"),
-              perc_cutoff=0.5, low_cutoff='y', low_val=0.01,
-              output_name='stevia.pre')
-stevia.pre.simper <- read.csv("stevia.pre_clean_simper.csv")
-kruskal.pretty(data.frame(otu_table(physeq.pre)),
-               data.frame(sample_data(physeq.pre)),
-               csv = stevia.pre.simper,
-               c("Treatment", "Sex"),
-               output_name = 'stevia.pre',
-               taxonomy = data.frame(tax_table(physeq.pre)))
-stevia.pre.simper.kw <- read.csv("stevia.pre_krusk_simper.csv")
-for(i in 1:nrow(stevia.pre.simper.kw)){
-  save <- which(rownames(data.frame(tax_table(physeq.pre))) == stevia.pre.simper.kw$OTU[i])
-  stevia.pre.simper.kw$Taxonomy[i] <-
-    paste(data.frame(tax_table(physeq.pre))[i,2], "-",
-          data.frame(tax_table(physeq.pre))[i,3], "-",
-          data.frame(tax_table(physeq.pre))[i,4], "-",
-          data.frame(tax_table(physeq.pre))[i,5], "-",
-          data.frame(tax_table(physeq.pre))[i,6])
-}
-write.table(stevia.pre.simper.kw, "stevia.pre_krusk_simper.csv", sep=",")
-
-# Post-treatment
-simper.pretty(data.frame(otu_table(physeq.post)),
-              data.frame(sample_data(physeq.post)),
-              c("Treatment"),
-              perc_cutoff=0.5, low_cutoff='y', low_val=0.01,
-              output_name='stevia.post')
-stevia.post.simper <- read.csv("stevia.post_clean_simper.csv")
-kruskal.pretty(data.frame(otu_table(physeq.post)),
-               data.frame(sample_data(physeq.post)),
-               csv = stevia.post.simper,
-               c("Treatment"),
-               output_name = 'stevia.post',
-               taxonomy = data.frame(tax_table(physeq.post)))
-stevia.post.simper.kw <- read.csv("stevia.post_krusk_simper.csv")
-for(i in 1:nrow(stevia.post.simper.kw)){
-  save <- which(rownames(data.frame(tax_table(physeq.post))) == stevia.post.simper.kw$OTU[i])
-  stevia.post.simper.kw$Taxonomy[i] <-
-    paste(data.frame(tax_table(physeq.post))[i,2], "-",
-          data.frame(tax_table(physeq.post))[i,3], "-",
-          data.frame(tax_table(physeq.post))[i,4], "-",
-          data.frame(tax_table(physeq.post))[i,5], "-",
-          data.frame(tax_table(physeq.post))[i,6])
-}
-write.table(stevia.post.simper.kw, "stevia.post_krusk_simper.csv", sep=",")
-
-# High Fat
-simper.pretty(data.frame(otu_table(physeq.hf)),
-              data.frame(sample_data(physeq.hf)),
-              c("Time"),
-              perc_cutoff=0.5, low_cutoff='y', low_val=0.01,
-              output_name='stevia.hf')
-stevia.hf.simper <- read.csv("stevia.hf_clean_simper.csv")
-kruskal.pretty(data.frame(otu_table(physeq.hf)),
-               data.frame(sample_data(physeq.hf)),
-               csv = stevia.hf.simper,
-               c("Time"),
-               output_name = 'stevia.hf',
-               taxonomy = data.frame(tax_table(physeq.hf)))
-stevia.hf.simper.kw <- read.csv("stevia.hf_krusk_simper.csv")
-for(i in 1:nrow(stevia.hf.simper.kw)){
-  save <- which(rownames(data.frame(tax_table(physeq.hf))) == stevia.hf.simper.kw$OTU[i])
-  stevia.hf.simper.kw$Taxonomy[i] <-
-    paste(data.frame(tax_table(physeq.hf))[i,2], "-",
-          data.frame(tax_table(physeq.hf))[i,3], "-",
-          data.frame(tax_table(physeq.hf))[i,4], "-",
-          data.frame(tax_table(physeq.hf))[i,5], "-",
-          data.frame(tax_table(physeq.hf))[i,6])
-}
-write.table(stevia.hf.simper.kw, "stevia.hf_krusk_simper.csv", sep=",")
-
-# Low Fat
-simper.pretty(data.frame(otu_table(physeq.lf)),
-              data.frame(sample_data(physeq.lf)),
-              c("Time"),
-              perc_cutoff=0.5, low_cutoff='y', low_val=0.01,
-              output_name='stevia.lf')
-stevia.lf.simper <- read.csv("stevia.lf_clean_simper.csv")
-kruskal.pretty(data.frame(otu_table(physeq.lf)),
-               data.frame(sample_data(physeq.lf)),
-               csv = stevia.lf.simper,
-               c("Time"),
-               output_name = 'stevia.lf',
-               taxonomy = data.frame(tax_table(physeq.lf)))
-stevia.lf.simper.kw <- read.csv("stevia.lf_krusk_simper.csv")
-for(i in 1:nrow(stevia.lf.simper.kw)){
-  save <- which(rownames(data.frame(tax_table(physeq.lf))) == stevia.lf.simper.kw$OTU[i])
-  stevia.lf.simper.kw$Taxonomy[i] <-
-    paste(data.frame(tax_table(physeq.lf))[i,2], "-",
-          data.frame(tax_table(physeq.lf))[i,3], "-",
-          data.frame(tax_table(physeq.lf))[i,4], "-",
-          data.frame(tax_table(physeq.lf))[i,5], "-",
-          data.frame(tax_table(physeq.lf))[i,6])
-}
-write.table(stevia.lf.simper.kw, "stevia.lf_krusk_simper.csv", sep=",")
-
-# Saccharin
-simper.pretty(data.frame(otu_table(physeq.sc)),
-              data.frame(sample_data(physeq.sc)),
-              c("Time"),
-              perc_cutoff=0.5, low_cutoff='y', low_val=0.01,
-              output_name='stevia.sc')
-stevia.sc.simper <- read.csv("stevia.sc_clean_simper.csv")
-kruskal.pretty(data.frame(otu_table(physeq.sc)),
-               data.frame(sample_data(physeq.sc)),
-               csv = stevia.sc.simper,
-               c("Time"),
-               output_name = 'stevia.sc',
-               taxonomy = data.frame(tax_table(physeq.sc)))
-stevia.sc.simper.kw <- read.csv("stevia.sc_krusk_simper.csv")
-for(i in 1:nrow(stevia.sc.simper.kw)){
-  save <- which(rownames(data.frame(tax_table(physeq.sc))) == stevia.sc.simper.kw$OTU[i])
-  stevia.sc.simper.kw$Taxonomy[i] <-
-    paste(data.frame(tax_table(physeq.sc))[i,2], "-",
-          data.frame(tax_table(physeq.sc))[i,3], "-",
-          data.frame(tax_table(physeq.sc))[i,4], "-",
-          data.frame(tax_table(physeq.sc))[i,5], "-",
-          data.frame(tax_table(physeq.sc))[i,6])
-}
-write.table(stevia.sc.simper.kw, "stevia.sc_krusk_simper.csv", sep=",")
-
-# Stevia
-simper.pretty(data.frame(otu_table(physeq.tv)),
-              data.frame(sample_data(physeq.tv)),
-              c("Time"),
-              perc_cutoff=0.5, low_cutoff='y', low_val=0.01,
-              output_name='stevia.tv')
-stevia.tv.simper <- read.csv("stevia.tv_clean_simper.csv")
-kruskal.pretty(data.frame(otu_table(physeq.tv)),
-               data.frame(sample_data(physeq.tv)),
-               csv = stevia.tv.simper,
-               c("Time"),
-               output_name = 'stevia.tv',
-               taxonomy = data.frame(tax_table(physeq.tv)))
-stevia.tv.simper.kw <- read.csv("stevia.tv_krusk_simper.csv")
-for(i in 1:nrow(stevia.tv.simper.kw)){
-  save <- which(rownames(data.frame(tax_table(physeq.tv))) == stevia.tv.simper.kw$OTU[i])
-  stevia.tv.simper.kw$Taxonomy[i] <-
-    paste(data.frame(tax_table(physeq.tv))[i,2], "-",
-          data.frame(tax_table(physeq.tv))[i,3], "-",
-          data.frame(tax_table(physeq.tv))[i,4], "-",
-          data.frame(tax_table(physeq.tv))[i,5], "-",
-          data.frame(tax_table(physeq.tv))[i,6])
-}
-write.table(stevia.tv.simper.kw, "stevia.tv_krusk_simper.csv", sep=",")
-
-
-
-
-
-
-### BH CORRECTION FOR ALL OTU-LEVEL SIMPER COMPARISONS
-stevia.pre.simper.kw$Group <- rep("Pre", nrow(stevia.pre.simper.kw))
-stevia.pre.simper.kw$OTU <- as.character(stevia.pre.simper.kw$OTU)
-stevia.pre.simper.kw$Comparison <- as.character(stevia.pre.simper.kw$Comparison)
-stevia.pre.simper.kw$Taxonomy <- as.character(stevia.pre.simper.kw$Taxonomy)
-stevia.post.simper.kw$Group <- rep("Post", nrow(stevia.post.simper.kw))
-stevia.post.simper.kw$OTU <- as.character(stevia.post.simper.kw$OTU)
-stevia.post.simper.kw$Comparison <- as.character(stevia.post.simper.kw$Comparison)
-stevia.post.simper.kw$Taxonomy <- as.character(stevia.post.simper.kw$Taxonomy)
-stevia.hf.simper.kw$Group <- rep("High Fat", nrow(stevia.hf.simper.kw))
-stevia.hf.simper.kw$OTU <- as.character(stevia.hf.simper.kw$OTU)
-stevia.hf.simper.kw$Comparison <- as.character(stevia.hf.simper.kw$Comparison)
-stevia.hf.simper.kw$Taxonomy <- as.character(stevia.hf.simper.kw$Taxonomy)
-stevia.lf.simper.kw$Group <- rep("Low Fat", nrow(stevia.lf.simper.kw))
-stevia.lf.simper.kw$OTU <- as.character(stevia.lf.simper.kw$OTU)
-stevia.lf.simper.kw$Comparison <- as.character(stevia.lf.simper.kw$Comparison)
-stevia.lf.simper.kw$Taxonomy <- as.character(stevia.lf.simper.kw$Taxonomy)
-stevia.sc.simper.kw$Group <- rep("Saccharin", nrow(stevia.sc.simper.kw))
-stevia.sc.simper.kw$OTU <- as.character(stevia.sc.simper.kw$OTU)
-stevia.sc.simper.kw$Comparison <- as.character(stevia.sc.simper.kw$Comparison)
-stevia.sc.simper.kw$Taxonomy <- as.character(stevia.sc.simper.kw$Taxonomy)
-stevia.sc.simper.kw$Group <- as.character(stevia.sc.simper.kw$Group)
-stevia.tv.simper.kw$Group <- rep("Stevia", nrow(stevia.tv.simper.kw))
-stevia.tv.simper.kw$OTU <- as.character(stevia.tv.simper.kw$OTU)
-stevia.tv.simper.kw$Comparison <- as.character(stevia.tv.simper.kw$Comparison)
-stevia.tv.simper.kw$Taxonomy <- as.character(stevia.tv.simper.kw$Taxonomy)
-stevia.tv.simper.kw$Group <- as.character(stevia.tv.simper.kw$Group)
-stevia.simper.all <- stevia.pre.simper.kw
-stevia.simper.all[(nrow(stevia.simper.all)+1):(nrow(stevia.simper.all)+nrow(stevia.post.simper.kw)),] <- stevia.post.simper.kw
-stevia.simper.all[(nrow(stevia.simper.all)+1):(nrow(stevia.simper.all)+nrow(stevia.hf.simper.kw)),] <- stevia.hf.simper.kw
-stevia.simper.all[(nrow(stevia.simper.all)+1):(nrow(stevia.simper.all)+nrow(stevia.lf.simper.kw)),] <- stevia.lf.simper.kw
-stevia.simper.all[(nrow(stevia.simper.all)+1):(nrow(stevia.simper.all)+nrow(stevia.sc.simper.kw)),] <- stevia.sc.simper.kw
-stevia.simper.all[(nrow(stevia.simper.all)+1):(nrow(stevia.simper.all)+nrow(stevia.tv.simper.kw)),] <- stevia.tv.simper.kw
-stevia.simper.all$fdr_krusk_p.val <- p.adjust(stevia.simper.all$krusk_p.val, "BH")
-write.table(stevia.simper.all, "stevia.simper.nosex.csv", sep=",")
-```
 
 
