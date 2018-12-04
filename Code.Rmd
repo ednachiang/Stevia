@@ -2181,10 +2181,10 @@ sample_data(physeq.simper.post.mal)$Treatment <- ordered(sample_data(physeq.simp
 ### HeatMap Post-Treatment
 # http://www.roymfrancis.com/a-guide-to-elegant-tiled-heatmaps-in-r/
 # https://github.com/tidyverse/ggplot2/pull/2541
-post.fem.hm <- plot_heatmap(physeq.simper.post.fem, sample.label = "Treatment", sample.order = c("LowFat", "HighFat", "Saccharin", "Stevia"), taxa.label = "OTU_Classification", taxa.order = "Phylum", low = "#FFFFCC", high = "firebrick3", na.value = "#FFFFFC") +
+post.fem.hm <- plot_heatmap(physeq.simper.post.fem, sample.label = "Treatment", sample.order = c("LowFat", "HighFat", "Saccharin", "Stevia"), taxa.label = "OTU_Classification", taxa.order = "Phylum") +
   geom_tile(colour="gray40") +
   #geom_text(aes(label=sprintf("%0.2f", round(Abundance, digits=2)))) +
-  scale_fill_gradient(name="Relative Abundance (%)", low = "#FFFFCC", high = "firebrick3") +
+  scale_fill_gradient(name="Relative Abundance (%)", low = "#FFFFFF", high = "midnightblue") +
   scale_x_discrete(labels = c("Low Fat", "High Fat", "Saccharin", "Stevia")) +
   scale_y_discrete(labels = c(expression(" "^A~italic("Bacteroides")), expression(" "^AC~"S24-7"), expression(" "^ABC~"S24-7"), expression(" "^AC~italic("Ruminiclostridium")), expression(" "^ABC~"Lachnospiraceae"), expression(" "^ACD~italic("Lactococcus")), expression(" "^ABC~italic("Anaeroplasma")), expression(" "^Bcd~italic("Akkermansia")))) +
   ylab("OTU Classification") + xlab("Female Post-treatment Group") +
@@ -2200,16 +2200,17 @@ post.fem.hm <- plot_heatmap(physeq.simper.post.fem, sample.label = "Treatment", 
         legend.text = element_text(family = "Arial", size=10),
         plot.title = element_text(family = "Arial", size=10, face="bold")
   ) +
-  guides(fill = guide_colorbar(barheight = unit( 3, "in" ),
-                                ticks.color = "black",
-                                ticks.linewidth = 1,
-                                frame.color = "black",
-                                frame.linewidth = 1))
+  guides(fill = guide_colorbar(barheight = unit( 3, "in" )#,
+                                #ticks.colour = "black",
+                                #ticks.linewidth = 1,
+                                #frame.colour = "black",
+                                #frame.linewidth = 1)
+         ))
 
-post.mal.hm <- plot_heatmap(physeq.simper.post.mal, sample.label = "Treatment", sample.order = c("LowFat", "HighFat", "Saccharin", "Stevia"), taxa.label = "OTU_Classification", taxa.order = "Phylum", low = "#FFFFCC", high = "firebrick3", na.value = "#FFFFFC") +
+post.mal.hm <- plot_heatmap(physeq.simper.post.mal, sample.label = "Treatment", sample.order = c("LowFat", "HighFat", "Saccharin", "Stevia"), taxa.label = "OTU_Classification", taxa.order = "Phylum") +
   geom_tile(colour="gray40") +
   #geom_text(aes(label=sprintf("%0.2f", round(Abundance, digits=2)))) +
-  scale_fill_gradient(name="Relative Abundance (%)", low = "#FFFFCC", high = "firebrick3") +
+  scale_fill_gradient(name="Relative Abundance (%)", low = "#FFFFCC", high = "midnightblue") +
   scale_x_discrete(labels = c("Low Fat", "High Fat", "Saccharin", "Stevia")) +
   scale_y_discrete(labels=c(expression(" "^abc~"S24-7"), expression(" "^abc~italic("Ruminiclostridium")), expression(" "^ac~"Lachnospiraceae"), expression(" "^abcd~italic("Lactococcus")), expression(" "^c~italic("Lactobacillus")), expression(" "^abc~italic("NK4A136")), expression(" "^bc~italic("Akkermansia")))) +
   ylab("OTU Classification") + xlab("Male Post-treatment Group") +
