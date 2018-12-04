@@ -1,0 +1,10 @@
+Comparison,SIMPER,OTU,krusk_p.val,fdr_krusk_p.val,Taxonomy,Left.mean.abund,Left.stdev,Right.mean.abund,Right.stdev
+Pre-treatment_Post-treatment,0.064031249,Otu00023,0.013191645,0.118724804,Bacteroidetes - Bacteroidia - Bacteroidales - Rikenellaceae - Alistipes,0.001258521,0.002814139,0.077478517,0.056990092
+Pre-treatment_Post-treatment,0.037758109,Otu00015,0.027802962,0.125113331,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_NK4A136_group,0.051547023,0.02546946,0.008955053,0.019150365
+Pre-treatment_Post-treatment,0.085193953,Otu00007,0.05821274,0.130978665,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.018315018,0.040953626,0.105650079,0.096935368
+Pre-treatment_Post-treatment,0.041723557,Otu00011,0.046532985,0.130978665,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.076143587,0.029133435,0.027766689,0.028522887
+Pre-treatment_Post-treatment,0.064427541,Otu00008,0.174525341,0.314145613,Tenericutes - Mollicutes - Anaeroplasmatales - Anaeroplasmataceae - Anaeroplasma,0.117533665,0.043320376,0.060981076,0.064271127
+Pre-treatment_Post-treatment,0.051383013,Otu00006,0.347207639,0.520811459,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.097258609,0.05857844,0.065655198,0.053129305
+Pre-treatment_Post-treatment,0.026399973,Otu00021,0.600401848,0.771945233,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.024982448,0.034706793,0.033684816,0.015197691
+Pre-treatment_Post-treatment,0.094711826,Otu00001,0.916814949,0.916814949,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.133375747,0.133291642,0.121576666,0.053335518
+Pre-treatment_Post-treatment,0.027204661,Otu00031,0.881497452,0.916814949,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.008267923,0.018487637,0.027768945,0.06209325

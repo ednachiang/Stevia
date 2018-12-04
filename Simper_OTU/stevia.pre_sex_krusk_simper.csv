@@ -1,8 +1,0 @@
-Comparison,SIMPER,OTU,krusk_p.val,fdr_krusk_p.val,Taxonomy,Left.mean.abund,Left.stdev,Right.mean.abund,Right.stdev
-Male_Female,0.097411218,Otu00006,1.02E-07,7.17E-07,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,8.74E-05,0.000201105,0.123384115,0.058564679
-Male_Female,0.079723019,Otu00013,9.69E-07,3.39E-06,Firmicutes - Clostridia - Clostridiales - Lachnospiraceae - Lachnospiraceae_unclassified,0.102175508,0.048783309,0.001654476,0.007019346
-Male_Female,0.055812944,Otu00008,4.46E-06,1.04E-05,Tenericutes - Mollicutes - Anaeroplasmatales - Anaeroplasmataceae - Anaeroplasma,0.022905064,0.021275359,0.091802236,0.03907852
-Male_Female,0.05853134,Otu00011,9.21E-06,1.61E-05,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.014435798,0.036121593,0.081423996,0.034688219
-Male_Female,0.070617543,Otu00005,0.001182097,0.001654935,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.114163574,0.090495769,0.038618812,0.038512438
-Male_Female,0.087643708,Otu00001,0.11540366,0.134637604,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.049409335,0.101255394,0.098738733,0.112846069
-Male_Female,0.044770493,Otu00009,0.461154746,0.461154746,Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - Bacteroidales_S24-7_group_ge,0.05397886,0.092478957,0.006200257,0.01107215

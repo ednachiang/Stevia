@@ -1,5 +1,0 @@
-"X","Comparison","SIMPER","OTU","krusk_p.val","fdr_krusk_p.val","Taxonomy","Left.mean.abund","Left.stdev","Right.mean.abund","Right.stdev"
-"1",1,"Pre-treatment_Post-treatment",0.252292285117788,"Otu00001",0.150926950066717,0.201235933422289,"Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidales_S24-7_group - NA",0.392758022977323,0.110294610234043,0.453282859549073,0.111942318097987
-"2",2,"Pre-treatment_Post-treatment",0.196693330921726,"Otu00023",0.00119058681197778,0.00476234724791114,"Verrucomicrobia - Verrucomicrobiae - Verrucomicrobiales - Verrucomicrobiaceae - NA",0.00609959920902153,0.0170081933555532,0.108325782485526,0.0781065956789877
-"3",3,"Male_Female",0.277725059304548,"Otu00001",0.0342937210364928,0.0685874420729857,"Bacteroidetes - Bacteroidia - Bacteroidales - Bacteroidaceae - NA",0.368957559761894,0.101053461911271,0.477083322764503,0.100121042997354
-"4",4,"Male_Female",0.149965510794859,"Otu00023",0.845198384806603,0.845198384806603,"Tenericutes - Mollicutes - Anaeroplasmatales - Anaeroplasmataceae - NA",0.0724610045558264,0.0936738874236179,0.041964377138721,0.0538896372432396

@@ -367,15 +367,15 @@ load("physeq/Physeq.RData")
 load("physeq/Physeq.pair.RData")
 load("physeq/Physeq.pre.RData")
 load("physeq/Physeq.post.RData")
-load("physeq/Physeq.post.rem.RData")
+#load("physeq/Physeq.post.rem.RData")
 load("physeq/Physeq.fem.RData")
 load("physeq/Physeq.mal.RData")
 load("physeq/Physeq.pre.fem.RData")
 load("physeq/Physeq.pre.mal.RData")
 load("physeq/Physeq.post.fem.RData")
 load("physeq/Physeq.post.mal.RData")
-load("physeq/Physeq.post.fem.rem.RData")
-load("physeq/Physeq.post.mal.rem.RData")
+#load("physeq/Physeq.post.fem.rem.RData")
+#load("physeq/Physeq.post.mal.rem.RData")
 load("physeq/Physeq.lf.RData")
 load("physeq/Physeq.hf.RData")
 load("physeq/Physeq.sc.RData")
@@ -384,14 +384,14 @@ load("physeq/Physeq.lf.post.RData")
 load("physeq/Physeq.hf.post.RData")
 load("physeq/Physeq.sc.post.RData")
 load("physeq/Physeq.tv.post.RData")
-#load("physeq/Physeq.lf.fem.RData")
-#load("physeq/Physeq.lf.mal.RData")
-#load("physeq/Physeq.hf.fem.RData")
-#load("physeq/Physeq.hf.mal.RData")
-#load("physeq/Physeq.sc.fem.RData")
-#load("physeq/Physeq.sc.mal.RData")
-#load("physeq/Physeq.tv.fem.RData")
-#load("physeq/Physeq.tv.mal.RData")
+load("physeq/Physeq.lf.fem.RData")
+load("physeq/Physeq.lf.mal.RData")
+load("physeq/Physeq.hf.fem.RData")
+load("physeq/Physeq.hf.mal.RData")
+load("physeq/Physeq.sc.fem.RData")
+load("physeq/Physeq.sc.mal.RData")
+load("physeq/Physeq.tv.fem.RData")
+load("physeq/Physeq.tv.mal.RData")
 ```
 
 ### Alpha Div
@@ -1560,227 +1560,426 @@ bray.pairwise.pvals.post$Adj.BH <- p.adjust(bray.pairwise.pvals.post$pval, metho
 ```{r}
 ### OTU-Level
 
+# # Post-treatment Females - Treatment
+# simper.pretty(data.frame(otu_table(physeq.post.fem)),
+#               data.frame(sample_data(physeq.post.fem)),
+#               c("Treatment"),
+#               perc_cutoff=0.5, low_cutoff='y', low_val=0.01,
+#               output_name='stevia.post.fem')
+# stevia.post.fem.simper <- read.csv("stevia.post.fem_clean_simper.csv")
+# kruskal.pretty(data.frame(otu_table(physeq.post.fem)),
+#                data.frame(sample_data(physeq.post.fem)),
+#                csv = stevia.post.fem.simper,
+#                c("Treatment"),
+#                output_name = 'stevia.post.fem',
+#                taxonomy = data.frame(tax_table(physeq.post.fem)))
+# stevia.post.fem.simper.kw <- read.csv("stevia.post.fem_krusk_simper.csv")
+# for(i in 1:nrow(stevia.post.fem.simper.kw)){
+#   save <- which(rownames(data.frame(tax_table(physeq.post.fem))) == stevia.post.fem.simper.kw$OTU[i])
+#   stevia.post.fem.simper.kw$Taxonomy[i] <-
+#     paste(tax_table(physeq.post.fem)[save,2][[1]], "-",
+#           tax_table(physeq.post.fem)[save,3][[1]], "-",
+#           tax_table(physeq.post.fem)[save,4][[1]], "-",
+#           tax_table(physeq.post.fem)[save,5][[1]], "-",
+#           tax_table(physeq.post.fem)[save,6][[1]])
+# }
+# write.table(stevia.post.fem.simper.kw, "stevia.post.fem_krusk_simper.csv", sep=",")
+# 
+# 
+# 
+# 
+# # Post-treatment Males - Treatment
+# simper.pretty(data.frame(otu_table(physeq.post.mal)),
+#               data.frame(sample_data(physeq.post.mal)),
+#               c("Treatment"),
+#               perc_cutoff=0.5, low_cutoff='y', low_val=0.01,
+#               output_name='stevia.post.mal')
+# stevia.post.mal.simper <- read.csv("stevia.post.mal_clean_simper.csv")
+# kruskal.pretty(data.frame(otu_table(physeq.post.mal)),
+#                data.frame(sample_data(physeq.post.mal)),
+#                csv = stevia.post.mal.simper,
+#                c("Treatment"),
+#                output_name = 'stevia.post.mal',
+#                taxonomy = data.frame(tax_table(physeq.post.mal)))
+# stevia.post.mal.simper.kw <- read.csv("stevia.post.mal_krusk_simper.csv")
+# for(i in 1:nrow(stevia.post.mal.simper.kw)){
+#   save <- which(rownames(data.frame(tax_table(physeq.post.mal))) == stevia.post.mal.simper.kw$OTU[i])
+#   stevia.post.mal.simper.kw$Taxonomy[i] <-
+#     paste(tax_table(physeq.post.mal)[save,2][[1]], "-",
+#           tax_table(physeq.post.mal)[save,3][[1]], "-",
+#           tax_table(physeq.post.mal)[save,4][[1]], "-",
+#           tax_table(physeq.post.mal)[save,5][[1]], "-",
+#           tax_table(physeq.post.mal)[save,6][[1]])
+# }
+# write.table(stevia.post.mal.simper.kw, "stevia.post.mal_krusk_simper.csv", sep=",")
+# 
+# 
+# 
+#
+# # Low Fat Females
+# simper.pretty(data.frame(otu_table(physeq.lf.fem)),
+#               data.frame(sample_data(physeq.lf.fem)),
+#               c("Time"),
+#               perc_cutoff=0.5, low_cutoff='y', low_val=0.01,
+#               output_name='stevia.lf.fem')
+# stevia.lf.fem.simper <- read.csv("stevia.lf.fem_clean_simper.csv")
+# kruskal.pretty(data.frame(otu_table(physeq.lf.fem)),
+#                data.frame(sample_data(physeq.lf.fem)),
+#                csv = stevia.lf.fem.simper,
+#                c("Time"),
+#                output_name = 'stevia.lf.fem',
+#                taxonomy = data.frame(tax_table(physeq.lf.fem)))
+# stevia.lf.fem.simper.kw <- read.csv("stevia.lf.fem_krusk_simper.csv")
+# for(i in 1:nrow(stevia.lf.fem.simper.kw)){
+#   save <- which(rownames(data.frame(tax_table(physeq.lf.fem))) == stevia.lf.fem.simper.kw$OTU[i])
+#   stevia.lf.fem.simper.kw$Taxonomy[i] <-
+#     paste(tax_table(physeq.lf.fem)[save,2][[1]], "-",
+#           tax_table(physeq.lf.fem)[save,3][[1]], "-",
+#           tax_table(physeq.lf.fem)[save,4][[1]], "-",
+#           tax_table(physeq.lf.fem)[save,5][[1]], "-",
+#           tax_table(physeq.lf.fem)[save,6][[1]])
+# }
+# write.table(stevia.lf.fem.simper.kw, "stevia.lf.fem_krusk_simper.csv", sep=",")
+# 
+# 
+# 
+# # Low Fat Males
+# simper.pretty(data.frame(otu_table(physeq.lf.mal)),
+#               data.frame(sample_data(physeq.lf.mal)),
+#               c("Time"),
+#               perc_cutoff=0.5, low_cutoff='y', low_val=0.01,
+#               output_name='stevia.lf.mal')
+# stevia.lf.mal.simper <- read.csv("stevia.lf.mal_clean_simper.csv")
+# kruskal.pretty(data.frame(otu_table(physeq.lf.mal)),
+#                data.frame(sample_data(physeq.lf.mal)),
+#                csv = stevia.lf.mal.simper,
+#                c("Time"),
+#                output_name = 'stevia.lf.mal',
+#                taxonomy = data.frame(tax_table(physeq.lf.mal)))
+# stevia.lf.mal.simper.kw <- read.csv("stevia.lf.mal_krusk_simper.csv")
+# for(i in 1:nrow(stevia.lf.mal.simper.kw)){
+#   save <- which(rownames(data.frame(tax_table(physeq.lf.mal))) == stevia.lf.mal.simper.kw$OTU[i])
+#   stevia.lf.mal.simper.kw$Taxonomy[i] <-
+#     paste(tax_table(physeq.lf.mal)[save,2][[1]], "-",
+#           tax_table(physeq.lf.mal)[save,3][[1]], "-",
+#           tax_table(physeq.lf.mal)[save,4][[1]], "-",
+#           tax_table(physeq.lf.mal)[save,5][[1]], "-",
+#           tax_table(physeq.lf.mal)[save,6][[1]])
+# }
+# write.table(stevia.lf.mal.simper.kw, "stevia.lf.mal_krusk_simper.csv", sep=",")
+# 
+# 
+# 
+# 
+# 
+# # High Fat Females
+# simper.pretty(data.frame(otu_table(physeq.hf.fem)),
+#               data.frame(sample_data(physeq.hf.fem)),
+#               c("Time"),
+#               perc_cutoff=0.5, low_cutoff='y', low_val=0.01,
+#               output_name='stevia.hf.fem')
+# stevia.hf.fem.simper <- read.csv("stevia.hf.fem_clean_simper.csv")
+# kruskal.pretty(data.frame(otu_table(physeq.hf.fem)),
+#                data.frame(sample_data(physeq.hf.fem)),
+#                csv = stevia.hf.fem.simper,
+#                c("Time"),
+#                output_name = 'stevia.hf.fem',
+#                taxonomy = data.frame(tax_table(physeq.hf.fem)))
+# stevia.hf.fem.simper.kw <- read.csv("stevia.hf.fem_krusk_simper.csv")
+# for(i in 1:nrow(stevia.hf.fem.simper.kw)){
+#   save <- which(rownames(data.frame(tax_table(physeq.hf.fem))) == stevia.hf.fem.simper.kw$OTU[i])
+#   stevia.hf.fem.simper.kw$Taxonomy[i] <-
+#     paste(tax_table(physeq.hf.fem)[save,2][[1]], "-",
+#           tax_table(physeq.hf.fem)[save,3][[1]], "-",
+#           tax_table(physeq.hf.fem)[save,4][[1]], "-",
+#           tax_table(physeq.hf.fem)[save,5][[1]], "-",
+#           tax_table(physeq.hf.fem)[save,6][[1]])
+# }
+# write.table(stevia.hf.fem.simper.kw, "stevia.hf.fem_krusk_simper.csv", sep=",")
+# 
+# 
+# 
+# # High Fat Males
+# simper.pretty(data.frame(otu_table(physeq.hf.mal)),
+#               data.frame(sample_data(physeq.hf.mal)),
+#               c("Time"),
+#               perc_cutoff=0.5, low_cutoff='y', low_val=0.01,
+#               output_name='stevia.hf.mal')
+# stevia.hf.mal.simper <- read.csv("stevia.hf.mal_clean_simper.csv")
+# kruskal.pretty(data.frame(otu_table(physeq.hf.mal)),
+#                data.frame(sample_data(physeq.hf.mal)),
+#                csv = stevia.hf.mal.simper,
+#                c("Time"),
+#                output_name = 'stevia.hf.mal',
+#                taxonomy = data.frame(tax_table(physeq.hf.mal)))
+# stevia.hf.mal.simper.kw <- read.csv("stevia.hf.mal_krusk_simper.csv")
+# for(i in 1:nrow(stevia.hf.mal.simper.kw)){
+#   save <- which(rownames(data.frame(tax_table(physeq.hf.mal))) == stevia.hf.mal.simper.kw$OTU[i])
+#   stevia.hf.mal.simper.kw$Taxonomy[i] <-
+#     paste(tax_table(physeq.hf.mal)[save,2][[1]], "-",
+#           tax_table(physeq.hf.mal)[save,3][[1]], "-",
+#           tax_table(physeq.hf.mal)[save,4][[1]], "-",
+#           tax_table(physeq.hf.mal)[save,5][[1]], "-",
+#           tax_table(physeq.hf.mal)[save,6][[1]])
+# }
+# write.table(stevia.hf.mal.simper.kw, "stevia.hf.mal_krusk_simper.csv", sep=",")
+# 
+# 
+# 
+# 
+# 
+# # Saccharin Females
+# simper.pretty(data.frame(otu_table(physeq.sc.fem)),
+#               data.frame(sample_data(physeq.sc.fem)),
+#               c("Time"),
+#               perc_cutoff=0.5, low_cutoff='y', low_val=0.01,
+#               output_name='stevia.sc.fem')
+# stevia.sc.fem.simper <- read.csv("stevia.sc.fem_clean_simper.csv")
+# kruskal.pretty(data.frame(otu_table(physeq.sc.fem)),
+#                data.frame(sample_data(physeq.sc.fem)),
+#                csv = stevia.sc.fem.simper,
+#                c("Time"),
+#                output_name = 'stevia.sc.fem',
+#                taxonomy = data.frame(tax_table(physeq.sc.fem)))
+# stevia.sc.fem.simper.kw <- read.csv("stevia.sc.fem_krusk_simper.csv")
+# for(i in 1:nrow(stevia.sc.fem.simper.kw)){
+#   save <- which(rownames(data.frame(tax_table(physeq.sc.fem))) == stevia.sc.fem.simper.kw$OTU[i])
+#   stevia.sc.fem.simper.kw$Taxonomy[i] <-
+#     paste(tax_table(physeq.sc.fem)[save,2][[1]], "-",
+#           tax_table(physeq.sc.fem)[save,3][[1]], "-",
+#           tax_table(physeq.sc.fem)[save,4][[1]], "-",
+#           tax_table(physeq.sc.fem)[save,5][[1]], "-",
+#           tax_table(physeq.sc.fem)[save,6][[1]])
+# }
+# write.table(stevia.sc.fem.simper.kw, "stevia.sc.fem_krusk_simper.csv", sep=",")
+# 
+# 
+# 
+# # Saccharin Males
+# simper.pretty(data.frame(otu_table(physeq.sc.mal)),
+#               data.frame(sample_data(physeq.sc.mal)),
+#               c("Time"),
+#               perc_cutoff=0.5, low_cutoff='y', low_val=0.01,
+#               output_name='stevia.sc.mal')
+# stevia.sc.mal.simper <- read.csv("stevia.sc.mal_clean_simper.csv")
+# kruskal.pretty(data.frame(otu_table(physeq.sc.mal)),
+#                data.frame(sample_data(physeq.sc.mal)),
+#                csv = stevia.sc.mal.simper,
+#                c("Time"),
+#                output_name = 'stevia.sc.mal',
+#                taxonomy = data.frame(tax_table(physeq.sc.mal)))
+# stevia.sc.mal.simper.kw <- read.csv("stevia.sc.mal_krusk_simper.csv")
+# for(i in 1:nrow(stevia.sc.mal.simper.kw)){
+#   save <- which(rownames(data.frame(tax_table(physeq.sc.mal))) == stevia.sc.mal.simper.kw$OTU[i])
+#   stevia.sc.mal.simper.kw$Taxonomy[i] <-
+#     paste(tax_table(physeq.sc.mal)[save,2][[1]], "-",
+#           tax_table(physeq.sc.mal)[save,3][[1]], "-",
+#           tax_table(physeq.sc.mal)[save,4][[1]], "-",
+#           tax_table(physeq.sc.mal)[save,5][[1]], "-",
+#           tax_table(physeq.sc.mal)[save,6][[1]])
+# }
+# write.table(stevia.sc.mal.simper.kw, "stevia.sc.mal_krusk_simper.csv", sep=",")
+# 
+# 
+# 
+# 
+# # Stevia Females
+# simper.pretty(data.frame(otu_table(physeq.tv.fem)),
+#               data.frame(sample_data(physeq.tv.fem)),
+#               c("Time"),
+#               perc_cutoff=0.5, low_cutoff='y', low_val=0.01,
+#               output_name='stevia.tv.fem')
+# stevia.tv.fem.simper <- read.csv("stevia.tv.fem_clean_simper.csv")
+# kruskal.pretty(data.frame(otu_table(physeq.tv.fem)),
+#                data.frame(sample_data(physeq.tv.fem)),
+#                csv = stevia.tv.fem.simper,
+#                c("Time"),
+#                output_name = 'stevia.tv.fem',
+#                taxonomy = data.frame(tax_table(physeq.tv.fem)))
+# stevia.tv.fem.simper.kw <- read.csv("stevia.tv.fem_krusk_simper.csv")
+# for(i in 1:nrow(stevia.tv.fem.simper.kw)){
+#   save <- which(rownames(data.frame(tax_table(physeq.tv.fem))) == stevia.tv.fem.simper.kw$OTU[i])
+#   stevia.tv.fem.simper.kw$Taxonomy[i] <-
+#     paste(tax_table(physeq.tv.fem)[save,2][[1]], "-",
+#           tax_table(physeq.tv.fem)[save,3][[1]], "-",
+#           tax_table(physeq.tv.fem)[save,4][[1]], "-",
+#           tax_table(physeq.tv.fem)[save,5][[1]], "-",
+#           tax_table(physeq.tv.fem)[save,6][[1]])
+# }
+# write.table(stevia.tv.fem.simper.kw, "stevia.tv.fem_krusk_simper.csv", sep=",")
+# 
+# 
+# 
+# # Stevia Males
+# simper.pretty(data.frame(otu_table(physeq.tv.mal)),
+#               data.frame(sample_data(physeq.tv.mal)),
+#               c("Time"),
+#               perc_cutoff=0.5, low_cutoff='y', low_val=0.01,
+#               output_name='stevia.tv.mal')
+# stevia.tv.mal.simper <- read.csv("stevia.tv.mal_clean_simper.csv")
+# kruskal.pretty(data.frame(otu_table(physeq.tv.mal)),
+#                data.frame(sample_data(physeq.tv.mal)),
+#                csv = stevia.tv.mal.simper,
+#                c("Time"),
+#                output_name = 'stevia.tv.mal',
+#                taxonomy = data.frame(tax_table(physeq.tv.mal)))
+# stevia.tv.mal.simper.kw <- read.csv("stevia.tv.mal_krusk_simper.csv")
+# for(i in 1:nrow(stevia.tv.mal.simper.kw)){
+#   save <- which(rownames(data.frame(tax_table(physeq.tv.mal))) == stevia.tv.mal.simper.kw$OTU[i])
+#   stevia.tv.mal.simper.kw$Taxonomy[i] <-
+#     paste(tax_table(physeq.tv.mal)[save,2][[1]], "-",
+#           tax_table(physeq.tv.mal)[save,3][[1]], "-",
+#           tax_table(physeq.tv.mal)[save,4][[1]], "-",
+#           tax_table(physeq.tv.mal)[save,5][[1]], "-",
+#           tax_table(physeq.tv.mal)[save,6][[1]])
+# }
+# write.table(stevia.tv.mal.simper.kw, "stevia.tv.mal_krusk_simper.csv", sep=",")
 
-# Post-treatment - Treatment
-simper.pretty(data.frame(otu_table(physeq.post)),
-              data.frame(sample_data(physeq.post)),
-              c("Treatment"),
-              perc_cutoff=0.5, low_cutoff='y', low_val=0.01,
-              output_name='stevia.post_treat')
-stevia.post.simper <- read.csv("stevia.post_treat_clean_simper.csv")
-kruskal.pretty(data.frame(otu_table(physeq.post)),
-               data.frame(sample_data(physeq.post)),
-               csv = stevia.post.simper,
-               c("Treatment"),
-               output_name = 'stevia.post_treat',
-               taxonomy = data.frame(tax_table(physeq.post)))
-stevia.post.simper.kw <- read.csv("stevia.post_treat_krusk_simper.csv")
-for(i in 1:nrow(stevia.post.simper.kw)){
-  save <- which(rownames(data.frame(tax_table(physeq.post))) == stevia.post.simper.kw$OTU[i])
-  stevia.post.simper.kw$Taxonomy[i] <-
-    paste(data.frame(tax_table(physeq.post))[save,2], "-",
-          data.frame(tax_table(physeq.post))[save,3], "-",
-          data.frame(tax_table(physeq.post))[save,4], "-",
-          data.frame(tax_table(physeq.post))[save,5], "-",
-          data.frame(tax_table(physeq.post))[save,6])
-}
-#write.table(stevia.post.simper.kw, "stevia.post_treat_krusk_simper.csv", sep=",")
-
-
-# Post-treatment - Sex
-simper.pretty(data.frame(otu_table(physeq.post)),
-              data.frame(sample_data(physeq.post)),
-              c("Sex"),
-              perc_cutoff=0.5, low_cutoff='y', low_val=0.01,
-              output_name='stevia.post_sex')
-stevia.post.simper <- read.csv("stevia.post_sex_clean_simper.csv")
-kruskal.pretty(data.frame(otu_table(physeq.post)),
-               data.frame(sample_data(physeq.post)),
-               csv = stevia.post.simper,
-               c("Sex"),
-               output_name = 'stevia.post_sex',
-               taxonomy = data.frame(tax_table(physeq.post)))
-stevia.post.simper.kw <- read.csv("stevia.post_sex_krusk_simper.csv")
-for(i in 1:nrow(stevia.post.simper.kw)){
-  save <- which(rownames(data.frame(tax_table(physeq.post))) == stevia.post.simper.kw$OTU[i])
-  stevia.post.simper.kw$Taxonomy[i] <-
-    paste(data.frame(tax_table(physeq.post))[save,2], "-",
-          data.frame(tax_table(physeq.post))[save,3], "-",
-          data.frame(tax_table(physeq.post))[save,4], "-",
-          data.frame(tax_table(physeq.post))[save,5], "-",
-          data.frame(tax_table(physeq.post))[save,6])
-}
-write.table(stevia.post.simper.kw, "stevia.post_sex_krusk_simper.csv", sep=",")
-
-
-# High Fat
-simper.pretty(data.frame(otu_table(physeq.hf)),
-              data.frame(sample_data(physeq.hf)),
-              c("Time"),
-              perc_cutoff=0.5, low_cutoff='y', low_val=0.01,
-              output_name='stevia.hf_time')
-stevia.hf.simper <- read.csv("stevia.hf_time_clean_simper.csv")
-kruskal.pretty(data.frame(otu_table(physeq.hf)),
-               data.frame(sample_data(physeq.hf)),
-               csv = stevia.hf.simper,
-               c("Time"),
-               output_name = 'stevia.hf_time',
-               taxonomy = data.frame(tax_table(physeq.hf)))
-stevia.hf.simper.kw <- read.csv("Simper_OTU/stevia.hf_time_krusk_simper.csv")
-for(i in 1:nrow(stevia.hf.simper.kw)){
-  save <- which(rownames(data.frame(tax_table(physeq.hf))) == stevia.hf.simper.kw$OTU[i])
-  stevia.hf.simper.kw$Taxonomy[i] <-
-    paste(data.frame(tax_table(physeq.hf))[save,2], "-",
-          data.frame(tax_table(physeq.hf))[save,3], "-",
-          data.frame(tax_table(physeq.hf))[save,4], "-",
-          data.frame(tax_table(physeq.hf))[save,5], "-",
-          data.frame(tax_table(physeq.hf))[save,6])
-}
-#write.table(stevia.hf.simper.kw, "Simper_OTU/stevia.hf_time_krusk_simper.csv", sep=",")
-
-# Low Fat
-simper.pretty(data.frame(otu_table(physeq.lf)),
-              data.frame(sample_data(physeq.lf)),
-              c("Time"),
-              perc_cutoff=0.5, low_cutoff='y', low_val=0.01,
-              output_name='stevia.lf_time')
-stevia.lf.simper <- read.csv("stevia.lf_time_clean_simper.csv")
-kruskal.pretty(data.frame(otu_table(physeq.lf)),
-               data.frame(sample_data(physeq.lf)),
-               csv = stevia.lf.simper,
-               c("Time"),
-               output_name = 'stevia.lf_time',
-               taxonomy = data.frame(tax_table(physeq.lf)))
-stevia.lf.simper.kw <- read.csv("Simper_OTU/stevia.lf_time_krusk_simper.csv")
-for(i in 1:nrow(stevia.lf.simper.kw)){
-  save <- which(rownames(data.frame(tax_table(physeq.lf))) == stevia.lf.simper.kw$OTU[i])
-  stevia.lf.simper.kw$Taxonomy[i] <-
-    paste(data.frame(tax_table(physeq.lf))[save,2], "-",
-          data.frame(tax_table(physeq.lf))[save,3], "-",
-          data.frame(tax_table(physeq.lf))[save,4], "-",
-          data.frame(tax_table(physeq.lf))[save,5], "-",
-          data.frame(tax_table(physeq.lf))[save,6])
-}
-#write.table(stevia.lf.simper.kw, "Simper_OTU/stevia.lf_time_krusk_simper.csv", sep=",")
-
-# Saccharin
-simper.pretty(data.frame(otu_table(physeq.sc)),
-              data.frame(sample_data(physeq.sc)),
-              c("Time"),
-              perc_cutoff=0.5, low_cutoff='y', low_val=0.01,
-              output_name='stevia.sc_time')
-stevia.sc.simper <- read.csv("stevia.sc_time_clean_simper.csv")
-kruskal.pretty(data.frame(otu_table(physeq.sc)),
-               data.frame(sample_data(physeq.sc)),
-               csv = stevia.sc.simper,
-               c("Time"),
-               output_name = 'stevia.sc_time',
-               taxonomy = data.frame(tax_table(physeq.sc)))
-stevia.sc.simper.kw <- read.csv("Simper_OTU/stevia.sc_time_krusk_simper.csv")
-for(i in 1:nrow(stevia.sc.simper.kw)){
-  save <- which(rownames(data.frame(tax_table(physeq.sc))) == stevia.sc.simper.kw$OTU[i])
-  stevia.sc.simper.kw$Taxonomy[i] <-
-    paste(data.frame(tax_table(physeq.sc))[save,2], "-",
-          data.frame(tax_table(physeq.sc))[save,3], "-",
-          data.frame(tax_table(physeq.sc))[save,4], "-",
-          data.frame(tax_table(physeq.sc))[save,5], "-",
-          data.frame(tax_table(physeq.sc))[save,6])
-}
-#write.table(stevia.sc.simper.kw, "Simper_OTU/stevia.sc_time_krusk_simper.csv", sep=",")
-
-# Stevia
-simper.pretty(data.frame(otu_table(physeq.tv)),
-              data.frame(sample_data(physeq.tv)),
-              c("Time"),
-              perc_cutoff=0.5, low_cutoff='y', low_val=0.01,
-              output_name='stevia.tv_time')
-stevia.tv.simper <- read.csv("stevia.tv_time_clean_simper.csv")
-kruskal.pretty(data.frame(otu_table(physeq.tv)),
-               data.frame(sample_data(physeq.tv)),
-               csv = stevia.tv.simper,
-               c("Time"),
-               output_name = 'stevia.tv_time',
-               taxonomy = data.frame(tax_table(physeq.tv)))
-stevia.tv.simper.kw <- read.csv("Simper_OTU/stevia.tv_time_krusk_simper.csv")
-for(i in 1:nrow(stevia.tv.simper.kw)){
-  save <- which(rownames(data.frame(tax_table(physeq.tv))) == stevia.tv.simper.kw$OTU[i])
-  stevia.tv.simper.kw$Taxonomy[i] <-
-    paste(data.frame(tax_table(physeq.tv))[save,2], "-",
-          data.frame(tax_table(physeq.tv))[save,3], "-",
-          data.frame(tax_table(physeq.tv))[save,4], "-",
-          data.frame(tax_table(physeq.tv))[save,5], "-",
-          data.frame(tax_table(physeq.tv))[save,6])
-}
-#write.table(stevia.tv.simper.kw, "Simper_OTU/stevia.tv_time_krusk_simper.csv", sep=",")
 
 
 
 
 
 
-### BH CORRECTION FOR ALL OTU-LEVEL SIMPER COMPARISONS
-stevia.simper.kw$Group <- rep("All", nrow(stevia.simper.kw))
-stevia.simper.kw$OTU <- as.character(stevia.simper.kw$OTU)
-stevia.simper.kw$Comparison <- as.character(stevia.simper.kw$Comparison)
-stevia.pre.simper.kw$Group <- rep("Pre", nrow(stevia.pre.simper.kw))
-stevia.pre.simper.kw$OTU <- as.character(stevia.pre.simper.kw$OTU)
-stevia.pre.simper.kw$Comparison <- as.character(stevia.pre.simper.kw$Comparison)
-stevia.post.simper.kw$Group <- rep("Post", nrow(stevia.post.simper.kw))
-stevia.post.simper.kw$OTU <- as.character(stevia.post.simper.kw$OTU)
-stevia.post.simper.kw$Comparison <- as.character(stevia.post.simper.kw$Comparison)
-stevia.hf.simper.kw$Group <- rep("High Fat", nrow(stevia.hf.simper.kw))
-stevia.hf.simper.kw$OTU <- as.character(stevia.hf.simper.kw$OTU)
-stevia.hf.simper.kw$Comparison <- as.character(stevia.hf.simper.kw$Comparison)
-stevia.lf.simper.kw$Group <- rep("Low Fat", nrow(stevia.lf.simper.kw))
-stevia.lf.simper.kw$OTU <- as.character(stevia.lf.simper.kw$OTU)
-stevia.lf.simper.kw$Comparison <- as.character(stevia.lf.simper.kw$Comparison)
-stevia.sc.simper.kw$Group <- rep("Saccharin", nrow(stevia.sc.simper.kw))
-stevia.sc.simper.kw$OTU <- as.character(stevia.sc.simper.kw$OTU)
-stevia.sc.simper.kw$Comparison <- as.character(stevia.sc.simper.kw$Comparison)
-stevia.tv.simper.kw$Group <- rep("Stevia", nrow(stevia.tv.simper.kw))
-stevia.tv.simper.kw$OTU <- as.character(stevia.tv.simper.kw$OTU)
-stevia.tv.simper.kw$Comparison <- as.character(stevia.tv.simper.kw$Comparison)
-#stevia.post.rem.simper.kw$Group <- rep("Post_Rem", nrow(stevia.post.rem.simper.kw))
-#stevia.post.rem.simper.kw$OTU <- as.character(stevia.post.rem.simper.kw$OTU)
-#stevia.post.rem.simper.kw$Comparison <- as.character(stevia.post.rem.simper.kw$Comparison)
-stevia.simper.all <- stevia.simper.kw
-stevia.simper.all[(nrow(stevia.simper.all)+1):(nrow(stevia.simper.all)+nrow(stevia.pre.simper.kw)),] <- stevia.pre.simper.kw
-stevia.simper.all[(nrow(stevia.simper.all)+1):(nrow(stevia.simper.all)+nrow(stevia.post.simper.kw)),] <- stevia.post.simper.kw
-stevia.simper.all[(nrow(stevia.simper.all)+1):(nrow(stevia.simper.all)+nrow(stevia.hf.simper.kw)),] <- stevia.hf.simper.kw
-stevia.simper.all[(nrow(stevia.simper.all)+1):(nrow(stevia.simper.all)+nrow(stevia.lf.simper.kw)),] <- stevia.lf.simper.kw
-stevia.simper.all[(nrow(stevia.simper.all)+1):(nrow(stevia.simper.all)+nrow(stevia.sc.simper.kw)),] <- stevia.sc.simper.kw
-stevia.simper.all[(nrow(stevia.simper.all)+1):(nrow(stevia.simper.all)+nrow(stevia.tv.simper.kw)),] <- stevia.tv.simper.kw
-#stevia.simper.all[(nrow(stevia.simper.all)+1):(nrow(stevia.simper.all)+nrow(stevia.post.rem.simper.kw)),] <- stevia.post.rem.simper.kw
-stevia.simper.all$fdr_krusk_p.val <- p.adjust(stevia.simper.all$krusk_p.val, "BH")
-#write.table(stevia.simper.all, "stevia.simper.all.csv", sep=",")
+### BH P-value COrrection for Time Comparisons
+# Females
+stevia.hf.fem.simper.kw$Group <- rep("High Fat", nrow(stevia.hf.fem.simper.kw))
+stevia.hf.fem.simper.kw$OTU <- as.character(stevia.hf.fem.simper.kw$OTU)
+stevia.hf.fem.simper.kw$Comparison <- as.character(stevia.hf.fem.simper.kw$Comparison)
+stevia.lf.fem.simper.kw$Group <- rep("Low Fat", nrow(stevia.lf.fem.simper.kw))
+stevia.lf.fem.simper.kw$OTU <- as.character(stevia.lf.fem.simper.kw$OTU)
+stevia.lf.fem.simper.kw$Comparison <- as.character(stevia.lf.fem.simper.kw$Comparison)
+stevia.sc.fem.simper.kw$Group <- rep("Saccharin", nrow(stevia.sc.fem.simper.kw))
+stevia.sc.fem.simper.kw$OTU <- as.character(stevia.sc.fem.simper.kw$OTU)
+stevia.sc.fem.simper.kw$Comparison <- as.character(stevia.sc.fem.simper.kw$Comparison)
+stevia.tv.fem.simper.kw$Group <- rep("Stevia", nrow(stevia.tv.fem.simper.kw))
+stevia.tv.fem.simper.kw$OTU <- as.character(stevia.tv.fem.simper.kw$OTU)
+stevia.tv.fem.simper.kw$Comparison <- as.character(stevia.tv.fem.simper.kw$Comparison)
+simper.fem.time <- stevia.hf.fem.simper.kw
+simper.fem.time[(nrow(simper.fem.time)+1):(nrow(simper.fem.time)+nrow(stevia.lf.fem.simper.kw)),] <- stevia.lf.fem.simper.kw
+simper.fem.time[(nrow(simper.fem.time)+1):(nrow(simper.fem.time)+nrow(stevia.sc.fem.simper.kw)),] <- stevia.sc.fem.simper.kw
+simper.fem.time[(nrow(simper.fem.time)+1):(nrow(simper.fem.time)+nrow(stevia.tv.fem.simper.kw)),] <- stevia.tv.fem.simper.kw
+simper.fem.time$fdr_krusk_p.val <- p.adjust(simper.fem.time$krusk_p.val, "BH")
+#write.table(simper.fem.time, "simper.fem.time.csv", sep=",")
+
+# Males
+stevia.hf.mal.simper.kw$Group <- rep("High Fat", nrow(stevia.hf.mal.simper.kw))
+stevia.hf.mal.simper.kw$OTU <- as.character(stevia.hf.mal.simper.kw$OTU)
+stevia.hf.mal.simper.kw$Comparison <- as.character(stevia.hf.mal.simper.kw$Comparison)
+stevia.lf.mal.simper.kw$Group <- rep("Low Fat", nrow(stevia.lf.mal.simper.kw))
+stevia.lf.mal.simper.kw$OTU <- as.character(stevia.lf.mal.simper.kw$OTU)
+stevia.lf.mal.simper.kw$Comparison <- as.character(stevia.lf.mal.simper.kw$Comparison)
+stevia.sc.mal.simper.kw$Group <- rep("Saccharin", nrow(stevia.sc.mal.simper.kw))
+stevia.sc.mal.simper.kw$OTU <- as.character(stevia.sc.mal.simper.kw$OTU)
+stevia.sc.mal.simper.kw$Comparison <- as.character(stevia.sc.mal.simper.kw$Comparison)
+stevia.tv.mal.simper.kw$Group <- rep("Stevia", nrow(stevia.tv.mal.simper.kw))
+stevia.tv.mal.simper.kw$OTU <- as.character(stevia.tv.mal.simper.kw$OTU)
+stevia.tv.mal.simper.kw$Comparison <- as.character(stevia.tv.mal.simper.kw$Comparison)
+simper.mal.time <- stevia.hf.mal.simper.kw
+simper.mal.time[(nrow(simper.mal.time)+1):(nrow(simper.mal.time)+nrow(stevia.lf.mal.simper.kw)),] <- stevia.lf.mal.simper.kw
+simper.mal.time[(nrow(simper.mal.time)+1):(nrow(simper.mal.time)+nrow(stevia.sc.mal.simper.kw)),] <- stevia.sc.mal.simper.kw
+simper.mal.time[(nrow(simper.mal.time)+1):(nrow(simper.mal.time)+nrow(stevia.tv.mal.simper.kw)),] <- stevia.tv.mal.simper.kw
+simper.mal.time$fdr_krusk_p.val <- p.adjust(simper.mal.time$krusk_p.val, "BH")
+#write.table(simper.mal.time, "simper.mal.time.csv", sep=",")
 
 
 
 
 
-### Calculate mean rel abund for post-treatment
-physeq.post.relabund <- transform_sample_counts(physeq.post, function(x){(x/sum(x))*100})
-otu00003 <- subset_taxa(physeq.post.relabund, Species == "Otu00003")
+
+### Calculate mean rel abund for post-treatment (to double-check manually input #'s)
+# Female
+physeq.post.fem.relabund <- transform_sample_counts(physeq.post.fem, function(x){(x/sum(x))*100})
+otu00002 <- subset_taxa(physeq.post.fem.relabund, Species == "Otu00002")
+otu2 <- psmelt(otu00002)
+otu2.sum <- otu2 %>%
+  group_by(Treatment) %>%
+  summarize(Mean = mean(Abundance),
+            SD = sd(Abundance))
+otu00003 <- subset_taxa(physeq.post.fem.relabund, Species == "Otu00003")
 otu3 <- psmelt(otu00003)
 otu3.sum <- otu3 %>%
   group_by(Treatment) %>%
   summarize(Mean = mean(Abundance),
             SD = sd(Abundance))
-otu00009 <- subset_taxa(physeq.post.relabund, Species == "Otu00009")
-otu9 <- psmelt(otu00009)
-otu9.sum <- otu9 %>%
+otu00004 <- subset_taxa(physeq.post.fem.relabund, Species == "Otu00004")
+otu4 <- psmelt(otu00004)
+otu4.sum <- otu4 %>%
   group_by(Treatment) %>%
   summarize(Mean = mean(Abundance),
             SD = sd(Abundance))
-otu00018 <- subset_taxa(physeq.post.relabund, Species == "Otu00018")
+otu00006 <- subset_taxa(physeq.post.fem.relabund, Species == "Otu00006")
+otu6 <- psmelt(otu00006)
+otu6.sum <- otu6 %>%
+  group_by(Treatment) %>%
+  summarize(Mean = mean(Abundance),
+            SD = sd(Abundance))
+otu00008 <- subset_taxa(physeq.post.fem.relabund, Species == "Otu00008")
+otu8 <- psmelt(otu00008)
+otu8.sum <- otu8 %>%
+  group_by(Treatment) %>%
+  summarize(Mean = mean(Abundance),
+            SD = sd(Abundance))
+otu00010 <- subset_taxa(physeq.post.fem.relabund, Species == "Otu00010")
+otu10 <- psmelt(otu00010)
+otu10.sum <- otu10 %>%
+  group_by(Treatment) %>%
+  summarize(Mean = mean(Abundance),
+            SD = sd(Abundance))
+otu00012 <- subset_taxa(physeq.post.fem.relabund, Species == "Otu00012")
+otu12 <- psmelt(otu00012)
+otu12.sum <- otu12 %>%
+  group_by(Treatment) %>%
+  summarize(Mean = mean(Abundance),
+            SD = sd(Abundance))
+otu00014 <- subset_taxa(physeq.post.fem.relabund, Species == "Otu00014")
+otu14 <- psmelt(otu00014)
+otu14.sum <- otu14 %>%
+  group_by(Treatment) %>%
+  summarize(Mean = mean(Abundance),
+            SD = sd(Abundance))
+
+# Male
+physeq.post.mal.relabund <- transform_sample_counts(physeq.post.mal, function(x){(x/sum(x))*100})
+otu00002 <- subset_taxa(physeq.post.mal.relabund, Species == "Otu00002")
+otu2 <- psmelt(otu00002)
+otu2.sum <- otu2 %>%
+  group_by(Treatment) %>%
+  summarize(Mean = mean(Abundance),
+            SD = sd(Abundance))
+otu00004 <- subset_taxa(physeq.post.mal.relabund, Species == "Otu00004")
+otu4 <- psmelt(otu00004)
+otu4.sum <- otu4 %>%
+  group_by(Treatment) %>%
+  summarize(Mean = mean(Abundance),
+            SD = sd(Abundance))
+otu00010 <- subset_taxa(physeq.post.mal.relabund, Species == "Otu00010")
+otu10 <- psmelt(otu00010)
+otu10.sum <- otu10 %>%
+  group_by(Treatment) %>%
+  summarize(Mean = mean(Abundance),
+            SD = sd(Abundance))
+otu00012 <- subset_taxa(physeq.post.mal.relabund, Species == "Otu00012")
+otu12 <- psmelt(otu00012)
+otu12.sum <- otu12 %>%
+  group_by(Treatment) %>%
+  summarize(Mean = mean(Abundance),
+            SD = sd(Abundance))
+otu00014 <- subset_taxa(physeq.post.mal.relabund, Species == "Otu00014")
+otu14 <- psmelt(otu00014)
+otu14.sum <- otu14 %>%
+  group_by(Treatment) %>%
+  summarize(Mean = mean(Abundance),
+            SD = sd(Abundance))
+otu00018 <- subset_taxa(physeq.post.mal.relabund, Species == "Otu00018")
 otu18 <- psmelt(otu00018)
 otu18.sum <- otu18 %>%
   group_by(Treatment) %>%
   summarize(Mean = mean(Abundance),
             SD = sd(Abundance))
-otu00021 <- subset_taxa(physeq.post.relabund, Species == "Otu00021")
-otu21 <- psmelt(otu00021)
-otu21.sum <- otu21 %>%
+otu00033 <- subset_taxa(physeq.post.mal.relabund, Species == "Otu00033")
+otu33 <- psmelt(otu00033)
+otu33.sum <- otu33 %>%
   group_by(Treatment) %>%
   summarize(Mean = mean(Abundance),
             SD = sd(Abundance))
@@ -1789,71 +1988,129 @@ otu21.sum <- otu21 %>%
 
 
 
-### Calculate mean rel abund for Time comparison
-physeq.pair.relabund <- transform_sample_counts(physeq.pair, function(x){(x/sum(x))*100})
-otu00003 <- subset_taxa(physeq.pair.relabund, Species == "Otu00003")
-otu3 <- psmelt(otu00003)
-otu3.sum <- otu3 %>%
+### Calculate mean rel abund for time comparison (to double-check manually input #'s)
+# Female
+physeq.fem.relabund <- transform_sample_counts(physeq.fem, function(x){(x/sum(x))*100})
+otu00002 <- subset_taxa(physeq.fem.relabund, Species == "Otu00002")
+otu2 <- psmelt(otu00002)
+otu2.sum <- otu2 %>%
   group_by(Treatment, Time) %>%
   summarize(Mean = mean(Abundance),
             SD = sd(Abundance))
-otu00004 <- subset_taxa(physeq.pair.relabund, Species == "Otu00004")
-otu4 <- psmelt(otu00004)
-otu4.sum <- otu4 %>%
-  group_by(Treatment, Time) %>%
-  summarize(Mean = mean(Abundance),
-            SD = sd(Abundance))
-otu00005 <- subset_taxa(physeq.pair.relabund, Species == "Otu00005")
-otu5 <- psmelt(otu00005)
-otu5.sum <- otu5 %>%
-  group_by(Treatment, Time) %>%
-  summarize(Mean = mean(Abundance),
-            SD = sd(Abundance))
-otu00006 <- subset_taxa(physeq.pair.relabund, Species == "Otu00006")
+otu00006 <- subset_taxa(physeq.fem.relabund, Species == "Otu00006")
 otu6 <- psmelt(otu00006)
 otu6.sum <- otu6 %>%
   group_by(Treatment, Time) %>%
   summarize(Mean = mean(Abundance),
             SD = sd(Abundance))
-otu00008 <- subset_taxa(physeq.pair.relabund, Species == "Otu00008")
+otu00007 <- subset_taxa(physeq.fem.relabund, Species == "Otu00007")
+otu7 <- psmelt(otu00007)
+otu7.sum <- otu7 %>%
+  group_by(Treatment, Time) %>%
+  summarize(Mean = mean(Abundance),
+            SD = sd(Abundance))
+otu00008 <- subset_taxa(physeq.fem.relabund, Species == "Otu00008")
 otu8 <- psmelt(otu00008)
 otu8.sum <- otu8 %>%
   group_by(Treatment, Time) %>%
   summarize(Mean = mean(Abundance),
             SD = sd(Abundance))
-otu00009 <- subset_taxa(physeq.pair.relabund, Species == "Otu00009")
-otu9 <- psmelt(otu00009)
-otu9.sum <- otu9 %>%
-  group_by(Treatment, Time) %>%
-  summarize(Mean = mean(Abundance),
-            SD = sd(Abundance))
-otu00010 <- subset_taxa(physeq.pair.relabund, Species == "Otu00010")
+otu00010 <- subset_taxa(physeq.fem.relabund, Species == "Otu00010")
 otu10 <- psmelt(otu00010)
 otu10.sum <- otu10 %>%
   group_by(Treatment, Time) %>%
   summarize(Mean = mean(Abundance),
             SD = sd(Abundance))
-otu00012 <- subset_taxa(physeq.pair.relabund, Species == "Otu00012")
+otu00011 <- subset_taxa(physeq.fem.relabund, Species == "Otu00011")
+otu11 <- psmelt(otu00011)
+otu11.sum <- otu11 %>%
+  group_by(Treatment, Time) %>%
+  summarize(Mean = mean(Abundance),
+            SD = sd(Abundance))
+otu00012 <- subset_taxa(physeq.fem.relabund, Species == "Otu00012")
 otu12 <- psmelt(otu00012)
 otu12.sum <- otu12 %>%
   group_by(Treatment, Time) %>%
   summarize(Mean = mean(Abundance),
             SD = sd(Abundance))
-otu00014 <- subset_taxa(physeq.pair.relabund, Species == "Otu00014")
+otu00014 <- subset_taxa(physeq.fem.relabund, Species == "Otu00014")
 otu14 <- psmelt(otu00014)
 otu14.sum <- otu14 %>%
   group_by(Treatment, Time) %>%
   summarize(Mean = mean(Abundance),
             SD = sd(Abundance))
-otu00015 <- subset_taxa(physeq.pair.relabund, Species == "Otu00015")
+otu00015 <- subset_taxa(physeq.fem.relabund, Species == "Otu00015")
 otu15 <- psmelt(otu00015)
 otu15.sum <- otu15 %>%
   group_by(Treatment, Time) %>%
   summarize(Mean = mean(Abundance),
             SD = sd(Abundance))
-otu00023 <- subset_taxa(physeq.pair.relabund, Species == "Otu00023")
+otu00023 <- subset_taxa(physeq.fem.relabund, Species == "Otu00023")
 otu23 <- psmelt(otu00023)
 otu23.sum <- otu23 %>%
+  group_by(Treatment, Time) %>%
+  summarize(Mean = mean(Abundance),
+            SD = sd(Abundance))
+
+# Male
+physeq.mal.relabund <- transform_sample_counts(physeq.mal, function(x){(x/sum(x))*100})
+otu00001 <- subset_taxa(physeq.mal.relabund, Species == "Otu00001")
+otu1 <- psmelt(otu00001)
+otu1.sum <- otu1 %>%
+  group_by(Treatment, Time) %>%
+  summarize(Mean = mean(Abundance),
+            SD = sd(Abundance))
+otu00003 <- subset_taxa(physeq.mal.relabund, Species == "Otu00003")
+otu3 <- psmelt(otu00003)
+otu3.sum <- otu3 %>%
+  group_by(Treatment, Time) %>%
+  summarize(Mean = mean(Abundance),
+            SD = sd(Abundance))
+otu00004 <- subset_taxa(physeq.mal.relabund, Species == "Otu00004")
+otu4 <- psmelt(otu00004)
+otu4.sum <- otu4 %>%
+  group_by(Treatment, Time) %>%
+  summarize(Mean = mean(Abundance),
+            SD = sd(Abundance))
+otu00005 <- subset_taxa(physeq.mal.relabund, Species == "Otu00005")
+otu5 <- psmelt(otu00005)
+otu5.sum <- otu5 %>%
+  group_by(Treatment, Time) %>%
+  summarize(Mean = mean(Abundance),
+            SD = sd(Abundance))
+otu00010 <- subset_taxa(physeq.mal.relabund, Species == "Otu00010")
+otu10 <- psmelt(otu00010)
+otu10.sum <- otu10 %>%
+  group_by(Treatment, Time) %>%
+  summarize(Mean = mean(Abundance),
+            SD = sd(Abundance))
+otu00012 <- subset_taxa(physeq.mal.relabund, Species == "Otu00012")
+otu12 <- psmelt(otu00012)
+otu12.sum <- otu12 %>%
+  group_by(Treatment, Time) %>%
+  summarize(Mean = mean(Abundance),
+            SD = sd(Abundance))
+otu00013 <- subset_taxa(physeq.mal.relabund, Species == "Otu00013")
+otu13 <- psmelt(otu00013)
+otu13.sum <- otu13 %>%
+  group_by(Treatment, Time) %>%
+  summarize(Mean = mean(Abundance),
+            SD = sd(Abundance))
+otu00014 <- subset_taxa(physeq.mal.relabund, Species == "Otu00014")
+otu14 <- psmelt(otu00014)
+otu14.sum <- otu14 %>%
+  group_by(Treatment, Time) %>%
+  summarize(Mean = mean(Abundance),
+            SD = sd(Abundance))
+otu00018 <- subset_taxa(physeq.mal.relabund, Species == "Otu00018")
+otu18 <- psmelt(otu00018)
+otu18.sum <- otu18 %>%
+  group_by(Treatment, Time) %>%
+  summarize(Mean = mean(Abundance),
+            SD = sd(Abundance))
+otu00033 <- subset_taxa(physeq.mal.relabund, Species == "Otu00033")
+otu33 <- psmelt(otu00033)
+otu33.sum <- otu33 %>%
   group_by(Treatment, Time) %>%
   summarize(Mean = mean(Abundance),
             SD = sd(Abundance))
@@ -1863,32 +2120,70 @@ otu23.sum <- otu23 %>%
 
 ### SIMPER Heatmap
 ```{r}
-### Prep Post-Treatment
-physeq.simper.post <- subset_taxa(physeq.post, Species == "Otu00002" | Species == "Otu00003" | Species == "Otu00004" | Species == "Otu00008" | Species == "Otu00009" | Species == "Otu00010" | Species == "Otu00012" | Species == "Otu00014" | Species == "Otu00018" | Species == "Otu00021" | Species == "Otu00023")
-physeq.simper.post.tax <- data.frame(tax_table(physeq.simper.post))
-physeq.simper.post.tax$Name <- c("Akkermansia", "Bacteroides", "S24-7", "Anaeroplasma", "S24-7", "Ruminiclostridium", "Lachnospiraceae", "Lactococcus", "Lactobacillus", "S24-7", "Alistipes")
-physeq.simper.post.tax <- tax_table(physeq.simper.post.tax)
-taxa_names(physeq.simper.post.tax) <- taxa_names(physeq.simper.post)
-simper.post.treat <- read.csv("Simper_OTU_post.csv")
-simper.post.treat.hm <- simper.post.treat
-rownames(simper.post.treat.hm) <- simper.post.treat.hm$OTU
-simper.post.treat.hm <- simper.post.treat.hm[,-1]
-simper.post.treat.hm <- simper.post.treat.hm[,-5:-7]
-simper.post.sampdat <- data.frame(c("LowFat", "HighFat", "Saccharin", "Stevia"))
-colnames(simper.post.sampdat) <- "Treatment"
-rownames(simper.post.sampdat) <- simper.post.sampdat$Treatment
-physeq.simper.post <- merge_phyloseq(otu_table(simper.post.treat.hm, taxa_are_rows=T), physeq.simper.post.tax, sample_data(simper.post.sampdat))
-colnames(tax_table(physeq.simper.post)) <- 
+### Prep Post-Treatment Female
+physeq.simper.post.fem <- subset_taxa(physeq.post.fem, Species == "Otu00002" | Species == "Otu00003" | 
+                                        Species == "Otu00004" | Species == "Otu00006" | Species == "Otu00008" |
+                                        Species == "Otu00010" | Species == "Otu00012" | Species == "Otu00014")
+physeq.simper.post.fem.tax <- data.frame(tax_table(physeq.simper.post.fem))
+physeq.simper.post.fem.tax$Name <- c("Akkermansia", "Bacteroides", "S24-7", "S24-7", "Anaeroplasma",
+                                     "Ruminiclostridium", "Lachnospiraceae", "Lactococcus")
+physeq.simper.post.fem.tax <- tax_table(physeq.simper.post.fem.tax)
+taxa_names(physeq.simper.post.fem.tax) <- taxa_names(physeq.simper.post.fem)
+simper.post.fem.treat <- read.csv("Simper_OTU_post_fem.csv")
+simper.post.fem.treat.hm <- simper.post.fem.treat
+rownames(simper.post.fem.treat.hm) <- simper.post.fem.treat.hm$OTU
+simper.post.fem.treat.hm <- simper.post.fem.treat.hm[,-1]
+simper.post.fem.treat.hm <- simper.post.fem.treat.hm[,-5:-7]
+simper.post.fem.sampdat <- data.frame(c("LowFat", "HighFat", "Saccharin", "Stevia"))
+colnames(simper.post.fem.sampdat) <- "Treatment"
+rownames(simper.post.fem.sampdat) <- simper.post.fem.sampdat$Treatment
+physeq.simper.post.fem <- merge_phyloseq(otu_table(simper.post.fem.treat.hm, taxa_are_rows=T), physeq.simper.post.fem.tax, sample_data(simper.post.fem.sampdat))
+colnames(tax_table(physeq.simper.post.fem)) <- 
   c("Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species", "OTU_Classification")
-physeq.simper.post <- transform_sample_counts(physeq.simper.post, function(x){x*100})
-sample_data(physeq.simper.post)$Treatment <- ordered(sample_data(physeq.simper.post)$Treatment, levels=c("LowFat", "HighFat", "Saccharin", "Stevia"))
+#physeq.simper.post.fem <- transform_sample_counts(physeq.simper.post.fem, function(x){x*100})
+sample_data(physeq.simper.post.fem)$Treatment <- ordered(sample_data(physeq.simper.post.fem)$Treatment,
+                                                         levels=c("LowFat", "HighFat", "Saccharin", "Stevia"))
+
+
+
+
+### Prep Post-Treatment Male
+physeq.simper.post.mal <- subset_taxa(physeq.post.mal, Species == "Otu00002" | Species == "Otu00004" | 
+                                        Species == "Otu00010" | Species == "Otu00012" | Species == "Otu00014" |
+                                        Species == "Otu00018" | Species == "Otu00033")
+physeq.simper.post.mal.tax <- data.frame(tax_table(physeq.simper.post.mal))
+physeq.simper.post.mal.tax$Name <- c("Akkermansia", "S24-7", "Ruminiclostridium", "Lachnospiraceae", "Lactococcus",
+                                     "Lactobacillus", "NK4A136")
+physeq.simper.post.mal.tax <- tax_table(physeq.simper.post.mal.tax)
+taxa_names(physeq.simper.post.mal.tax) <- taxa_names(physeq.simper.post.mal)
+simper.post.mal.treat <- read.csv("Simper_OTU_post_mal.csv")
+simper.post.mal.treat.hm <- simper.post.mal.treat
+rownames(simper.post.mal.treat.hm) <- simper.post.mal.treat.hm$OTU
+simper.post.mal.treat.hm <- simper.post.mal.treat.hm[,-1]
+simper.post.mal.treat.hm <- simper.post.mal.treat.hm[,-5:-7]
+simper.post.mal.sampdat <- data.frame(c("LowFat", "HighFat", "Saccharin", "Stevia"))
+colnames(simper.post.mal.sampdat) <- "Treatment"
+rownames(simper.post.mal.sampdat) <- simper.post.mal.sampdat$Treatment
+physeq.simper.post.mal <- merge_phyloseq(otu_table(simper.post.mal.treat.hm, taxa_are_rows=T), physeq.simper.post.mal.tax, sample_data(simper.post.mal.sampdat))
+colnames(tax_table(physeq.simper.post.mal)) <- 
+  c("Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species", "OTU_Classification")
+#physeq.simper.post.mal <- transform_sample_counts(physeq.simper.post.mal, function(x){x*100})
+sample_data(physeq.simper.post.mal)$Treatment <- ordered(sample_data(physeq.simper.post.mal)$Treatment,
+                                                         levels=c("LowFat", "HighFat", "Saccharin", "Stevia"))
+
+
+
+
+
+
+
 
 ### HeatMap Post-Treatment
 # http://www.roymfrancis.com/a-guide-to-elegant-tiled-heatmaps-in-r/
 # https://github.com/tidyverse/ggplot2/pull/2541
-post.hm <- plot_heatmap(physeq.simper.post, sample.label = "Treatment", sample.order = c("LowFat", "HighFat", "Saccharin", "Stevia"), taxa.label = "OTU_Classification", taxa.order = "Phylum", low = "#FFFFCC", high = "firebrick3", na.value = "#FFFFFC") +
+post.fem.hm <- plot_heatmap(physeq.simper.post.fem, sample.label = "Treatment", sample.order = c("LowFat", "HighFat", "Saccharin", "Stevia"), taxa.label = "OTU_Classification", taxa.order = "Phylum", low = "#FFFFCC", high = "firebrick3", na.value = "#FFFFFC") +
   geom_tile(colour="gray40") +
-  geom_text(aes(label=sprintf("%0.2f", round(Abundance, digits=2)))) +
+  #geom_text(aes(label=sprintf("%0.2f", round(Abundance, digits=2)))) +
   scale_fill_gradient(name="Relative Abundance (%)", low = "#FFFFCC", high = "firebrick3") +
   scale_x_discrete(labels = c("Low Fat", "High Fat", "Saccharin", "Stevia")) +
   scale_y_discrete(labels=c(expression(" "^ac~"Bacteroides"), expression(" "^abc~"S24-7"), 
@@ -1897,7 +2192,37 @@ post.hm <- plot_heatmap(physeq.simper.post, sample.label = "Treatment", sample.o
                             expression(" "^abc~"Lachnospiraceae"), expression(" "^acde~"Lactococcus"),
                             expression(" "^c~"Lactobacillus"), expression(" "^abc~"Anaeroplasma"), 
                             expression(" "^abc~"Akkermansia"))) +
-  ylab("OTU Classification") + xlab("Post-treatment Group") +
+  ylab("OTU Classification") + xlab("Female Post-treatment Group") +
+  theme(panel.border=element_blank(),
+        axis.text.x = element_text(angle=50, hjust=1, vjust=1.2, family="Arial", size=10),
+        axis.text.y = element_text(family="Arial", size=10),
+        axis.ticks.x=element_blank(),
+        axis.ticks.y=element_blank(),
+        axis.title.x = element_text(size=12, face="bold", family="Arial"),
+        axis.title.y = element_text(margin = margin(t=0, r=20, b=0, l=0), size=12, face="bold", family="Arial"),
+        axis.line=element_blank(),
+        legend.title = element_text(family = "Arial", size=10, face="bold"),
+        legend.text = element_text(family = "Arial", size=10),
+        plot.title = element_text(family = "Arial", size=10, face="bold")
+  ) +
+  guides(fill = guide_colorbar(barheight = unit( 3 , "in" ),
+                                ticks.color = "black",
+                                ticks.linewidth = 1,
+                                frame.color = "black",
+                                frame.linewidth = 1))
+
+post.mal.hm <- plot_heatmap(physeq.simper.post.mal, sample.label = "Treatment", sample.order = c("LowFat", "HighFat", "Saccharin", "Stevia"), taxa.label = "OTU_Classification", taxa.order = "Phylum", low = "#FFFFCC", high = "firebrick3", na.value = "#FFFFFC") +
+  geom_tile(colour="gray40") +
+  #geom_text(aes(label=sprintf("%0.2f", round(Abundance, digits=2)))) +
+  scale_fill_gradient(name="Relative Abundance (%)", low = "#FFFFCC", high = "firebrick3") +
+  scale_x_discrete(labels = c("Low Fat", "High Fat", "Saccharin", "Stevia")) +
+  scale_y_discrete(labels=c(expression(" "^ac~"Bacteroides"), expression(" "^abc~"S24-7"), 
+                            expression(" "^d~"S24-7"), expression(" "^bc~"S24-7"), 
+                            expression(" "^abc~"Alistipes"), expression(" "^abc~"Ruminiclostridium"),
+                            expression(" "^abc~"Lachnospiraceae"), expression(" "^acde~"Lactococcus"),
+                            expression(" "^c~"Lactobacillus"), expression(" "^abc~"Anaeroplasma"), 
+                            expression(" "^abc~"Akkermansia"))) +
+  ylab("OTU Classification") + xlab("Male Post-treatment Group") +
   theme(panel.border=element_blank(),
         axis.text.x = element_text(angle=50, hjust=1, vjust=1.2, family="Arial", size=10),
         axis.text.y = element_text(family="Arial", size=10),
@@ -1919,35 +2244,105 @@ post.hm <- plot_heatmap(physeq.simper.post, sample.label = "Treatment", sample.o
 
 
 
-### Prep Time
-physeq.simper.time <- subset_taxa(physeq.pair, Species == "Otu00003" | Species == "Otu00004" | 
-                                    Species == "Otu00005" | Species == "Otu00006" | Species == "Otu00008" | 
-                                    Species == "Otu00009" | Species == "Otu00010" | Species == "Otu00012" | 
-                                    Species == "Otu00014" | Species == "Otu00015" | Species == "Otu00023")
-physeq.simper.time.tax <- data.frame(tax_table(physeq.simper.time))
-physeq.simper.time.tax$Name <- c("Bacteroides", "S24-7", "S24-7", "S24-7", "Anaeroplasma", "S24-7", "Ruminiclostridium", "Lachnospiraceae", "Lactococcus", "NK4A136", "Alistipes")
-physeq.simper.time.tax <- tax_table(physeq.simper.time.tax)
-taxa_names(physeq.simper.time.tax) <- taxa_names(physeq.simper.time)
-simper.time.treat <- read.csv("Simper_OTU_time.csv")
-simper.time.treat.hm <- simper.time.treat
-rownames(simper.time.treat.hm) <- simper.time.treat.hm$OTU
-simper.time.treat.hm <- simper.time.treat.hm[,-1]
-simper.time.treat.hm <- simper.time.treat.hm[,-9:-11]
-simper.time.sampdat <- data.frame(c("LF_Pre", "LF_Post", "HF_Pre", "HF_Post", "SC_Pre", "SC_Post", "TV_Pre", "TV_Post"))
-colnames(simper.time.sampdat) <- "Treatment_Time"
-rownames(simper.time.sampdat) <- simper.time.sampdat$Treatment_Time
-physeq.simper.time <- merge_phyloseq(otu_table(simper.time.treat.hm, taxa_are_rows=T), physeq.simper.time.tax, sample_data(simper.time.sampdat))
-colnames(tax_table(physeq.simper.time)) <- 
+
+### Prep Time - Females
+physeq.simper.time.fem <- subset_taxa(physeq.pair, Species == "Otu00002" | Species == "Otu00006" | 
+                                      Spcies == "Otu00007" | Species == "Otu00008" | Species == "Otu00010" | 
+                                      Species == "Otu00011" | Species == "Otu00012" | Species == "Otu00014" |
+                                      Species == "Otu00015" | Species == "Otu00023")
+physeq.simper.time.fem.tax <- data.frame(tax_table(physeq.simper.time.fem))
+physeq.simper.time.fem.tax$Name <- c("Akkermansia", "S24-7", "S24-7", "Anaeroplasma", "Ruminiclostridium", "S24-7",
+                                     "Lachnospiraceae", "Lactococcus", "NK4A136", "Alistipes")
+physeq.simper.time.fem.tax <- tax_table(physeq.simper.time.fem.tax)
+taxa_names(physeq.simper.time.fem.tax) <- taxa_names(physeq.simper.time.fem)
+simper.time.fem.treat <- read.csv("Simper_OTU_time_fem.csv")
+simper.time.fem.treat.hm <- simper.time.fem.treat
+rownames(simper.time.fem.treat.hm) <- simper.time.fem.treat.hm$OTU
+simper.time.fem.treat.hm <- simper.time.fem.treat.hm[,-1]
+simper.time.fem.treat.hm <- simper.time.fem.treat.hm[,-9:-11]
+simper.time.fem.sampdat <- data.frame(c("LF_Pre", "LF_Post", "HF_Pre", "HF_Post", "SC_Pre", "SC_Post", "TV_Pre", "TV_Post"))
+colnames(simper.time.fem.sampdat) <- "Treatment_Time"
+rownames(simper.time.fem.sampdat) <- simper.time.fem.sampdat$Treatment_Time
+physeq.simper.time.fem <- merge_phyloseq(otu_table(simper.time.fem.treat.hm, taxa_are_rows=T), physeq.simper.time.fem.tax, sample_data(simper.time.fem.sampdat))
+colnames(tax_table(physeq.simper.time.fem)) <- 
   c("Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species", "OTU_Classification")
-physeq.simper.time <- transform_sample_counts(physeq.simper.time, function(x){x*100})
-sample_data(physeq.simper.time)$Treatment_Time <- ordered(sample_data(physeq.simper.time)$Treatment_Time, levels=c("LF_Pre", "LF_Post", "HF_Pre", "HF_Post", "SC_Pre", "SC_Post", "TV_Pre", "TV_Post"))
+#physeq.simper.time.fem <- transform_sample_counts(physeq.simper.time.fem, function(x){x*100})
+sample_data(physeq.simper.time.fem)$Treatment_Time <- ordered(sample_data(physeq.simper.time.fem)$Treatment_Time, levels=c("LF_Pre", "LF_Post", "HF_Pre", "HF_Post", "SC_Pre", "SC_Post", "TV_Pre", "TV_Post"))
+
+
+
+
+### Prep Time - Males
+physeq.simper.time.mal <- subset_taxa(physeq.pair, Species == "Otu00001" | Species == "Otu00003" | 
+                                      Species == "Otu00004" | Species == "Otu00005" | Species == "Otu00010" |
+                                      Species == "Otu00012" | Species == "Otu00013" | Species == "Otu00014" |
+                                      Species == "Otu00018" | Species == "Otu00033" )
+physeq.simper.time.mal.tax <- data.frame(tax_table(physeq.simper.time.mal))
+physeq.simper.time.mal.tax$Name <- c("S24-7", "Bacteroides", "S24-7", "S24-7", "Ruminiclostridium",
+                                     "Lachnospiraceae", "Lachnospiraceae", "Lactococcus", "Lactobacillus",
+                                     "NK4A136")
+physeq.simper.time.mal.tax <- tax_table(physeq.simper.time.mal.tax)
+taxa_names(physeq.simper.time.mal.tax) <- taxa_names(physeq.simper.time.mal)
+simper.time.mal.treat <- read.csv("Simper_OTU_time_mal.csv")
+simper.time.mal.treat.hm <- simper.time.mal.treat
+rownames(simper.time.mal.treat.hm) <- simper.time.mal.treat.hm$OTU
+simper.time.mal.treat.hm <- simper.time.mal.treat.hm[,-1]
+simper.time.mal.treat.hm <- simper.time.mal.treat.hm[,-9:-11]
+simper.time.mal.sampdat <- data.frame(c("LF_Pre", "LF_Post", "HF_Pre", "HF_Post", "SC_Pre", "SC_Post", "TV_Pre", "TV_Post"))
+colnames(simper.time.mal.sampdat) <- "Treatment_Time"
+rownames(simper.time.mal.sampdat) <- simper.time.mal.sampdat$Treatment_Time
+physeq.simper.time.mal <- merge_phyloseq(otu_table(simper.time.mal.treat.hm, taxa_are_rows=T), physeq.simper.time.mal.tax, sample_data(simper.time.mal.sampdat))
+colnames(tax_table(physeq.simper.time.mal)) <- 
+  c("Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species", "OTU_Classification")
+#physeq.simper.time.mal <- transform_sample_counts(physeq.simper.time.mal, function(x){x*100})
+sample_data(physeq.simper.time.mal)$Treatment_Time <- ordered(sample_data(physeq.simper.time.mal)$Treatment_Time, levels=c("LF_Pre", "LF_Post", "HF_Pre", "HF_Post", "SC_Pre", "SC_Post", "TV_Pre", "TV_Post"))
+
+
+
+
+
+
+
+
 
 ### HeatMap Time
 # http://www.roymfrancis.com/a-guide-to-elegant-tiled-heatmaps-in-r/
 # https://github.com/tidyverse/ggplot2/pull/2541
-time.hm <- plot_heatmap(physeq.simper.time, sample.label = "Treatment_Time", sample.order = c("LF_Pre", "LF_Post", "HF_Pre", "HF_Post", "SC_Pre", "SC_Post", "TV_Pre", "TV_Post"), taxa.label = "OTU_Classification", taxa.order = "Phylum", low = "#FFFFCC", high = "firebrick3", na.value = "#FFFFFC") +
+time.fem.hm <- plot_heatmap(physeq.simper.time.fem, sample.label = "Treatment_Time", sample.order = c("LF_Pre", "LF_Post", "HF_Pre", "HF_Post", "SC_Pre", "SC_Post", "TV_Pre", "TV_Post"), taxa.label = "OTU_Classification", taxa.order = "Phylum", low = "#FFFFCC", high = "firebrick3", na.value = "#FFFFFC") +
   geom_tile(colour="gray40") +
-  geom_text(aes(label=sprintf("%0.2f", round(Abundance, digits=2)))) +
+  #geom_text(aes(label=sprintf("%0.2f", round(Abundance, digits=2)))) +
+  scale_fill_gradient(name="Relative Abundance (%)", low = "#FFFFCC", high = "firebrick3", limits=c(0,12)) +
+  scale_x_discrete(labels = c("Low Fat Pre", "Low Fat Post", "High Fat Pre", "High Fat Post",
+                              "Saccharin Pre", "Saccharin Post", "Stevia Pre", "Stevia Post")) +
+  scale_y_discrete(labels=c(expression(" "^a~"Bacteroides"), expression(" "^bcd~"S24-7"), 
+                            expression(" "^bcd~"S24-7"), expression(" "^c~"S24-7"), 
+                            expression(" "^c~"S24-7"), expression(" "^a~"Alistipes"),
+                            expression(" "^bcd~"Ruminiclostridium"), expression(" "^bcd~"Lachnospiraceae"),
+                            expression(" "^bd~"Lactococcus"), expression(" "^ab~"NK4A136"),
+                            expression(" "^cd~"Anaeroplasma"))) +
+  ylab("OTU Classification") + xlab("Group") +
+  theme(panel.border=element_blank(),
+        axis.text.x = element_text(angle=50, hjust=1.1, vjust=1.18, family="Arial", size=10, 
+                                   margin = margin(t=0, r=0, b=0, l=0)),
+        axis.text.y = element_text(family="Arial", size=10),
+        axis.ticks.x=element_blank(),
+        axis.ticks.y=element_blank(),
+        axis.title.x = element_text(size=12, face="bold", family="Arial"),
+        axis.title.y = element_text(margin = margin(t=0, r=20, b=0, l=0), size=12, face="bold", family="Arial"),
+        axis.line=element_blank(),
+        legend.title = element_text(family = "Arial", size=10, face="bold"),
+        legend.text = element_text(family = "Arial", size=10),
+        plot.title = element_text(family = "Arial", size=10, face="bold")
+  ) +
+  guides(fill = guide_colorbar(barheight = unit( 3 , "in" ),
+                                ticks.color = "black",
+                                ticks.linewidth = 1,
+                                frame.color = "black",
+                                frame.linewidth = 1))
+
+time.mal.hm <- plot_heatmap(physeq.simper.time.mal, sample.label = "Treatment_Time", sample.order = c("LF_Pre", "LF_Post", "HF_Pre", "HF_Post", "SC_Pre", "SC_Post", "TV_Pre", "TV_Post"), taxa.label = "OTU_Classification", taxa.order = "Phylum", low = "#FFFFCC", high = "firebrick3", na.value = "#FFFFFC") +
+  geom_tile(colour="gray40") +
+  #geom_text(aes(label=sprintf("%0.2f", round(Abundance, digits=2)))) +
   scale_fill_gradient(name="Relative Abundance (%)", low = "#FFFFCC", high = "firebrick3", limits=c(0,12)) +
   scale_x_discrete(labels = c("Low Fat Pre", "Low Fat Post", "High Fat Pre", "High Fat Post",
                               "Saccharin Pre", "Saccharin Post", "Stevia Pre", "Stevia Post")) +
