@@ -11,7 +11,6 @@ library(ggplot2)
 library(vegan)
 library(phyloseq)
 library(grid)
-library(RColorBrewer)
 library(extrafont)
 loadfonts(device="win")
 windowsFonts(Times="Arial")
@@ -461,10 +460,13 @@ kruskal.test(formula = chao ~ Treatment, data=adiv.pair[which(adiv.pair$Time == 
   # p-value = 0.0003939
 pairwise.wilcox.test(adiv.pair$chao, adiv.pair$Treatment, p.adjust.method = "fdr")
   # LowFat - HighFat = 0.014
+    # Low Fat > High Fat = 0.007
   # Saccharin - HighFat = 0.865
   # Saccharin - LowFat = 0.007
+    # Low Fat > Saccharin = 0.0035
   # Stevia - HighFat = 0.986
   # Stevia - LowFat = 0.018
+    # Low Fat > Stevia = 0.009
   # Stevia - Saccharin = 0.865
   ## Low fat vs. high fat = sig diff
 wilcox.test(chao ~ Diet, data=adiv.pair, alternative = "greater")
