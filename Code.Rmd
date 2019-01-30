@@ -397,23 +397,6 @@ load("physeq/Physeq.tv.mal.RData")
 ```{r}
 adiv.pair <- data.frame(sample_data(physeq.pair))
 
-### Coverage
-# Plot
-ggplot(adiv.pair, aes(x=Treatment, y= coverage, fill = Treatment)) +
-  geom_boxplot(position=position_dodge(1)) +
-  geom_point() + 
-  facet_grid(.~Time) +
-  xlab("Treatment") +
-  scale_fill_manual(values=c("#F0AC5F", "#FF0000", "#92D050", "#3565FF")) +
-  ylab("Coverage")
-# Test normality
-hist(adiv.pair$coverage, breaks=10)
-qqnorm(adiv.pair$coverage)
-qqline(adiv.pair$coverage)
-shapiro.test(adiv.pair$coverage)
-  # p-value = 0.003709
-  # Not normal
-
 ### Chao
 # Plot
 chao.ann <- data.frame(lab=c("a", "b", "b", "b"), Time = factor(c("Post-treatment", "Post-treatment", "Post-treatment", "Post-treatment")), Treatment = factor(c("Low Fat", "High Fat", "Saccharin", "Stevia")))
