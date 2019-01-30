@@ -1105,7 +1105,7 @@ fb.diet.sum <- fb.post %>%
 ```{r}
 ### Paired
 bray.nmds <- ordinate(physeq=physeq.pair, method="NMDS", distance="bray")
-  # stress = 9.279067e-05 
+  # stress = 9.095252e-05 
 
 all.nmds <- plot_ordination(physeq=physeq.pair, ordination=bray.nmds, color="Treatment", shape="Time") +
   scale_shape_manual(values=c(19,2), labels=c("Pre-treat", "Post-treat")) +
@@ -1125,7 +1125,7 @@ all.nmds <- plot_ordination(physeq=physeq.pair, ordination=bray.nmds, color="Tre
         legend.margin=margin(0,0,0,0),
         legend.box.margin=margin(-10,0,-10,-8)
         ) +
-  annotate("text", x = 0.56, y = -1.3e-04, label = "stress = 0.00009", size=2, family="Arial") +
+  annotate("text", x = 0.56, y = -1.05e-04, label = "stress = 0.00009", size=2, family="Arial") +
   guides(color = guide_legend(order=1), shape = guide_legend(order=2))
 
 
