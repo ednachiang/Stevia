@@ -404,7 +404,7 @@ ggplot(adiv.pair, aes(x=Treatment, y= coverage, fill = Treatment)) +
   geom_point() + 
   facet_grid(.~Time) +
   xlab("Treatment") +
-  scale_fill_manual(values=c("rosybrown", "brown2", "limegreen", "dodgerblue2")) +
+  scale_fill_manual(values=c("#F0AC5F", "#FF0000", "#92D050", "#3565FF")) +
   ylab("Coverage")
 # Test normality
 hist(adiv.pair$coverage, breaks=10)
@@ -425,7 +425,7 @@ ggplot(adiv.pair, aes(x=Treatment, y=chao, fill = Treatment)) +
   geom_point(position = position_dodge(width = 0.2)) + 
   facet_grid(.~Time) +
   xlab("Treatment") + 
-  scale_fill_manual(values=c("rosybrown", "brown2", "limegreen", "dodgerblue2")) +
+  scale_fill_manual(values=c("#F0AC5F", "#FF0000", "#92D050", "#3565FF")) +
   ylab("Chao Richness") +
   scale_y_continuous(breaks = c(50, 100, 150, 200, 250, 300, 350), limits = c(50,350)) +
   theme(panel.grid.major = element_blank(),
@@ -505,7 +505,7 @@ shannon.plot <- ggplot(adiv.pair, aes(x=Treatment, y=shannon, fill = Treatment))
   geom_boxplot(position=position_dodge(1)) +
   geom_point(position = position_dodge(width = 0.2)) + 
   facet_grid(.~Time) +
-  scale_fill_manual(values=c("rosybrown", "brown2", "limegreen", "dodgerblue2")) +
+  scale_fill_manual(values=c("#F0AC5F", "#FF0000", "#92D050", "#3565FF")) +
   xlab("Treatment") +
   ylab("Shannon Diversity") +
   scale_y_continuous(breaks=c(2.75, 3.00, 3.25, 3.50, 3.75), limits= c(2.75, 3.75)) +
@@ -1058,7 +1058,6 @@ qqline(fb.tv$FB_Ratio)
 shapiro.test(fb.tv$FB_Ratio)
   # p-value = 0.1139
   # However, since Low Fat Pre vs. Post is Not Normal, I'll use a non-parametric test. This is conservative.
-
 # Wilcoxon (Paired)
 wilcox.test(FB_Ratio ~ Time, data=fb.tv, paired=T, alternative="less")
   # p-value = 0.007813
@@ -1127,7 +1126,7 @@ bray.nmds <- ordinate(physeq=physeq.pair, method="NMDS", distance="bray")
 
 all.nmds <- plot_ordination(physeq=physeq.pair, ordination=bray.nmds, color="Treatment", shape="Time") +
   scale_shape_manual(values=c(19,2), labels=c("Pre-treat", "Post-treat")) +
-  scale_color_manual(values=c("rosybrown", "brown2", "limegreen", "dodgerblue2")) +
+  scale_color_manual(values=c("#F0AC5F", "#FF0000", "#92D050", "#3565FF")) +
   ggtitle("All Samples") +
   #geom_point(size=2, stroke=1.5) +
   theme(panel.grid.major = element_blank(),
@@ -1201,7 +1200,7 @@ load("bray.nmds.post.rem.RData")
 
 post.rem.nmds <- plot_ordination(physeq=physeq.post.rem, ordination=bray.nmds.post.rem, color="Treatment",
                                  shape="Sex") +
-  scale_color_manual(values=c("brown2", "limegreen", "dodgerblue2")) +
+  scale_color_manual(values=c("#FF0000", "#92D050", "#3565FF")) +
   scale_shape_manual(values=c(19,2)) +
   ggtitle("Post-treatment (no Low Fat)") +
   #geom_point(size=2, stroke=1.5) +
