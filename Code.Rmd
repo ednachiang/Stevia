@@ -366,7 +366,7 @@ load("physeq/Physeq.RData")
 load("physeq/Physeq.pair.RData")
 load("physeq/Physeq.pre.RData")
 load("physeq/Physeq.post.RData")
-#load("physeq/Physeq.post.rem.RData")
+load("physeq/Physeq.post.rem.RData")
 load("physeq/Physeq.fem.RData")
 load("physeq/Physeq.mal.RData")
 load("physeq/Physeq.pre.fem.RData")
@@ -1105,7 +1105,7 @@ fb.diet.sum <- fb.post %>%
 ```{r}
 ### Paired
 bray.nmds <- ordinate(physeq=physeq.pair, method="NMDS", distance="bray")
-  # stress = 7.565278e-05 
+  # stress = 9.279067e-05 
 
 all.nmds <- plot_ordination(physeq=physeq.pair, ordination=bray.nmds, color="Treatment", shape="Time") +
   scale_shape_manual(values=c(19,2), labels=c("Pre-treat", "Post-treat")) +
@@ -1125,13 +1125,13 @@ all.nmds <- plot_ordination(physeq=physeq.pair, ordination=bray.nmds, color="Tre
         legend.margin=margin(0,0,0,0),
         legend.box.margin=margin(-10,0,-10,-8)
         ) +
-  annotate("text", x = 0.56, y = -1.3e-04, label = "stress = 0.00008", size=2, family="Arial") +
+  annotate("text", x = 0.56, y = -1.3e-04, label = "stress = 0.00009", size=2, family="Arial") +
   guides(color = guide_legend(order=1), shape = guide_legend(order=2))
 
 
 ### Pre-treatment
 bray.nmds.pre <- ordinate(physeq=physeq.pre, method="NMDS", distance="bray")
-  # stress = 0.1929748 
+  # stress = 0.1805169 
 # Sex Ellipses
 sample_data(physeq.pre)$Elip.sex <- paste(sample_data(physeq.pre)$Sex)
 elip.nmds.pre.sex <- data.frame(MDS1 = bray.nmds.pre$points[,1], MDS2 = bray.nmds.pre$points[,2],
@@ -1166,7 +1166,7 @@ pre.nmds <- plot_ordination(physeq=physeq.pre, ordination=bray.nmds.pre, shape="
         legend.box.margin=margin(-10,0,-10,-7),
         plot.title = element_text(family = "Arial", size=8, face="bold", hjust=0.5)
         ) +
-  annotate("text", x = 0.31, y = -0.52, label = "stress = 0.193", size=2, family="Arial")
+  annotate("text", x = 0.31, y = -0.52, label = "stress = 0.181", size=2, family="Arial")
 
 
 
