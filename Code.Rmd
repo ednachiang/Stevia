@@ -401,7 +401,7 @@ adiv.pair <- data.frame(sample_data(physeq.pair))
 # Plot
 chao.ann <- data.frame(lab=c("ns","a", "b", "b", "b"), Time = factor(c("Pre-treatment", "Post-treatment", "Post-treatment", "Post-treatment", "Post-treatment")), Treatment = factor(c("Low Fat", "Low Fat", "High Fat", "Saccharin", "Stevia")))
   # Annotations
-#tiff("Chao.tiff", width=180, height=55, units="mm", res=600)
+tiff("Chao.tiff", width=180, height=55, units="mm", res=600)
 #chao.plot <-
 ggplot(adiv.pair, aes(x=Treatment, y=chao, fill = Treatment)) +
   geom_boxplot(position=position_dodge(1)) +
@@ -422,9 +422,9 @@ ggplot(adiv.pair, aes(x=Treatment, y=chao, fill = Treatment)) +
         plot.title = element_text(family = "Arial", size=10, face="bold"),
         strip.text.x = element_text(family="Arial", size=10)
         ) +
-  geom_text(data = chao.ann, aes(label=lab), x=c(2.5,1,2,3,4), y=c(350,350,350,350,350), 
+  geom_text(data = chao.ann, aes(label=lab), x=c(2.5,1,2,3,4), y=c(348,348,348,348,348), 
             size=4, color="black", family="Arial")
-#dev.off()
+dev.off()
 
 
 # Test normality
