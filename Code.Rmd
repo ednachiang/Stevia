@@ -360,7 +360,7 @@ physeq.tv.mal <- subset_samples(physeq.tv, Sex == "Male")
 #save(physeq.tv.mal, file = "Physeq.tv.mal.RData")
 ```
 
-### Load Phyloseq Object
+### Load Phyloseq Objects
 ```{r}
 load("physeq/Physeq.RData")
 load("physeq/Physeq.pair.RData")
@@ -2223,7 +2223,7 @@ post.mal.hm <- plot_heatmap(physeq.simper.post.mal, sample.label = "Treatment", 
   geom_tile(colour="gray40") +
   geom_text(size=3, family="Arial", aes(label=sprintf("%0.2f", round(Abundance, digits=2)))) +
   scale_fill_gradientn(name=expression("Relative\nAbundance\n(%)"), limits=c(0,13),
-                         breaks=c(0, 3.25, 6.50, 9.75, 13), labels=c("0", "3.25", "6.50", "9.75", "13"),
+                         breaks=c(0, 3.25, 6.50, 9.75, 13), labels=c("0", "6", "12", "18", "24"),
                          colours = c("#ffffee", "#f4fdc3", "#e0fc9b", "#c2fd74", "#97fe4e", "#6dfa76",
                                      "#40f395", "#00ebaf", "#00d6dd", "#00bbff", "#0097ff", "#3f62ff")) +
   scale_x_discrete(labels = c("Low Fat", "High Fat", "Saccharin", "Stevia")) +
@@ -2365,7 +2365,7 @@ time.mal.hm <- plot_heatmap(physeq.simper.time.mal, sample.label = "Treatment_Ti
   geom_tile(colour="gray40") +
   geom_text(size=3, family="Arial", aes(label=sprintf("%0.2f", round(Abundance, digits=2)))) +
   scale_fill_gradientn(name=expression("Relative\nAbundance\n(%)"), limits=c(0,21),
-                           breaks=c(0, 5.25, 10.5, 15.75, 21), labels=c("0", "5.25", "10.5", "15.75", "21"),
+                           breaks=c(0, 5.25, 10.5, 15.75, 21), labels=c("0", "6", "12", "18", "24"),
                          colours = c("#ffffee", "#f4fdc3", "#e0fc9b", "#c2fd74", "#97fe4e", "#6dfa76",
                                      "#40f395", "#00ebaf", "#00d6dd", "#00bbff", "#0097ff", "#3f62ff")) +
   scale_x_discrete(labels = c("Low Fat Pre", "Low Fat Post", "High Fat Pre", "High Fat Post",
