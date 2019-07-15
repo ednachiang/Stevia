@@ -17,8 +17,8 @@
 4. **Simper:** Output results from SIMPER analysis in `Code.Rmd`
 
 ##### **Files:**
-1. `bray.nmds.post.rem.RData`:
-2. `Code.Rmd`
+1. `bray.nmds.post.rem.RData`: NMDS object used in `Code.Rmd`
+2. `Code.Rmd`: Code used to analyze data
 3. `metadata.csv` and `metadata.xlsx`: Metadata
 4. `PERMANOVA.pvals.csv` and `PERMANOVA.pvals.xlsx`: Adjusted PERMANOVA p-values
 
