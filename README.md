@@ -1,6 +1,6 @@
 ## Not so sweet: Stevia supplementation does not rescue high fat diet-induced obesity, glucose intolerance, or microbiota changes
   
-#### **Authors:** Sarah L. Becker1‡, Edna Chiang2‡, Anna Plantinga, Hannah Carey, Garret Suen, Steven J.  Swoap
+#### **Authors:** Sarah L. Becker‡, Edna Chiang‡, Anna Plantinga, Hannah Carey, Garret Suen, Steven J.  Swoap
   
 ‡ These authors have contributed equally to this work
   
