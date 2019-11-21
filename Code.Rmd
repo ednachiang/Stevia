@@ -612,27 +612,83 @@ phy.sex.sum <- phy.df %>%
             SE = (sd(Abundance)/(sqrt(length(Abundance)))),
             iqr = IQR(Abundance))
 
-# Calculate IQR limits (Fig #)
-phy.sum$iqr.min <- phy.sum$Median - 0.5*phy.sum$iqr
-phy.sum[which(phy.sum$iqr.min < 0),10] <- 0
-  # Any IQR min < 0, change to 0 (otherwise error bar won't plot)
-phy.sum$iqr.max <- phy.sum$Median + 0.5*phy.sum$iqr
 
-# Calculate IQR Limits (Fig S#)
-phy.sex.sum$iqr.min <- phy.sex.sum$Median - 0.5*phy.sex.sum$iqr
-phy.sex.sum[which(phy.sex.sum$iqr.min < 0),10] <- 0
-  # Any IQR min < 0, change to 0 (otherwise error bar won't plot)
-phy.sex.sum$iqr.max <- phy.sex.sum$Median + 0.5*phy.sex.sum$iqr
+### Boxplot
+phy.ann <- data.frame(lab=c("ns", "ns", "*", "*",
+                            "*", "*", "*", "*",
+                            "*", "*", "*", "ns",
+                            "+", "*", "*", "*",
+                            "*", "*", "*", "*",
+                            "ns", "*", "*", "*"),
+                      Phylum = factor(c("Firmicutes", "Firmicutes", "Firmicutes", "Firmicutes",
+                                        "Bacteroidetes", "Bacteroidetes", "Bacteroidetes",
+                                        "Bacteroidetes", "Verrucomicrobia", "Verrucomicrobia",
+                                        "Verrucomicrobia", "Verrucomicrobia", "Tenericutes",
+                                        "Tenericutes", "Tenericutes", "Tenericutes", "Proteobacteria",
+                                        "Proteobacteria", "Proteobacteria", "Proteobacteria",
+                                        "Actinobacteria",
+                                        "Actinobacteria","Actinobacteria","Actinobacteria")),
+                      Treatment = factor(c("Low Fat", "High Fat", "Saccharin", "Stevia", "Low Fat",
+                                         "High Fat", "Saccharin", "Stevia", "Low Fat", "High Fat",
+                                         "Saccharin", "Stevia", "Low Fat", "High Fat", "Saccharin",
+                                         "Stevia", "Low Fat", "High Fat", "Saccharin", "Stevia",
+                                         "Low Fat", "High Fat", "Saccharin", "Stevia")),
+                      Time = factor(c("Pre-treatment", "Pre-treatment", "Pre-treatment", "Pre-treatment",
+                                      "Pre-treatment", "Pre-treatment", "Pre-treatment", "Pre-treatment",
+                                      "Pre-treatment", "Pre-treatment", "Pre-treatment", "Pre-treatment",
+                                      "Pre-treatment", "Pre-treatment", "Pre-treatment", "Pre-treatment",
+                                      "Pre-treatment", "Pre-treatment", "Pre-treatment", "Pre-treatment",
+                                      "Pre-treatment", "Pre-treatment", "Pre-treatment", "Pre-treatment"))
+                      
+tiff("phyla.box.tiff", width = 228, height = 300, units = "mm", res = 600)
+ggplot(phy.df, aes(x=Treatment, y=Abundance, fill=Time)) +
+  geom_boxplot(position=position_dodge(1)) +
+  geom_point(position=position_dodge(width = 1), size=2) +
+  facet_grid(Phylum~., scales = "free") +
+  xlab("Treatment") +
+  scale_fill_manual(values=c("#FFFFFF", "#BEBEBE")) +
+  ylab("Relative Abundance") +
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        axis.text.x = element_text(family="Arial", size=20),
+        axis.text.y = element_text(family="Arial", size=16),
+        axis.title.x = element_text(family="Arial", size=20, face="bold"),
+        axis.title.y = element_text(family="Arial", size=20, face="bold"),
+        legend.title = element_text(family="Arial", size=20, face="bold"),
+        legend.text = element_text(family="Arial", size=20),
+        plot.title = element_text(family = "Arial", size=20, face="bold"),
+        strip.text.y = element_text(family="Arial", size=16),
+        strip.background=element_rect(fill="#FFFFFF"),
+        axis.ticks.x = element_blank()
+        ) +
+  geom_text(data=phy.ann, aes(label=lab), x=c(1,2,3,4,
+                                              1,2,3,4,
+                                              1,2,3,4,
+                                              1,2,3,4,
+                                              1,2,3,4,
+                                              1,2,3,4),
+            y=c(72,72,72,72,
+                66,66,66,66,
+                28,28,28,28,
+                19,19,19,19,
+                2.4,2.4,2.4,2.4,
+                2.4,2.4,2.4,2.4),
+            size=6, color="brown", family="Arial")
+dev.off()
+
+
+
+
 
 ### Barplot ###
 #tiff("phyla.tiff", width = 180, height = 100, units = "mm", res = 600)
-ggplot(phy.sum, aes(x=Phylum, y=Median, fill=Phylum)) +
+ggplot(phy.sum, aes(x=Phylum, y=Mean, fill=Phylum)) +
   geom_bar(stat="identity", color="black") +
   facet_grid(Time ~ Treatment) +
-  geom_errorbar(aes(ymax=iqr.max, ymin=iqr.min), width=0.25) +
+  geom_errorbar(aes(ymax=Mean+SE, ymin=Mean-SE), width=0.25) +
   scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#ffff33", "#a65628")) +
   xlab("Phyla") +
-  ylab("Median Relative Abundance (%) for Phyla > 0.1%") +
+  ylab("Mean Relative Abundance (%) for Phyla > 0.1%") +
   scale_y_continuous(limits=c(0,80), expand=c(0,0))+
   theme(panel.grid.major = element_blank(),
         #panel.grid.minor = element_blank(),
@@ -649,13 +705,13 @@ ggplot(phy.sum, aes(x=Phylum, y=Median, fill=Phylum)) +
 
 ### Supplemental Barplot ###
 #tiff("phyla.supp.tiff", width = 180, height = 150, units = "mm", res = 600)
-ggplot(phy.sex.sum, aes(x=Phylum, y=Median, fill=Phylum)) +
+ggplot(phy.sex.sum, aes(x=Phylum, y=Mean, fill=Phylum)) +
   geom_bar(stat="identity", color="black") +
   facet_grid(Time + Sex ~ Treatment) +
-  geom_errorbar(aes(ymax=iqr.max, ymin=iqr.min), width=0.25) +
+  geom_errorbar(aes(ymax=Mean+SE, ymin=Mean-SE), width=0.25) +
   scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#ffff33", "#a65628")) +
   xlab("Phyla") +
-  ylab("Median Relative Abundance (%) for Phyla > 0.01%") +
+  ylab("Mean Relative Abundance (%) for Phyla > 0.01%") +
   scale_y_continuous(limits=c(0,80), expand=c(0,0))+
   theme(panel.grid.major = element_blank(),
         #panel.grid.minor = element_blank(),
@@ -1085,6 +1141,7 @@ fb.sum <- fb.df %>%
   summarize(Mean = mean(FB_Ratio),
             Median = median(FB_Ratio),
             SD = sd(FB_Ratio),
+            SE = sd(FB_Ratio)
             iqr = IQR(FB_Ratio))
 fb.diet.sum <- fb.post %>%
   group_by(Diet) %>%
