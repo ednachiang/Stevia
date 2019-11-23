@@ -590,13 +590,6 @@ barplot(sort(taxa_sums(phy99),TRUE)[1:20]/nsamples(phy99),las=2,cex.axis=.7)
 phy.df <- psmelt(phy99)
 phy.df$Phylum <- ordered(phy.df$Phylum, levels=c("Firmicutes", "Bacteroidetes", "Verrucomicrobia", "Tenericutes", "Proteobacteria", "Actinobacteria"))
 phy.df$Phylum[which(is.na(phy.df$Phylum))] <- rep("Unclassified",length(which(is.na(phy.df$Phylum))))
-phy.sum <- phy.df %>%
-  group_by(Treatment, Time, Phylum) %>%
-  summarize(Mean = mean(Abundance),
-            Median = median(Abundance),
-            SD = sd(Abundance),
-            SE = (sd(Abundance)/(sqrt(length(Abundance)))),
-            iqr = IQR(Abundance))
 phy.all.sum <- phy.df %>%
   group_by(Phylum) %>%
   summarize(Mean = mean(Abundance),
@@ -604,14 +597,6 @@ phy.all.sum <- phy.df %>%
             SD = sd(Abundance),
             SE = (sd(Abundance)/(sqrt(length(Abundance)))),
             iqr = IQR(Abundance))
-phy.sex.sum <- phy.df %>%
-  group_by(Treatment, Time, Sex, Phylum) %>%
-  summarize(Mean = mean(Abundance),
-            Median = median(Abundance),
-            SD = sd(Abundance),
-            SE = (sd(Abundance)/(sqrt(length(Abundance)))),
-            iqr = IQR(Abundance))
-
 
 ### Boxplot
 phy.ann <- data.frame(lab=c("ns", "ns", "*", "*",
@@ -638,9 +623,9 @@ phy.ann <- data.frame(lab=c("ns", "ns", "*", "*",
                                       "Pre-treatment", "Pre-treatment", "Pre-treatment", "Pre-treatment",
                                       "Pre-treatment", "Pre-treatment", "Pre-treatment", "Pre-treatment",
                                       "Pre-treatment", "Pre-treatment", "Pre-treatment", "Pre-treatment",
-                                      "Pre-treatment", "Pre-treatment", "Pre-treatment", "Pre-treatment"))
+                                      "Pre-treatment", "Pre-treatment", "Pre-treatment", "Pre-treatment")))
                       
-tiff("phyla.box.tiff", width = 228, height = 300, units = "mm", res = 600)
+tiff("phyla.box.tiff", width = 228, height = 280, units = "mm", res = 600)
 ggplot(phy.df, aes(x=Treatment, y=Abundance, fill=Time)) +
   geom_boxplot(position=position_dodge(1)) +
   geom_point(position=position_dodge(width = 1), size=2) +
@@ -676,88 +661,6 @@ ggplot(phy.df, aes(x=Treatment, y=Abundance, fill=Time)) +
             size=6, color="brown", family="Arial")
 dev.off()
 
-
-
-
-
-### Barplot ###
-#tiff("phyla.tiff", width = 180, height = 100, units = "mm", res = 600)
-ggplot(phy.sum, aes(x=Phylum, y=Mean, fill=Phylum)) +
-  geom_bar(stat="identity", color="black") +
-  facet_grid(Time ~ Treatment) +
-  geom_errorbar(aes(ymax=Mean+SE, ymin=Mean-SE), width=0.25) +
-  scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#ffff33", "#a65628")) +
-  xlab("Phyla") +
-  ylab("Mean Relative Abundance (%) for Phyla > 0.1%") +
-  scale_y_continuous(limits=c(0,80), expand=c(0,0))+
-  theme(panel.grid.major = element_blank(),
-        #panel.grid.minor = element_blank(),
-        axis.text.x = element_blank(),
-        panel.spacing=unit(1, "lines"),
-        axis.title = element_text(size=12, family="Arial", face="bold"),
-        strip.text.x = element_text(size=12, family="Arial"),
-        strip.text.y = element_text(size=12, family="Arial"),
-        axis.text.y = element_text(size=12, family="Arial"),
-        legend.title = element_text(size=12, family="Arial", face="bold"),
-        legend.text = element_text(size=12, family="Arial"),
-        axis.ticks.x=element_blank())
-#dev.off()
-
-### Supplemental Barplot ###
-#tiff("phyla.supp.tiff", width = 180, height = 150, units = "mm", res = 600)
-ggplot(phy.sex.sum, aes(x=Phylum, y=Mean, fill=Phylum)) +
-  geom_bar(stat="identity", color="black") +
-  facet_grid(Time + Sex ~ Treatment) +
-  geom_errorbar(aes(ymax=Mean+SE, ymin=Mean-SE), width=0.25) +
-  scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#ffff33", "#a65628")) +
-  xlab("Phyla") +
-  ylab("Mean Relative Abundance (%) for Phyla > 0.01%") +
-  scale_y_continuous(limits=c(0,80), expand=c(0,0))+
-  theme(panel.grid.major = element_blank(),
-        #panel.grid.minor = element_blank(),
-        axis.text.x = element_blank(),
-        panel.spacing=unit(1, "lines"),
-        axis.title = element_text(size=12, family="Arial", face="bold"),
-        strip.text.x = element_text(size=12, family="Arial"),
-        strip.text.y = element_text(size=12, family="Arial"),
-        axis.text.y = element_text(size=12, family="Arial"),
-        legend.title = element_text(size=12, family="Arial", face="bold"),
-        legend.text = element_text(size=12, family="Arial"),
-        axis.ticks.x=element_blank())
-#dev.off()
-
-
-
-### Testing barplot for sex + treatment + time
-
-
-test <- phy.df %>%
-  group_by(Time, Sex, Phylum) %>%
-  summarize(Mean = mean(Abundance),
-            Median = median(Abundance),
-            SD = sd(Abundance),
-            SE = (sd(Abundance)/(sqrt(length(Abundance)))),
-            iqr = IQR(Abundance))
-test$iqr.min <- test$Median - 0.5*test$iqr
-test[which(test$iqr.min < 0),10] <- 0
-  # Any IQR min < 0, change to 0 (otherwise error bar won't plot)
-test$iqr.max <- test$Median + 0.5*test$iqr
-ggplot(test, aes(x=Phylum, y=Median, fill=Phylum)) +
-  geom_bar(stat="identity", color="black") +
-  facet_grid(Time~ Sex) +
-  geom_errorbar(aes(ymax=iqr.max, ymin=iqr.min), width=0.25) +
-  scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#f781bf", "#a65628", "#ffff33", "#ff7f00")) +
-  xlab("Phyla") +
-  ylab("Median Relative Abundance for Phyla > 0.01%") +
-  scale_y_continuous(limits=c(0,80), expand=c(0,0))+
-  theme(axis.text.x = element_blank(),
-        panel.spacing=unit(1, "lines"),
-        axis.title = element_text(size=20),
-        strip.text.x = element_text(size=14),
-        strip.text.y = element_text(size=14),
-        axis.text.y = element_text(size=12),
-        legend.title = element_text(size = 14),
-        legend.text = element_text(size=12))
 ```
 
 
