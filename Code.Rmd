@@ -401,11 +401,11 @@ adiv.pair <- data.frame(sample_data(physeq.pair))
 # Plot
 chao.ann <- data.frame(lab=c("ns","a", "b", "b", "b"), Time = factor(c("Pre-treatment", "Post-treatment", "Post-treatment", "Post-treatment", "Post-treatment")), Treatment = factor(c("Low Fat", "Low Fat", "High Fat", "Saccharin", "Stevia")))
   # Annotations
-tiff("Chao.tiff", width=180, height=55, units="mm", res=600)
+tiff("Chao.tiff", width=336, height=100, units="mm", res=600)
 #chao.plot <-
 ggplot(adiv.pair, aes(x=Treatment, y=chao, fill = Treatment)) +
   geom_boxplot(position=position_dodge(1)) +
-  geom_point(position = position_dodge(width = 0.2)) + 
+  geom_point(position = position_dodge(width = 0.2), size=2) + 
   facet_grid(.~Time) +
   xlab("Treatment") + 
   scale_fill_manual(values=c("#F0AC5F", "#FF0000", "#92D050", "#3565FF")) +
@@ -413,17 +413,17 @@ ggplot(adiv.pair, aes(x=Treatment, y=chao, fill = Treatment)) +
   scale_y_continuous(breaks = c(50, 100, 150, 200, 250, 300, 350), limits = c(50,350)) +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
-        axis.text.x = element_text(family="Arial", size=10),
-        axis.text.y = element_text(family="Arial", size=10),
-        axis.title.x = element_text(family="Arial", size=10, face="bold"),
-        axis.title.y = element_text(family="Arial", size=10, face="bold"),
-        legend.title = element_text(family="Arial", size=10, face="bold"),
-        legend.text = element_text(family="Arial", size=10),
-        plot.title = element_text(family = "Arial", size=10, face="bold"),
-        strip.text.x = element_text(family="Arial", size=10)
+        axis.text.x = element_text(family="Arial", size=16),
+        axis.text.y = element_text(family="Arial", size=16),
+        axis.title.x = element_text(family="Arial", size=16, face="bold"),
+        axis.title.y = element_text(family="Arial", size=16, face="bold"),
+        legend.title = element_text(family="Arial", size=16, face="bold"),
+        legend.text = element_text(family="Arial", size=16),
+        plot.title = element_text(family = "Arial", size=16, face="bold"),
+        strip.text.x = element_text(family="Arial", size=16)
         ) +
   geom_text(data = chao.ann, aes(label=lab), x=c(2.5,1,2,3,4), y=c(348,348,348,348,348), 
-            size=4, color="black", family="Arial")
+            size=6, color="black", family="Arial")
 dev.off()
 
 
@@ -1158,9 +1158,6 @@ dev.off()
 ### PERMANOVA Bray-Curtis
 ```{r}
 ##### Compare Pre- vs. Post- Within Treatments #####
-
-### Calculate Bray-Curtis Dissimilarity
-bray.pcoa <- phyloseq::distance(physeq = physeq.pair, method="bray")
 
 ### Low Fat
 lf.sampdf <- data.frame(sample_data(physeq.lf))
