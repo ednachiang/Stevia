@@ -1061,124 +1061,95 @@ fb.diet.sum <- fb.post %>%
 
 
 
-### Bray-Curtis NMDS
+### Bray-Curtis PCoA
 ```{r}
-### Paired
-bray.nmds <- ordinate(physeq=physeq.pair, method="NMDS", distance="bray")
-  # stress = 9.095252e-05 
+### All Samples
+bray.pcoa <- ordinate(physeq=physeq.pair, method="PCoA", distance="bray")
 
-all.nmds <- plot_ordination(physeq=physeq.pair, ordination=bray.nmds, color="Treatment", shape="Time") +
+
+all.pcoa <- plot_ordination(physeq = physeq.pair, ordination = pair.pcoa, axes = c(1, 2),
+                color="Treatment", shape="Time") + 
   scale_shape_manual(values=c(19,2), labels=c("Pre-treat", "Post-treat")) +
   scale_color_manual(values=c("#F0AC5F", "#FF0000", "#92D050", "#3565FF")) +
   ggtitle("All Samples") +
-  #geom_point(size=2, stroke=1.5) +
+  geom_point(size=2, stroke=1.5) +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
-        axis.text.x = element_text(family="Arial", size=8),
-        axis.text.y = element_text(family="Arial", size=8),
-        axis.title.x = element_text(family="Arial", size=8, face="bold"),
-        axis.title.y = element_text(family="Arial", size=8, face="bold"),
-        legend.title = element_text(family="Arial", size=8, face="bold"),
-        legend.text = element_text(family="Arial", size=8),
-        plot.title = element_text(family = "Arial", size=8, face="bold", hjust=0.5),
+        axis.text.x = element_text(family="Arial", size=16),
+        axis.text.y = element_text(family="Arial", size=16),
+        axis.title.x = element_text(family="Arial", size=16, face="bold"),
+        axis.title.y = element_text(family="Arial", size=16, face="bold"),
+        legend.title = element_text(family="Arial", size=16, face="bold"),
+        legend.text = element_text(family="Arial", size=16),
+        plot.title = element_text(family = "Arial", size=16, face="bold", hjust=0.5),
         plot.margin = unit(c(1,1,1,1), "mm"),      # top, right, bottom, left
         legend.margin=margin(0,0,0,0),
         legend.box.margin=margin(-10,0,-10,-8)
         ) +
-  annotate("text", x = 0.56, y = -1e-04, label = "stress = 0.00009", size=2, family="Arial") +
   guides(color = guide_legend(order=1), shape = guide_legend(order=2))
 
-
 ### Pre-treatment
-bray.nmds.pre <- ordinate(physeq=physeq.pre, method="NMDS", distance="bray")
-  # stress = 0.1805169 
-# Sex Ellipses
-sample_data(physeq.pre)$Elip.sex <- paste(sample_data(physeq.pre)$Sex)
-elip.nmds.pre.sex <- data.frame(MDS1 = bray.nmds.pre$points[,1], MDS2 = bray.nmds.pre$points[,2],
-                        Group = sample_data(physeq.pre)$Elip.sex)
-plot.new()
-elip.ord.pre.sex <- ordiellipse(bray.nmds.pre, sample_data(physeq.pre)$Elip.sex, display="sites", kind="se", conf=0.95, label=T)
-elip.pre.sex.df <- data.frame()
-for(i in levels(elip.nmds.pre.sex$Group)){
-  elip.pre.sex.df <- rbind(elip.pre.sex.df, cbind(as.data.frame(with(elip.nmds.pre.sex[elip.nmds.pre.sex$Group==i,],
-                                                     veganCovEllipse(elip.ord.pre.sex[[i]]$cov,
-                                                                     elip.ord.pre.sex[[i]]$center,
-                                                                     elip.ord.pre.sex[[i]]$scale))),
-                                  group=i))
-}
-# Ordination
-pre.nmds <- plot_ordination(physeq=physeq.pre, ordination=bray.nmds.pre, shape="Sex") +
+bray.pcoa.pre <- ordinate(physeq=physeq.pre, method="PCoA", distance="bray")
+
+pre.pcoa <- plot_ordination(physeq = physeq.pre, ordination = bray.pcoa.pre, axes = c(1, 2),
+                shape="Sex") + 
   scale_shape_manual(values=c(19,2)) +
-  geom_path(data=elip.pre.sex.df, aes(x=NMDS1, y=NMDS2, shape=group), size=1, linetype=1) +
   ggtitle("Pre-treatment") +
-  #geom_point(size=2, stroke=1.5) +
+  geom_point(size=2, stroke=1.5) +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
-        axis.text.x = element_text(family="Arial", size=8),
-        axis.text.y = element_text(family="Arial", size=8),
-        axis.title.x = element_text(family="Arial", size=8, face="bold"),
-        axis.title.y = element_text(family="Arial", size=8, face="bold"),
-        legend.title = element_text(family="Arial", size=8, face="bold"),
-        legend.text = element_text(family="Arial", size=8),
+        axis.text.x = element_text(family="Arial", size=16),
+        axis.text.y = element_text(family="Arial", size=16),
+        axis.title.x = element_text(family="Arial", size=16, face="bold"),
+        axis.title.y = element_text(family="Arial", size=16, face="bold"),
+        legend.title = element_text(family="Arial", size=16, face="bold"),
+        legend.text = element_text(family="Arial", size=16),
         legend.key.width = unit(0.9, "cm"),
         plot.margin = unit(c(1,1,1,1), "mm"),      # top, right, bottom, left
         legend.margin=margin(0,0,0,0),
         legend.box.margin=margin(-10,0,-10,-7),
-        plot.title = element_text(family = "Arial", size=8, face="bold", hjust=0.5)
-        ) +
-  annotate("text", x = 0.31, y = -0.52, label = "stress = 0.181", size=2, family="Arial")
+        plot.title = element_text(family = "Arial", size=16, face="bold", hjust=0.5)
+        ) 
 
+### Post-treatment w/o Low Far
+bray.pcoa.post.rem <- ordinate(physeq=physeq.post.rem, method="PCoA", distance="bray")
 
-
-
-
-
-
-
-### Post-treatment w/o Low Fat
-#bray.nmds.post.rem <- ordinate(physeq=physeq.post.rem, method="NMDS", distance="bray")
-  # stress = 0.1979704
-#save(bray.nmds.post.rem, file="bray.nmds.post.rem.RData")
-load("bray.nmds.post.rem.RData")
-
-post.rem.nmds <- plot_ordination(physeq=physeq.post.rem, ordination=bray.nmds.post.rem, color="Treatment",
-                                 shape="Sex") +
+post.rem.pcoa <- plot_ordination(physeq = physeq.post.rem, ordination = bray.pcoa.post.rem, axes = c(1, 2),
+                color="Treatment", shape="Sex") + 
   scale_color_manual(values=c("#FF0000", "#92D050", "#3565FF")) +
   scale_shape_manual(values=c(19,2)) +
   ggtitle("Post-treatment (no Low Fat)") +
-  #geom_point(size=2, stroke=1.5) +
+  geom_point(size=2, stroke=1.5) +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
-        axis.text.x = element_text(family="Arial", size=8),
-        axis.text.y = element_text(family="Arial", size=8),
-        axis.title.x = element_text(family="Arial", size=8, face="bold"),
-        axis.title.y = element_text(family="Arial", size=8, face="bold"),
-        legend.title = element_text(family="Arial", size=8, face="bold"),
-        legend.text = element_text(family="Arial", size=8),
-        plot.title = element_text(family = "Arial", size=8, face="bold", hjust=0.5),
+        axis.text.x = element_text(family="Arial", size=16),
+        axis.text.y = element_text(family="Arial", size=16),
+        axis.title.x = element_text(family="Arial", size=16, face="bold"),
+        axis.title.y = element_text(family="Arial", size=16, face="bold"),
+        legend.title = element_text(family="Arial", size=16, face="bold"),
+        legend.text = element_text(family="Arial", size=16),
+        plot.title = element_text(family = "Arial", size=16, face="bold", hjust=0.5),
         plot.margin = unit(c(1,1,1,1), "mm"),      # top, right, bottom, left
         legend.margin=margin(0,0,0,0),
         legend.box.margin=margin(-10,0,-10,-8)
         ) +
-  guides(color = guide_legend(order=1), shape = guide_legend(order=2)) +
-  annotate("text", x = 0.24, y = -0.37, label = "stress = 0.198", size=2, family="Arial")
-  
+  guides(color = guide_legend(order=1), shape = guide_legend(order=2))
 
 ```
-### NMDS Plot
+### PCoA Plot
 ```{r}
-tiff("nmds.tiff", width=85, height = 150, units="mm", res = 600)
+tiff("pcoa.tiff", width=160, height = 300, units="mm", res = 600)
 grid.newpage()
 pushViewport(viewport(layout=(grid.layout(6,1, widths=c(1), heights=c(0.07, 1, 0.07, 1, 0.07, 1)))))
 grid.text("A", x=unit(0.03, "npc"), vp=viewport(layout.pos.row=1, layout.pos.col=1),
-          gp=gpar(fontsize=12,fontface="bold",fontfamily="Arial"))
-print(all.nmds, vp=viewport(layout.pos.row=2, layout.pos.col=1))
+          gp=gpar(fontsize=22,fontface="bold",fontfamily="Arial"))
+print(all.pcoa, vp=viewport(layout.pos.row=2, layout.pos.col=1))
 grid.text("B", x=unit(0.03, "npc"), vp=viewport(layout.pos.row=3, layout.pos.col=1),
-          gp=gpar(fontsize=12,fontface="bold",fontfamily="Arial"))
-print(pre.nmds, vp=viewport(layout.pos.row=4, layout.pos.col=1))
+          gp=gpar(fontsize=22,fontface="bold",fontfamily="Arial"))
+print(pre.pcoa, vp=viewport(layout.pos.row=4, layout.pos.col=1))
 grid.text("C", x=unit(0.03, "npc"), vp=viewport(layout.pos.row=5, layout.pos.col=1),
-          gp=gpar(fontsize=12,fontface="bold",fontfamily="Arial"))
-print(post.rem.nmds, vp=viewport(layout.pos.row=6, layout.pos.col=1))
+          gp=gpar(fontsize=22,fontface="bold",fontfamily="Arial"))
+print(post.rem.pcoa, vp=viewport(layout.pos.row=6, layout.pos.col=1))
 dev.off()
 
 
@@ -1188,6 +1159,8 @@ dev.off()
 ```{r}
 ##### Compare Pre- vs. Post- Within Treatments #####
 
+### Calculate Bray-Curtis Dissimilarity
+bray.pcoa <- phyloseq::distance(physeq = physeq.pair, method="bray")
 
 ### Low Fat
 lf.sampdf <- data.frame(sample_data(physeq.lf))
@@ -2353,8 +2326,6 @@ time.mal.hm <- plot_heatmap(physeq.simper.time.mal, sample.label = "Treatment_Ti
   guides(fill = guide_colorbar(barheight = unit(2, "in" ),
                                 frame.colour = "black",
                                 frame.linewidth = 1))
-
-
 ```
 
 ### HeatMap Plots
@@ -2385,3 +2356,9 @@ dev.off()
 
 
 
+
+
+### PCoA for Reviewer
+```{r}
+
+```
