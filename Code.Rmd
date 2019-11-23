@@ -2153,8 +2153,8 @@ sample_data(physeq.simper.post.mal)$Treatment <- ordered(sample_data(physeq.simp
 # https://github.com/tidyverse/ggplot2/pull/2541
 post.fem.hm <- plot_heatmap(physeq.simper.post.fem, sample.label = "Treatment", sample.order = c("LowFat", "HighFat", "Saccharin", "Stevia"), taxa.label = "OTU_Classification", taxa.order = "Phylum") +
   geom_tile(colour="gray40") +
-  geom_text(size=3, family="Arial", aes(label=sprintf("%0.2f", round(Abundance, digits=2)))) +
-  scale_fill_gradientn(name=expression("Relative\nAbundance\n(%)"), limits=c(0,24),
+  geom_text(size=5, family="Arial", aes(label=sprintf("%0.2f", round(Abundance, digits=2)))) +
+  scale_fill_gradientn(name=expression("Mean Relative\nAbundance\n(%)"), limits=c(0,24),
                          breaks=c(0,6,12,18,24), labels=c("0", "6", "12", "18", "24"),
                          colours = c("#ffffee", "#f4fdc3", "#e0fc9b", "#c2fd74", "#97fe4e", "#6dfa76",
                                      "#40f395", "#00ebaf", "#00d6dd", "#00bbff", "#0097ff", "#3f62ff")) +
@@ -2162,17 +2162,17 @@ post.fem.hm <- plot_heatmap(physeq.simper.post.fem, sample.label = "Treatment", 
   scale_y_discrete(labels = c(expression(" "^A~italic("Bacteroides")), expression(" "^AC~"S24-7"), expression(" "^ABC~"S24-7"), expression(" "^AC~italic("Ruminiclostridium")), expression(" "^ABC~"Lachnospiraceae"), expression(" "^ACD~italic("Lactococcus")), expression(" "^ABC~italic("Anaeroplasma")), expression(" "^Bcd~italic("Akkermansia")))) +
   ylab("OTU Classification") + xlab("Female Post-treatment Group") +
   theme(panel.border=element_blank(),
-        axis.text.x = element_text(angle=50, hjust=1, vjust=1.2, family="Arial", size=8),
-        axis.text.y = element_text(family="Arial", size=8),
+        axis.text.x = element_text(angle=50, hjust=1, vjust=1.2, family="Arial", size=16),
+        axis.text.y = element_text(family="Arial", size=16),
         axis.ticks.x=element_blank(),
         axis.ticks.y=element_blank(),
-        axis.title.x = element_text(size=8, face="bold", family="Arial"),
-        axis.title.y = element_text(margin = margin(t=0, r=0, b=0, l=0), size=8, face="bold", family="Arial"),
+        axis.title.x = element_text(size=16, face="bold", family="Arial"),
+        axis.title.y = element_text(margin = margin(t=0, r=0, b=0, l=0), size=16, face="bold", family="Arial"),
         axis.line=element_blank(),
-        legend.title = element_text(family = "Arial", size=8, face="bold"),
-        legend.text = element_text(family = "Arial", size=8),
+        legend.title = element_text(family = "Arial", size=16, face="bold"),
+        legend.text = element_text(family = "Arial", size=16),
         legend.margin = margin(t=0, r=-5, b=0, l=-8),
-        plot.title = element_text(family = "Arial", size=8, face="bold")
+        plot.title = element_text(family = "Arial", size=16, face="bold")
   ) +
   guides(fill = guide_colorbar(barheight = unit(2, "in" ),
                                frame.colour="black",
@@ -2181,8 +2181,8 @@ post.fem.hm <- plot_heatmap(physeq.simper.post.fem, sample.label = "Treatment", 
          
 post.mal.hm <- plot_heatmap(physeq.simper.post.mal, sample.label = "Treatment", sample.order = c("LowFat", "HighFat", "Saccharin", "Stevia"), taxa.label = "OTU_Classification", taxa.order = "Phylum") +
   geom_tile(colour="gray40") +
-  geom_text(size=3, family="Arial", aes(label=sprintf("%0.2f", round(Abundance, digits=2)))) +
-  scale_fill_gradientn(name=expression("Relative\nAbundance\n(%)"), limits=c(0,13),
+  geom_text(size=5, family="Arial", aes(label=sprintf("%0.2f", round(Abundance, digits=2)))) +
+  scale_fill_gradientn(name=expression("Mean Relative\nAbundance\n(%)"), limits=c(0,13),
                          breaks=c(0, 3.25, 6.50, 9.75, 13), labels=c("0", "6", "12", "18", "24"),
                          colours = c("#ffffee", "#f4fdc3", "#e0fc9b", "#c2fd74", "#97fe4e", "#6dfa76",
                                      "#40f395", "#00ebaf", "#00d6dd", "#00bbff", "#0097ff", "#3f62ff")) +
@@ -2190,17 +2190,17 @@ post.mal.hm <- plot_heatmap(physeq.simper.post.mal, sample.label = "Treatment", 
   scale_y_discrete(labels=c(expression(" "^abc~"S24-7"), expression(" "^abc~italic("Ruminiclostridium")), expression(" "^ac~"Lachnospiraceae"), expression(" "^abcd~italic("Lactococcus")), expression(" "^c~italic("Lactobacillus")), expression(" "^abc~italic("NK4A136")), expression(" "^bc~italic("Akkermansia")))) +
   ylab("OTU Classification") + xlab("Male Post-treatment Group") +
   theme(panel.border=element_blank(),
-        axis.text.x = element_text(angle=50, hjust=1, vjust=1.2, family="Arial", size=8),
-        axis.text.y = element_text(family="Arial", size=8),
+        axis.text.x = element_text(angle=50, hjust=1, vjust=1.2, family="Arial", size=16),
+        axis.text.y = element_text(family="Arial", size=16),
         axis.ticks.x=element_blank(),
         axis.ticks.y=element_blank(),
-        axis.title.x = element_text(size=8, face="bold", family="Arial"),
-        axis.title.y = element_text(margin = margin(t=0, r=0, b=0, l=0), size=8, face="bold", family="Arial"),
+        axis.title.x = element_text(size=16, face="bold", family="Arial"),
+        axis.title.y = element_text(margin = margin(t=0, r=0, b=0, l=0), size=16, face="bold", family="Arial"),
         axis.line=element_blank(),
-        legend.title = element_text(family = "Arial", size=8, face="bold"),
-        legend.text = element_text(family = "Arial", size=8),
+        legend.title = element_text(family = "Arial", size=16, face="bold"),
+        legend.text = element_text(family = "Arial", size=16),
         legend.margin = margin(t=0, r=-5, b=0, l=-8),
-        plot.title = element_text(family = "Arial", size=8, face="bold")
+        plot.title = element_text(family = "Arial", size=16, face="bold")
   ) +
   guides(fill = guide_colorbar(barheight = unit(2, "in" ),
                                 frame.colour = "black",
@@ -2288,8 +2288,8 @@ time.fem.hm <- plot_heatmap(physeq.simper.time.fem, sample.label = "Treatment_Ti
                                              "Saccharin_Pre","Saccharin_Post", "Stevia_Pre", "Stevia_Post"),
                             taxa.label = "OTU_Classification", taxa.order = "Phylum") +
   geom_tile(colour="gray40") +
-  geom_text(size=3, family="Arial", aes(label=sprintf("%0.2f", round(Abundance, digits=2)))) +
-  scale_fill_gradientn(name=expression("Relative\nAbundance\n(%)"), limits=c(0,24),
+  geom_text(size=5, family="Arial", aes(label=sprintf("%0.2f", round(Abundance, digits=2)))) +
+  scale_fill_gradientn(name=expression("Mean Relative\nAbundance\n(%)"), limits=c(0,24),
                           breaks=c(0, 6, 12, 18, 24), labels=c("0", "6", "12", "18", "24"),
                          colours = c("#ffffee", "#f4fdc3", "#e0fc9b", "#c2fd74", "#97fe4e", "#6dfa76",
                                      "#40f395", "#00ebaf", "#00d6dd", "#00bbff", "#0097ff", "#3f62ff")) +
@@ -2298,18 +2298,18 @@ time.fem.hm <- plot_heatmap(physeq.simper.time.fem, sample.label = "Treatment_Ti
   scale_y_discrete(labels=c(expression(" "^BCD~"S24-7"), expression(" "^a~"S24-7"), expression(" "^aBCD~"S24-7"), expression(" "^A~italic("Alistipes")), expression(" "^BD~italic("Ruminiclostridium")), expression(" "^BCD~"Lachnospiraceae"), expression(" "^D~italic("Lactococcus")), expression(" "^ACD~italic("NK4A136")), expression(" "^BCD~italic("Anaeroplasma")), expression(" "^C~italic("Akkermansia")))) + 
   ylab("OTU Classification") + xlab("Female Group") +
   theme(panel.border=element_blank(),
-        axis.text.x = element_text(angle=50, hjust=1.1, vjust=1.18, family="Arial", size=8, 
+        axis.text.x = element_text(angle=50, hjust=1.1, vjust=1.18, family="Arial", size=16, 
                                    margin = margin(t=0, r=0, b=0, l=0)),
-        axis.text.y = element_text(family="Arial", size=8),
+        axis.text.y = element_text(family="Arial", size=16),
         axis.ticks.x=element_blank(),
         axis.ticks.y=element_blank(),
-        axis.title.x = element_text(size=8, face="bold", family="Arial"),
-        axis.title.y = element_text(margin = margin(t=0, r=0, b=0, l=0), size=8, face="bold", family="Arial"),
+        axis.title.x = element_text(size=16, face="bold", family="Arial"),
+        axis.title.y = element_text(margin = margin(t=0, r=0, b=0, l=0), size=16, face="bold", family="Arial"),
         axis.line=element_blank(),
-        legend.title = element_text(family = "Arial", size=8, face="bold"),
-        legend.text = element_text(family = "Arial", size=8),
+        legend.title = element_text(family = "Arial", size=16, face="bold"),
+        legend.text = element_text(family = "Arial", size=16),
         legend.margin = margin(t=0, r=-5, b=0, l=-8),
-        plot.title = element_text(family = "Arial", size=8, face="bold")
+        plot.title = element_text(family = "Arial", size=16, face="bold")
   ) +
   guides(fill = guide_colorbar(barheight = unit(2, "in" ),
                                 frame.colour = "black",
@@ -2323,8 +2323,8 @@ time.mal.hm <- plot_heatmap(physeq.simper.time.mal, sample.label = "Treatment_Ti
                                              "Saccharin_Pre","Saccharin_Post", "Stevia_Pre", "Stevia_Post"),
                             taxa.label = "OTU_Classification", taxa.order = "Phylum") +
   geom_tile(colour="gray40") +
-  geom_text(size=3, family="Arial", aes(label=sprintf("%0.2f", round(Abundance, digits=2)))) +
-  scale_fill_gradientn(name=expression("Relative\nAbundance\n(%)"), limits=c(0,21),
+  geom_text(size=5, family="Arial", aes(label=sprintf("%0.2f", round(Abundance, digits=2)))) +
+  scale_fill_gradientn(name=expression("Mean Relative\nAbundance\n(%)"), limits=c(0,21),
                            breaks=c(0, 5.25, 10.5, 15.75, 21), labels=c("0", "6", "12", "18", "24"),
                          colours = c("#ffffee", "#f4fdc3", "#e0fc9b", "#c2fd74", "#97fe4e", "#6dfa76",
                                      "#40f395", "#00ebaf", "#00d6dd", "#00bbff", "#0097ff", "#3f62ff")) +
@@ -2337,18 +2337,18 @@ time.mal.hm <- plot_heatmap(physeq.simper.time.mal, sample.label = "Treatment_Ti
                             expression(" "^D~italic("Lactobacillus")), expression(" "^A~italic("NK4A136")))) +
   ylab("OTU Classification") + xlab("Male Group") +
   theme(panel.border=element_blank(),
-        axis.text.x = element_text(angle=50, hjust=1.1, vjust=1.18, family="Arial", size=8, 
+        axis.text.x = element_text(angle=50, hjust=1.1, vjust=1.18, family="Arial", size=16, 
                                    margin = margin(t=0, r=0, b=0, l=0)),
-        axis.text.y = element_text(family="Arial", size=8),
+        axis.text.y = element_text(family="Arial", size=16),
         axis.ticks.x=element_blank(),
         axis.ticks.y=element_blank(),
-        axis.title.x = element_text(size=8, face="bold", family="Arial"),
-        axis.title.y = element_text(margin = margin(t=0, r=0, b=0, l=0), size=8, face="bold", family="Arial"),
+        axis.title.x = element_text(size=16, face="bold", family="Arial"),
+        axis.title.y = element_text(margin = margin(t=0, r=0, b=0, l=0), size=16, face="bold", family="Arial"),
         axis.line=element_blank(),
-        legend.title = element_text(family = "Arial", size=8, face="bold"),
-        legend.text = element_text(family = "Arial", size=8),
+        legend.title = element_text(family = "Arial", size=16, face="bold"),
+        legend.text = element_text(family = "Arial", size=16),
         legend.margin = margin(t=0, r=-5, b=0, l=-8),
-        plot.title = element_text(family = "Arial", size=8, face="bold")
+        plot.title = element_text(family = "Arial", size=16, face="bold")
   ) +
   guides(fill = guide_colorbar(barheight = unit(2, "in" ),
                                 frame.colour = "black",
@@ -2359,7 +2359,7 @@ time.mal.hm <- plot_heatmap(physeq.simper.time.mal, sample.label = "Treatment_Ti
 
 ### HeatMap Plots
 ```{r}
-tiff("hm.tiff", width=180, height = 90, units="mm", res = 600)
+tiff("hm.tiff", width=336, height = 150, units="mm", res = 600)
 grid.newpage()
 pushViewport(viewport(layout=(grid.layout(2,2, heights=c(0.05,1.00)))))
 grid.text("A", x=unit(0.03, "npc"), vp=viewport(layout.pos.row=1, layout.pos.col=1),
@@ -2370,7 +2370,7 @@ grid.text("B", x=unit(0.03, "npc"), vp=viewport(layout.pos.row=1, layout.pos.col
 print(post.mal.hm, vp=viewport(layout.pos.row=2, layout.pos.col=2))
 dev.off()
 
-tiff("hm.supp.tiff", width=180, height = 170, units="mm", res = 600)
+tiff("hm.supp.tiff", width=336, height = 300, units="mm", res = 600)
 grid.newpage()
 pushViewport(viewport(layout=(grid.layout(4,1, heights=c(0.05,1.00,0.05,1.00)))))
 grid.text("A", x=unit(0.03, "npc"), vp=viewport(layout.pos.row=1, layout.pos.col=1),
