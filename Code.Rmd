@@ -2334,10 +2334,10 @@ tiff("hm.tiff", width=336, height = 150, units="mm", res = 600)
 grid.newpage()
 pushViewport(viewport(layout=(grid.layout(2,2, heights=c(0.05,1.00)))))
 grid.text("A", x=unit(0.03, "npc"), vp=viewport(layout.pos.row=1, layout.pos.col=1),
-          gp=gpar(fontsize=16,fontface="bold",fontfamily="Arial"))
+          gp=gpar(fontsize=22,fontface="bold",fontfamily="Arial"))
 print(post.fem.hm, vp=viewport(layout.pos.row=2, layout.pos.col=1))
 grid.text("B", x=unit(0.03, "npc"), vp=viewport(layout.pos.row=1, layout.pos.col=2),
-          gp=gpar(fontsize=16,fontface="bold",fontfamily="Arial"))
+          gp=gpar(fontsize=22,fontface="bold",fontfamily="Arial"))
 print(post.mal.hm, vp=viewport(layout.pos.row=2, layout.pos.col=2))
 dev.off()
 
@@ -2345,10 +2345,10 @@ tiff("hm.supp.tiff", width=336, height = 300, units="mm", res = 600)
 grid.newpage()
 pushViewport(viewport(layout=(grid.layout(4,1, heights=c(0.05,1.00,0.05,1.00)))))
 grid.text("A", x=unit(0.03, "npc"), vp=viewport(layout.pos.row=1, layout.pos.col=1),
-          gp=gpar(fontsize=16,fontface="bold",fontfamily="Arial"))
+          gp=gpar(fontsize=22,fontface="bold",fontfamily="Arial"))
 print(time.fem.hm, vp=viewport(layout.pos.row=2, layout.pos.col=1))
 grid.text("B", x=unit(0.03, "npc"), vp=viewport(layout.pos.row=3, layout.pos.col=1),
-          gp=gpar(fontsize=16,fontface="bold",fontfamily="Arial"))
+          gp=gpar(fontsize=22,fontface="bold",fontfamily="Arial"))
 print(time.mal.hm, vp=viewport(layout.pos.row=4, layout.pos.col=1))
 dev.off()
 
