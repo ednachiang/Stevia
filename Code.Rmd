@@ -12,6 +12,7 @@ library(vegan)
 library(phyloseq)
 library(grid)
 library(extrafont)
+library(equivalence)
 loadfonts(device="win")
 windowsFonts(Times="Arial")
 theme_set(theme_bw())
@@ -402,7 +403,6 @@ adiv.pair <- data.frame(sample_data(physeq.pair))
 chao.ann <- data.frame(lab=c("ns","a", "b", "b", "b"), Time = factor(c("Pre-treatment", "Post-treatment", "Post-treatment", "Post-treatment", "Post-treatment")), Treatment = factor(c("Low Fat", "Low Fat", "High Fat", "Saccharin", "Stevia")))
   # Annotations
 tiff("Chao.tiff", width=336, height=100, units="mm", res=600)
-#chao.plot <-
 ggplot(adiv.pair, aes(x=Treatment, y=chao, fill = Treatment)) +
   geom_boxplot(position=position_dodge(1)) +
   geom_point(position = position_dodge(width = 0.2), size=2) + 
@@ -2353,3 +2353,656 @@ dev.off()
 
 
 
+
+### RTOST/TOST
+```{r}
+# Code modified from Skarlupka, et al. (2019) https://doi.org/10.1186/s40104-019-0375-0
+
+# Format OTU table
+TOST.otu <- data.frame(t(data.frame(otu_table(physeq.pair))))
+TOST.otu$Sample <- rownames(TOST.otu)
+TOST.otu$DNA <- "High"
+lowDNA <- c("TV7C", "TV6C", "TV5C", "TV3C", "TV10C")
+for (i in 1:5){
+  x <- which(TOST.otu$Sample == lowDNA[i])
+  TOST.otu$DNA[x] = "Low"
+}
+  # Label as low DNA (< 1 ng/uL) vs high DNA (> 1 ng/uL)
+
+# Calculate Mean OTUs
+TOST.mean <- aggregate(TOST.otu[,1:(ncol(TOST.otu)-2)], 
+                       list(TOST.otu$DNA), mean)
+  # Calculate Mean
+  # Leave out Sample and DNA cols that I just made
+TOST.mean <- as.matrix(TOST.mean[,-1])
+  # Remove col 1 (DNA)
+
+# Calculate Median OTUs
+TOST.median <- aggregate(TOST.otu[,1:(ncol(TOST.otu)-2)],
+                         list(TOST.otu$DNA), median)
+  # Calculate Median
+TOST.median <- as.matrix(TOST.median[,-1])
+
+# Calculate Random OTUs
+TOST.random <- TOST.otu[,c(1:(ncol(TOST.otu)-2),433)] %>% group_by(DNA) %>% sample_n(1)
+  # Select TOST.otu all OTUs cols and the DNA col so you can use dplyr
+TOST.random <- as.matrix(sapply(TOST.random[,-432], as.numeric))
+  # Remove DNA col
+
+# Explore data - Random
+summary(as.vector(TOST.random))
+length(which(TOST.random > 300, arr.ind=T))
+  # There are 2 values above 300
+jj <- scale(as.vector(TOST.random))
+qqnorm(jj, main="QQ-Plot for Random")
+abline(0, 1, col="red")
+  # Totally NOT normal
+plot(density(as.vector(TOST.random)), main="Density Plot for Random")
+shapiro.test(TOST.random)
+  # p-value < 2.2e-16
+  # Not Normal
+
+
+# Explore data - Mean
+summary(as.vector(TOST.mean))
+length(which(TOST.mean > 100, arr.ind=T))
+  # There are 22 values above 100
+jj <- scale(as.vector(TOST.mean))
+qqnorm(jj, main="QQ-Plot for Mean")
+abline(0, 1, col="red")
+  # Totally NOT normal
+plot(density(as.vector(TOST.mean)), main="Density Plot for Mean")
+shapiro.test(TOST.mean)
+  # p-value < 2.2e-16
+  # Not Normal
+
+# Explore data - Median
+summary(as.vector(TOST.median))
+length(which(TOST.median > 200, arr.ind=T))
+  # There are 2 values above 200
+jj <- scale(as.vector(TOST.median))
+qqnorm(jj, main="QQ-Plot for Median")
+abline(0, 1, col="red")
+  # Totally NOT normal
+plot(density(as.vector(TOST.median)), main="Density Plot for Median")
+shapiro.test(TOST.median)
+  # p-value < 2.2e-16
+  # Not Normal
+
+
+# Perform a log transformations
+rand <- ifelse(as.vector(TOST.random) == 0, 1, as.vector(TOST.random))
+  # Replace all 0's with 1's
+rand.log <- log(rand)
+mean <- ifelse(as.vector(TOST.mean) == 0, 1, as.vector(TOST.mean))
+  # Replace all 0's with 1's
+mean.log <- log(mean)
+medi <- ifelse(as.vector(TOST.median) == 0, 1, as.vector(TOST.median))
+  # Replace all 0's with 1's
+medi.log <- log(medi)
+
+# Re-explore data - Random
+jj <- scale(as.vector(rand.log))
+qqnorm(jj, main="Q-Q plot for Log-Transformed Random")
+abline(0, 1, col="red")
+  # lol wut def not normal
+plot(density(as.vector(rand.log)), main="Density Plot for Log-Transformed Random")
+shapiro.test(rand.log)
+  # p-value < 2.2e-16
+  # Not Normal
+
+# Re-explore data - Mean
+jj <- scale(as.vector(mean.log))
+qqnorm(jj, main="Q-Q plot for Log-Transformed Mean")
+abline(0, 1, col="red")
+  # Looks more Normal-like
+plot(density(as.vector(mean.log)), main="Density Plot for Log-Transformed Mean")
+shapiro.test(mean.log)
+  # p-value < 2.2e-16
+  # Not Normal
+
+# Re-explore data - Median
+jj <- scale(as.vector(medi.log))
+qqnorm(jj, main="Q-Q plot for Log-Transformed Median")
+abline(0, 1, col="red")
+  # Not Normal
+plot(density(as.vector(medi.log)), main="Density Plot for Log-Transformed Median")
+shapiro.test(medi.log)
+  # p-value < 2.2e-16
+  # Not Normal
+
+### Because data isn't Normally distributed, I'll use RTOST and not TOST
+
+### RTOST
+
+# Random vs. Mean
+rand.mean.rtost <- rtost(TOST.random, TOST.mean, alpha=0.05,
+                         epsilon=0.25, tr=0.2, paired=F)
+cbind(round(rand.mean.rtost$p.value,2), rand.mean.rtost$result)
+  # p-value = 0.8820058
+  # Do not reject hypothesis that random & mean have non-equivalent means
+
+# Random vs. Median
+rand.medi.rtost <- rtost(TOST.random, TOST.median, alpha=0.05,
+                         epsilon=0.25, tr=0.2, paired=F)
+cbind(round(rand.medi.rtost$p.value,2), rand.medi.rtost$result)
+  # p-value = 0
+  # Reject hypothesis that random & median have non-equivalent means
+
+
+
+
+
+
+
+test <- cowsAll[,c(2:160,163)] %>% group_by(cowperiod) %>% sample_n(1)
+test1 <- sapply(test[,-160], as.numeric)
+
+cowsAll <- read.table("FirstYearShared.txt", header=T)
+cowsAll$ID <- substr(cowsAll$Group, 0,3)
+cowsAll$period <- substr(cowsAll$Group,6,6)
+cowsAll$cowperiod <- paste0(cowsAll$ID, cowsAll$period)
+collapsedAll_mean <- aggregate(cowsAll[,2:160],
+                                         list(cowsAll$cowperiod), mean)
+collapsedAll_mean <- as.matrix(collapsedAll_mean)
+collapsedAll_median <- as.matrix(aggregate(cowsAll[,2:160],
+                                           list(cowsAll$cowperiod), 
+                                           median))
+collapsedAll_random <- cowsAll[,c(2:160,163)] %>%
+  group_by(cowperiod) %>%
+  sample_n(1)
+collapsedAll_random <- sapply(collapsedAll_random[,-160], as.numeric)
+collapsedAll_random <- as.matrix(collapsedAll_random)
+summary(as.vector(collapsedAll_random))
+length(which(collapsedAll_random > 3000, arr.ind=T))
+View(collapsedAll_random[,c(1,159)])
+
+summary(as.vector(collapsedAll_mean))
+```
+
+
+### TOST for post Stevia samples
+```{r}
+# Code modified from Skarlupka, et al. (2019) https://doi.org/10.1186/s40104-019-0375-0
+
+# Because all the 5 low [DNA] samples are post-treatment Stevia samples, I can't compare them to other groups (e.g. all samples, all post-treatment high fat diet samples, all pre- and post- Stevia samples) because I already know that these comparisons are different based on my previous analyses for the paper
+# Because I already know these differences exist, the test of equivalency should reflect this (do NOT reject null hypothesis)
+# Therefore, I can ONLY compare the 5 low [DNA] samples with the 3 post-treatment Stevia samples that have a high [DNA]
+
+# I want to randomly select one of the low [DNA] samples to create a random OTU matrix
+# The random low [DNA] matrix will be compared to a mean and median matrix that summarizes all the high [DNA] (Stevia post) samples
+
+
+# Format OTU table
+TOST.otu <- data.frame(t(data.frame(otu_table(physeq.tv.post))))
+TOST.otu$Sample <- rownames(TOST.otu)
+TOST.otu$DNA <- "High"
+lowDNA <- c("TV7C", "TV6C", "TV5C", "TV3C", "TV10C")
+for (i in 1:5){
+  x <- which(TOST.otu$Sample == lowDNA[i])
+  TOST.otu$DNA[x] = "Low"
+}
+TOST.otu.low <- TOST.otu[which(TOST.otu$DNA == "Low"),]
+  # Separate low [DNA]
+TOST.otu.high <- TOST.otu[which(TOST.otu$DNA == "High"),]
+  # Separate high [DNA]
+
+# Calculate Mean OTUs (high [DNA])
+TOST.mean <- aggregate(TOST.otu.high[,1:(ncol(TOST.otu.high)-2)], 
+                       list(TOST.otu.high$DNA), mean)
+  # Calculate Mean
+  # Leave out Sample and DNA cols that I just made
+TOST.mean <- as.matrix(TOST.mean[,-1])
+  # Remove col 1 (DNA)
+
+# Calculate Median OTUs
+TOST.median <- aggregate(TOST.otu.high[,1:(ncol(TOST.otu.high)-2)],
+                         list(TOST.otu.high$DNA), median)
+  # Calculate Median
+TOST.median <- as.matrix(TOST.median[,-1])
+
+# Calculate Random OTUs
+TOST.random <- TOST.otu.low[,c(1:(ncol(TOST.otu.low)-2),433)] %>%
+  sample_n(1)
+  # Select TOST.otu all OTUs cols and the DNA col so you can use dplyr
+TOST.random <- t(as.matrix(sapply(TOST.random[,-432], as.numeric)))
+  # Remove DNA col
+
+# Explore data - Random
+summary(as.vector(TOST.random))
+length(which(TOST.random > 100, arr.ind=T))
+  # There are 12 values above 100
+jj <- scale(as.vector(TOST.random))
+qqnorm(jj, main="QQ-Plot for Random")
+abline(0, 1, col="red")
+  # Not Normal
+plot(density(as.vector(TOST.random)), main="Density Plot for Random")
+  # Skewed right
+shapiro.test(TOST.random)
+  # p-value < 2.2e-16
+  # Not Normal
+
+
+# Explore data - Mean
+summary(as.vector(TOST.mean))
+length(which(TOST.mean > 100, arr.ind=T))
+  # There are 16 values above 100
+jj <- scale(as.vector(TOST.mean))
+qqnorm(jj, main="QQ-Plot for Mean")
+abline(0, 1, col="red")
+  # Not normal
+plot(density(as.vector(TOST.mean)), main="Density Plot for Mean")
+  # Skewed right
+shapiro.test(TOST.mean)
+  # p-value < 2.2e-16
+  # Not Normal
+
+# Explore data - Median
+summary(as.vector(TOST.median))
+length(which(TOST.median > 100, arr.ind=T))
+  # There are 12 values above 200
+jj <- scale(as.vector(TOST.median))
+qqnorm(jj, main="QQ-Plot for Median")
+abline(0, 1, col="red")
+  # Not Normal
+plot(density(as.vector(TOST.median)), main="Density Plot for Median")
+  # Skewed right
+shapiro.test(TOST.median)
+  # p-value < 2.2e-16
+  # Not Normal
+
+
+# Perform a log transformations
+rand <- ifelse(as.vector(TOST.random) == 0, 1, as.vector(TOST.random))
+  # Replace all 0's with 1's
+rand.log <- log(rand)
+mean <- ifelse(as.vector(TOST.mean) == 0, 1, as.vector(TOST.mean))
+  # Replace all 0's with 1's
+mean.log <- log(mean)
+medi <- ifelse(as.vector(TOST.median) == 0, 1, as.vector(TOST.median))
+  # Replace all 0's with 1's
+medi.log <- log(medi)
+
+# Re-explore data - Random
+jj <- scale(as.vector(rand.log))
+qqnorm(jj, main="Q-Q plot for Log-Transformed Random")
+abline(0, 1, col="red")
+  # Not Normal
+plot(density(as.vector(rand.log)), main="Density Plot for Log-Transformed Random")
+  # Skewed right
+shapiro.test(rand.log)
+  # p-value < 2.2e-16
+  # Not Normal
+
+# Re-explore data - Mean
+jj <- scale(as.vector(mean.log))
+qqnorm(jj, main="Q-Q plot for Log-Transformed Mean")
+abline(0, 1, col="red")
+  # Not Normal
+plot(density(as.vector(mean.log)), main="Density Plot for Log-Transformed Mean")
+  # Skewed right
+shapiro.test(mean.log)
+  # p-value < 2.2e-16
+  # Not Normal
+
+# Re-explore data - Median
+jj <- scale(as.vector(medi.log))
+qqnorm(jj, main="Q-Q plot for Log-Transformed Median")
+abline(0, 1, col="red")
+  # Not Normal
+plot(density(as.vector(medi.log)), main="Density Plot for Log-Transformed Median")
+  # Skewed right
+shapiro.test(medi.log)
+  # p-value < 2.2e-16
+  # Not Normal
+
+### Because data isn't Normally distributed, I'll use RTOST and not TOST
+
+### RTOST
+
+# Random vs. Mean
+rtost(TOST.random, TOST.mean, alpha=0.05, epsilon=0.25, tr=0.2,
+      paired=F)
+  # p-value = 9.308091e-15
+  # Reject hypothesis that random & mean have non-equivalent means
+
+# Random vs. Median
+rtost(TOST.random, TOST.median, alpha=0.05, epsilon=0.25, tr=0.2,
+      paired=F)
+  # p-value = 
+  # Reject hypothesis that random & median have non-equivalent means
+```
+
+### RTOST for post Stevia samples (all instead of 1 random)
+```{r}
+# Code modified from Skarlupka, et al. (2019) https://doi.org/10.1186/s40104-019-0375-0
+
+# Because all the 5 low [DNA] samples are post-treatment Stevia samples, I can't compare them to other groups (e.g. all samples, all post-treatment high fat diet samples, all pre- and post- Stevia samples) because I already know that these comparisons are different based on my previous analyses for the paper
+# Because I already know these differences exist, the test of equivalency should reflect this (do NOT reject null hypothesis)
+# Therefore, I can ONLY compare the 5 low [DNA] samples with the 3 post-treatment Stevia samples that have a high [DNA]
+
+# Here, I'll test each of the low [DNA] samples against a mean and median matrix that summarizes all the high [DNA] (Stevia post) samples
+
+
+# Format OTU table
+TOST.otu <- data.frame(t(data.frame(otu_table(physeq.tv.post))))
+TOST.otu$Sample <- rownames(TOST.otu)
+TOST.otu$DNA <- "High"
+lowDNA <- c("TV7C", "TV6C", "TV5C", "TV3C", "TV10C")
+for (i in 1:5){
+  x <- which(TOST.otu$Sample == lowDNA[i])
+  TOST.otu$DNA[x] = "Low"
+}
+
+# Separate low [DNA] samples
+TOST.otu.low1 <- TOST.otu[which(TOST.otu$Sample == "TV3C"),]
+TOST.otu.low2 <- TOST.otu[which(TOST.otu$Sample == "TV5C"),]
+TOST.otu.low3 <- TOST.otu[which(TOST.otu$Sample == "TV6C"),]
+TOST.otu.low4 <- TOST.otu[which(TOST.otu$Sample == "TV7C"),]
+TOST.otu.low5 <- TOST.otu[which(TOST.otu$Sample == "TV10C"),]
+
+# Separate high [DNA] samples
+TOST.otu.high <- TOST.otu[which(TOST.otu$DNA == "High"),]
+
+# Calculate Mean OTUs (high [DNA])
+TOST.mean <- aggregate(TOST.otu.high[,1:(ncol(TOST.otu.high)-2)], 
+                       list(TOST.otu.high$DNA), mean)
+  # Calculate Mean
+  # Leave out Sample and DNA cols that I just made
+TOST.mean <- as.matrix(TOST.mean[,-1])
+  # Remove col 1 (DNA)
+
+# Calculate Median OTUs
+TOST.median <- aggregate(TOST.otu.high[,1:(ncol(TOST.otu.high)-2)],
+                         list(TOST.otu.high$DNA), median)
+  # Calculate Median
+TOST.median <- as.matrix(TOST.median[,-1])
+
+# Prep low [DNA] data
+TOST.otu.low1.input <- t(as.matrix(sapply(TOST.otu.low1[,1:431],
+                                        as.numeric)))
+  # Remove Sample and DNA cols
+TOST.otu.low2.input <- t(as.matrix(sapply(TOST.otu.low2[,1:431],
+                                        as.numeric)))
+TOST.otu.low3.input <- t(as.matrix(sapply(TOST.otu.low3[,1:431],
+                                        as.numeric)))
+TOST.otu.low4.input <- t(as.matrix(sapply(TOST.otu.low4[,1:431],
+                                        as.numeric)))
+TOST.otu.low5.input <- t(as.matrix(sapply(TOST.otu.low5[,1:431],
+                                        as.numeric)))
+
+# Explore data - low1
+summary(as.vector(TOST.otu.low1.input))
+length(which(TOST.otu.low1.input > 100, arr.ind=T))
+  # There are 12 values above 100
+jj <- scale(as.vector(TOST.otu.low1.input))
+qqnorm(jj, main="QQ-Plot for Low1")
+abline(0, 1, col="red")
+  # Not Normal
+plot(density(as.vector(TOST.otu.low1.input)), main="Density Plot for Low1")
+  # Skewed right
+shapiro.test(TOST.otu.low1.input)
+  # p-value < 2.2e-16
+  # Not Normal
+
+# Explore data - low2
+summary(as.vector(TOST.otu.low2.input))
+length(which(TOST.otu.low2.input > 100, arr.ind=T))
+  # There are 12 values above 100
+jj <- scale(as.vector(TOST.otu.low2.input))
+qqnorm(jj, main="QQ-Plot for Low2")
+abline(0, 1, col="red")
+  # Not Normal
+plot(density(as.vector(TOST.otu.low2.input)), main="Density Plot for Low2")
+  # Skewed right
+shapiro.test(TOST.otu.low2.input)
+  # p-value < 2.2e-16
+  # Not Normal
+
+# Explore data - low3
+summary(as.vector(TOST.otu.low3.input))
+length(which(TOST.otu.low3.input > 100, arr.ind=T))
+  # There are 10 values above 100
+jj <- scale(as.vector(TOST.otu.low3.input))
+qqnorm(jj, main="QQ-Plot for Low3")
+abline(0, 1, col="red")
+  # Not Normal
+plot(density(as.vector(TOST.otu.low3.input)), main="Density Plot for Low3")
+  # Skewed right
+shapiro.test(TOST.otu.low3.input)
+  # p-value < 2.2e-16
+  # Not Normal
+
+# Explore data - low4
+summary(as.vector(TOST.otu.low4.input))
+length(which(TOST.otu.low4.input > 100, arr.ind=T))
+  # There are 12 values above 100
+jj <- scale(as.vector(TOST.otu.low4.input))
+qqnorm(jj, main="QQ-Plot for Low4")
+abline(0, 1, col="red")
+  # Not Normal
+plot(density(as.vector(TOST.otu.low4.input)), main="Density Plot for Low4")
+  # Skewed right
+shapiro.test(TOST.otu.low4.input)
+  # p-value < 2.2e-16
+  # Not Normal
+
+# Explore data - low5
+summary(as.vector(TOST.otu.low5.input))
+length(which(TOST.otu.low5.input > 100, arr.ind=T))
+  # There are 12 values above 100
+jj <- scale(as.vector(TOST.otu.low5.input))
+qqnorm(jj, main="QQ-Plot for Low5")
+abline(0, 1, col="red")
+  # Not Normal
+plot(density(as.vector(TOST.otu.low5.input)), main="Density Plot for Low5")
+  # Skewed right
+shapiro.test(TOST.otu.low5.input)
+  # p-value < 2.2e-16
+  # Not Normal
+
+
+# Explore data - Mean
+summary(as.vector(TOST.mean))
+length(which(TOST.mean > 100, arr.ind=T))
+  # There are 16 values above 100
+jj <- scale(as.vector(TOST.mean))
+qqnorm(jj, main="QQ-Plot for Mean")
+abline(0, 1, col="red")
+  # Not normal
+plot(density(as.vector(TOST.mean)), main="Density Plot for Mean")
+  # Skewed right
+shapiro.test(TOST.mean)
+  # p-value < 2.2e-16
+  # Not Normal
+
+# Explore data - Median
+summary(as.vector(TOST.median))
+length(which(TOST.median > 100, arr.ind=T))
+  # There are 12 values above 200
+jj <- scale(as.vector(TOST.median))
+qqnorm(jj, main="QQ-Plot for Median")
+abline(0, 1, col="red")
+  # Not Normal
+plot(density(as.vector(TOST.median)), main="Density Plot for Median")
+  # Skewed right
+shapiro.test(TOST.median)
+  # p-value < 2.2e-16
+  # Not Normal
+
+
+# Perform a log transformations
+low1 <- ifelse(as.vector(TOST.otu.low1.input) == 0, 1,
+               as.vector(TOST.otu.low1.input))
+  # Replace all 0's with 1's
+low1.log <- log(low1)
+low2 <- ifelse(as.vector(TOST.otu.low2.input) == 0, 1,
+               as.vector(TOST.otu.low2.input))
+low2.log <- log(low2)
+low3 <- ifelse(as.vector(TOST.otu.low3.input) == 0, 1,
+               as.vector(TOST.otu.low3.input))
+low3.log <- log(low3)
+low4 <- ifelse(as.vector(TOST.otu.low4.input) == 0, 1,
+               as.vector(TOST.otu.low4.input))
+low4.log <- log(low4)
+low5 <- ifelse(as.vector(TOST.otu.low5.input) == 0, 1,
+               as.vector(TOST.otu.low5.input))
+low5.log <- log(low5)
+mean <- ifelse(as.vector(TOST.mean) == 0, 1, as.vector(TOST.mean))
+mean.log <- log(mean)
+medi <- ifelse(as.vector(TOST.median) == 0, 1, as.vector(TOST.median))
+medi.log <- log(medi)
+
+# Re-explore data - low1
+jj <- scale(as.vector(low1.log))
+qqnorm(jj, main="Q-Q plot for Log-Transformed Low1")
+abline(0, 1, col="red")
+  # Not Normal
+plot(density(as.vector(low1.log)), main="Density Plot for Log-Transformed Low1")
+  # Skewed right
+shapiro.test(low1.log)
+  # p-value < 2.2e-16
+  # Not Normal
+
+# Re-explore data - low2
+jj <- scale(as.vector(low2.log))
+qqnorm(jj, main="Q-Q plot for Log-Transformed Low2")
+abline(0, 1, col="red")
+  # Not Normal
+plot(density(as.vector(low2.log)), main="Density Plot for Log-Transformed Low2")
+  # Skewed right
+shapiro.test(low2.log)
+  # p-value < 2.2e-16
+  # Not Normal
+
+# Re-explore data - low3
+jj <- scale(as.vector(low3.log))
+qqnorm(jj, main="Q-Q plot for Log-Transformed Low3")
+abline(0, 1, col="red")
+  # Not Normal
+plot(density(as.vector(low3.log)), main="Density Plot for Log-Transformed Low3")
+  # Skewed right
+shapiro.test(low3.log)
+  # p-value < 2.2e-16
+  # Not Normal
+
+# Re-explore data - low4
+jj <- scale(as.vector(low4.log))
+qqnorm(jj, main="Q-Q plot for Log-Transformed Low4")
+abline(0, 1, col="red")
+  # Not Normal
+plot(density(as.vector(low4.log)), main="Density Plot for Log-Transformed Low4")
+  # Skewed right
+shapiro.test(low4.log)
+  # p-value < 2.2e-16
+  # Not Normal
+
+
+# Re-explore data - low5
+jj <- scale(as.vector(low5.log))
+qqnorm(jj, main="Q-Q plot for Log-Transformed Low5")
+abline(0, 1, col="red")
+  # Not Normal
+plot(density(as.vector(low5.log)), main="Density Plot for Log-Transformed Low5")
+  # Skewed right
+shapiro.test(low5.log)
+  # p-value < 2.2e-16
+  # Not Normal
+
+# Re-explore data - Mean
+jj <- scale(as.vector(mean.log))
+qqnorm(jj, main="Q-Q plot for Log-Transformed Mean")
+abline(0, 1, col="red")
+  # Not Normal
+plot(density(as.vector(mean.log)), main="Density Plot for Log-Transformed Mean")
+  # Skewed right
+shapiro.test(mean.log)
+  # p-value < 2.2e-16
+  # Not Normal
+
+# Re-explore data - Median
+jj <- scale(as.vector(medi.log))
+qqnorm(jj, main="Q-Q plot for Log-Transformed Median")
+abline(0, 1, col="red")
+  # Not Normal
+plot(density(as.vector(medi.log)), main="Density Plot for Log-Transformed Median")
+  # Skewed right
+shapiro.test(medi.log)
+  # p-value < 2.2e-16
+  # Not Normal
+
+### Because data isn't Normally distributed, I'll use RTOST and not TOST
+
+### RTOST
+
+# Low1 vs. Mean
+rtost(TOST.otu.low1.input, TOST.mean, alpha=0.05, epsilon=0.25, tr=0.2, 
+      paired=F)
+  # p-value = 9.308091e-15
+  # Reject hypothesis that random & mean have non-equivalent means
+
+# Low2 vs. Mean
+rtost(TOST.otu.low2.input, TOST.mean, alpha=0.05, epsilon=0.25, tr=0.2, 
+      paired=F)
+  # p-value = 1.208621e-06
+  # Reject hypothesis that random & mean have non-equivalent means
+
+# Low3 vs. Mean
+rtost(TOST.otu.low3.input, TOST.mean, alpha=0.05, epsilon=0.25, tr=0.2, 
+      paired=F)
+  # p-value = 9.308091e-15
+  # Reject hypothesis that random & mean have non-equivalent means
+
+# Low4 vs. Mean
+rtost(TOST.otu.low4.input, TOST.mean, alpha=0.05, epsilon=0.25, tr=0.2, 
+      paired=F)
+  # p-value = 9.308091e-15
+  # Reject hypothesis that random & mean have non-equivalent means
+
+# Low5 vs. Mean
+rtost(TOST.otu.low5.input, TOST.mean, alpha=0.05, epsilon=0.25, tr=0.2, 
+      paired=F)
+  # p-value = 9.308091e-15
+  # Reject hypothesis that random & mean have non-equivalent means
+
+# BH p-value adjustment
+p.adjust(c(9.308091e-15,1.208621e-06,9.308091e-15,9.308091e-15,9.308091e-15), method="fdr")
+  # low1 = 1.163511e-14
+  # low2 = 1.208621e-06
+  # low3 = 1.163511e-14
+  # low4 = 1.163511e-14
+  # low5 = 1.163511e-14
+
+
+
+### Compared low [DNA] samples to Median, but got standard deviation error for all tests --> can't use these
+# Low1 vs. Median
+rtost(TOST.otu.low1.input, TOST.median, alpha=0.05, epsilon=0.25,
+      tr=0.2, paired=T)
+  # p-value = 0
+  # Reject hypothesis that random & median have non-equivalent means
+
+# Low2 vs. Median
+rtost(TOST.otu.low2.input, TOST.median, alpha=0.05, epsilon=0.25,
+      tr=0.2, paired=T)
+  # p-value = 2.191107e-13
+  # Reject hypothesis that random & median have non-equivalent means
+
+# Low3 vs. Median
+rtost(TOST.otu.low3.input, TOST.median, alpha=0.05, epsilon=0.25,
+      tr=0.2, paired=T)
+  # p-value = 0
+  # Reject hypothesis that random & median have non-equivalent means
+
+# Low4 vs. Median
+rtost(TOST.otu.low4.input, TOST.median, alpha=0.05, epsilon=0.25,
+      tr=0.2, paired=T)
+  # p-value = 0
+  # Reject hypothesis that random & median have non-equivalent means
+
+# Low5 vs. Median
+rtost(TOST.otu.low5.input, TOST.median, alpha=0.05, epsilon=0.25,
+      tr=0.2, paired=T)
+  # p-value = 0
+  # Reject hypothesis that random & median have non-equivalent means
+```
