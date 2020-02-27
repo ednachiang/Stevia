@@ -2682,7 +2682,7 @@ p.adjust(c(9.308091e-15,1.208621e-06,9.308091e-15,9.308091e-15,9.308091e-15), me
 
 
 ```
-### Phylum Bar chart for post Stevia samples ([DNA] check)
+### Phylum Barplot for post Stevia samples ([DNA] check)
 ```{r}
 # Merge samples w/ same taxonomic rank
 checkPhy <- tax_glom(physeq.tv.post, taxrank="Phylum")
@@ -2786,5 +2786,110 @@ grid.text("B", just=c(-1,-26), x=unit(0.03,"npc"), vp=viewport(layout.pos.row=1,
 print(checkPhy.m, vp=viewport(layout.pos.row=1, layout.pos.col=4))
 checkPhy.legend$vp <- viewport(layout.pos.row=1, layout.pos.col=5)
 grid.draw(checkPhy.legend)
+dev.off()
+```
+
+### Family Bar chart for post Stevia samples ([DNA] check)
+```{r}
+# Merge samples w/ same taxonomic rank
+checkFam <- tax_glom(physeq.tv.post, taxrank="Family")
+
+# Transform each merged family count to rel abund
+checkFam99 <- transform_sample_counts(checkFam,
+                                      function(x){(x/sum(x))*100})
+
+# Remove any family w/ < 1% rel abund --> This selects the top 10 families
+checkFam99 <- prune_taxa(((taxa_sums(checkFam99)) / nsamples(checkFam99)) > 1, checkFam99)
+
+# Create rank abundance of phyla
+barplot(sort(taxa_sums(checkFam99), TRUE)[1:20]/nsamples(checkFam99), las=2, cex.axis=.7)
+
+# Format data
+checkFam.df <- psmelt(checkFam99)
+checkFam.df$Family <- ordered(checkFam.df$Family, 
+                              levels=c("Lachnospiraceae", "S24-7",
+                                       "Ruminococcaceae", "Streptococcaceae", "Verrucomicrobiaceae",
+                                       "Bacteroidaceae", "Lactobacillaceae", "Erysipelotrichaceae",
+                                       "Alcaligenaceae", "Rikenellaceae"))
+checkFam.df$Family[which(is.na(checkFam.df$Family))] <-
+  rep("S24-7",length(which(is.na(checkFam.df$Family))))
+checkFam.df$DNA <- "High"
+lowDNA <- c("TV7C", "TV6C", "TV5C", "TV3C", "TV10C")
+for (i in 1:5){
+  x <- which(checkFam.df$Sample == lowDNA[i])
+  checkFam.df$DNA[x] = "Low"
+}
+checkFam.df$Label <- NA
+checkFam.df$Label[which(checkFam.df$Sample == "TV1C")] <- "High [DNA] (TV1C)"
+checkFam.df$Label[which(checkFam.df$Sample == "TV3C")] <- "Low [DNA] (TV3C)"
+checkFam.df$Label[which(checkFam.df$Sample == "TV4C")] <- "High [DNA] (TV4C)"
+checkFam.df$Label[which(checkFam.df$Sample == "TV5C")] <- "Low [DNA] (TV5C)"
+checkFam.df$Label[which(checkFam.df$Sample == "TV6C")] <- "Low [DNA] (TV6C)"
+checkFam.df$Label[which(checkFam.df$Sample == "TV7C")] <- "Low [DNA] (TV7C)"
+checkFam.df$Label[which(checkFam.df$Sample == "TV9C")] <- "High [DNA] (TV9C)"
+checkFam.df$Label[which(checkFam.df$Sample == "TV10C")] <- "Low [DNA] (TV10C)"
+checkFam.df.m <- checkFam.df[which(checkFam.df$Sex == "Male"),]
+checkFam.df.f <- checkFam.df[which(checkFam.df$Sex == "Female"),]
+
+
+### Barplot ###
+
+checkFam.m <- ggplot(checkFam.df.m, aes(x=Family, y=Abundance, fill=Family)) +
+  facet_grid(Label ~ . , labeller=label_wrap_gen(width=15)) +
+  geom_bar(stat="identity", color="black") +
+  scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#ffff33", "#a65628", "gainsboro", "gray47", "black", "lavenderblush")) +
+  xlab("Families") +
+  ylab("Relative Abundance (%) for Top 10 Families") +
+  scale_y_continuous(limits=c(0,30), breaks=c(0,6,12,18,24,30)) +
+  theme(panel.grid.major = element_blank(),
+      panel.grid.minor = element_blank(),
+      panel.spacing=unit(1, "lines"),
+      axis.title = element_text(size=18, family="Arial", face="bold"),
+      strip.text.x = element_text(size=18, family="Arial"),
+      strip.text.y = element_text(size=18, family="Arial"),
+      strip.background = element_blank(),
+      axis.text.y = element_text(size=18, family="Arial"),
+      legend.title = element_text(size=18, family="Arial", face="bold"),
+      legend.text = element_text(size=18, family="Arial"),
+      axis.ticks.x=element_blank(),
+      axis.text.x = element_blank()) +
+  guides(fill=FALSE)
+
+checkFam.legend <- g_legend(checkFam.m)
+
+checkFam.f <- ggplot(checkFam.df.f, aes(x=Family, y=Abundance, fill=Family)) +
+  facet_grid(Label ~ ., labeller=label_wrap_gen(width=15)) +
+  geom_bar(stat="identity", color="black") +
+  scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#ffff33", "#a65628", "gainsboro", "gray47", "black", "lavenderblush")) +
+  xlab("Families") +
+  ylab("Relative Abundance (%) for Top 10 Families") +
+  scale_y_continuous(limits=c(0,30), breaks=c(0,6,12,18,24,30)) +
+  theme(panel.grid.major = element_blank(),
+      panel.grid.minor = element_blank(),
+      panel.spacing=unit(1, "lines"),
+      axis.title = element_text(size=18, family="Arial", face="bold"),
+      strip.text.x = element_text(size=18, family="Arial"),
+      strip.text.y = element_text(size=18, family="Arial"),
+      strip.background = element_blank(),
+      axis.text.y = element_text(size=18, family="Arial"),
+      legend.title = element_text(size=18, family="Arial", face="bold"),
+      legend.text = element_text(size=18, family="Arial"),
+      axis.ticks.x=element_blank(),
+      axis.text.x = element_blank()) +
+  guides(fill=FALSE)
+
+
+
+tiff("check.family.tiff", width = 336, height = 250, units = "mm", res = 600)
+grid.newpage()
+pushViewport(viewport(layout=(grid.layout(1,5, widths=c(0.1, 1, 0.1, 1, 0.7), heights=c(1)))))
+grid.text("A", just=c(-1,-23),x=unit(0.03,"npc"), vp=viewport(layout.pos.row=1, layout.pos.col=1),
+      gp=gpar(fontsize=20, fontface="bold", fontfamily="Arial"))
+print(checkFam.f, vp=viewport(layout.pos.row=1, layout.pos.col=2))
+grid.text("B", just=c(-1,-23), x=unit(0.03,"npc"), vp=viewport(layout.pos.row=1, layout.pos.col=3),
+      gp=gpar(fontsize=20, fontface="bold", fontfamily="Arial"))
+print(checkFam.m, vp=viewport(layout.pos.row=1, layout.pos.col=4))
+checkFam.legend$vp <- viewport(layout.pos.row=1, layout.pos.col=5)
+grid.draw(checkFam.legend)
 dev.off()
 ```
