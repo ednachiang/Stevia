@@ -2723,42 +2723,68 @@ checkPhy.df$Label[which(checkPhy.df$Sample == "TV6C")] <- "Low [DNA] (TV6C)"
 checkPhy.df$Label[which(checkPhy.df$Sample == "TV7C")] <- "Low [DNA] (TV7C)"
 checkPhy.df$Label[which(checkPhy.df$Sample == "TV9C")] <- "High [DNA] (TV9C)"
 checkPhy.df$Label[which(checkPhy.df$Sample == "TV10C")] <- "Low [DNA] (TV10C)"
+checkPhy.df.m <- checkPhy.df[which(checkPhy.df$Sex == "Male"),]
+checkPhy.df.f <- checkPhy.df[which(checkPhy.df$Sex == "Female"),]
 
-### Boxplot
 
-tiff("checkDNA.phyla.box.tiff", width = 228, height = 280, units = "mm", res = 600)
-ggplot(checkPhy.df, aes(x=Treatment, y=Abundance, fill=Time)) +
-  geom_boxplot(position=position_dodge(1)) +
-  geom_point(position=position_dodge(width = 1), size=2) +
-  facet_grid(Phylum~., scales = "free") +
-  xlab("Treatment") +
-  scale_fill_manual(values=c("#FFFFFF", "#BEBEBE")) +
-  ylab("Relative Abundance") +
+### Barplot ###
+
+checkPhy.m <- ggplot(checkPhy.df.m, aes(x=Phylum, y=Abundance, fill=Phylum)) +
+  facet_grid(Label ~ . , labeller=label_wrap_gen(width=15)) +
+  geom_bar(stat="identity", color="black") +
+  scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#ffff33", "#a65628")) +
+  xlab("Phyla") +
+  ylab("Relative Abundance (%) for Phyla > 0.01%") +
+  scale_y_continuous(limits=c(0,75), breaks=c(0,15,30,45,60,75)) +
   theme(panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank(),
-        axis.text.x = element_text(family="Arial", size=20),
-        axis.text.y = element_text(family="Arial", size=16),
-        axis.title.x = element_text(family="Arial", size=20, face="bold"),
-        axis.title.y = element_text(family="Arial", size=20, face="bold"),
-        legend.title = element_text(family="Arial", size=20, face="bold"),
-        legend.text = element_text(family="Arial", size=20),
-        plot.title = element_text(family = "Arial", size=20, face="bold"),
-        strip.text.y = element_text(family="Arial", size=16),
-        strip.background=element_rect(fill="#FFFFFF"),
-        axis.ticks.x = element_blank()
-        ) +
-  geom_text(data=phy.ann, aes(label=lab), x=c(1,2,3,4,
-                                              1,2,3,4,
-                                              1,2,3,4,
-                                              1,2,3,4,
-                                              1,2,3,4,
-                                              1,2,3,4),
-            y=c(72,72,72,72,
-                66,66,66,66,
-                28,28,28,28,
-                19,19,19,19,
-                2.4,2.4,2.4,2.4,
-                2.4,2.4,2.4,2.4),
-            size=6, color="brown", family="Arial")
+      panel.grid.minor = element_blank(),
+      panel.spacing=unit(1, "lines"),
+      axis.title = element_text(size=18, family="Arial", face="bold"),
+      strip.text.x = element_text(size=18, family="Arial"),
+      strip.text.y = element_text(size=18, family="Arial"),
+      strip.background = element_blank(),
+      axis.text.y = element_text(size=18, family="Arial"),
+      legend.title = element_text(size=18, family="Arial", face="bold"),
+      legend.text = element_text(size=18, family="Arial"),
+      axis.ticks.x=element_blank(),
+      axis.text.x = element_text(size=16, family="Arial", angle=25, hjust=1)) +
+  guides(fill=FALSE)
+
+checkPhy.legend <- g_legend(checkPhy.m)
+
+checkPhy.f <- ggplot(checkPhy.df.f, aes(x=Phylum, y=Abundance, fill=Phylum)) +
+  facet_grid(Label ~ ., labeller=label_wrap_gen(width=15)) +
+  geom_bar(stat="identity", color="black") +
+  scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#ffff33", "#a65628")) +
+  xlab("Phyla") +
+  ylab("Relative Abundance (%) for Phyla > 0.01%") +
+  scale_y_continuous(limits=c(0,75), breaks=c(0,15,30,45,60,75)) +
+  theme(panel.grid.major = element_blank(),
+      panel.grid.minor = element_blank(),
+      panel.spacing=unit(1, "lines"),
+      axis.title = element_text(size=18, family="Arial", face="bold"),
+      strip.text.x = element_text(size=18, family="Arial"),
+      strip.text.y = element_text(size=18, family="Arial"),
+      strip.background = element_blank(),
+      axis.text.y = element_text(size=18, family="Arial"),
+      legend.title = element_text(size=18, family="Arial", face="bold"),
+      legend.text = element_text(size=18, family="Arial"),
+      axis.ticks.x=element_blank(),
+      axis.text.x = element_text(size=16, family="Arial", angle=25, hjust=1)) +
+  guides(fill=FALSE)
+
+
+
+tiff("check.phyla.tiff", width = 336, height = 250, units = "mm", res = 600)
+grid.newpage()
+pushViewport(viewport(layout=(grid.layout(1,5, widths=c(0.1, 1, 0.1, 1, 0.5), heights=c(1)))))
+grid.text("A", just=c(-1,-26),x=unit(0.03,"npc"), vp=viewport(layout.pos.row=1, layout.pos.col=1),
+      gp=gpar(fontsize=20, fontface="bold", fontfamily="Arial"))
+print(checkPhy.f, vp=viewport(layout.pos.row=1, layout.pos.col=2))
+grid.text("B", just=c(-1,-26), x=unit(0.03,"npc"), vp=viewport(layout.pos.row=1, layout.pos.col=3),
+      gp=gpar(fontsize=20, fontface="bold", fontfamily="Arial"))
+print(checkPhy.m, vp=viewport(layout.pos.row=1, layout.pos.col=4))
+checkPhy.legend$vp <- viewport(layout.pos.row=1, layout.pos.col=5)
+grid.draw(checkPhy.legend)
 dev.off()
 ```
