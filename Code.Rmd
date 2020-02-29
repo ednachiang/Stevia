@@ -2354,7 +2354,7 @@ dev.off()
 
 
 
-### TOST for post Stevia samples
+### RTOST for post Stevia samples
 ```{r}
 # Code modified from Skarlupka, et al. (2019) https://doi.org/10.1186/s40104-019-0375-0
 
@@ -2519,101 +2519,6 @@ shapiro.test(TOST.otu.high.f.mean)
   # Not Normal
 
 
-### Try log transformations to see if we can get data to be Normal
-low.m1 <- ifelse(as.vector(TOST.otu.low.m1) == 0, 1, as.vector(TOST.otu.low.m1))
-  # Replace all 0's with 1's
-low.m1.log <- log(low.m1)
-low.m2 <- ifelse(as.vector(TOST.otu.low.m2) == 0, 1, as.vector(TOST.otu.low.m2))
-low.m2.log <- log(low.m2)
-low.f1 <- ifelse(as.vector(TOST.otu.low.f1) == 0, 1, as.vector(TOST.otu.low.f1))
-low.f1.log <- log(low.f1)
-low.f2 <- ifelse(as.vector(TOST.otu.low.f2) == 0, 1, as.vector(TOST.otu.low.f2))
-low.f2.log <- log(low.f2)
-low.f3 <- ifelse(as.vector(TOST.otu.low.f3) == 0, 1, as.vector(TOST.otu.low.f3))
-low.f3.log <- log(low.f3)
-high.m <- ifelse(as.vector(TOST.otu.high.m.mean) == 0, 1, as.vector(TOST.otu.high.m.mean))
-high.m.log <- log(high.m)
-high.f <- ifelse(as.vector(TOST.otu.high.f.mean) == 0, 1, as.vector(TOST.otu.high.f.mean))
-high.f.log <- log(high.f)
-
-# Re-explore data - low m1
-jj <- scale(as.vector(low.m1.log))
-qqnorm(jj, main="Q-Q plot for Log-Transformed Low M1")
-abline(0, 1, col="red")
-  # Not Normal
-plot(density(as.vector(low.m1.log)), main="Density Plot for Log-Transformed Low M1")
-  # Skewed right
-shapiro.test(low.m1.log)
-  # p-value < 2.2e-16
-  # Not Normal
-
-# Re-explore data - low m2
-jj <- scale(as.vector(low.m2.log))
-qqnorm(jj, main="Q-Q plot for Log-Transformed Low M2")
-abline(0, 1, col="red")
-  # Not Normal
-plot(density(as.vector(low.m2.log)), main="Density Plot for Log-Transformed Low M2")
-  # Skewed right
-shapiro.test(low.m2.log)
-  # p-value < 2.2e-16
-  # Not Normal
-
-# Re-explore data - low f1
-jj <- scale(as.vector(low.f1.log))
-qqnorm(jj, main="Q-Q plot for Log-Transformed Low F1")
-abline(0, 1, col="red")
-  # Not Normal
-plot(density(as.vector(low.f1.log)), main="Density Plot for Log-Transformed Low F1")
-  # Skewed right
-shapiro.test(low.f1.log)
-  # p-value < 2.2e-16
-  # Not Normal
-
-# Re-explore data - low f2
-jj <- scale(as.vector(low.f2.log))
-qqnorm(jj, main="Q-Q plot for Log-Transformed Low F2")
-abline(0, 1, col="red")
-  # Not Normal
-plot(density(as.vector(low.f2.log)), main="Density Plot for Log-Transformed Low F2")
-  # Skewed right
-shapiro.test(low.f2.log)
-  # p-value < 2.2e-16
-  # Not Normal
-
-# Re-explore data - low f3
-jj <- scale(as.vector(low.f3.log))
-qqnorm(jj, main="Q-Q plot for Log-Transformed Low F3")
-abline(0, 1, col="red")
-  # Not Normal
-plot(density(as.vector(low.f3.log)), main="Density Plot for Log-Transformed Low F3")
-  # Skewed right
-shapiro.test(low.f3.log)
-  # p-value < 2.2e-16
-  # Not Normal
-
-# Re-explore data - high m
-jj <- scale(as.vector(high.m.log))
-qqnorm(jj, main="Q-Q plot for Log-Transformed High M")
-abline(0, 1, col="red")
-  # Not Normal
-plot(density(as.vector(high.m.log)), main="Density Plot for Log-Transformed High M")
-  # Skewed right
-shapiro.test(high.m.log)
-  # p-value < 2.2e-16
-  # Not Normal
-
-# Re-explore data - high f
-jj <- scale(as.vector(high.f.log))
-qqnorm(jj, main="Q-Q plot for Log-Transformed High F")
-abline(0, 1, col="red")
-  # Not Normal
-plot(density(as.vector(high.f.log)), main="Density Plot for Log-Transformed High F")
-  # Skewed right
-shapiro.test(high.f.log)
-  # p-value < 2.2e-16
-  # Not Normal
-
-
 
 ### Because data isn't Normally distributed, I'll use RTOST and not TOST ###
 
@@ -2668,16 +2573,6 @@ rtost(TOST.otu.low.f2, TOST.otu.low.f3, alpha=0.05, epsilon=0.25, tr=0.2, paired
 
 # Error in if (tt$conf.int[2] < epsilon & tt$conf.int[1] > -epsilon) result <- "rejected" else result <- "not rejected" : missing value where TRUE/FALSE needed
 
-
-
-
-# BH p-value adjustment
-p.adjust(c(9.308091e-15,1.208621e-06,9.308091e-15,9.308091e-15,9.308091e-15), method="fdr")
-  # low1 = 1.163511e-14
-  # low2 = 1.208621e-06
-  # low3 = 1.163511e-14
-  # low4 = 1.163511e-14
-  # low5 = 1.163511e-14
 
 
 
