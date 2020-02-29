@@ -2420,6 +2420,9 @@ TOST.otu.low.f2 <- t(as.matrix(sapply(TOST.otu.low.f2[,1:431], as.numeric)))
 TOST.otu.low.f3 <- t(as.matrix(sapply(TOST.otu.low.f3[,1:431], as.numeric)))
 
 
+
+### Explore Data ###
+
 # Explore data - low m1
 summary(as.vector(TOST.otu.low.m1))
 length(which(TOST.otu.low.m1 > 100, arr.ind=T))
@@ -2629,7 +2632,7 @@ checkPhy.m <- ggplot(checkPhy.df.m, aes(x=Phylum, y=Abundance, fill=Phylum)) +
   geom_bar(stat="identity", color="black") +
   scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#ffff33", "#a65628")) +
   xlab("Phyla") +
-  ylab("Relative Abundance (%) for Phyla > 0.01%") +
+  ylab("Relative Abundance (%) for Phyla") +
   scale_y_continuous(limits=c(0,75), breaks=c(0,15,30,45,60,75)) +
   theme(panel.grid.major = element_blank(),
       panel.grid.minor = element_blank(),
@@ -2652,7 +2655,7 @@ checkPhy.f <- ggplot(checkPhy.df.f, aes(x=Phylum, y=Abundance, fill=Phylum)) +
   geom_bar(stat="identity", color="black") +
   scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#ffff33", "#a65628")) +
   xlab("Phyla") +
-  ylab("Relative Abundance (%) for Phyla > 0.01%") +
+  ylab("Relative Abundance (%) for Phyla") +
   scale_y_continuous(limits=c(0,75), breaks=c(0,15,30,45,60,75)) +
   theme(panel.grid.major = element_blank(),
       panel.grid.minor = element_blank(),
@@ -2693,8 +2696,8 @@ checkFam <- tax_glom(physeq.tv.post, taxrank="Family")
 checkFam99 <- transform_sample_counts(checkFam,
                                       function(x){(x/sum(x))*100})
 
-# Remove any family w/ < 1% rel abund --> This selects the top 10 families
-checkFam99 <- prune_taxa(((taxa_sums(checkFam99)) / nsamples(checkFam99)) > 1, checkFam99)
+# Remove any family w/ < 0.1% rel abund --> This selects the top 10 families
+checkFam99 <- prune_taxa(((taxa_sums(checkFam99)) / nsamples(checkFam99)) > 0.1, checkFam99)
 
 # Create rank abundance of phyla
 barplot(sort(taxa_sums(checkFam99), TRUE)[1:20]/nsamples(checkFam99), las=2, cex.axis=.7)
@@ -2702,12 +2705,12 @@ barplot(sort(taxa_sums(checkFam99), TRUE)[1:20]/nsamples(checkFam99), las=2, cex
 # Format data
 checkFam.df <- psmelt(checkFam99)
 checkFam.df$Family <- ordered(checkFam.df$Family, 
-                              levels=c("Lachnospiraceae", "S24-7",
+                              levels=c("Lachnospiraceae", "Bacteroidales_S24-7_group",
                                        "Ruminococcaceae", "Streptococcaceae", "Verrucomicrobiaceae",
                                        "Bacteroidaceae", "Lactobacillaceae", "Erysipelotrichaceae",
-                                       "Alcaligenaceae", "Rikenellaceae"))
-checkFam.df$Family[which(is.na(checkFam.df$Family))] <-
-  rep("S24-7",length(which(is.na(checkFam.df$Family))))
+                                       "Alcaligenaceae", "Rikenellaceae", "Peptococcaceae", "Mollicutes_RF9_fa",
+                                       "Coriobacteriaceae", "Family_XIII", "Peptostreptococcaceae",
+                                       "Clostridiales_vadinBB60_group"))
 checkFam.df$DNA <- "High"
 lowDNA <- c("TV7C", "TV6C", "TV5C", "TV3C", "TV10C")
 for (i in 1:5){
@@ -2732,9 +2735,15 @@ checkFam.df.f <- checkFam.df[which(checkFam.df$Sex == "Female"),]
 checkFam.m <- ggplot(checkFam.df.m, aes(x=Family, y=Abundance, fill=Family)) +
   facet_grid(Label ~ . , labeller=label_wrap_gen(width=15)) +
   geom_bar(stat="identity", color="black") +
-  scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#ffff33", "#a65628", "gainsboro", "gray47", "black", "lavenderblush")) +
+  scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#ffff33", "#a65628", "gainsboro",
+                             "gray47", "black", "lavenderblush", "chocolate1", "cyan2", "deeppink1", "lawngreen",
+                             "red4", "white"),
+                    labels=c("Lachnospiraceae", "S24-7", "Ruminococcaceae", "Streptococcaceae",
+                             "Verrucomicrobiaceae", "Bacteroidaceae", "Lactobacillaceae", "Erysipelotrichaceae",
+                             "Alcaligenaceae", "Rikenellaceae", "Peptococcaceae", "RF9 Family", "Coriobacteriaceae",
+                             "Family XIII", "Peptostreptococcaceae", "vadinBB60")) +
   xlab("Families") +
-  ylab("Relative Abundance (%) for Top 10 Families") +
+  ylab("Relative Abundance (%) for Families > 0.1%") +
   scale_y_continuous(limits=c(0,30), breaks=c(0,6,12,18,24,30)) +
   theme(panel.grid.major = element_blank(),
       panel.grid.minor = element_blank(),
@@ -2755,9 +2764,15 @@ checkFam.legend <- g_legend(checkFam.m)
 checkFam.f <- ggplot(checkFam.df.f, aes(x=Family, y=Abundance, fill=Family)) +
   facet_grid(Label ~ ., labeller=label_wrap_gen(width=15)) +
   geom_bar(stat="identity", color="black") +
-  scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#ffff33", "#a65628", "gainsboro", "gray47", "black", "lavenderblush")) +
+  scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#ffff33", "#a65628", "gainsboro",
+                             "gray47", "black", "lavenderblush", "chocolate1", "cyan2", "deeppink1", "lawngreen",
+                             "red4", "white"),
+                    labels=c("Lachnospiraceae", "S24-7", "Ruminococcaceae", "Streptococcaceae",
+                             "Verrucomicrobiaceae", "Bacteroidaceae", "Lactobacillaceae", "Erysipelotrichaceae",
+                             "Alcaligenaceae", "Rikenellaceae", "Peptococcaceae", "RF9 Family", "Coriobacteriaceae",
+                             "Family XIII", "Peptostreptococcaceae", "vadinBB60")) +
   xlab("Families") +
-  ylab("Relative Abundance (%) for Top 10 Families") +
+  ylab("Relative Abundance (%) for Families > 0.1%") +
   scale_y_continuous(limits=c(0,30), breaks=c(0,6,12,18,24,30)) +
   theme(panel.grid.major = element_blank(),
       panel.grid.minor = element_blank(),
