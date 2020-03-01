@@ -2633,6 +2633,7 @@ checkPhy.m <- ggplot(checkPhy.df.m, aes(x=Phylum, y=Abundance, fill=Phylum)) +
   scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#ffff33", "#a65628")) +
   xlab("Phyla") +
   ylab("Relative Abundance (%) for Phyla") +
+  ggtitle("Male Post-treatment Stevia") +
   scale_y_continuous(limits=c(0,75), breaks=c(0,15,30,45,60,75)) +
   theme(panel.grid.major = element_blank(),
       panel.grid.minor = element_blank(),
@@ -2645,7 +2646,8 @@ checkPhy.m <- ggplot(checkPhy.df.m, aes(x=Phylum, y=Abundance, fill=Phylum)) +
       legend.title = element_text(size=18, family="Arial", face="bold"),
       legend.text = element_text(size=18, family="Arial"),
       axis.ticks.x=element_blank(),
-      axis.text.x = element_text(size=16, family="Arial", angle=25, hjust=1)) +
+      axis.text.x = element_text(size=16, family="Arial", angle=25, hjust=1),
+      title = element_text(size=16, family="Arial", face="bold")) +
   guides(fill=FALSE)
 
 checkPhy.legend <- g_legend(checkPhy.m)
@@ -2656,6 +2658,7 @@ checkPhy.f <- ggplot(checkPhy.df.f, aes(x=Phylum, y=Abundance, fill=Phylum)) +
   scale_fill_manual(values=c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#ffff33", "#a65628")) +
   xlab("Phyla") +
   ylab("Relative Abundance (%) for Phyla") +
+  ggtitle("Female Post-treatment Stevia") +
   scale_y_continuous(limits=c(0,75), breaks=c(0,15,30,45,60,75)) +
   theme(panel.grid.major = element_blank(),
       panel.grid.minor = element_blank(),
@@ -2668,7 +2671,8 @@ checkPhy.f <- ggplot(checkPhy.df.f, aes(x=Phylum, y=Abundance, fill=Phylum)) +
       legend.title = element_text(size=18, family="Arial", face="bold"),
       legend.text = element_text(size=18, family="Arial"),
       axis.ticks.x=element_blank(),
-      axis.text.x = element_text(size=16, family="Arial", angle=25, hjust=1)) +
+      axis.text.x = element_text(size=16, family="Arial", angle=25, hjust=1),
+      title = element_text(size=16, family="Arial", face="bold")) +
   guides(fill=FALSE)
 
 
@@ -2676,10 +2680,10 @@ checkPhy.f <- ggplot(checkPhy.df.f, aes(x=Phylum, y=Abundance, fill=Phylum)) +
 tiff("check.phyla.tiff", width = 336, height = 250, units = "mm", res = 600)
 grid.newpage()
 pushViewport(viewport(layout=(grid.layout(1,5, widths=c(0.1, 1, 0.1, 1, 0.5), heights=c(1)))))
-grid.text("A", just=c(-1,-26),x=unit(0.03,"npc"), vp=viewport(layout.pos.row=1, layout.pos.col=1),
+grid.text("A", just=c(-1,-23),x=unit(0.03,"npc"), vp=viewport(layout.pos.row=1, layout.pos.col=1),
       gp=gpar(fontsize=20, fontface="bold", fontfamily="Arial"))
 print(checkPhy.f, vp=viewport(layout.pos.row=1, layout.pos.col=2))
-grid.text("B", just=c(-1,-26), x=unit(0.03,"npc"), vp=viewport(layout.pos.row=1, layout.pos.col=3),
+grid.text("B", just=c(-1,-23), x=unit(0.03,"npc"), vp=viewport(layout.pos.row=1, layout.pos.col=3),
       gp=gpar(fontsize=20, fontface="bold", fontfamily="Arial"))
 print(checkPhy.m, vp=viewport(layout.pos.row=1, layout.pos.col=4))
 checkPhy.legend$vp <- viewport(layout.pos.row=1, layout.pos.col=5)
@@ -2744,6 +2748,7 @@ checkFam.m <- ggplot(checkFam.df.m, aes(x=Family, y=Abundance, fill=Family)) +
                              "Family XIII", "Peptostreptococcaceae", "vadinBB60")) +
   xlab("Families") +
   ylab("Relative Abundance (%) for Families > 0.1%") +
+  ggtitle("Male Post-treatment Stevia") +
   scale_y_continuous(limits=c(0,30), breaks=c(0,6,12,18,24,30)) +
   theme(panel.grid.major = element_blank(),
       panel.grid.minor = element_blank(),
@@ -2756,7 +2761,8 @@ checkFam.m <- ggplot(checkFam.df.m, aes(x=Family, y=Abundance, fill=Family)) +
       legend.title = element_text(size=18, family="Arial", face="bold"),
       legend.text = element_text(size=18, family="Arial"),
       axis.ticks.x=element_blank(),
-      axis.text.x = element_blank()) +
+      axis.text.x = element_blank(),
+      title = element_text(size=16, family="Arial", face="bold")) +
   guides(fill=FALSE)
 
 checkFam.legend <- g_legend(checkFam.m)
@@ -2773,6 +2779,7 @@ checkFam.f <- ggplot(checkFam.df.f, aes(x=Family, y=Abundance, fill=Family)) +
                              "Family XIII", "Peptostreptococcaceae", "vadinBB60")) +
   xlab("Families") +
   ylab("Relative Abundance (%) for Families > 0.1%") +
+  ggtitle("Female Post-treatment Stevia") +
   scale_y_continuous(limits=c(0,30), breaks=c(0,6,12,18,24,30)) +
   theme(panel.grid.major = element_blank(),
       panel.grid.minor = element_blank(),
@@ -2785,7 +2792,8 @@ checkFam.f <- ggplot(checkFam.df.f, aes(x=Family, y=Abundance, fill=Family)) +
       legend.title = element_text(size=18, family="Arial", face="bold"),
       legend.text = element_text(size=18, family="Arial"),
       axis.ticks.x=element_blank(),
-      axis.text.x = element_blank()) +
+      axis.text.x = element_blank(),
+      title = element_text(size=16, family="Arial", face="bold")) +
   guides(fill=FALSE)
 
 
