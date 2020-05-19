@@ -1,10 +1,12 @@
-## Not so sweet: Stevia supplementation does not rescue high fat diet-induced obesity, glucose intolerance, or microbiota changes
+## Effect of stevia on the gut microbiota and glucose tolerance in a murine model of diet-induced obesity
   
-#### **Authors:** Sarah L. Becker‡, Edna Chiang‡, Anna Plantinga, Hannah Carey, Garret Suen, Steven J.  Swoap
+#### **Authors:** Sarah L. Becker‡, Edna Chiang‡, Anna Plantinga, Hannah V. Carey, Garret Suen, Steven J.  Swoap
   
 ‡ These authors have contributed equally to this work
   
-##### Submitted to XXX on XXX
+##### Accepted by *FEMS Microbiology Ecology* on Apr 26th, 2020
+
+Link to article: https://academic.oup.com/femsec/article-abstract/96/6/fiaa079/5827635
   
 **********
 
